@@ -1,0 +1,22 @@
+name: Pulizia MeteoHub
+on:
+  workflow_dispatch:
+    inputs:
+      cancella:
+        description: "cancella le richieste (altrimenti solo elenco)"
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  pulizia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - run: pip install -q requests
+      - name: Pulizia
+        env:
+          MH_EMAIL: ${{ secrets.MH_EMAIL }}
+          MH_PASSWORD: ${{ secrets.MH_PASSWORD }}
+        run: python3 strumenti/pulisci_meteohub.py ${{ inputs.cancella && '--cancella' || '' }}

@@ -1,0 +1,65 @@
+name: Prova automatica
+
+# A ogni modifica del codice: controlla i workflow (actionlint) e, per ogni zona, fa girare tutto quello che si puo'
+# provare senza WRF (namelist, stazioni inventate rilette coi formati di WRF, file del mare, mappe da file WRF inventati,
+# controllo di plausibilita'). Pochi minuti; non tocca le cache di WRF e non pubblica nulla.
+on:
+  push:
+    paths:
+      - "zone/**"
+      - "strumenti/**"
+      - ".github/workflows/**"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prova-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  flussi:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - name: Flussi di lavoro (actionlint)
+        run: |
+          bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/v1.7.7/scripts/download-actionlint.bash) 1.7.7
+          ./actionlint -color
+
+  zona:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        zona: [castelli, lazio]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Strumenti
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq gfortran shellcheck
+          pip install -q numpy scipy matplotlib netCDF4 requests pyproj f90nml pyflakes eccodes \
+            opencv-python-headless tifffile imagecodecs
+      - name: Codice della zona
+        run: |
+          cp -a "zone/${{ matrix.zona }}/." .
+          rm -rf zone
+      - name: Collaudo
+        run: bash wrf/prove.sh "$RUNNER_TEMP/prove"
+      - name: Controllo di plausibilita' sulle uscite inventate del collaudo
+        run: python3 wrf/controllo.py --uscite "$RUNNER_TEMP/prove/sint"
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: mappe-di-prova-${{ matrix.zona }}
+          path: ${{ runner.temp }}/prove/mappe/
+          retention-days: 3
+          if-no-files-found: ignore

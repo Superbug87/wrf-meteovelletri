@@ -1,0 +1,387 @@
+name: Previsione WRF (flusso comune)
+
+# Flusso comune ai quattro workflow (zona x modello di partenza). Non parte da solo: lo chiamano
+# castelli-ecmwf.yml, castelli-icon2i.yml, lazio-ecmwf.yml e lazio-icon2i.yml, ognuno con i suoi orari.
+on:
+  workflow_call:
+    inputs:
+      zona:
+        description: "castelli o lazio (cartella zone/<zona>)"
+        type: string
+        required: true
+      pilota:
+        description: "modello che dà le condizioni iniziali e al contorno: ecmwf o icon2i"
+        type: string
+        required: true
+      ciclo:
+        type: string
+        default: ""
+      ore:
+        type: string
+        default: "48"
+      ore_segmento:
+        type: string
+        default: "16"
+      stazioni:
+        type: boolean
+        default: true
+      mare:
+        type: boolean
+        default: true
+      radar:
+        type: boolean
+        default: true
+
+jobs:
+  # 1) WRF e WPS compilati: si fa una volta sola, poi restano in cache.
+  #    A tappe: se la compilazione non finisce (tempo massimo o blocco) il sorgente parziale va in cache
+  #    e rilanciando si riprende da dove era arrivata. Il log scrive l'avanzamento ogni 5 minuti.
+  costruzione:
+    needs: pianifica
+    if: ${{ needs.pianifica.outputs.fatto != 'true' }}
+    env:
+      WRF_TAG: v4.7.0
+      WPS_TAG: v4.7.0
+    runs-on: ubuntu-22.04
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v5
+      - name: Codice della zona (${{ inputs.zona }})
+        run: |
+          cp -a "zone/${{ inputs.zona }}/." .
+          rm -rf zone
+      - name: Cache di WRF e WPS compilati
+        id: cache
+        uses: actions/cache@v5
+        with:
+          path: /home/runner/wrf-install
+          key: wrf-build-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ hashFiles('wrf/costruisci.sh', 'wrf/dipendenze.sh') }}
+      - name: Sorgente parziale di una compilazione interrotta
+        id: parziale
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/restore@v5
+        with:
+          path: |
+            /home/runner/wrf-src
+            /home/runner/jasper
+          key: wrf-src-v1-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ github.run_id }}-${{ github.run_attempt }}
+          # La chiave non dipende dagli script: una correzione a costruisci.sh non butta via gli oggetti già compilati.
+          # Se serve ripartire da zero basta cambiare "v1".
+          restore-keys: |
+            wrf-src-v1-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-
+      - name: Dipendenze di sistema
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: bash wrf/dipendenze.sh
+      - name: "Tappa 1: JasPer, sorgenti, configure"
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: bash wrf/costruisci.sh prepara
+      - name: "Tappa 2: compilazione di WRF (40-90 minuti la prima volta, avanzamento nel log)"
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: bash wrf/costruisci.sh wrf
+      - name: "Tappa 3: compilazione di WPS"
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: bash wrf/costruisci.sh wps
+      - name: "Tappa 4: installazione"
+        id: installa
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: bash wrf/costruisci.sh installa
+      # Se la compilazione non è arrivata in fondo si salva il sorgente parziale; la cache finale la salva da sola
+      # actions/cache@v5 a fine lavoro, ma solo se tutto è andato bene
+      - name: Salvo il sorgente parziale
+        if: ${{ always() && steps.cache.outputs.cache-hit != 'true' && steps.installa.conclusion != 'success' }}
+        uses: actions/cache/save@v5
+        with:
+          path: |
+            /home/runner/wrf-src
+            /home/runner/jasper
+          key: ${{ steps.parziale.outputs.cache-primary-key }}
+      - name: Log di compilazione
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: log-compilazione
+          path: |
+            /home/runner/wrf-src/diagnosi.txt
+            /home/runner/wrf-src/WRF/configure.log
+            /home/runner/wrf-src/WRF/compile.log
+            /home/runner/wrf-src/WPS/configure.log
+            /home/runner/wrf-src/WPS/compile.log
+          retention-days: 7
+          if-no-files-found: ignore
+
+  # 2) Terreno e uso del suolo dei tre domini (geogrid): si fa una volta sola, restano pochi MB in cache
+  statico:
+    needs: costruzione
+    env:
+      WRF_TAG: v4.7.0
+      WPS_TAG: v4.7.0
+    runs-on: ubuntu-22.04
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v5
+      - name: Codice della zona (${{ inputs.zona }})
+        run: |
+          cp -a "zone/${{ inputs.zona }}/." .
+          rm -rf zone
+      - name: Cache dei dati statici
+        id: geo
+        uses: actions/cache@v5
+        with:
+          path: /home/runner/wrf-geo
+          key: wrf-geo-${{ hashFiles('wrf/dominio.py', 'wrf/statico.sh') }}
+      - name: Recupero WRF e WPS compilati
+        if: steps.geo.outputs.cache-hit != 'true'
+        uses: actions/cache/restore@v5
+        with:
+          path: /home/runner/wrf-install
+          key: wrf-build-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ hashFiles('wrf/costruisci.sh', 'wrf/dipendenze.sh') }}
+          fail-on-cache-miss: true
+      - name: Dipendenze di sistema
+        if: steps.geo.outputs.cache-hit != 'true'
+        run: bash wrf/dipendenze.sh
+      - name: Dati geografici e geogrid
+        if: steps.geo.outputs.cache-hit != 'true'
+        run: bash wrf/statico.sh
+      - name: Log di geogrid
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: log-geogrid
+          path: /home/runner/lavoro-geogrid/geogrid.log
+          retention-days: 7
+          if-no-files-found: ignore
+
+  # 3) Quale ciclo e quante ore
+  pianifica:
+    runs-on: ubuntu-22.04
+    outputs:
+      ciclo: ${{ steps.p.outputs.ciclo }}
+      pilota: ${{ steps.p.outputs.pilota }}
+      ore: ${{ steps.p.outputs.ore }}
+      seg: ${{ steps.p.outputs.seg }}
+      fatto: ${{ steps.p.outputs.fatto }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Codice della zona (${{ inputs.zona }})
+        run: |
+          cp -a "zone/${{ inputs.zona }}/." .
+          rm -rf zone
+      - name: Scelta del ciclo
+        id: p
+        env:
+          IN_PILOTA: ${{ inputs.pilota }}
+          IN_CICLO: ${{ inputs.ciclo }}
+          IN_ORE: ${{ inputs.ore }}
+          IN_SEG: ${{ inputs.ore_segmento }}
+          RAMO: risultati-${{ inputs.zona }}-${{ inputs.pilota }}
+          MH_EMAIL: ${{ secrets.MH_EMAIL }}
+          MH_PASSWORD: ${{ secrets.MH_PASSWORD }}
+        run: |
+          pip install -q requests numpy
+          PILOTA=${IN_PILOTA}; ORE=${IN_ORE:-48}; SEG=${IN_SEG:-16}
+          case "$PILOTA" in ecmwf|icon2i) ;; *) echo "pilota: ecmwf o icon2i"; exit 1;; esac
+          case "$ORE$SEG" in *[!0-9]*) echo "ore e ore_segmento devono essere numeri"; exit 1;; esac
+          PASSO=3; [ "$PILOTA" = icon2i ] && PASSO=6        # ICON-2I si scarica ogni 6 ore, ECMWF ogni 3
+          if [ $((ORE % PASSO)) -ne 0 ] || [ "$ORE" -lt "$PASSO" ] || [ "$ORE" -gt 48 ]; then echo "ore: multiplo di $PASSO tra $PASSO e 48"; exit 1; fi
+          if [ "$SEG" -lt 1 ] || [ $(( (ORE + SEG - 1) / SEG )) -gt 4 ]; then echo "servono al massimo 4 segmenti: alza ore_segmento"; exit 1; fi
+          CICLO=${IN_CICLO}
+          if [ -z "$CICLO" ]; then CICLO=$(python3 "wrf/scarica_$PILOTA.py" --ore "$ORE" --solo-ciclo); fi
+          # lancio programmato (anche di riserva): se questo ciclo è già nel ramo risultati non si rifà
+          FATTO=false
+          if [ "$GITHUB_EVENT_NAME" = schedule ] && git fetch -q --depth 1 origin "$RAMO" 2>/dev/null \
+             && git ls-tree -r --name-only FETCH_HEAD "archivio/$CICLO" | grep -q .; then
+            FATTO=true
+            echo "Il ciclo $CICLO è già pubblicato: niente da fare."
+          fi
+          { echo "ciclo=$CICLO"; echo "pilota=$PILOTA"; echo "ore=$ORE"; echo "seg=$SEG"; echo "fatto=$FATTO"; } >> "$GITHUB_OUTPUT"
+          echo "Pilota $PILOTA, ciclo $CICLO, $ORE ore, segmenti da $SEG ore"
+
+  # 4) La previsione, a segmenti in fila (un job non può durare più di 6 ore)
+  previsione:
+    needs: [pianifica, costruzione, statico]
+    if: ${{ needs.pianifica.outputs.fatto != 'true' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 355
+    strategy:
+      max-parallel: 1             # i segmenti girano uno dopo l'altro, nell'ordine
+      fail-fast: true
+      matrix:
+        include:
+          - { seg: 0, prev: 0 }
+          - { seg: 1, prev: 0 }
+          - { seg: 2, prev: 1 }
+          - { seg: 3, prev: 2 }
+    env:
+      WRF_TAG: v4.7.0
+      WPS_TAG: v4.7.0
+      CICLO: ${{ needs.pianifica.outputs.ciclo }}
+      PILOTA: ${{ needs.pianifica.outputs.pilota }}
+      ORE: ${{ needs.pianifica.outputs.ore }}
+      SEG: ${{ needs.pianifica.outputs.seg }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Codice della zona (${{ inputs.zona }})
+        run: |
+          cp -a "zone/${{ inputs.zona }}/." .
+          rm -rf zone
+      - name: Questo segmento serve?
+        id: s
+        run: |
+          DA=$(( ${{ matrix.seg }} * SEG )); A=$(( DA + SEG ))
+          [ "$A" -gt "$ORE" ] && A=$ORE
+          ATTIVO=false; [ "$DA" -lt "$ORE" ] && ATTIVO=true
+          { echo "attivo=$ATTIVO"; echo "da=$DA"; echo "a=$A"; } >> "$GITHUB_OUTPUT"
+          echo "segmento ${{ matrix.seg }}: da +$DA h a +$A h (attivo: $ATTIVO)"
+      - name: Recupero WRF e WPS compilati
+        if: steps.s.outputs.attivo == 'true'
+        uses: actions/cache/restore@v5
+        with:
+          path: /home/runner/wrf-install
+          key: wrf-build-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ hashFiles('wrf/costruisci.sh', 'wrf/dipendenze.sh') }}
+          fail-on-cache-miss: true
+      - name: Recupero i dati statici
+        if: steps.s.outputs.attivo == 'true'
+        uses: actions/cache/restore@v5
+        with:
+          path: /home/runner/wrf-geo
+          key: wrf-geo-${{ hashFiles('wrf/dominio.py', 'wrf/statico.sh') }}
+          fail-on-cache-miss: true
+      - name: Dipendenze
+        if: steps.s.outputs.attivo == 'true'
+        run: |
+          bash wrf/dipendenze.sh
+          pip install -q requests netCDF4 numpy eccodes
+          python3 -c "import eccodes; print('ecCodes', eccodes.codes_get_api_version())"
+      - name: Dati ICON-2I già scaricati per questo ciclo (cache condivisa tra le due zone)
+        id: dati
+        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'icon2i'
+        uses: actions/cache/restore@v5
+        with:
+          path: /home/runner/icon2i-dati
+          key: icon2i-dati-v1-${{ env.CICLO }}-${{ env.ORE }}
+      - name: Scarico ICON-2I da MeteoHub (se non è già in cache)
+        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'icon2i' && steps.dati.outputs.cache-hit != 'true'
+        env:
+          MH_EMAIL: ${{ secrets.MH_EMAIL }}
+          MH_PASSWORD: ${{ secrets.MH_PASSWORD }}
+        run: python3 wrf/scarica_icon2i.py --ciclo "$CICLO" --ore "$ORE" --out /home/runner/icon2i-dati
+      - name: Salvo i dati ICON-2I in cache per l'altra zona
+        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'icon2i' && steps.dati.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v5
+        with:
+          path: /home/runner/icon2i-dati
+          key: icon2i-dati-v1-${{ env.CICLO }}-${{ env.ORE }}
+      - name: Dati globali, ungrib, metgrid, real, stazioni (solo primo segmento)
+        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0
+        env:
+          DATI_PRONTI: ${{ inputs.pilota == 'icon2i' && '/home/runner/icon2i-dati' || '' }}
+          WU_API_KEY: ${{ inputs.stazioni && secrets.WU_API_KEY || '' }}   # senza, niente nudging
+          SST_MARE: ${{ inputs.mare && '1' || '0' }}
+        run: bash wrf/esegui.sh prepara "$CICLO" "$ORE"
+      - name: Stato del segmento precedente
+        if: steps.s.outputs.attivo == 'true' && matrix.seg > 0
+        uses: actions/download-artifact@v7
+        with:
+          name: stato-${{ matrix.prev }}
+          path: /home/runner/lavoro
+      - name: WRF
+        if: steps.s.outputs.attivo == 'true'
+        env:
+          WU_API_KEY: ${{ inputs.stazioni && secrets.WU_API_KEY || '' }}   # serve solo a cifrare le osservazioni passate al segmento dopo
+        run: bash wrf/esegui.sh modello "$CICLO" "${{ steps.s.outputs.da }}" "${{ steps.s.outputs.a }}"
+      - name: Salvo lo stato per il segmento dopo
+        if: steps.s.outputs.attivo == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: stato-${{ matrix.seg }}
+          path: /home/runner/lavoro/stato.tgz
+          retention-days: 2
+      - name: Salvo le uscite del dominio fine
+        if: steps.s.outputs.attivo == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: uscite-${{ matrix.seg }}
+          path: /home/runner/lavoro/uscite.tgz
+          retention-days: 3
+      - name: Log (solo se qualcosa è andato storto)
+        if: failure() && steps.s.outputs.attivo == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: log-segmento-${{ matrix.seg }}
+          path: |
+            /home/runner/lavoro/run/namelist.input
+            /home/runner/lavoro/run/real.log
+            /home/runner/lavoro/run/wrf.log
+            /home/runner/lavoro/run/rsl.error.0000
+            /home/runner/lavoro/run/rsl.out.0000
+            /home/runner/lavoro/WPS/*.log
+          retention-days: 7
+          if-no-files-found: ignore
+
+  # 5) Le mappe
+  mappe:
+    needs: [pianifica, previsione]
+    if: ${{ !cancelled() && needs.previsione.result == 'success' }}
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Codice della zona (${{ inputs.zona }})
+        run: |
+          cp -a "zone/${{ inputs.zona }}/." .
+          rm -rf zone
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Librerie Python
+        run: pip install -q numpy scipy matplotlib netCDF4 requests
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: uscite-*
+          path: uscite
+      - name: Scompatto
+        # con download-artifact v7 e un solo allegato la sottocartella non c'e': si cerca ovunque
+        run: |
+          find uscite -name uscite.tgz | while read -r t; do tar -xzf "$t" -C "$(dirname "$t")"; done
+          find uscite -name 'wrfout_d03_*' | head -n 1 | grep -q . || { echo "nessun wrfout negli allegati"; find uscite | head -n 20; exit 1; }
+      - name: Controllo di plausibilità (se il run è assurdo non si pubblica nulla e resta la previsione precedente)
+        run: python3 wrf/controllo.py --uscite uscite --rapporto controllo.json
+      - name: Rapporto del controllo
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: controllo
+          path: controllo.json
+          retention-days: 14
+          if-no-files-found: ignore
+      - name: Mappe (senza nudging sulle stazioni, correzione dopo il calcolo se c'è la chiave)
+        env:
+          WU_API_KEY: ${{ secrets.WU_API_KEY }}
+          CICLO: ${{ needs.pianifica.outputs.ciclo }}
+          PILOTA: ${{ needs.pianifica.outputs.pilota }}
+        run: python3 wrf/postprocess.py --uscite uscite --out mappe --ciclo "$CICLO" --pilota "$PILOTA"
+      # Il radar e' un in piu': se non risponde o qualcosa va storto, le mappe di WRF escono lo stesso
+      - name: Librerie per il radar
+        if: ${{ inputs.radar }}
+        continue-on-error: true
+        run: pip install -q pyproj opencv-python-headless tifffile imagecodecs
+      - name: Radar (verifica sulle ultime ore e pioggia delle prossime 3)
+        if: ${{ inputs.radar }}
+        continue-on-error: true
+        env:
+          CICLO: ${{ needs.pianifica.outputs.ciclo }}
+          PILOTA: ${{ needs.pianifica.outputs.pilota }}
+        run: python3 wrf/pioggia_radar.py --uscite uscite --out mappe --ciclo "$CICLO" --pilota "$PILOTA"
+      - uses: actions/upload-artifact@v6
+        with:
+          name: mappe
+          path: |
+            mappe/*.png
+            mappe/*.csv
+          retention-days: 14
+      - name: Pubblico nel ramo risultati
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CICLO: ${{ needs.pianifica.outputs.ciclo }}
+          PILOTA: ${{ needs.pianifica.outputs.pilota }}
+          RAMO: risultati-${{ inputs.zona }}-${{ inputs.pilota }}
+        run: bash wrf/pubblica.sh mappe "$CICLO"

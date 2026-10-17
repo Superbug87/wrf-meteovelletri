@@ -1,0 +1,59 @@
+name: Castelli Romani · ECMWF
+
+# Previsione WRF a 48 ore: zona castelli (dominio fine a 1 km), condizioni iniziali e al contorno da ECMWF IFS.
+# Il lavoro lo fa il flusso comune previsione.yml. GitHub a volte ritarda o salta i lanci programmati: ogni ciclo ha un lancio
+# di riserva, che non rifa' un ciclo gia' pubblicato.
+on:
+  schedule:
+    - cron: "40 8 * * *"    # ciclo 00 UTC (ECMWF lo pubblica verso le 07:35)
+    - cron: "20 11 * * *"   # riserva del ciclo 00 UTC
+    - cron: "10 20 * * *"   # ciclo 12 UTC (pubblicato verso le 19:35)
+    - cron: "30 22 * * *"   # riserva del ciclo 12 UTC
+  workflow_dispatch:
+    inputs:
+      ciclo:
+        description: "Ciclo AAAAMMGGHH (solo 00 o 12 UTC; vuoto = l'ultimo disponibile)"
+        required: false
+        default: ""
+      ore:
+        description: "Ore di previsione (multiplo di 3, da 3 a 48)"
+        required: false
+        default: "48"
+      ore_segmento:
+        description: "Ore calcolate da ogni job (GitHub ferma i job a 6 ore); al massimo 4 segmenti"
+        required: false
+        default: "16"
+      stazioni:
+        description: "Nudging sulle stazioni (serve il segreto WU_API_KEY)"
+        type: boolean
+        default: true
+      mare:
+        description: "Temperatura del mare ad alta risoluzione (MUR SST) al posto di quella del modello globale"
+        type: boolean
+        default: true
+      radar:
+        description: "Confronto con il radar della Protezione Civile e pioggia delle prossime 3 ore"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write                 # serve a pubblicare le immagini nel ramo risultati-castelli-ecmwf
+
+concurrency:
+  group: castelli-ecmwf             # un run alla volta per questa zona e questo modello; gli altri tre workflow vanno in parallelo
+  cancel-in-progress: false
+
+jobs:
+  wrf:
+    uses: ./.github/workflows/previsione.yml
+    with:
+      zona: castelli
+      pilota: ecmwf
+      ciclo: ${{ inputs.ciclo || '' }}
+      ore: ${{ inputs.ore || '48' }}
+      ore_segmento: ${{ inputs.ore_segmento || '16' }}
+      # nei lanci programmati gli input non esistono: il confronto con la stringa 'false' da' vero (opzione attiva)
+      stazioni: ${{ github.event.inputs.stazioni != 'false' }}
+      mare: ${{ github.event.inputs.mare != 'false' }}
+      radar: ${{ github.event.inputs.radar != 'false' }}
+    secrets: inherit
