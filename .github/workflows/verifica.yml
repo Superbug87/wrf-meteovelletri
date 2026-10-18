@@ -3,8 +3,6 @@ name: Verifica giornaliera
 # Ogni mattina confronta le previsioni del giorno prima con le osservazioni (Regione Lazio, Aeronautica, radar della
 # Protezione Civile) e aggiorna la pagella nel ramo "verifica". Pochi minuti, niente WRF.
 on:
-  schedule:
-    - cron: "20 5 * * *"          # 07:20 ora legale italiana: il giorno prima e' completo e i dati sono arrivati
   workflow_dispatch:
     inputs:
       giorno:
