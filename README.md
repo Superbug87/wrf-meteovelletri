@@ -50,6 +50,11 @@ Riunisce in un solo repository i progetti `wrf-castelli`, `wrf-lazio` e `wrf-ico
 Actions → il workflow della zona e del modello → **Run workflow**. Campi: `ciclo` (vuoto = l'ultimo), `ore` (48), `ore_segmento` (16),
 `stazioni`, `mare` (temperatura del mare MUR), `radar` (confronto con il radar della Protezione Civile).
 
+## Stato
+- 18/10/2026: primi run riusciti di tutti e quattro i workflow (ciclo 17/10 12 UTC; Castelli ICON-2I anche 18/10 00 UTC), controllo di plausibilità passato, mappe pubblicate.
+- Il nudging sulle stazioni resta attivo: confrontato con 27 stazioni della Regione Lazio migliora la temperatura a 2 m (errore tipico 1,27 °C contro 1,51 °C senza).
+- Da verificare: WRF a volte produce piovaschi leggeri al mattino che i modelli globali non hanno (non dipende dal nudging né dalla temperatura del mare).
+
 ## Fonti dei dati e licenze
 | cosa | fonte | condizioni |
 |---|---|---|
