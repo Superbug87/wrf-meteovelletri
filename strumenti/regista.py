@@ -35,8 +35,13 @@ PREVISIONI = {
 VERIFICA = ("verifica.yml", (5, 20))
 # prove affiancate del nudging (sperimentale.yml, non pubblicano): per ogni ciclo di questo workflow, fino a questa data,
 # si lanciano queste varianti con un quarto delle stazioni della Regione tenute fuori; il confronto "solo WU" e' il run normale
-PROVE = {"workflow": "castelli-ecmwf.yml", "zona": "castelli", "pilota": "ecmwf", "varianti": ("ufficiali", "tutte"),
-         "dal_ciclo": "2026101812", "fino_a": "2026-10-25"}
+PROVE = [
+    {"workflow": "castelli-ecmwf.yml", "zona": "castelli", "pilota": "ecmwf", "varianti": ("ufficiali", "tutte"),
+     "controllo": "true", "dal_ciclo": "2026101812", "fino_a": "2026-10-25"},
+    # Lazio a 3 km invece di 2 (zona lazio3), stesso nudging dei lanci normali: si confronta con il run normale
+    {"workflow": "lazio-ecmwf.yml", "zona": "lazio3", "pilota": "ecmwf", "varianti": ("wu",),
+     "controllo": "false", "dal_ciclo": "2026101812", "fino_a": "2026-10-25"},
+]
 FINESTRA = timedelta(hours=10)
 TENTATIVI = 3
 PAUSA = timedelta(minutes=50)          # le sveglie arrivano a distanza di circa un'ora: un po' di margine
@@ -111,32 +116,32 @@ def main():
         except RuntimeError as e:                    # un workflow che non risponde non ferma gli altri
             print(f"  !! {wf}: {e}")
 
-    if adesso.date().isoformat() <= PROVE["fino_a"]:
-        ritardi = PREVISIONI[PROVE["workflow"]][1]
+    for prova in PROVE:
+        if adesso.date().isoformat() > prova["fino_a"]:
+            continue
+        ritardi = PREVISIONI[prova["workflow"]][1]
         cand = [(g + timedelta(hours=o) + timedelta(hours=h, minutes=m), g + timedelta(hours=o))
                 for g in (oggi - timedelta(days=1), oggi) for o, (h, m) in ritardi.items()]
         cand = [x for x in cand if x[0] <= adesso < x[0] + FINESTRA]
-        if cand:
-            partenza, ciclo = max(cand)
-            c = ciclo.strftime("%Y%m%d%H")
-            try:
-                if c < PROVE["dal_ciclo"]:
-                    raise StopIteration
-                fatte = {r["displayTitle"] for r in gh("run", "list", "-R", REPO, "--workflow", "sperimentale.yml", "-L", "40",
-                                                        "--json", "displayTitle")}
-                for v in PROVE["varianti"]:
-                    titolo = f"Prova {PROVE['zona']} {PROVE['pilota']} {v} {c}"
-                    if titolo in fatte:
-                        continue
-                    print(f"  sperimentale.yml: LANCIO {titolo}")
-                    if not a.prova:
-                        gh("workflow", "run", "sperimentale.yml", "-R", REPO, "--ref", "main", "-f", f"zona={PROVE['zona']}",
-                           "-f", f"pilota={PROVE['pilota']}", "-f", f"ciclo={c}", "-f", f"nudging={v}", "-f", "controllo=true",
-                           json_out=False)
-            except StopIteration:
-                pass
-            except RuntimeError as e:
-                print(f"  !! sperimentale.yml: {e}")
+        if not cand:
+            continue
+        c = max(cand)[1].strftime("%Y%m%d%H")
+        if c < prova["dal_ciclo"]:
+            continue
+        try:
+            fatte = {r["displayTitle"] for r in gh("run", "list", "-R", REPO, "--workflow", "sperimentale.yml", "-L", "60",
+                                                    "--json", "displayTitle")}
+            for v in prova["varianti"]:
+                titolo = f"Prova {prova['zona']} {prova['pilota']} {v} {c}"
+                if titolo in fatte:
+                    continue
+                print(f"  sperimentale.yml: LANCIO {titolo}")
+                if not a.prova:
+                    gh("workflow", "run", "sperimentale.yml", "-R", REPO, "--ref", "main", "-f", f"zona={prova['zona']}",
+                       "-f", f"pilota={prova['pilota']}", "-f", f"ciclo={c}", "-f", f"nudging={v}",
+                       "-f", f"controllo={prova['controllo']}", json_out=False)
+        except RuntimeError as e:
+            print(f"  !! sperimentale.yml: {e}")
 
     wf, (h, m) = VERIFICA
     partenza = oggi + timedelta(hours=h, minutes=m)

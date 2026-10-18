@@ -9,7 +9,7 @@ on:
     inputs:
       zona:
         type: choice
-        options: [castelli, lazio]
+        options: [castelli, lazio, lazio3]
         default: castelli
       pilota:
         type: choice
