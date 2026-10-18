@@ -33,6 +33,10 @@ PREVISIONI = {
     "lazio-ecmwf.yml": ("risultati-lazio-ecmwf", {0: (9, 10), 12: (8, 20)}),
 }
 VERIFICA = ("verifica.yml", (5, 20))
+# prove affiancate del nudging (sperimentale.yml, non pubblicano): per ogni ciclo di questo workflow, fino a questa data,
+# si lanciano queste varianti con un quarto delle stazioni della Regione tenute fuori; il confronto "solo WU" e' il run normale
+PROVE = {"workflow": "castelli-ecmwf.yml", "zona": "castelli", "pilota": "ecmwf", "varianti": ("ufficiali", "tutte"),
+         "dal_ciclo": "2026101812", "fino_a": "2026-10-25"}
 FINESTRA = timedelta(hours=10)
 TENTATIVI = 3
 PAUSA = timedelta(minutes=50)          # le sveglie arrivano a distanza di circa un'ora: un po' di margine
@@ -106,6 +110,33 @@ def main():
                 gh("workflow", "run", wf, "-R", REPO, "--ref", "main", "-f", f"ciclo={c}", json_out=False)
         except RuntimeError as e:                    # un workflow che non risponde non ferma gli altri
             print(f"  !! {wf}: {e}")
+
+    if adesso.date().isoformat() <= PROVE["fino_a"]:
+        ritardi = PREVISIONI[PROVE["workflow"]][1]
+        cand = [(g + timedelta(hours=o) + timedelta(hours=h, minutes=m), g + timedelta(hours=o))
+                for g in (oggi - timedelta(days=1), oggi) for o, (h, m) in ritardi.items()]
+        cand = [x for x in cand if x[0] <= adesso < x[0] + FINESTRA]
+        if cand:
+            partenza, ciclo = max(cand)
+            c = ciclo.strftime("%Y%m%d%H")
+            try:
+                if c < PROVE["dal_ciclo"]:
+                    raise StopIteration
+                fatte = {r["displayTitle"] for r in gh("run", "list", "-R", REPO, "--workflow", "sperimentale.yml", "-L", "40",
+                                                        "--json", "displayTitle")}
+                for v in PROVE["varianti"]:
+                    titolo = f"Prova {PROVE['zona']} {PROVE['pilota']} {v} {c}"
+                    if titolo in fatte:
+                        continue
+                    print(f"  sperimentale.yml: LANCIO {titolo}")
+                    if not a.prova:
+                        gh("workflow", "run", "sperimentale.yml", "-R", REPO, "--ref", "main", "-f", f"zona={PROVE['zona']}",
+                           "-f", f"pilota={PROVE['pilota']}", "-f", f"ciclo={c}", "-f", f"nudging={v}", "-f", "controllo=true",
+                           json_out=False)
+            except StopIteration:
+                pass
+            except RuntimeError as e:
+                print(f"  !! sperimentale.yml: {e}")
 
     wf, (h, m) = VERIFICA
     partenza = oggi + timedelta(hours=h, minutes=m)

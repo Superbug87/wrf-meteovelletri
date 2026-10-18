@@ -1,4 +1,5 @@
 name: Prova sperimentale (manuale)
+run-name: "Prova ${{ inputs.zona }} ${{ inputs.pilota }} ${{ inputs.nudging }} ${{ inputs.ciclo }}"
 
 # Un run di WRF per provare una scelta prima di metterla nei lanci normali: NON pubblica nulla (mappe ed estratto per la
 # verifica restano negli allegati del run per 14 giorni). Si possono lanciare piu' prove insieme, anche sullo stesso ciclo:
