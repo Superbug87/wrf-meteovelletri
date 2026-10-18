@@ -14,7 +14,6 @@ import json
 import sys
 from datetime import timezone
 from pathlib import Path
-from zoneinfo import ZoneInfo
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -45,7 +44,7 @@ def disegna_orarie(c, z_f, lat_f, lon_f, tempi, tempi_utc, ciclo, out):
     out = Path(out) / "orarie"
     if ciclo:
         run_utc = pc.datetime.strptime(ciclo, "%Y%m%d%H").replace(tzinfo=timezone.utc)
-        run_txt = pc.etichetta(run_utc.astimezone(ZoneInfo("Europe/Rome")).replace(tzinfo=None))
+        run_txt = f"{run_utc:%d/%m} {run_utc:%H}Z"                     # nome standard della corsa (ora UTC di partenza)
     else:
         run_txt = "?"
     chiave_ciclo = ciclo or "senza_ciclo"

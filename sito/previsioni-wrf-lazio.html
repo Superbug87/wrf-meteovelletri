@@ -201,10 +201,8 @@ function oraPiuVicina(t0) {                   // l'ora della mappa più vicina a
   return best;
 }
 
-const etichettaCiclo = c => {            // "2026101612" -> "ven 16 ott, 14:00 (12 UTC)"
-  const d = new Date(Date.UTC(+c.slice(0, 4), +c.slice(4, 6) - 1, +c.slice(6, 8), +c.slice(8, 10)));
-  return `${fmtOra.format(d)} (${c.slice(8, 10)} UTC)`;
-};
+const etichettaCiclo = c =>              // "2026101612" -> "16/10 12Z" (nome standard della corsa: ora UTC di partenza)
+  `${c.slice(6, 8)}/${c.slice(4, 6)} ${c.slice(8, 10)}Z`;
 
 async function leggiJson(percorso) {
   const r = await fetch(BASE + percorso, { cache: "no-cache" });
