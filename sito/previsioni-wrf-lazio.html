@@ -45,12 +45,10 @@
   .run select { flex: 1; min-width: 0; font: inherit; color: var(--testo); background: var(--carta); border: 1px solid var(--linea);
                 border-radius: 10px; padding: 8px 10px; min-height: 40px; }
   #modelli { margin: 0 0 10px; }
-  small { color: var(--sec); display: block; margin-top: 14px; }
-  .note { margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--linea); color: var(--sec); font-size: .82rem; line-height: 1.45; }
-  .note h2 { font-size: .9rem; margin: 12px 0 4px; color: var(--testo); }
-  .note p, .note ul { margin: 0 0 8px; }
-  .note ul { padding-left: 1.1em; }
-  .note li { margin-bottom: 4px; }
+  small { color: var(--sec); display: block; margin-top: 8px; font-size: .74rem; line-height: 1.35; }
+  .note { margin-top: 6px; color: var(--sec); font-size: .7rem; line-height: 1.4; }
+  .note summary { cursor: pointer; font-size: .78rem; padding: 4px 0; }
+  .note p { margin: 4px 0 6px; }
   .note a { color: inherit; }
 </style>
 </head>
@@ -75,48 +73,28 @@
   <div id="giorni" class="righe" role="group" aria-label="Giorno"></div>
   <small id="fonte"></small>
   <small>Esperimento personale, non un servizio ufficiale: non sostituisce bollettini e allerte della Protezione Civile.</small>
-  <section class="note" aria-labelledby="note-avv">
-    <h2 id="note-avv">Avvertenze</h2>
-    <p>Queste mappe sono prodotte in automatico da un modello numerico (WRF) che gira su server gratuiti, senza controllo di un meteorologo.
-      Sono <b>sperimentali</b>: possono contenere errori anche grandi, arrivare in ritardo o mancare. Non usarle per decisioni che
-      riguardano la sicurezza di persone o beni. Per avvisi e allerte valgono solo i bollettini ufficiali:
-      <a href="https://www.protezionecivile.gov.it" target="_blank" rel="noopener">Protezione Civile</a>,
-      <a href="https://protezionecivile.regione.lazio.it" target="_blank" rel="noopener">Centro Funzionale della Regione Lazio</a>,
-      <a href="https://www.meteoam.it" target="_blank" rel="noopener">Aeronautica Militare</a>.</p>
-    <p>Fulmini, supercelle e tornado sono indici di ambiente favorevole, non probabilità. Le raffiche sono una stima.
-      Nelle prime ore il modello è stato corretto con le temperature misurate dalle stazioni (nudging); dopo prosegue da solo.
-      Quanto sbaglia, giorno per giorno, lo dice la <a href="pagella-wrf.html" target="_top">pagella</a>. Il servizio è fornito così com'è, senza garanzie.</p>
-    <h2>Fonti dei dati e licenze</h2>
-    <ul>
-      <li><b>ECMWF</b> (dati di partenza e ai bordi dei run «ECMWF»): Copyright © European Centre for Medium-Range Weather Forecasts (ECMWF),
-        fonte <a href="https://www.ecmwf.int" target="_blank" rel="noopener">www.ecmwf.int</a>, open data con licenza
-        <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a>.
-        Dati modificati: ritagliati, ricodificati e usati per far girare WRF. ECMWF non risponde di errori od omissioni nei dati,
-        della loro disponibilità o di danni derivanti dal loro uso.</li>
-      <li><b>ICON-2I</b> (dati di partenza e ai bordi dei run «ICON-2I»): Agenzia ItaliaMeteo in cooperation with Arpae Emilia-Romagna
-        Idro-Meteo-Clima Service, tramite <a href="https://meteohub.agenziaitaliameteo.it" target="_blank" rel="noopener">MeteoHub</a>,
-        licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a>. Dati modificati.</li>
-      <li><b>Temperatura del mare</b>: JPL MUR MEaSUREs Project (2015), GHRSST Level 4 MUR Global Foundation SST Analysis v4.1,
-        PO.DAAC, NASA JPL, <a href="https://doi.org/10.5067/GHGMR-4FJ04" target="_blank" rel="noopener">doi:10.5067/GHGMR-4FJ04</a>,
-        tramite NOAA CoastWatch ERDDAP.</li>
-      <li><b>Radar</b>: Dipartimento della Protezione Civile,
-        <a href="https://radar.protezionecivile.it" target="_blank" rel="noopener">Radar-DPC</a>, licenza
-        <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
-        Le immagini ricavate dal radar (confronto con il radar e pioggia delle prossime ore) sono distribuite con la stessa licenza CC BY-SA 4.0.</li>
-      <li><b>Stazioni meteo</b> (nudging): stazioni personali della rete
-        <a href="https://www.wunderground.com" target="_blank" rel="noopener">Weather Underground</a> (The Weather Company), secondo i suoi termini d'uso;
-        usate solo dentro il calcolo, non ripubblicate.</li>
-      <li><b>Modello</b>: <a href="https://www.mmm.ucar.edu/models/wrf" target="_blank" rel="noopener">WRF</a> (Weather Research and Forecasting)
-        e WPS di NCAR/UCAR, versione 4.7; Skamarock e altri (2019), <a href="https://doi.org/10.5065/1dfh-6p97" target="_blank" rel="noopener">doi:10.5065/1dfh-6p97</a>.</li>
-      <li><b>Terreno e uso del suolo</b>: dati geografici WPS di NCAR/UCAR (tra cui GMTED2010 di USGS/NGA e MODIS di NASA).
-        <b>Laghi</b>: © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium,
-        <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a>.
-        <b>Confini</b>: ISTAT, elaborati da <a href="https://github.com/openpolis/geojson-italy" target="_blank" rel="noopener">Openpolis</a>,
-        <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a>.</li>
-    </ul>
-    <p>Le mappe sono elaborazioni di Meteo Velletri: chi le riusa deve citare queste fonti (e, per le immagini radar, mantenere la licenza CC BY-SA 4.0).
-      Codice e dettagli: <a href="https://github.com/Superbug87/wrf-meteovelletri" target="_blank" rel="noopener">github.com/Superbug87/wrf-meteovelletri</a>.</p>
-  </section>
+  <details class="note">
+    <summary>Avvertenze, fonti e licenze</summary>
+    <p><b>Avvertenze.</b> Mappe prodotte in automatico dal modello WRF, senza controllo di un meteorologo: sperimentali, possono sbagliare anche
+      di molto, arrivare in ritardo o mancare. Non usarle per decisioni sulla sicurezza di persone o beni: valgono solo i bollettini di
+      <a href="https://www.protezionecivile.gov.it" target="_blank" rel="noopener">Protezione Civile</a>, <a href="https://protezionecivile.regione.lazio.it" target="_blank" rel="noopener">Regione Lazio</a> e
+      <a href="https://www.meteoam.it" target="_blank" rel="noopener">Aeronautica Militare</a>. Fulmini, supercelle e tornado sono indici di ambiente favorevole, non probabilità;
+      le raffiche sono una stima. Nelle prime ore il modello è corretto con le temperature delle stazioni (nudging). Quanto sbaglia lo dice la
+      <a href="pagella-wrf.html" target="_top">pagella</a>. Fornito così com'è, senza garanzie.</p>
+    <p><b>Fonti.</b> <b>ECMWF</b>: Copyright © European Centre for Medium-Range Weather Forecasts, <a href="https://www.ecmwf.int" target="_blank" rel="noopener">www.ecmwf.int</a>,
+      open data <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a>, dati modificati; ECMWF non risponde di errori, omissioni, disponibilità o danni derivanti dall'uso.
+      · <b>ICON-2I</b>: Agenzia ItaliaMeteo in cooperation with Arpae Emilia-Romagna Idro-Meteo-Clima Service, via
+      <a href="https://meteohub.agenziaitaliameteo.it" target="_blank" rel="noopener">MeteoHub</a>, <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a>, dati modificati.
+      · <b>Mare</b>: JPL MUR MEaSUREs Project (2015), GHRSST L4 MUR v4.1, PO.DAAC NASA JPL, <a href="https://doi.org/10.5067/GHGMR-4FJ04" target="_blank" rel="noopener">doi:10.5067/GHGMR-4FJ04</a>, via NOAA CoastWatch ERDDAP.
+      · <b>Radar</b>: Dipartimento della Protezione Civile, <a href="https://radar.protezionecivile.it" target="_blank" rel="noopener">Radar-DPC</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank" rel="noopener">CC BY-SA 4.0</a>: le immagini ricavate dal radar hanno la stessa licenza.
+      · <b>Stazioni</b>: rete personale <a href="https://www.wunderground.com" target="_blank" rel="noopener">Weather Underground</a> (The Weather Company), usate solo nel calcolo, non ripubblicate.
+      · <b>Modello</b>: <a href="https://www.mmm.ucar.edu/models/wrf" target="_blank" rel="noopener">WRF</a> 4.7 e WPS di NCAR/UCAR, Skamarock e altri (2019), <a href="https://doi.org/10.5065/1dfh-6p97" target="_blank" rel="noopener">doi:10.5065/1dfh-6p97</a>.
+      · <b>Terreno</b>: dati WPS di NCAR/UCAR (GMTED2010 USGS/NGA, MODIS NASA).
+      · <b>Laghi</b>: © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium, <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a>.
+      · <b>Confini</b>: ISTAT, elaborati da <a href="https://github.com/openpolis/geojson-italy" target="_blank" rel="noopener">Openpolis</a>, <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a>.</p>
+    <p>Le mappe sono elaborazioni di Meteo Velletri: chi le riusa citi queste fonti (immagini radar: <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank" rel="noopener">CC BY-SA 4.0</a>).
+      Codice: <a href="https://github.com/Superbug87/wrf-meteovelletri" target="_blank" rel="noopener">github.com/Superbug87/wrf-meteovelletri</a>.</p>
+  </details>
 </main>
 <script>
 "use strict";
