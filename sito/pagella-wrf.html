@@ -34,7 +34,7 @@
   .scheda { margin: 10px 0; background: var(--carta); border: 1px solid var(--linea); border-radius: 12px; overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .92rem; }
   th, td { padding: 8px 8px; border-bottom: 1px solid var(--linea); text-align: right; white-space: nowrap; }
-  th:first-child, td:first-child { text-align: left; white-space: normal; width: 36%; }
+  th:first-child, td:first-child { text-align: left; white-space: normal; }
   thead th { font-size: .8rem; color: var(--sec); font-weight: 600; vertical-align: bottom; }
   tr.gruppo td { background: var(--sfondo); font-weight: 600; font-size: .85rem; color: var(--sec); text-align: left; }
   td.meglio { color: var(--meglio); background: var(--meglio-sfondo); font-weight: 700; }
@@ -100,20 +100,20 @@ function bottoni(id, voci, chiave, chiaveLS) {
 
 // righe della tabella: come leggere il valore da un insieme di indici e se "meglio" vuol dire piu' basso o piu' alto
 const RIGHE = [
-  { gruppo: "Temperatura a 2 m (°C)" },
-  { nome: "Errore tipico", val: i => i.t2 && [i.t2.tipico, i.t2.n], meglio: "basso" },
-  { nome: "Errore medio", val: i => i.t2 && [i.t2.medio, i.t2.n], meglio: "zero", segno: true },
-  { nome: "Errore tipico di notte", val: i => i.t2_notte && [i.t2_notte.tipico, i.t2_notte.n], meglio: "basso" },
-  { nome: "Errore tipico di giorno", val: i => i.t2_giorno && [i.t2_giorno.tipico, i.t2_giorno.n], meglio: "basso" },
-  { gruppo: "Vento a 10 m (km/h)" },
-  { nome: "Errore tipico", val: i => i.vento && [i.vento.tipico * 3.6, i.vento.n], meglio: "basso" },
-  { nome: "Errore medio", val: i => i.vento && [i.vento.medio * 3.6, i.vento.n], meglio: "zero", segno: true },
+  { gruppo: "Temperatura a 2 m: errore (°C)" },
+  { nome: "Tipico", val: i => i.t2 && [i.t2.tipico, i.t2.n], meglio: "basso" },
+  { nome: "Medio", val: i => i.t2 && [i.t2.medio, i.t2.n], meglio: "zero", segno: true },
+  { nome: "Tipico di notte", val: i => i.t2_notte && [i.t2_notte.tipico, i.t2_notte.n], meglio: "basso" },
+  { nome: "Tipico di giorno", val: i => i.t2_giorno && [i.t2_giorno.tipico, i.t2_giorno.n], meglio: "basso" },
+  { gruppo: "Vento a 10 m: errore (km/h)" },
+  { nome: "Tipico", val: i => i.vento && [i.vento.tipico * 3.6, i.vento.n], meglio: "basso" },
+  { nome: "Medio", val: i => i.vento && [i.vento.medio * 3.6, i.vento.n], meglio: "zero", segno: true },
   { gruppo: "Pioggia ai pluviometri (≥ 1 mm in 6 ore)" },
-  { nome: "Presa (%)", val: i => i.pioggia && i.pioggia["1.0"].presa !== null && [i.pioggia["1.0"].presa, i.pioggia["1.0"].piovuto], meglio: "alto", dec: 0 },
-  { nome: "Falsi allarmi (%)", val: i => i.pioggia && i.pioggia["1.0"].falsi !== null && [i.pioggia["1.0"].falsi, i.pioggia["1.0"].previsto], meglio: "basso", dec: 0 },
+  { nome: "Presa %", val: i => i.pioggia && i.pioggia["1.0"].presa !== null && [i.pioggia["1.0"].presa, i.pioggia["1.0"].piovuto], meglio: "alto", dec: 0 },
+  { nome: "Falsi allarmi %", val: i => i.pioggia && i.pioggia["1.0"].falsi !== null && [i.pioggia["1.0"].falsi, i.pioggia["1.0"].previsto], meglio: "basso", dec: 0 },
   { gruppo: "Pioggia col radar (≥ 0,5 mm in 6 ore, entro 10 km)" },
-  { nome: "Nel posto giusto (%)", val: i => i.radar && i.radar["0.5"].prevista_giusta !== null && [i.radar["0.5"].prevista_giusta, i.radar["0.5"].celle_previste], meglio: "alto", dec: 0, soloWrf: true },
-  { nome: "Vista (%)", val: i => i.radar && i.radar["0.5"].osservata_presa !== null && [i.radar["0.5"].osservata_presa, i.radar["0.5"].celle_osservate], meglio: "alto", dec: 0, soloWrf: true },
+  { nome: "Posto giusto %", val: i => i.radar && i.radar["0.5"].prevista_giusta !== null && [i.radar["0.5"].prevista_giusta, i.radar["0.5"].celle_previste], meglio: "alto", dec: 0, soloWrf: true },
+  { nome: "Vista %", val: i => i.radar && i.radar["0.5"].osservata_presa !== null && [i.radar["0.5"].osservata_presa, i.radar["0.5"].celle_osservate], meglio: "alto", dec: 0, soloWrf: true },
 ];
 
 function indiciDi(modelli, colonna) {
