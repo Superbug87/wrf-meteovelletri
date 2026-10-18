@@ -3,12 +3,8 @@ name: Castelli Romani · ICON-2I
 # Previsione WRF a 48 ore: zona castelli (dominio fine a 1 km), condizioni iniziali e al contorno da ICON-2I (MeteoHub).
 # Il lavoro lo fa il flusso comune previsione.yml. GitHub a volte ritarda o salta i lanci programmati: ogni ciclo ha un lancio
 # di riserva, che non rifa' un ciclo gia' pubblicato.
+# Gli orari li decide il regista (regista.yml, svegliato a orario): i lanci programmati di GitHub arrivavano con ore di ritardo.
 on:
-  schedule:
-    - cron: "10 3 * * *"    # ciclo 00 UTC (ICON-2I esce circa 2 ore dopo)
-    - cron: "40 5 * * *"    # riserva del ciclo 00 UTC
-    - cron: "10 15 * * *"   # ciclo 12 UTC
-    - cron: "40 17 * * *"   # riserva del ciclo 12 UTC
   workflow_dispatch:
     inputs:
       ciclo:

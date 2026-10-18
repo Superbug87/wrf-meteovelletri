@@ -3,12 +3,8 @@ name: Castelli Romani · ECMWF
 # Previsione WRF a 48 ore: zona castelli (dominio fine a 1 km), condizioni iniziali e al contorno da ECMWF IFS.
 # Il lavoro lo fa il flusso comune previsione.yml. GitHub a volte ritarda o salta i lanci programmati: ogni ciclo ha un lancio
 # di riserva, che non rifa' un ciclo gia' pubblicato.
+# Gli orari li decide il regista (regista.yml, svegliato a orario): i lanci programmati di GitHub arrivavano con ore di ritardo.
 on:
-  schedule:
-    - cron: "40 8 * * *"    # ciclo 00 UTC (ECMWF lo pubblica verso le 07:35)
-    - cron: "20 11 * * *"   # riserva del ciclo 00 UTC
-    - cron: "10 20 * * *"   # ciclo 12 UTC (pubblicato verso le 19:35)
-    - cron: "30 22 * * *"   # riserva del ciclo 12 UTC
   workflow_dispatch:
     inputs:
       ciclo:

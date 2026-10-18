@@ -3,12 +3,8 @@ name: Lazio · ICON-2I
 # Previsione WRF a 48 ore: zona lazio (dominio fine a 2 km), condizioni iniziali e al contorno da ICON-2I (MeteoHub).
 # Il lavoro lo fa il flusso comune previsione.yml. GitHub a volte ritarda o salta i lanci programmati: ogni ciclo ha un lancio
 # di riserva, che non rifa' un ciclo gia' pubblicato.
+# Gli orari li decide il regista (regista.yml, svegliato a orario): i lanci programmati di GitHub arrivavano con ore di ritardo.
 on:
-  schedule:
-    - cron: "25 4 * * *"    # ciclo 00 UTC (75 minuti dopo i Castelli: trova i dati ICON-2I gia' in cache)
-    - cron: "55 6 * * *"    # riserva del ciclo 00 UTC
-    - cron: "25 16 * * *"   # ciclo 12 UTC
-    - cron: "55 18 * * *"   # riserva del ciclo 12 UTC
   workflow_dispatch:
     inputs:
       ciclo:
