@@ -1,0 +1,61 @@
+name: Estratti arretrati (manuale)
+
+# Ricava l'estratto per la verifica da un run gia' fatto (finche' i suoi allegati "uscite-*" esistono, 3 giorni)
+# e lo aggiunge alla cartella estratti/ del ramo risultati-<zona>-<modello>. Serve per i run partiti prima della verifica.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Numero del run (dall'indirizzo della pagina del run)"
+        required: true
+      zona:
+        type: choice
+        options: [castelli, lazio]
+      pilota:
+        type: choice
+        options: [ecmwf, icon2i]
+      ciclo:
+        description: "Ciclo del run, AAAAMMGGHH"
+        required: true
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: ${{ inputs.zona }}-${{ inputs.pilota }}-estratti
+  cancel-in-progress: false
+
+jobs:
+  estratto:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - run: pip install -q numpy netCDF4
+      - uses: actions/download-artifact@v7
+        with:
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+          pattern: uscite-*
+          path: uscite
+      - name: Estratto
+        run: |
+          find uscite -name uscite.tgz | while read -r t; do tar -xzf "$t" -C "$(dirname "$t")" && rm -f "$t"; done
+          mkdir -p estratto
+          python3 strumenti/estrai_verifica.py --uscite uscite --stazioni strumenti/stazioni_verifica.json \
+            --ciclo "${{ inputs.ciclo }}" --out "estratto/estratto_${{ inputs.zona }}-${{ inputs.pilota }}_${{ inputs.ciclo }}.npz"
+      - name: Aggiungo l'estratto al ramo dei risultati
+        env:
+          RAMO: risultati-${{ inputs.zona }}-${{ inputs.pilota }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          F=$(ls "$PWD"/estratto/*.npz)
+          T=$(mktemp -d); cd "$T"; git init -q
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch -q --depth 1 origin "$RAMO"; git checkout -q -b "$RAMO" FETCH_HEAD
+          mkdir -p estratti; cp "$F" estratti/
+          git config user.name "github-actions"; git config user.email "actions@users.noreply.github.com"
+          git add -A; git diff --cached --quiet && { echo "gia' presente"; exit 0; }
+          git checkout -q --orphan nuovo; git commit -q -m "Estratto per la verifica: $(basename "$F")"
+          git push -q --force origin "HEAD:refs/heads/$RAMO"; echo "aggiunto $(basename "$F") a $RAMO"
