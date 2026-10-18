@@ -31,6 +31,22 @@ on:
       radar:
         type: boolean
         default: true
+      # fonti del nudging: wu, ufficiali (Regione Lazio + Aeronautica) o tutte (ufficiali + superosservazioni WU);
+      # vuoto = la scelta in uso (NUDGING_DEFAULT qui sotto)
+      nudging:
+        type: string
+        default: ""
+      # solo prove: un quarto delle stazioni della Regione resta fuori dal nudging, per misurarne l'effetto
+      controllo:
+        type: boolean
+        default: false
+      # solo prove: niente pubblicazione nel ramo risultati (mappe ed estratto restano negli allegati del run)
+      prova:
+        type: boolean
+        default: false
+
+env:
+  NUDGING_DEFAULT: wu             # fonti del nudging nei lanci normali (wu / ufficiali / tutte)
 
 jobs:
   # 1) WRF e WPS compilati: si fa una volta sola, poi restano in cache.
@@ -275,7 +291,10 @@ jobs:
         if: steps.s.outputs.attivo == 'true' && matrix.seg == 0
         env:
           DATI_PRONTI: ${{ inputs.pilota == 'icon2i' && '/home/runner/icon2i-dati' || '' }}
-          WU_API_KEY: ${{ inputs.stazioni && secrets.WU_API_KEY || '' }}   # senza, niente nudging
+          WU_API_KEY: ${{ inputs.stazioni && secrets.WU_API_KEY || '' }}   # senza, niente stazioni Wunderground
+          STAZIONI: ${{ inputs.stazioni }}
+          NUDGING_FONTI: ${{ inputs.nudging || env.NUDGING_DEFAULT }}
+          OBS_CONTROLLO: ${{ inputs.controllo && '1' || '' }}
           SST_MARE: ${{ inputs.mare && '1' || '0' }}
         run: bash wrf/esegui.sh prepara "$CICLO" "$ORE"
       - name: Stato del segmento precedente
@@ -385,8 +404,10 @@ jobs:
           path: |
             mappe/*.png
             mappe/*.csv
+            mappe/*.npz
           retention-days: 14
       - name: Pubblico nel ramo risultati
+        if: ${{ !inputs.prova }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CICLO: ${{ needs.pianifica.outputs.ciclo }}

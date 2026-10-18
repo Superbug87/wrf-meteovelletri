@@ -164,6 +164,12 @@ python3 wrf/stazioni_wrf.py --prova --ciclo 2026101600 --geo "$T/geo" --out "$T/
 gfortran wrf/leggi_obs.f90 -o "$T/leggi_obs"
 for f in "$T"/obs/OBS_DOMAIN101 "$T"/obs/OBS_DOMAIN201 "$T"/obs/OBS_DOMAIN301; do "$T/leggi_obs" "$f"; done
 
+passo "stazioni ufficiali e superosservazioni WU (inventate, nessuna rete) e rilettura con i formati di WRF"
+STRUMENTI=strumenti; [ -d "$STRUMENTI" ] || STRUMENTI="$RADICE/../../strumenti"     # nel repository, fuori dal run di GitHub
+python3 -m pyflakes "$STRUMENTI/stazioni_ufficiali.py" "$STRUMENTI/prova_ufficiali.py"
+python3 "$STRUMENTI/prova_ufficiali.py" --wrf wrf --geo "$T/geo" --ciclo 2026101600 --out "$T/obs_uff"
+for f in "$T"/obs_uff/OBS_DOMAIN101 "$T"/obs_uff/OBS_DOMAIN201 "$T"/obs_uff/OBS_DOMAIN301; do "$T/leggi_obs" "$f"; done
+
 passo "ricerca e lettura delle stazioni usate dalle mappe (API inventata, tutte le stazioni, in parallelo)"
 python3 - "$T" <<'EOF'
 import sys

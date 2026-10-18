@@ -48,6 +48,8 @@ PASSO_MIN = 15                       # minuti: media delle misure ogni 5 minuti 
 CHIAMATE_AL_SECONDO = float(os.environ.get("WU_CHIAMATE_AL_SECONDO", "40"))
 THREAD = int(os.environ.get("WU_THREAD", "24"))
 TOLLERANZA_QUOTA = {3: 400.0, 2: 600.0, 1: 800.0}      # m: quota dichiarata - terreno del modello (a 3 km il rilievo è levigato)
+CELLE_KM = {3: 6.0, 2: 18.0, 1: 54.0}                  # superosservazioni WU con NUDGING_FONTI=tutte
+RISOLUZIONI = {3: "2 km", 2: "6 km", 1: "18 km"}
 ETA_MASSIMA_ELENCO = timedelta(hours=48)               # dall'elenco della ricerca si scartano solo le stazioni mute da due giorni
 ETA_MASSIMA_DATO = timedelta(hours=3)                  # l'ultimo dato letto deve essere di meno di 3 ore fa
 LATO_INIZIALE = 0.30                                   # gradi: riquadri di partenza della ricerca (circa 33 x 25 km)
@@ -527,6 +529,37 @@ def leggi_tutte(chiave, ids, domini, t0, adesso):
     return stazioni, motivi
 
 
+def leggi_wu(chiave, domini, t0, adesso):
+    """Ricerca e lettura delle stazioni Wunderground nei domini: {sid: dati} (prima del controllo di qualità)."""
+    inizio = time.monotonic()
+    print("Ricerca delle stazioni...", flush=True)
+    trovate, riass = cerca(chiave, domini, adesso)
+    print(f"Stazioni trovate: {len(trovate)} con {riass['ricerche']} ricerche in {time.monotonic() - inizio:.0f} s"
+          f" (mute da più di 2 giorni: {riass['mute']}; ricerche fallite: {riass['fallite']}; "
+          f"riquadri troppo fitti per essere esauriti: {riass['non_esaurite']})", flush=True)
+    ids = [sid for sid, (la, lo) in trovate.items() if dominio_fine(domini, la, lo)]
+    for n in (3, 2, 1):
+        print(f"  nel dominio {n}: {sum(1 for sid in ids if dominio_fine(domini, *trovate[sid]) == n)}", flush=True)
+    inizio = time.monotonic()
+    stazioni, motivi = leggi_tutte(chiave, ids, domini, t0, adesso)
+    print("Scartate prima del controllo: " + ", ".join(f"{v} {k}" for k, v in motivi.items() if v) +
+          f"; restano {len(stazioni)} (lettura in {time.monotonic() - inizio:.0f} s, "
+          f"{_stato['chiamate']} chiamate in tutto)", flush=True)
+
+    return stazioni
+
+
+def importa_ufficiali():
+    """strumenti/stazioni_ufficiali.py: accanto a wrf/ nel run di GitHub, tre livelli sopra nel repository."""
+    qui = Path(__file__).resolve().parent
+    for c in (qui.parent / "strumenti", qui.parents[2] / "strumenti"):
+        if (c / "stazioni_ufficiali.py").exists():
+            sys.path.insert(0, str(c))
+            import stazioni_ufficiali
+            return stazioni_ufficiali
+    raise FileNotFoundError("strumenti/stazioni_ufficiali.py")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--ciclo", required=True, help="AAAAMMGGHH, inizio della previsione (UTC)")
@@ -541,42 +574,44 @@ def main():
     t0 = datetime.strptime(a.ciclo, "%Y%m%d%H").replace(tzinfo=timezone.utc)
     adesso = datetime.now(timezone.utc)
     domini = carica_domini(a.geo)
+    modo = (os.environ.get("NUDGING_FONTI", "") or "wu").strip().lower()
+    if modo not in ("wu", "ufficiali", "tutte"):
+        print(f"NUDGING_FONTI={modo} non previsto: uso wu")
+        modo = "wu"
+    print(f"Stazioni per il nudging: {dict(wu='Wunderground', ufficiali='Regione Lazio e Aeronautica', tutte='ufficiali + Wunderground')[modo]}", flush=True)
 
+    stazioni = {}
     if a.prova:
         prova_ricerca(domini, adesso)
         stazioni, difetti = stazioni_finte(domini, t0, adesso)
         n_prima = len(stazioni)
-    else:
+    elif modo != "ufficiali":
         chiave = os.environ.get("WU_API_KEY", "")
         if not chiave:
-            print("WU_API_KEY non impostata: niente stazioni, WRF girerà senza nudging.")
-            return
-        SEGRETI.append(chiave)
-        if adesso - t0 > timedelta(hours=23):
-            print("Il ciclo è più vecchio di 23 ore: lo storico a 24 ore di Wunderground non basta, niente nudging.")
-            return
-        inizio = time.monotonic()
-        print("Ricerca delle stazioni...", flush=True)
-        trovate, riass = cerca(chiave, domini, adesso)
-        print(f"Stazioni trovate: {len(trovate)} con {riass['ricerche']} ricerche in {time.monotonic() - inizio:.0f} s"
-              f" (mute da più di 2 giorni: {riass['mute']}; ricerche fallite: {riass['fallite']}; "
-              f"riquadri troppo fitti per essere esauriti: {riass['non_esaurite']})", flush=True)
-        ids = [sid for sid, (la, lo) in trovate.items() if dominio_fine(domini, la, lo)]
-        for n in (3, 2, 1):
-            print(f"  nel dominio {n}: {sum(1 for sid in ids if dominio_fine(domini, *trovate[sid]) == n)}", flush=True)
-        inizio = time.monotonic()
-        stazioni, motivi = leggi_tutte(chiave, ids, domini, t0, adesso)
-        print("Scartate prima del controllo: " + ", ".join(f"{v} {k}" for k, v in motivi.items() if v) +
-              f"; restano {len(stazioni)} (lettura in {time.monotonic() - inizio:.0f} s, "
-              f"{_stato['chiamate']} chiamate in tutto)", flush=True)
+            print("WU_API_KEY non impostata: niente stazioni Wunderground.")
+        elif adesso - t0 > timedelta(hours=23):
+            print("Il ciclo è più vecchio di 23 ore: lo storico a 24 ore di Wunderground non basta, niente stazioni WU.")
+        else:
+            SEGRETI.append(chiave)
+            stazioni = leggi_wu(chiave, domini, t0, adesso)
+    if stazioni:
+        eliminate, valori = controlla(stazioni)
+        print(f"Controllo di qualità: eliminate {eliminate} stazioni, scartati {valori} valori singoli; restano {len(stazioni)}")
+    if a.prova:
+        verifica_prova(stazioni, difetti, n_prima)
 
+    if modo != "wu" and not a.prova:
+        try:
+            SU = importa_ufficiali()
+            SU.prepara(modo, stazioni, domini, t0, adesso, out, TOLLERANZA_QUOTA, CELLE_KM, LAT0, LON0, RISOLUZIONI)
+            return
+        except Exception as e:                       # le ufficiali non devono far perdere le Wunderground
+            print(f"!! Stazioni ufficiali non utilizzabili ({type(e).__name__}: {e}): si usano solo le Wunderground", flush=True)
+            for f_ in ("OBS_DOMAIN101", "OBS_DOMAIN201", "OBS_DOMAIN301", "obs_fdda_end.txt", "obs_fonti.txt"):
+                (out / f_).unlink(missing_ok=True)
     if not stazioni:
         print("Nessuna stazione utilizzabile: WRF girerà senza nudging.")
         return
-    eliminate, valori = controlla(stazioni)
-    print(f"Controllo di qualità: eliminate {eliminate} stazioni, scartati {valori} valori singoli; restano {len(stazioni)}")
-    if a.prova:
-        verifica_prova(stazioni, difetti, n_prima)
 
     righe = in_ordine(stazioni)
     testi = {1: [], 2: [], 3: []}

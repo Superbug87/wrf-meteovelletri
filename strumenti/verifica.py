@@ -295,6 +295,10 @@ def conta_pioggia(acc, prev, oss):
 
 def verifica_estratto(e, oss, quote, radar_ore, radar_mod, acc_per_scad):
     ciclo = datetime.strptime(str(e["ciclo"]), "%Y%m%d%H").replace(tzinfo=timezone.utc)
+    # le ore fino alla fine del nudging erano gia' passate quando il modello ha smesso di vedere le stazioni:
+    # non sono previsione (e con le stazioni ufficiali il modello le ha viste proprio qui). Si contano solo le successive.
+    fine_nudging = int(e["fine_nudging"]) if "fine_nudging" in e else -1
+    libera_da = ciclo + timedelta(minutes=max(fine_nudging, 0))
     valide = [ciclo + timedelta(hours=int(h)) for h in e["ore"]]
     indice = {t: k for k, t in enumerate(valide)}
     ids = [str(x) for x in e["stazioni"]]
@@ -311,8 +315,8 @@ def verifica_estratto(e, oss, quote, radar_ore, radar_mod, acc_per_scad):
             if t not in giorno_ore:
                 continue
             ore_prev = int(round((t - ciclo).total_seconds() / 3600))
-            if ore_prev < 1:
-                continue                             # l'istante iniziale non e' una previsione
+            if ore_prev < 1 or t <= libera_da:
+                continue                             # l'istante iniziale e le ore assimilate non sono previsione
             acc = acc_per_scad[scadenza(ore_prev)]
             usati.add(scadenza(ore_prev))
             ot = o.get("t2", {}).get(t)
@@ -336,7 +340,7 @@ def verifica_estratto(e, oss, quote, radar_ore, radar_mod, acc_per_scad):
             if not all(t in op for t in ore6) or not all(t in indice for t in ore6):
                 continue
             ore_prev = int(round((t_fine - ciclo).total_seconds() / 3600))
-            if ore_prev < 6:
+            if ore_prev < 6 or t_fine - timedelta(hours=6) < libera_da:
                 continue
             prev = sum(float(e["pioggia"][indice[t], j]) for t in ore6)
             if not np.isfinite(prev):
@@ -355,7 +359,7 @@ def verifica_estratto(e, oss, quote, radar_ore, radar_mod, acc_per_scad):
             if not all(t in radar_ore for t in ore6) or not all(t in indice for t in ore6):
                 continue
             ore_prev = int(round((t_fine - ciclo).total_seconds() / 3600))
-            if ore_prev < 6:
+            if ore_prev < 6 or t_fine - timedelta(hours=6) < libera_da:
                 continue
             prev = sum(e["griglia_pioggia"][indice[t]].astype(float) for t in ore6)
             osservata = sum(radar_mod.campiona(radar_ore[t], glat, glon) for t in ore6)

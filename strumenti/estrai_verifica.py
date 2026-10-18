@@ -8,7 +8,8 @@ osservazioni, in poche decine di kB:
   - nei punti delle stazioni dentro il dominio fine (Regione Lazio e Aeronautica), ogni ora: temperatura a 2 m,
     punto di rugiada, vento a 10 m (velocita' e direzione), pioggia caduta nell'ora, pressione ridotta al livello del mare;
     in piu' la quota del terreno del modello nel punto (per riportare la temperatura alla quota della stazione);
-  - la pioggia oraria su una griglia ridotta (un punto ogni PASSO_GRIGLIA celle), per il confronto con il radar.
+  - la pioggia oraria su una griglia ridotta (un punto ogni PASSO_GRIGLIA celle), per il confronto con il radar;
+  - fin dove arriva il nudging (minuti dall'inizio del ciclo, -1 se non c'e') e da quali stazioni.
 """
 import argparse
 import glob
@@ -104,12 +105,27 @@ def main():
         prec_pt, prec_g = r[jj, ii], r[sl]
         ore.append(int(round((datetime.strptime(t, "%Y-%m-%d_%H:%M:%S") - ciclo).total_seconds() / 3600)))
 
+    # fin dove il modello e' stato "tirato" verso le stazioni (nudging): quelle ore la verifica non le conta
+    fine_nudging, fonti = -1, ""
+    for f in sorted(glob.glob(os.path.join(a.uscite, "**", "obs_fdda_end.txt"), recursive=True)):
+        try:
+            fine_nudging = int(open(f).read().split()[0])
+        except (ValueError, IndexError):
+            pass
+        break
+    for f in sorted(glob.glob(os.path.join(a.uscite, "**", "obs_fonti.txt"), recursive=True)):
+        fonti = open(f).read().strip()
+        break
+    if fine_nudging >= 0 and not fonti:
+        fonti = "wu"
+
     np.savez_compressed(
-        a.out, ciclo=a.ciclo, ore=np.array(ore, np.int16), stazioni=np.array(ids), quota_modello=hgt[jj, ii].astype(np.float32),
+        a.out, ciclo=a.ciclo, fine_nudging=np.int32(fine_nudging), fonti_nudging=fonti, ore=np.array(ore, np.int16), stazioni=np.array(ids), quota_modello=hgt[jj, ii].astype(np.float32),
         t2=T, td2=TD, vento=VV, dir_vento=DV, pioggia=PP, mslp=MSLP,
         griglia_lat=glat.astype(np.float32), griglia_lon=glon.astype(np.float32), griglia_pioggia=PG.astype(np.float16))
     print(f"estratto: {len(ids)} stazioni nel dominio, {n} istanti (ore {ore[0]}..{ore[-1]}), griglia {glat.shape}, "
-          f"{os.path.getsize(a.out) / 1024:.0f} kB -> {a.out}")
+          f"{os.path.getsize(a.out) / 1024:.0f} kB -> {a.out}"
+          + (f"; nudging fino a +{fine_nudging} min ({fonti})" if fine_nudging >= 0 else "; senza nudging"))
 
 
 if __name__ == "__main__":

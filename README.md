@@ -31,6 +31,12 @@ Riunisce in un solo repository i progetti `wrf-castelli`, `wrf-lazio` e `wrf-ico
 - Tutti chiamano lo stesso **flusso comune** (`.github/workflows/previsione.yml`): compilazione di WRF/WPS (una volta, in cache), dati statici
   della zona (geogrid, in cache), scelta del ciclo, dati di partenza, ungrib, metgrid, real, WRF a segmenti da 16 ore, controllo, mappe, pubblicazione.
 - **ICON-2I** si scarica una sola volta per ciclo (MeteoHub limita le richieste): i Castelli partono prima e lo mettono in cache, il Lazio lo ritrova.
+- **Nudging sulle stazioni** (`wrf/stazioni_wrf.py`, `strumenti/stazioni_ufficiali.py`): nelle prime ore, fino all'ultima osservazione
+  disponibile, WRF viene tenuto vicino alla temperatura e all'umidità misurate; dopo prosegue libero. Fonti (`NUDGING_DEFAULT` nel flusso
+  comune, o il campo `nudging` delle prove): `wu` (stazioni Weather Underground), `ufficiali` (Regione Lazio, temperatura ogni 15 minuti
+  e umidità dove c'è; Aeronautica Militare, SYNOP orari, METAR di riserva) o `tutte` (le ufficiali più le WU controllate contro di esse
+  e riassunte in una "superosservazione" per riquadro di 3 km sui Castelli e 6 km sul Lazio, saltando i riquadri con una stazione ufficiale).
+  Con le ufficiali la temperatura si riporta alla quota del terreno di WRF (6,5 K/km). Se una fonte non risponde si va avanti con le altre.
 - **Controllo di plausibilità** (`wrf/controllo.py`) prima delle mappe: terreno della cornice, valori mancanti, temperatura, vento, corrente verticale,
   pioggia e salti di pressione. Se il run non è plausibile **non si pubblica nulla** e sul sito resta la previsione precedente.
 - **Pubblicazione**: ogni workflow scrive solo nel suo ramo (un solo commit, la storia delle immagini non si accumula):
@@ -39,7 +45,8 @@ Riunisce in un solo repository i progetti `wrf-castelli`, `wrf-lazio` e `wrf-ico
 ## Struttura
 - `zone/castelli/`, `zone/lazio/`: il codice di ciascuna zona (domini, WPS/WRF, stazioni, mappe). Il flusso comune copia la cartella della zona nella radice prima di lavorare.
   Le parti uguali nelle due zone (compilazione, controllo, scarico dei dati) sono per ora copiate in entrambe.
-- `strumenti/`: `genera_pagine.py` (pagine del sito con la scelta del modello), `pulisci_meteohub.py` (cancella le richieste vecchie su MeteoHub).
+- `strumenti/`: `genera_pagine.py` (pagine del sito con la scelta del modello), `pulisci_meteohub.py` (cancella le richieste vecchie su MeteoHub),
+  `stazioni_ufficiali.py` (stazioni ufficiali per il nudging, collaudo in `prova_ufficiali.py`), `estrai_verifica.py` e `verifica.py` (verifica).
 - `sito/`: le pagine da caricare a mano sul sito (si caricano una volta: le immagini le prendono da GitHub):
   `previsioni-wrf.html` (Castelli), `previsioni-wrf-lazio.html` (Lazio), `pagella-wrf.html` (verifica).
 
@@ -49,6 +56,8 @@ Riunisce in un solo repository i progetti `wrf-castelli`, `wrf-lazio` e `wrf-ico
 - Ogni mattina `verifica.yml` (`strumenti/verifica.py`) confronta il giorno prima con le osservazioni: stazioni del Centro Funzionale della
   Regione Lazio (temperatura, pioggia, vento), SYNOP dell'Aeronautica Militare (temperatura, rugiada, vento, pressione) e radar della
   Protezione Civile (pioggia, con 10 km di tolleranza). Come riferimento: previsioni a breve di ECMWF e ICON-2I originali (Open-Meteo).
+- Si contano solo le ore **dopo la fine del nudging**: prima il modello vedeva le stazioni (con le ufficiali, proprio quelle della verifica)
+  e quelle ore erano già passate quando la previsione è uscita.
 - Risultati nel ramo `verifica`: `giorni/AAAA-MM-GG.json` (somme del giorno) e `pagella.json` (ultimi 7 e 30 giorni), letto da `sito/pagella-wrf.html`.
 - Elenco delle stazioni: `strumenti/stazioni_verifica.json` (da rifare se la rete regionale cambia).
 
@@ -59,6 +68,10 @@ Riunisce in un solo repository i progetti `wrf-castelli`, `wrf-lazio` e `wrf-ico
 ## Avvio a mano
 Actions → il workflow della zona e del modello → **Run workflow**. Campi: `ciclo` (vuoto = l'ultimo), `ore` (48), `ore_segmento` (16),
 `stazioni`, `mare` (temperatura del mare MUR), `radar` (confronto con il radar della Protezione Civile).
+
+**Prove** (`sperimentale.yml`, Actions → Prova sperimentale): un run che non pubblica nulla, con la zona, il modello, il ciclo e le stazioni
+del nudging scelti (`wu`, `ufficiali`, `tutte`, `nessuno`); `controllo` tiene fuori dal nudging un quarto fisso delle stazioni della Regione,
+per misurare l'effetto su stazioni che il modello non ha visto. Mappe ed estratto restano negli allegati del run.
 
 ## Stato
 - 18/10/2026: primi run riusciti di tutti e quattro i workflow (ciclo 17/10 12 UTC; Castelli ICON-2I anche 18/10 00 UTC), controllo di plausibilità passato, mappe pubblicate.
@@ -78,6 +91,7 @@ Actions → il workflow della zona e del modello → **Run workflow**. Campi: `c
 | Confini provinciali e comunali | confini amministrativi ISTAT, elaborati da [Openpolis](https://github.com/openpolis/geojson-italy) ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)) | semplificati (25 m) e ritagliati sull'area delle mappe in `dati/confini.json`; la fonte va citata (Confini: ISTAT, elaborati da Openpolis, CC BY 4.0) |
 | Contorno dei laghi | [ESA WorldCover 2021](https://esa-worldcover.org) v200 (acqua a 10 m) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium; contorni semplificati in `dati/laghi.json` |
 | Stazioni meteo | rete di stazioni amatoriali di [Weather Underground](https://www.wunderground.com/) (The Weather Company), tramite la chiave personale del proprietario | restano soggette ai termini d'uso di Weather Underground, da rispettare (la chiave è personale). I dati **non vengono ripubblicati**: si scaricano durante il calcolo, entrano in WRF e non finiscono nei risultati; i file temporanei che passano da un segmento all'altro sono cifrati; i log non riportano codici o posizioni delle stazioni; le mappe mostrano solo l'uscita del modello |
+| Stazioni ufficiali (nudging e verifica) | Regione Lazio, rete del Centro Funzionale, dal portale pubblico [temporeale.regione.lazio.it](https://temporeale.regione.lazio.it) (account pubblico); SYNOP dell'Aeronautica Militare (dati WMO) tramite [OGIMET](https://www.ogimet.com); METAR tramite [aviationweather.gov](https://aviationweather.gov) (NOAA) | dati consultabili pubblicamente; si scaricano durante il calcolo e per la verifica e **non si ripubblicano in forma grezza** (nei risultati restano solo il modello e gli scarti medi della pagella). Prima di un uso diverso da quello personale le condizioni della Regione vanno chieste o verificate |
 | Solo per `previsioni_castelli.py` / `previsioni_lazio.py` usati da soli | [Open-Meteo](https://open-meteo.com/) ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); l'API gratuita è per uso non commerciale) e quote dal modello digitale del terreno Copernicus DEM («contiene dati Copernicus modificati») | non usati dalla catena WRF |
 
 Librerie principali: ecCodes (Apache 2.0), JasPer, NumPy, SciPy, Matplotlib, netCDF4, requests, pyproj, OpenCV, tifffile: ciascuna con la sua licenza.

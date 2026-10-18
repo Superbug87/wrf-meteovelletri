@@ -79,9 +79,14 @@ prepara)
   ls -la wrfinput_d0* wrfbdy_d01
   rm -rf "$LAVORO/WPS"
 
-  echo "== Stazioni Wunderground per il nudging (se c'e' la chiave)"
-  python3 "$QUI/stazioni_wrf.py" --ciclo "$CICLO" --geo "$GEO" --out . ||
-    { echo "!! Stazioni non utilizzabili: WRF girera' senza nudging"; rm -f OBS_DOMAIN* obs_fdda_end.txt; }
+  # NUDGING_FONTI: wu (Wunderground, serve WU_API_KEY), ufficiali (Regione Lazio e Aeronautica) o tutte; STAZIONI=false: niente
+  echo "== Stazioni per il nudging (fonti: ${NUDGING_FONTI:-wu})"
+  if [ "${STAZIONI:-true}" = false ]; then
+    echo "nudging disattivato"
+  else
+    python3 "$QUI/stazioni_wrf.py" --ciclo "$CICLO" --geo "$GEO" --out . ||
+      { echo "!! Stazioni non utilizzabili: WRF girera' senza nudging"; rm -f OBS_DOMAIN* obs_fdda_end.txt obs_fonti.txt; }
+  fi
   ;;
 modello)
   DA=${3:?da ora}; A=${4:?a ora}
@@ -93,7 +98,7 @@ modello)
         rm -f obs.tgz.enc
       else
         echo "!! Osservazioni delle stazioni non leggibili: questo segmento gira senza nudging"
-        rm -f OBS_DOMAIN* obs_fdda_end.txt obs.tgz.enc
+        rm -f OBS_DOMAIN* obs_fdda_end.txt obs_fonti.txt obs.tgz.enc
       fi
     fi
   fi
@@ -126,6 +131,7 @@ modello)
   fi
   USC=(); [ -s obs_fdda_end.txt ] && USC+=(obs_fdda_end.txt)
   if [ -s sst_usata.txt ]; then EXTRA+=(sst_usata.txt); USC+=(sst_usata.txt); fi
+  if [ -s obs_fdda_end.txt ] && [ -s obs_fonti.txt ]; then EXTRA+=(obs_fonti.txt); USC+=(obs_fonti.txt); fi
   tar -czf "$LAVORO/stato.tgz" wrfinput_d0* wrfbdy_d01 wrfrst_d0*_"$FINE" "${EXTRA[@]}"
   tar -czf "$LAVORO/uscite.tgz" wrfout_d03_* wrfxtrm_d03_* "${USC[@]}"
   ls -la "$LAVORO"/*.tgz

@@ -1,0 +1,54 @@
+name: Prova sperimentale (manuale)
+
+# Un run di WRF per provare una scelta prima di metterla nei lanci normali: NON pubblica nulla (mappe ed estratto per la
+# verifica restano negli allegati del run per 14 giorni). Si possono lanciare piu' prove insieme, anche sullo stesso ciclo:
+# ogni combinazione zona/modello/fonti ha la sua coda e non disturba i quattro workflow normali.
+on:
+  workflow_dispatch:
+    inputs:
+      zona:
+        type: choice
+        options: [castelli, lazio]
+        default: castelli
+      pilota:
+        type: choice
+        options: [ecmwf, icon2i]
+        default: ecmwf
+      ciclo:
+        description: "Ciclo AAAAMMGGHH (vuoto = l'ultimo disponibile)"
+        default: ""
+      ore:
+        description: "Ore di previsione"
+        default: "48"
+      nudging:
+        description: "Stazioni per il nudging"
+        type: choice
+        options: [wu, ufficiali, tutte, nessuno]
+        default: ufficiali
+      controllo:
+        description: "Tieni fuori dal nudging un quarto delle stazioni della Regione (per misurare l'effetto)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sperimentale-${{ inputs.zona }}-${{ inputs.pilota }}-${{ inputs.nudging }}
+  cancel-in-progress: false
+
+jobs:
+  wrf:
+    uses: ./.github/workflows/previsione.yml
+    with:
+      zona: ${{ inputs.zona }}
+      pilota: ${{ inputs.pilota }}
+      ciclo: ${{ inputs.ciclo }}
+      ore: ${{ inputs.ore }}
+      stazioni: ${{ inputs.nudging != 'nessuno' }}
+      nudging: ${{ inputs.nudging != 'nessuno' && inputs.nudging || 'wu' }}
+      controllo: ${{ inputs.controllo }}
+      prova: true
+      mare: true
+      radar: false
+    secrets: inherit

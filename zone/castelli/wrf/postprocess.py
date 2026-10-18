@@ -295,9 +295,17 @@ def main():
     if nudging:
         fine_utc = (datetime.strptime(a.ciclo, "%Y%m%d%H") + timedelta(minutes=int(file_obs[0].read_text().split()[0])))
         fine_loc = fine_utc.replace(tzinfo=timezone.utc).astimezone(roma)
-        banner += " + stazioni WU assimilate"
-        modello_txt += (f" Le stazioni Wunderground sono state assimilate nel modello (temperatura e umidità, "
-                        f"nudging) fino alle {fine_loc:%H:%M}; dopo il modello prosegue libero.")
+        # obs_fonti.txt (se c'e'): "aeronautica=7 regione=45 wu=120"; senza, erano solo Wunderground
+        fonti = {}
+        for f_ in Path(a.uscite).rglob("obs_fonti.txt"):
+            fonti = dict(x.split("=") for x in f_.read_text().split() if "=" in x)
+            break
+        nomi = [n for k, n in (("regione", "Regione Lazio"), ("aeronautica", "Aeronautica Militare"), ("wu", "Wunderground"))
+                if k in fonti] or ["Wunderground"]
+        banner += " + stazioni " + ("WU" if nomi == ["Wunderground"] else "ufficiali" if "Wunderground" not in nomi else "ufficiali e WU") + " assimilate"
+        modello_txt += (f" Le stazioni {', '.join(nomi[:-1]) + ' e ' + nomi[-1] if len(nomi) > 1 else nomi[0]} sono state "
+                        f"assimilate nel modello (temperatura e umidità, nudging) fino alle {fine_loc:%H:%M}; "
+                        f"dopo il modello prosegue libero.")
         print(f"Stazioni assimilate in WRF fino alle {fine_loc:%H:%M} (ora locale): nessuna correzione successiva.")
 
     if not nudging and not a.senza_stazioni and os.environ.get("WU_API_KEY"):
