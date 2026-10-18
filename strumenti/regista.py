@@ -29,8 +29,8 @@ REPO = os.environ.get("GITHUB_REPOSITORY", "Superbug87/wrf-meteovelletri")
 PREVISIONI = {
     "castelli-icon2i.yml": ("risultati-castelli-icon2i", {0: (3, 10), 12: (3, 10)}),
     "lazio-icon2i.yml": ("risultati-lazio-icon2i", {0: (4, 25), 12: (4, 25)}),
-    "castelli-ecmwf.yml": ("risultati-castelli-ecmwf", {0: (8, 40), 12: (8, 10)}),
-    "lazio-ecmwf.yml": ("risultati-lazio-ecmwf", {0: (9, 10), 12: (8, 20)}),
+    "castelli-ecmwf.yml": ("risultati-castelli-ecmwf", {0: (7, 50), 12: (7, 50)}),   # ECMWF a 48 h esce verso +7:35
+    "lazio-ecmwf.yml": ("risultati-lazio-ecmwf", {0: (7, 50), 12: (7, 50)}),
 }
 VERIFICA = ("verifica.yml", (5, 20))
 # prove affiancate del nudging (sperimentale.yml, non pubblicano): per ogni ciclo di questo workflow, fino a questa data,
