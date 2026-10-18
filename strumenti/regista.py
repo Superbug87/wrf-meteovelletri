@@ -8,7 +8,7 @@ A ogni sveglia, per ognuno dei quattro workflow guarda l'ultimo ciclo il cui ora
 da 10 ore) e lo lancia se:
   - non e' gia' pubblicato (cartella archivio/<ciclo> nel ramo risultati-<zona>-<modello>);
   - non c'e' gia' un run di quel workflow in coda o in corso;
-  - i tentativi dopo l'orario di partenza sono meno di 3 e l'ultimo e' di almeno 60 minuti fa (se un run fallisce,
+  - i tentativi dopo l'orario di partenza sono meno di 3 e l'ultimo e' di almeno 50 minuti fa (se un run fallisce,
     per esempio perche' i dati non sono ancora pronti, si riprova un'ora dopo, ma non all'infinito).
 Fa lo stesso con la verifica giornaliera (una volta al giorno, dopo le 05:20 UTC).
 Ogni sveglia lancia al massimo un run per workflow; la sveglia dopo vede il run gia' partito.
@@ -35,7 +35,7 @@ PREVISIONI = {
 VERIFICA = ("verifica.yml", (5, 20))
 FINESTRA = timedelta(hours=10)
 TENTATIVI = 3
-PAUSA = timedelta(minutes=60)
+PAUSA = timedelta(minutes=50)          # le sveglie arrivano a distanza di circa un'ora: un po' di margine
 
 
 def gh(*args, json_out=True):
