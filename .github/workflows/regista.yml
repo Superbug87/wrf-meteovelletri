@@ -33,5 +33,6 @@ jobs:
       - name: Cosa c'e' da lanciare
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PROVA: ${{ inputs.prova && '--prova' || '' }}
-        run: python3 strumenti/regista.py $PROVA
+          PROVA: ${{ inputs.prova && '1' || '' }}
+        run: |
+          if [ -n "$PROVA" ]; then python3 strumenti/regista.py --prova; else python3 strumenti/regista.py; fi
