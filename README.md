@@ -40,7 +40,17 @@ Riunisce in un solo repository i progetti `wrf-castelli`, `wrf-lazio` e `wrf-ico
 - `zone/castelli/`, `zone/lazio/`: il codice di ciascuna zona (domini, WPS/WRF, stazioni, mappe). Il flusso comune copia la cartella della zona nella radice prima di lavorare.
   Le parti uguali nelle due zone (compilazione, controllo, scarico dei dati) sono per ora copiate in entrambe.
 - `strumenti/`: `genera_pagine.py` (pagine del sito con la scelta del modello), `pulisci_meteohub.py` (cancella le richieste vecchie su MeteoHub).
-- `sito/`: le pagine da caricare a mano sul sito (si caricano una volta: le immagini le prendono da GitHub).
+- `sito/`: le pagine da caricare a mano sul sito (si caricano una volta: le immagini le prendono da GitHub):
+  `previsioni-wrf.html` (Castelli), `previsioni-wrf-lazio.html` (Lazio), `pagella-wrf.html` (verifica).
+
+## Verifica giornaliera e pagella
+- Durante ogni run, dopo il controllo, `strumenti/estrai_verifica.py` salva i valori del modello nei punti delle stazioni e la pioggia oraria
+  su una griglia ridotta (`estratti/` nel ramo dei risultati, pochi kB a run, 31 giorni).
+- Ogni mattina `verifica.yml` (`strumenti/verifica.py`) confronta il giorno prima con le osservazioni: stazioni del Centro Funzionale della
+  Regione Lazio (temperatura, pioggia, vento), SYNOP dell'Aeronautica Militare (temperatura, rugiada, vento, pressione) e radar della
+  Protezione Civile (pioggia, con 10 km di tolleranza). Come riferimento: previsioni a breve di ECMWF e ICON-2I originali (Open-Meteo).
+- Risultati nel ramo `verifica`: `giorni/AAAA-MM-GG.json` (somme del giorno) e `pagella.json` (ultimi 7 e 30 giorni), letto da `sito/pagella-wrf.html`.
+- Elenco delle stazioni: `strumenti/stazioni_verifica.json` (da rifare se la rete regionale cambia).
 
 ## Segreti del repository (Settings → Secrets and variables → Actions)
 - `MH_EMAIL`, `MH_PASSWORD`: account MeteoHub (per ICON-2I).

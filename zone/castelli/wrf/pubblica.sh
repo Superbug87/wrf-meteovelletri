@@ -22,6 +22,11 @@ rm -rf ultimo; mkdir -p ultimo "archivio/$CICLO"
 cp "$IMG"/*.png ultimo/
 cp "$IMG"/*.png "archivio/$CICLO/"
 cp "$IMG"/*.csv "archivio/$CICLO/" 2>/dev/null || true       # statistiche del confronto con il radar, solo nell'archivio
+# estratti per la verifica giornaliera (strumenti/verifica.py): pochi kB a run, si tengono 31 giorni (62 cicli)
+if ls "$IMG"/estratto_*.npz >/dev/null 2>&1; then
+  mkdir -p estratti; cp "$IMG"/estratto_*.npz estratti/
+  { ls -1 estratti/*.npz 2>/dev/null || true; } | sort | head -n -62 | xargs -r rm -f
+fi
 if [ -f "$IMG/orarie/indice.json" ]; then
   mkdir -p orarie
   for d in "$IMG"/orarie/*/; do rm -rf "orarie/$(basename "$d")"; cp -r "$d" "orarie/$(basename "$d")"; done

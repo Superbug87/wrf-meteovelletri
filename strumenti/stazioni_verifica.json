@@ -1,0 +1,2892 @@
+{
+"descrizione": "Stazioni per la verifica delle previsioni: rete idro-termo-pluviometrica del Centro Funzionale della Regione Lazio (portale temporeale.regione.lazio.it, elementi per grandezza) e stazioni SYNOP dell'Aeronautica Militare (via OGIMET). Generato il 18/10/2026; da rifare se la rete cambia.",
+"regione": [
+{
+"id": "RL200400",
+"nome": "Abbadia S.Salvatore",
+"lat": 42.89417,
+"lon": 11.66917,
+"quota": 873,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15201,
+"T": 15202
+}
+},
+{
+"id": "RL571100",
+"nome": "Abbazia Trisulti",
+"lat": 41.77472,
+"lon": 13.405,
+"quota": 828,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44189,
+"T": 44188
+}
+},
+{
+"id": "RL3800",
+"nome": "Acilia",
+"lat": 41.76972,
+"lon": 12.38333,
+"quota": 70,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13191
+}
+},
+{
+"id": "RL2300",
+"nome": "Acqua Acetosa",
+"lat": 41.93333,
+"lon": 12.49056,
+"quota": 24,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13155
+}
+},
+{
+"id": "RL578300",
+"nome": "Acquapendente",
+"lat": 42.74417,
+"lon": 11.87694,
+"quota": 402,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 48896,
+"T": 48892
+}
+},
+{
+"id": "RL199600",
+"nome": "Allumiere",
+"lat": 42.15778,
+"lon": 11.90861,
+"quota": 534,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15177,
+"T": 15178
+}
+},
+{
+"id": "RL201500",
+"nome": "Amaseno a Fossanova",
+"lat": 41.43333,
+"lon": 13.19444,
+"quota": 6,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15234
+}
+},
+{
+"id": "RL571300",
+"nome": "Amatrice",
+"lat": 42.63833,
+"lon": 13.28722,
+"quota": 925,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 48470,
+"T": 48471
+}
+},
+{
+"id": "RL108300",
+"nome": "Aniene a Lunghezza",
+"lat": 41.92722,
+"lon": 12.6675,
+"quota": 43,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12789
+}
+},
+{
+"id": "RL138400",
+"nome": "Aniene a Marano Equo",
+"lat": 41.99389,
+"lon": 13.02139,
+"quota": 330,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12816
+}
+},
+{
+"id": "RL47200",
+"nome": "Aniene a Ponte Salario",
+"lat": 41.93944,
+"lon": 12.50833,
+"quota": 23,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12772
+}
+},
+{
+"id": "RL140300",
+"nome": "Aniene a Subiaco",
+"lat": 41.92278,
+"lon": 13.09305,
+"quota": 376,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12809
+}
+},
+{
+"id": "RL479600",
+"nome": "Anzio",
+"lat": 41.45,
+"lon": 12.63028,
+"quota": 19,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 36991,
+"T": 36989
+}
+},
+{
+"id": "RL575100",
+"nome": "Aprilia",
+"lat": 41.59389,
+"lon": 12.64833,
+"quota": 85,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45145,
+"T": 45141
+}
+},
+{
+"id": "RL201200",
+"nome": "Ardea",
+"lat": 41.61167,
+"lon": 12.53694,
+"quota": 18,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15225,
+"T": 15226
+}
+},
+{
+"id": "RL199100",
+"nome": "Arrone a Maccarese",
+"lat": 41.8825,
+"lon": 12.23333,
+"quota": 11,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15161
+}
+},
+{
+"id": "RL479800",
+"nome": "Arsoli",
+"lat": 42.03611,
+"lon": 13.01972,
+"quota": 365,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37004,
+"T": 37000
+}
+},
+{
+"id": "RL2900",
+"nome": "Aurelio",
+"lat": 41.87806,
+"lon": 12.4275,
+"quota": 86,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13168
+}
+},
+{
+"id": "RL1057600",
+"nome": "Autore",
+"lat": 41.95667,
+"lon": 13.24056,
+"quota": 1431,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 87821,
+"T": 87824,
+"UR": 87825
+}
+},
+{
+"id": "RL477700",
+"nome": "Baccano",
+"lat": 42.11805,
+"lon": 12.36694,
+"quota": 226,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37073,
+"T": 37069
+}
+},
+{
+"id": "RL479900",
+"nome": "Bagnoregio",
+"lat": 42.62611,
+"lon": 12.1025,
+"quota": 460,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37092,
+"T": 37088
+}
+},
+{
+"id": "RL391100",
+"nome": "Barbarano",
+"lat": 42.25417,
+"lon": 12.04444,
+"quota": 326,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13107,
+"T": 13108,
+"UR": 13111,
+"dir_vento": 13110,
+"vento": 13109
+}
+},
+{
+"id": "RL577500",
+"nome": "Bolsena",
+"lat": 42.65333,
+"lon": 11.97222,
+"quota": 343,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45287,
+"T": 45283
+}
+},
+{
+"id": "RL573600",
+"nome": "Borgo Montello",
+"lat": 41.5125,
+"lon": 12.76972,
+"quota": 25,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44821,
+"T": 44822,
+"pressione": 50460,
+"UR": 50459,
+"dir_vento": 50462,
+"vento": 50461
+}
+},
+{
+"id": "RL479200",
+"nome": "Borgorose",
+"lat": 42.19306,
+"lon": 13.23167,
+"quota": 724,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37042,
+"T": 37031,
+"vento_s": 37038
+}
+},
+{
+"id": "RL137900",
+"nome": "Boville Ernica",
+"lat": 41.65472,
+"lon": 13.46361,
+"quota": 402,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12270,
+"T": 12269
+}
+},
+{
+"id": "RL199900",
+"nome": "Bracciano",
+"lat": 42.10194,
+"lon": 12.175,
+"quota": 293,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15186,
+"T": 15187
+}
+},
+{
+"id": "RL476600",
+"nome": "Brusciano",
+"lat": 42.27694,
+"lon": 13.14833,
+"quota": 1326,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 35948,
+"T": 35949,
+"pressione": 50178,
+"UR": 50177,
+"dir_vento": 50176,
+"vento": 50175
+}
+},
+{
+"id": "RL683400",
+"nome": "Campaegli",
+"lat": 41.97278,
+"lon": 13.10583,
+"quota": 1436,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 49474,
+"T": 49480,
+"pressione": 49483,
+"UR": 49481,
+"dir_vento": 49479,
+"vento": 49478
+}
+},
+{
+"id": "RL572800",
+"nome": "Campo di Carne",
+"lat": 41.55972,
+"lon": 12.64056,
+"quota": 79,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44563,
+"T": 44562
+}
+},
+{
+"id": "RL656100",
+"nome": "Campodimele",
+"lat": 41.39972,
+"lon": 13.53167,
+"quota": 708,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 49560,
+"T": 49563,
+"UR": 49564
+}
+},
+{
+"id": "RL246700",
+"nome": "Campoli Appennino",
+"lat": 41.72972,
+"lon": 13.67944,
+"quota": 680,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 18349,
+"T": 18350
+}
+},
+{
+"id": "RL574600",
+"nome": "Canino rlazio",
+"lat": 42.46444,
+"lon": 11.74889,
+"quota": 225,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 43655,
+"T": 43654
+}
+},
+{
+"id": "RL2200",
+"nome": "Capannacce",
+"lat": 41.93944,
+"lon": 12.6425,
+"quota": 76,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13153
+}
+},
+{
+"id": "RL571800",
+"nome": "Carpineto Romano",
+"lat": 41.60278,
+"lon": 13.08833,
+"quota": 562,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 48715,
+"T": 48716
+}
+},
+{
+"id": "RL3300",
+"nome": "Casilino",
+"lat": 41.87167,
+"lon": 12.54972,
+"quota": 38,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13176
+}
+},
+{
+"id": "RL2700",
+"nome": "Cassiodoro",
+"lat": 41.90639,
+"lon": 12.46722,
+"quota": 35,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13163
+}
+},
+{
+"id": "RL354400",
+"nome": "Castel Cellesi",
+"lat": 42.58611,
+"lon": 12.16083,
+"quota": 369,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12745
+}
+},
+{
+"id": "RL153400",
+"nome": "Castello Vici",
+"lat": 42.09611,
+"lon": 12.27917,
+"quota": 167,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13197
+}
+},
+{
+"id": "RL571000",
+"nome": "Ceccano rlazio",
+"lat": 41.57861,
+"lon": 13.32611,
+"quota": 130,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44686,
+"T": 44687
+}
+},
+{
+"id": "RL574700",
+"nome": "Cecchina",
+"lat": 41.70028,
+"lon": 12.65,
+"quota": 257,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44680,
+"T": 44681
+}
+},
+{
+"id": "RL572600",
+"nome": "Cervaro",
+"lat": 41.49,
+"lon": 13.90555,
+"quota": 327,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44100,
+"T": 44101
+}
+},
+{
+"id": "RL406700",
+"nome": "Cerveteri",
+"lat": 41.99944,
+"lon": 12.10861,
+"quota": 117,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 27749
+}
+},
+{
+"id": "RL683900",
+"nome": "Cimino",
+"lat": 42.41722,
+"lon": 12.21055,
+"quota": 851,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 51432,
+"T": 51429,
+"pressione": 54265,
+"UR": 51430,
+"dir_vento": 53523,
+"vento": 53522
+}
+},
+{
+"id": "RL576100",
+"nome": "Cisterna di Latina",
+"lat": 41.58944,
+"lon": 12.82333,
+"quota": 73,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45159,
+"T": 45155
+}
+},
+{
+"id": "RL480000",
+"nome": "Cittaducale",
+"lat": 42.38583,
+"lon": 12.95194,
+"quota": 484,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37193,
+"T": 37191
+}
+},
+{
+"id": "RL479300",
+"nome": "Cittareale",
+"lat": 42.59056,
+"lon": 13.16305,
+"quota": 809,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37225,
+"T": 37221
+}
+},
+{
+"id": "RL199700",
+"nome": "Civitavecchia",
+"lat": 42.09667,
+"lon": 11.78528,
+"quota": 15,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15180,
+"T": 15181,
+"dir_vento": 43684,
+"vento": 43683
+}
+},
+{
+"id": "RL572400",
+"nome": "Civitella Cesi",
+"lat": 42.21444,
+"lon": 12.02889,
+"quota": 228,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44352,
+"T": 44351
+}
+},
+{
+"id": "RL479400",
+"nome": "Collalto Sabino",
+"lat": 42.13972,
+"lon": 13.04805,
+"quota": 965,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37018,
+"T": 37014
+}
+},
+{
+"id": "RL656400",
+"nome": "Colle San Magno",
+"lat": 41.56028,
+"lon": 13.68056,
+"quota": 529,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 50108,
+"T": 50105,
+"UR": 50106
+}
+},
+{
+"id": "RL661500",
+"nome": "Colle la Croce",
+"lat": 42.56889,
+"lon": 13.02722,
+"quota": 1100,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 49901,
+"T": 49897,
+"UR": 49899
+}
+},
+{
+"id": "RL391500",
+"nome": "Collegio Romano",
+"lat": 41.89861,
+"lon": 12.48056,
+"quota": 49,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12758,
+"T": 12756
+}
+},
+{
+"id": "RL476700",
+"nome": "Colli sul Velino",
+"lat": 42.49806,
+"lon": 12.79722,
+"quota": 475,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 35942,
+"T": 35943
+}
+},
+{
+"id": "RL684800",
+"nome": "Configni",
+"lat": 42.42305,
+"lon": 12.65167,
+"quota": 437,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 51425,
+"T": 51422,
+"UR": 51423
+}
+},
+{
+"id": "RL573000",
+"nome": "Corchiano",
+"lat": 42.35361,
+"lon": 12.34917,
+"quota": 214,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 46764,
+"T": 46788
+}
+},
+{
+"id": "RL576200",
+"nome": "Cori",
+"lat": 41.64139,
+"lon": 12.91528,
+"quota": 357,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45152,
+"T": 45148
+}
+},
+{
+"id": "RL247300",
+"nome": "Cosa ad Alatri",
+"lat": 41.72472,
+"lon": 13.36028,
+"quota": 316,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 18369,
+"T": 18371
+}
+},
+{
+"id": "RL2800",
+"nome": "Eleniano",
+"lat": 41.89028,
+"lon": 12.51528,
+"quota": 76,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13166
+}
+},
+{
+"id": "RL571400",
+"nome": "Esperia",
+"lat": 41.38667,
+"lon": 13.6575,
+"quota": 359,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44201,
+"T": 44200
+}
+},
+{
+"id": "RL3400",
+"nome": "Eur",
+"lat": 41.82361,
+"lon": 12.49694,
+"quota": 53,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13178
+}
+},
+{
+"id": "RL3900",
+"nome": "Falcognana",
+"lat": 41.76278,
+"lon": 12.55861,
+"quota": 108,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13193
+}
+},
+{
+"id": "RL570700",
+"nome": "Ferentino",
+"lat": 41.70305,
+"lon": 13.26111,
+"quota": 397,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44683,
+"T": 44684
+}
+},
+{
+"id": "RL656900",
+"nome": "Fianello",
+"lat": 42.37472,
+"lon": 12.56194,
+"quota": 214,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 50242,
+"T": 50239,
+"UR": 50240
+}
+},
+{
+"id": "RL477900",
+"nome": "Fiano Romano",
+"lat": 42.12667,
+"lon": 12.60778,
+"quota": 24,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37171,
+"T": 37167
+}
+},
+{
+"id": "RL477100",
+"nome": "Filettino",
+"lat": 41.88944,
+"lon": 13.32972,
+"quota": 1060,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 35975,
+"T": 35976
+}
+},
+{
+"id": "RL199300",
+"nome": "Fiora a Montalto di Castro",
+"lat": 42.35389,
+"lon": 11.59917,
+"quota": 11,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15167,
+"T": 15169
+}
+},
+{
+"id": "RL199200",
+"nome": "Fiora a Pitigliano",
+"lat": 42.59361,
+"lon": 11.59889,
+"quota": 161,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15164
+}
+},
+{
+"id": "RL551100",
+"nome": "Fiora a Vulci",
+"lat": 42.40194,
+"lon": 11.63028,
+"quota": 25,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 43241
+}
+},
+{
+"id": "RL572500",
+"nome": "Fiuggi",
+"lat": 41.80194,
+"lon": 13.24111,
+"quota": 876,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44569,
+"T": 44568,
+"pressione": 50128,
+"UR": 50127,
+"dir_vento": 50129,
+"vento": 50130
+}
+},
+{
+"id": "RL1900",
+"nome": "Flaminio",
+"lat": 42.00889,
+"lon": 12.455,
+"quota": 84,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13148
+}
+},
+{
+"id": "RL192100",
+"nome": "Fondi",
+"lat": 41.34222,
+"lon": 13.41889,
+"quota": 12,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15243,
+"T": 15244
+}
+},
+{
+"id": "RL571700",
+"nome": "Fontana Liri Superiore",
+"lat": 41.61028,
+"lon": 13.56222,
+"quota": 386,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44097,
+"T": 44098
+}
+},
+{
+"id": "RL478000",
+"nome": "Formello",
+"lat": 42.07972,
+"lon": 12.40111,
+"quota": 225,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37085,
+"T": 37081
+}
+},
+{
+"id": "RL575000",
+"nome": "Fosso di Pantanello ad Ostia",
+"lat": 41.71722,
+"lon": 12.36083,
+"quota": 5,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45332,
+"T": 45333
+}
+},
+{
+"id": "RL185400",
+"nome": "Fosso di Pratolungo",
+"lat": 41.93639,
+"lon": 12.59889,
+"quota": 24,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13130
+}
+},
+{
+"id": "RL391600",
+"nome": "Frascati",
+"lat": 41.80972,
+"lon": 12.67139,
+"quota": 291,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12752,
+"T": 12753
+}
+},
+{
+"id": "RL3200",
+"nome": "Fregene",
+"lat": 41.8675,
+"lon": 12.19028,
+"quota": 3,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13174
+}
+},
+{
+"id": "RL573100",
+"nome": "Frosinone",
+"lat": 41.63917,
+"lon": 13.31528,
+"quota": 154,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44572,
+"T": 44571,
+"pressione": 51461,
+"UR": 51458,
+"dir_vento": 51459,
+"vento": 51460
+}
+},
+{
+"id": "RL573200",
+"nome": "Gaeta",
+"lat": 41.22055,
+"lon": 13.56333,
+"quota": 73,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44853,
+"T": 44854,
+"pressione": 50510,
+"UR": 50507,
+"dir_vento": 50508,
+"vento": 50509
+}
+},
+{
+"id": "RL576300",
+"nome": "Giuliano di Roma",
+"lat": 41.54111,
+"lon": 13.27944,
+"quota": 343,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45180,
+"T": 45176
+}
+},
+{
+"id": "RL684200",
+"nome": "Graffignano",
+"lat": 42.57305,
+"lon": 12.2075,
+"quota": 180,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 51729,
+"T": 51464,
+"pressione": 51468,
+"UR": 51465,
+"dir_vento": 51466,
+"vento": 51467
+}
+},
+{
+"id": "RL480100",
+"nome": "Guidonia",
+"lat": 42.0,
+"lon": 12.72639,
+"quota": 117,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37059,
+"T": 37055
+}
+},
+{
+"id": "RL573900",
+"nome": "Ischia di Castro",
+"lat": 42.55278,
+"lon": 11.76361,
+"quota": 468,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45225,
+"T": 45224
+}
+},
+{
+"id": "RL3700",
+"nome": "Isola Sacra",
+"lat": 41.765,
+"lon": 12.245,
+"quota": 10,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13189
+}
+},
+{
+"id": "RL573800",
+"nome": "Itri",
+"lat": 41.26805,
+"lon": 13.525,
+"quota": 419,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44575,
+"T": 44574
+}
+},
+{
+"id": "RL1800",
+"nome": "La Storta",
+"lat": 42.00639,
+"lon": 12.37417,
+"quota": 144,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13146
+}
+},
+{
+"id": "RL576700",
+"nome": "Ladispoli rlazio",
+"lat": 41.955,
+"lon": 12.07,
+"quota": 14,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45005,
+"T": 45001
+}
+},
+{
+"id": "RL578100",
+"nome": "Lago di Albano",
+"lat": 41.74611,
+"lon": 12.65389,
+"quota": 293,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45210,
+"T": 45206
+}
+},
+{
+"id": "RL63600",
+"nome": "Lago di Corbara",
+"lat": 42.69833,
+"lon": 12.23667,
+"quota": 124,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12763,
+"T": 27468
+}
+},
+{
+"id": "RL575300",
+"nome": "Lago di Nemi",
+"lat": 41.71889,
+"lon": 12.69917,
+"quota": 329,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45401,
+"T": 45397
+}
+},
+{
+"id": "RL573300",
+"nome": "Lanuvio",
+"lat": 41.64556,
+"lon": 12.66361,
+"quota": 127,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44818,
+"T": 44819
+}
+},
+{
+"id": "RL201600",
+"nome": "Latina",
+"lat": 41.47139,
+"lon": 12.90583,
+"quota": 33,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15237,
+"T": 15238
+}
+},
+{
+"id": "RL477200",
+"nome": "Lenola",
+"lat": 41.41167,
+"lon": 13.44833,
+"quota": 513,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 35939,
+"T": 35940
+}
+},
+{
+"id": "RL200600",
+"nome": "Leonessa",
+"lat": 42.57861,
+"lon": 12.95361,
+"quota": 929,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15207,
+"T": 15208
+}
+},
+{
+"id": "RL480200",
+"nome": "Licenza",
+"lat": 42.075,
+"lon": 12.89972,
+"quota": 490,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 36986,
+"T": 36984
+}
+},
+{
+"id": "RL247400",
+"nome": "Liri a Ceprano",
+"lat": 41.55278,
+"lon": 13.51806,
+"quota": 101,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 18373,
+"T": 18375
+}
+},
+{
+"id": "RL246600",
+"nome": "Liri a Civitella Roveto",
+"lat": 41.915,
+"lon": 13.42583,
+"quota": 520,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 18345,
+"T": 18347
+}
+},
+{
+"id": "RL247600",
+"nome": "Liri a Pontecorvo",
+"lat": 41.45083,
+"lon": 13.66667,
+"quota": 62,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 21070
+}
+},
+{
+"id": "RL476800",
+"nome": "Lugnano",
+"lat": 42.43417,
+"lon": 12.9225,
+"quota": 528,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 36084,
+"T": 36085
+}
+},
+{
+"id": "RL577200",
+"nome": "Maccarese rlazio",
+"lat": 41.8175,
+"lon": 12.21944,
+"quota": 3,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45408,
+"T": 45404
+}
+},
+{
+"id": "RL574100",
+"nome": "Mandrione",
+"lat": 42.37722,
+"lon": 11.79194,
+"quota": 148,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45234,
+"T": 45235
+}
+},
+{
+"id": "RL571600",
+"nome": "Manziana",
+"lat": 42.13583,
+"lon": 12.11917,
+"quota": 416,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44348,
+"T": 44349,
+"pressione": 49798,
+"UR": 49795,
+"dir_vento": 49796,
+"vento": 49797
+}
+},
+{
+"id": "RL577300",
+"nome": "Marta",
+"lat": 42.53472,
+"lon": 11.93278,
+"quota": 309,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45312,
+"T": 45308,
+"UR": 45320,
+"vento_s": 45317
+}
+},
+{
+"id": "RL199400",
+"nome": "Marta a Tarquinia",
+"lat": 42.25694,
+"lon": 11.7425,
+"quota": 28,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15171,
+"T": 15865
+}
+},
+{
+"id": "RL478100",
+"nome": "Massimina",
+"lat": 41.88528,
+"lon": 12.36556,
+"quota": 70,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37011,
+"T": 37007
+}
+},
+{
+"id": "RL247500",
+"nome": "Melfa a Roccasecca",
+"lat": 41.53639,
+"lon": 13.64778,
+"quota": 131,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 21069
+}
+},
+{
+"id": "RL246900",
+"nome": "Melfa ad Atina",
+"lat": 41.62944,
+"lon": 13.76972,
+"quota": 338,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 18356,
+"T": 18358
+}
+},
+{
+"id": "RL479500",
+"nome": "Micigliano",
+"lat": 42.45222,
+"lon": 13.05389,
+"quota": 923,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37232,
+"T": 37228
+}
+},
+{
+"id": "RL747300",
+"nome": "Mignone SP45",
+"lat": 42.1725,
+"lon": 11.755,
+"quota": 5,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 56523
+}
+},
+{
+"id": "RL199000",
+"nome": "Mignone SS Aurelia",
+"lat": 42.19417,
+"lon": 11.78611,
+"quota": 7,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15156
+}
+},
+{
+"id": "RL573700",
+"nome": "Montalto di Castro meteo",
+"lat": 42.32972,
+"lon": 11.63333,
+"quota": 35,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 49772,
+"T": 49778,
+"dir_vento": 49777,
+"vento": 49776
+}
+},
+{
+"id": "RL573400",
+"nome": "Montasola",
+"lat": 42.37944,
+"lon": 12.69,
+"quota": 504,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44284,
+"T": 44283
+}
+},
+{
+"id": "RL2400",
+"nome": "Monte Mario",
+"lat": 41.92972,
+"lon": 12.44194,
+"quota": 130,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13157
+}
+},
+{
+"id": "RL577100",
+"nome": "Monte Romano",
+"lat": 42.2675,
+"lon": 11.90028,
+"quota": 233,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45368,
+"T": 45364
+}
+},
+{
+"id": "RL481000",
+"nome": "Monte Terminillo",
+"lat": 42.45555,
+"lon": 12.99278,
+"quota": 1685,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37250,
+"T": 37242,
+"vento_s": 37246
+}
+},
+{
+"id": "RL199500",
+"nome": "Montefiascone",
+"lat": 42.53,
+"lon": 12.02278,
+"quota": 560,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15174,
+"T": 15175
+}
+},
+{
+"id": "RL478200",
+"nome": "Montelibretti",
+"lat": 42.13472,
+"lon": 12.73889,
+"quota": 247,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37185,
+"T": 37181
+}
+},
+{
+"id": "RL480300",
+"nome": "Monterotondo ETG",
+"lat": 42.05139,
+"lon": 12.61694,
+"quota": 172,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37211,
+"T": 37206
+}
+},
+{
+"id": "RL478300",
+"nome": "Moricone",
+"lat": 42.11694,
+"lon": 12.77361,
+"quota": 300,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37178,
+"T": 37174
+}
+},
+{
+"id": "RL480400",
+"nome": "Morlupo",
+"lat": 42.14361,
+"lon": 12.50667,
+"quota": 220,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37066,
+"T": 37062
+}
+},
+{
+"id": "RL198900",
+"nome": "Moscarello a Borgo S.Maria",
+"lat": 41.46305,
+"lon": 12.81111,
+"quota": 10,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15154
+}
+},
+{
+"id": "RL578600",
+"nome": "Nepi",
+"lat": 42.24111,
+"lon": 12.33778,
+"quota": 235,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45273,
+"T": 45269
+}
+},
+{
+"id": "RL164000",
+"nome": "Nerola",
+"lat": 42.16111,
+"lon": 12.78722,
+"quota": 419,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13127
+}
+},
+{
+"id": "RL575700",
+"nome": "Norma",
+"lat": 41.58694,
+"lon": 12.97083,
+"quota": 444,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45166,
+"T": 45162
+}
+},
+{
+"id": "RL574000",
+"nome": "Osteria Nuova",
+"lat": 42.03167,
+"lon": 12.29972,
+"quota": 131,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 47049,
+"T": 49214
+}
+},
+{
+"id": "RL573500",
+"nome": "Osteria di Castro",
+"lat": 41.51278,
+"lon": 13.40694,
+"quota": 242,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44204,
+"T": 44203
+}
+},
+{
+"id": "RL4000",
+"nome": "Ostia",
+"lat": 41.72833,
+"lon": 12.28972,
+"quota": 9,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13195
+}
+},
+{
+"id": "RL3100",
+"nome": "Ostiense",
+"lat": 41.87583,
+"lon": 12.48417,
+"quota": 27,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13172
+}
+},
+{
+"id": "RL2100",
+"nome": "Ottavia",
+"lat": 41.95417,
+"lon": 12.41139,
+"quota": 134,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13152
+}
+},
+{
+"id": "RL574800",
+"nome": "Paglia a Proceno",
+"lat": 42.76417,
+"lon": 11.85639,
+"quota": 254,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44287,
+"T": 44286
+}
+},
+{
+"id": "RL246800",
+"nome": "Pagliara",
+"lat": 42.00444,
+"lon": 13.31833,
+"quota": 1060,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 18353,
+"T": 18354
+}
+},
+{
+"id": "RL480500",
+"nome": "Palestrina",
+"lat": 41.83805,
+"lon": 12.88139,
+"quota": 424,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37203,
+"T": 37199
+}
+},
+{
+"id": "RL572200",
+"nome": "Paliano",
+"lat": 41.79,
+"lon": 13.06222,
+"quota": 461,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44094,
+"T": 44095
+}
+},
+{
+"id": "RL478400",
+"nome": "Palombara Sabina",
+"lat": 42.06667,
+"lon": 12.765,
+"quota": 366,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37139,
+"T": 37135
+}
+},
+{
+"id": "RL577800",
+"nome": "Passo Corese ETG",
+"lat": 42.16944,
+"lon": 12.65889,
+"quota": 206,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45390,
+"T": 45386
+}
+},
+{
+"id": "RL656200",
+"nome": "Pianetto",
+"lat": 42.545,
+"lon": 11.63722,
+"quota": 214,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 49782,
+"T": 49780,
+"UR": 50405
+}
+},
+{
+"id": "RL656000",
+"nome": "Piedimonte San Germano",
+"lat": 41.49639,
+"lon": 13.75528,
+"quota": 98,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 50032,
+"T": 50030,
+"UR": 50031
+}
+},
+{
+"id": "RL200900",
+"nome": "Poggio Mirteto",
+"lat": 42.27,
+"lon": 12.69528,
+"quota": 188,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15216,
+"T": 15217
+}
+},
+{
+"id": "RL656800",
+"nome": "Poggio Moiano",
+"lat": 42.20778,
+"lon": 12.88417,
+"quota": 543,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 50249,
+"T": 50247,
+"UR": 50248
+}
+},
+{
+"id": "RL656300",
+"nome": "Poggio Perugino",
+"lat": 42.35028,
+"lon": 12.75833,
+"quota": 821,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 50690,
+"T": 50687,
+"UR": 50688
+}
+},
+{
+"id": "RL572900",
+"nome": "Pomezia",
+"lat": 41.66389,
+"lon": 12.50083,
+"quota": 90,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44560,
+"T": 44559
+}
+},
+{
+"id": "RL575500",
+"nome": "Ponte Ferraioli",
+"lat": 41.46222,
+"lon": 13.09889,
+"quota": 3,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45173,
+"T": 45169
+}
+},
+{
+"id": "RL3500",
+"nome": "Ponte Galeria Acea",
+"lat": 41.82556,
+"lon": 12.35194,
+"quota": 64,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13180
+}
+},
+{
+"id": "RL615200",
+"nome": "Ponza",
+"lat": 40.92944,
+"lon": 12.96972,
+"quota": 47,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45072,
+"T": 45073,
+"dir_vento": 45074,
+"vento": 45075
+}
+},
+{
+"id": "RL479000",
+"nome": "Posta",
+"lat": 42.52833,
+"lon": 13.10083,
+"quota": 703,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37566,
+"T": 37568
+}
+},
+{
+"id": "RL200800",
+"nome": "Posticciola",
+"lat": 42.23361,
+"lon": 12.94194,
+"quota": 519,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15213,
+"T": 15214
+}
+},
+{
+"id": "RL575600",
+"nome": "Priverno",
+"lat": 41.47083,
+"lon": 13.18583,
+"quota": 85,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45187,
+"T": 45183
+}
+},
+{
+"id": "RL247700",
+"nome": "Rapido a Cassino",
+"lat": 41.48667,
+"lon": 13.84056,
+"quota": 40,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 18381,
+"T": 18383
+}
+},
+{
+"id": "RL480600",
+"nome": "Riano",
+"lat": 42.10139,
+"lon": 12.50389,
+"quota": 220,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 36862,
+"T": 36858
+}
+},
+{
+"id": "RL574200",
+"nome": "Rignano Flaminio",
+"lat": 42.20917,
+"lon": 12.47528,
+"quota": 312,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44345,
+"T": 44346
+}
+},
+{
+"id": "RL576000",
+"nome": "Rio Cassano",
+"lat": 41.37278,
+"lon": 13.02639,
+"quota": 34,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45340,
+"T": 45336
+}
+},
+{
+"id": "RL572000",
+"nome": "Ripi",
+"lat": 41.60361,
+"lon": 13.4075,
+"quota": 170,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44090,
+"T": 44091
+}
+},
+{
+"id": "RL476900",
+"nome": "Rivodutri",
+"lat": 42.52278,
+"lon": 12.865,
+"quota": 886,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 36079,
+"T": 36080
+}
+},
+{
+"id": "RL391200",
+"nome": "Rocca Respampani",
+"lat": 42.38389,
+"lon": 11.92889,
+"quota": 165,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13099,
+"T": 13100,
+"UR": 13103,
+"dir_vento": 13101,
+"vento": 13102
+}
+},
+{
+"id": "RL657500",
+"nome": "Rocca Romana",
+"lat": 42.17167,
+"lon": 12.24306,
+"quota": 347,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 49968,
+"T": 49962,
+"pressione": 49967,
+"UR": 49963,
+"dir_vento": 49964,
+"vento": 49965
+}
+},
+{
+"id": "RL656600",
+"nome": "Rocca Santo Stefano",
+"lat": 41.91111,
+"lon": 13.02222,
+"quota": 617,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 50277,
+"T": 50275,
+"UR": 50276
+}
+},
+{
+"id": "RL479100",
+"nome": "Rocca di Papa",
+"lat": 41.76028,
+"lon": 12.71028,
+"quota": 771,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37218,
+"T": 37214
+}
+},
+{
+"id": "RL477300",
+"nome": "Roma Bufalotta",
+"lat": 41.95694,
+"lon": 12.54556,
+"quota": 53,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 35935
+}
+},
+{
+"id": "RL478500",
+"nome": "Roma EUR",
+"lat": 41.82861,
+"lon": 12.49722,
+"quota": 53,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37117,
+"T": 37113
+}
+},
+{
+"id": "RL2500",
+"nome": "Roma Est",
+"lat": 41.92194,
+"lon": 12.57889,
+"quota": 28,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13159
+}
+},
+{
+"id": "RL478600",
+"nome": "Roma Flaminio",
+"lat": 41.93565,
+"lon": 12.46437,
+"quota": 29,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37047,
+"T": 37045
+}
+},
+{
+"id": "RL111600",
+"nome": "Roma Macao",
+"lat": 41.90389,
+"lon": 12.50722,
+"quota": 84,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12786,
+"T": 12785
+}
+},
+{
+"id": "RL479700",
+"nome": "Roma Monte Mario",
+"lat": 41.93556,
+"lon": 12.43556,
+"quota": 124,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 36855,
+"T": 36845,
+"vento_s": 36851
+}
+},
+{
+"id": "RL2000",
+"nome": "Roma Nord",
+"lat": 41.9625,
+"lon": 12.50083,
+"quota": 18,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13150
+}
+},
+{
+"id": "RL3600",
+"nome": "Roma Sud",
+"lat": 41.81694,
+"lon": 12.42833,
+"quota": 10,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13182
+}
+},
+{
+"id": "RL574900",
+"nome": "Ronciglione rlazio",
+"lat": 42.28805,
+"lon": 12.20778,
+"quota": 460,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 43255,
+"T": 43256
+}
+},
+{
+"id": "RL477400",
+"nome": "Rosolino Pilo",
+"lat": 41.8825,
+"lon": 12.46306,
+"quota": 81,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 36026
+}
+},
+{
+"id": "RL574400",
+"nome": "Rota",
+"lat": 42.15278,
+"lon": 12.00861,
+"quota": 114,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45330
+}
+},
+{
+"id": "RL478700",
+"nome": "Roviano",
+"lat": 42.03278,
+"lon": 12.99694,
+"quota": 717,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37559,
+"T": 37561
+}
+},
+{
+"id": "RL247000",
+"nome": "S.Apollinare Rlazio",
+"lat": 41.40278,
+"lon": 13.83222,
+"quota": 30,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 18360,
+"T": 18361
+}
+},
+{
+"id": "RL572700",
+"nome": "S.Vito Romano",
+"lat": 41.88278,
+"lon": 12.97194,
+"quota": 732,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44566,
+"T": 44565
+}
+},
+{
+"id": "RL572300",
+"nome": "SS.Cosma e Damiano",
+"lat": 41.27417,
+"lon": 13.78972,
+"quota": 10,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44195,
+"T": 44194
+}
+},
+{
+"id": "RL45400",
+"nome": "Sabaudia",
+"lat": 41.29944,
+"lon": 13.02778,
+"quota": 38,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12782,
+"T": 12781
+}
+},
+{
+"id": "RL247200",
+"nome": "Sacco a Colleferro",
+"lat": 41.75944,
+"lon": 12.97861,
+"quota": 218,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 18365,
+"T": 18367
+}
+},
+{
+"id": "RL577600",
+"nome": "Salisano",
+"lat": 42.26055,
+"lon": 12.7525,
+"quota": 417,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45376,
+"T": 45372
+}
+},
+{
+"id": "RL478800",
+"nome": "Salone",
+"lat": 41.91167,
+"lon": 12.63055,
+"quota": 32,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37147,
+"T": 37143
+}
+},
+{
+"id": "RL143300",
+"nome": "Salto a San Martino",
+"lat": 42.32667,
+"lon": 12.99139,
+"quota": 439,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12828
+}
+},
+{
+"id": "RL656700",
+"nome": "Sambuci",
+"lat": 41.99111,
+"lon": 12.94694,
+"quota": 614,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 49893,
+"T": 49891,
+"UR": 49892
+}
+},
+{
+"id": "RL570800",
+"nome": "San Biagio Saracinisco",
+"lat": 41.61361,
+"lon": 13.94889,
+"quota": 1057,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44198,
+"T": 44197
+}
+},
+{
+"id": "RL656500",
+"nome": "San Marino",
+"lat": 41.67028,
+"lon": 13.09472,
+"quota": 312,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 50267,
+"T": 50265,
+"UR": 50266
+}
+},
+{
+"id": "RL576600",
+"nome": "Santa Severa",
+"lat": 42.01222,
+"lon": 11.97833,
+"quota": 2,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44991,
+"T": 44986
+}
+},
+{
+"id": "RL577400",
+"nome": "Sasso Furbara",
+"lat": 42.05472,
+"lon": 12.04583,
+"quota": 319,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44998,
+"T": 44994
+}
+},
+{
+"id": "RL571900",
+"nome": "Settefrati",
+"lat": 41.67028,
+"lon": 13.85222,
+"quota": 772,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44181,
+"T": 44180
+}
+},
+{
+"id": "RL201300",
+"nome": "Sezze",
+"lat": 41.49861,
+"lon": 13.05889,
+"quota": 331,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15231
+}
+},
+{
+"id": "RL571200",
+"nome": "Sgurgola",
+"lat": 41.68583,
+"lon": 13.15083,
+"quota": 171,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44192,
+"T": 44191
+}
+},
+{
+"id": "RL136300",
+"nome": "Sora",
+"lat": 41.7225,
+"lon": 13.61944,
+"quota": 282,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 21519,
+"T": 21797
+}
+},
+{
+"id": "RL391300",
+"nome": "Sorano Meteo",
+"lat": 42.72805,
+"lon": 11.68444,
+"quota": 782,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 27838,
+"T": 27839,
+"UR": 27842,
+"dir_vento": 27840,
+"vento": 27841
+}
+},
+{
+"id": "RL577700",
+"nome": "Sorgenti Capore",
+"lat": 42.23333,
+"lon": 12.81028,
+"quota": 259,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45383,
+"T": 45379
+}
+},
+{
+"id": "RL480700",
+"nome": "Sorgenti Peschiera",
+"lat": 42.36556,
+"lon": 13.005,
+"quota": 410,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37239,
+"T": 37235
+}
+},
+{
+"id": "RL480800",
+"nome": "Soriano nel Cimino",
+"lat": 42.42194,
+"lon": 12.23722,
+"quota": 411,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37099,
+"T": 37097
+}
+},
+{
+"id": "RL571500",
+"nome": "Spigno Saturnia",
+"lat": 41.30417,
+"lon": 13.73278,
+"quota": 51,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44689,
+"T": 44690
+}
+},
+{
+"id": "RL201000",
+"nome": "Subiaco-Scolastica",
+"lat": 41.91861,
+"lon": 13.11028,
+"quota": 534,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15219,
+"T": 15220
+}
+},
+{
+"id": "RL715200",
+"nome": "Supino",
+"lat": 41.60167,
+"lon": 13.175,
+"quota": 1075,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 51604,
+"T": 51600,
+"UR": 51601
+}
+},
+{
+"id": "RL578500",
+"nome": "Sutri",
+"lat": 42.24167,
+"lon": 12.22444,
+"quota": 295,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45280,
+"T": 45276
+}
+},
+{
+"id": "RL201700",
+"nome": "Terracina",
+"lat": 41.28667,
+"lon": 13.25583,
+"quota": 7,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15240,
+"T": 15241
+}
+},
+{
+"id": "RL282200",
+"nome": "Tevere a Castelgiubileo",
+"lat": 41.98889,
+"lon": 12.49778,
+"quota": 18,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 36089,
+"T": 36090
+}
+},
+{
+"id": "RL419600",
+"nome": "Tevere a Fidene",
+"lat": 41.96889,
+"lon": 12.49417,
+"quota": 28,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 28951
+}
+},
+{
+"id": "RL185500",
+"nome": "Tevere a Fiumara",
+"lat": 41.74639,
+"lon": 12.25555,
+"quota": 5,
+"fonte": "Regione Lazio",
+"elementi": {
+"dir_vento": 13134,
+"vento": 13133
+}
+},
+{
+"id": "RL391800",
+"nome": "Tevere a Orte Scalo",
+"lat": 42.44333,
+"lon": 12.40889,
+"quota": 53,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12734
+}
+},
+{
+"id": "RL45200",
+"nome": "Tevere a Ponte Felice",
+"lat": 42.35055,
+"lon": 12.46139,
+"quota": 45,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12775
+}
+},
+{
+"id": "RL323600",
+"nome": "Tevere a Porta Portese",
+"lat": 41.88083,
+"lon": 12.47055,
+"quota": 17,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 23976
+}
+},
+{
+"id": "RL392000",
+"nome": "Tevere a Stimigliano",
+"lat": 42.28194,
+"lon": 12.55833,
+"quota": 40,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 36087,
+"T": 36088
+}
+},
+{
+"id": "RL392100",
+"nome": "Tivoli",
+"lat": 41.96305,
+"lon": 12.79861,
+"quota": 257,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12750
+}
+},
+{
+"id": "RL477500",
+"nome": "Tor Marancia",
+"lat": 41.85417,
+"lon": 12.5,
+"quota": 55,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 35937
+}
+},
+{
+"id": "RL104900",
+"nome": "Tor Vergata",
+"lat": 41.85111,
+"lon": 12.63111,
+"quota": 80,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13136,
+"T": 13137,
+"UR": 13138,
+"dir_vento": 13139,
+"vento": 13140
+}
+},
+{
+"id": "RL572100",
+"nome": "Torrente Tafone",
+"lat": 42.37472,
+"lon": 11.5575,
+"quota": 12,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44692,
+"T": 44693
+}
+},
+{
+"id": "RL391400",
+"nome": "Torrita Tiberina",
+"lat": 42.22528,
+"lon": 12.62722,
+"quota": 41,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13091,
+"T": 13092,
+"UR": 13095,
+"dir_vento": 13094,
+"vento": 13093
+}
+},
+{
+"id": "RL574500",
+"nome": "Tragliatella rlazio",
+"lat": 42.02,
+"lon": 12.19806,
+"quota": 165,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 46784,
+"T": 46787
+}
+},
+{
+"id": "RL574300",
+"nome": "Treia a Civita Castellana",
+"lat": 42.29194,
+"lon": 12.42806,
+"quota": 60,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44007,
+"T": 44008
+}
+},
+{
+"id": "RL480900",
+"nome": "Trevi nel Lazio",
+"lat": 41.86389,
+"lon": 13.2475,
+"quota": 773,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 37164,
+"T": 37159
+}
+},
+{
+"id": "RL576800",
+"nome": "Trevignano Romano",
+"lat": 42.15722,
+"lon": 12.24639,
+"quota": 200,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45012,
+"T": 45008
+}
+},
+{
+"id": "RL142900",
+"nome": "Turano a Rocca Sinibalda",
+"lat": 42.29833,
+"lon": 12.91083,
+"quota": 413,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12825
+}
+},
+{
+"id": "RL199800",
+"nome": "Tuscania",
+"lat": 42.40833,
+"lon": 11.87028,
+"quota": 176,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15183,
+"T": 15950
+}
+},
+{
+"id": "RL654300",
+"nome": "Ufente a Ponte Ferraioli",
+"lat": 41.4625,
+"lon": 13.09833,
+"quota": 6,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 49976
+}
+},
+{
+"id": "RL576900",
+"nome": "Valentano",
+"lat": 42.55694,
+"lon": 11.83389,
+"quota": 494,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45327,
+"T": 45323
+}
+},
+{
+"id": "RL655900",
+"nome": "Valle del Rio",
+"lat": 41.75278,
+"lon": 13.72778,
+"quota": 915,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 51438,
+"T": 51436,
+"UR": 51437
+}
+},
+{
+"id": "RL575800",
+"nome": "Vallecorsa",
+"lat": 41.44389,
+"lon": 13.40861,
+"quota": 462,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 45194,
+"T": 45190
+}
+},
+{
+"id": "RL660900",
+"nome": "Vallepietra",
+"lat": 41.92528,
+"lon": 13.23333,
+"quota": 865,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 50203,
+"T": 50207,
+"UR": 50208
+}
+},
+{
+"id": "RL140100",
+"nome": "Velino a Rieti",
+"lat": 42.40306,
+"lon": 12.87167,
+"quota": 395,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12804,
+"T": 15211
+}
+},
+{
+"id": "RL140000",
+"nome": "Velino ad Antrodoco",
+"lat": 42.42083,
+"lon": 13.07889,
+"quota": 498,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12801
+}
+},
+{
+"id": "RL201400",
+"nome": "Velletri",
+"lat": 41.68389,
+"lon": 12.77861,
+"quota": 328,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 15228,
+"T": 15229
+}
+},
+{
+"id": "RL570900",
+"nome": "Veroli",
+"lat": 41.67222,
+"lon": 13.40833,
+"quota": 334,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 44838,
+"T": 44839
+}
+},
+{
+"id": "RL716200",
+"nome": "Vetralla Rlazio",
+"lat": 42.3325,
+"lon": 12.09083,
+"quota": 399,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 51715,
+"T": 51717,
+"UR": 51488
+}
+},
+{
+"id": "RL2600",
+"nome": "Via Marchi",
+"lat": 41.91972,
+"lon": 12.51917,
+"quota": 38,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 13161
+}
+},
+{
+"id": "RL655700",
+"nome": "Vico nel Lazio",
+"lat": 41.77611,
+"lon": 13.33778,
+"quota": 622,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 50024,
+"T": 50022,
+"UR": 50023
+}
+},
+{
+"id": "RL134600",
+"nome": "Viterbo",
+"lat": 42.42,
+"lon": 12.10639,
+"quota": 340,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 12798,
+"T": 12797
+}
+},
+{
+"id": "RL477000",
+"nome": "Vivaro Romano",
+"lat": 42.10222,
+"lon": 13.00555,
+"quota": 800,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 35945,
+"T": 35946
+}
+},
+{
+"id": "RL477600",
+"nome": "Zagarolo",
+"lat": 41.83222,
+"lon": 12.835,
+"quota": 345,
+"fonte": "Regione Lazio",
+"elementi": {
+"pioggia": 35811
+}
+}
+],
+"aeronautica": [
+{
+"id": "WMO16239",
+"nome": "Roma Ciampino",
+"lat": 41.799,
+"lon": 12.595,
+"quota": 130,
+"fonte": "Aeronautica Militare (SYNOP)",
+"wmo": "16239"
+},
+{
+"id": "WMO16242",
+"nome": "Roma Fiumicino",
+"lat": 41.804,
+"lon": 12.251,
+"quota": 5,
+"fonte": "Aeronautica Militare (SYNOP)",
+"wmo": "16242"
+},
+{
+"id": "WMO16245",
+"nome": "Pratica di Mare",
+"lat": 41.659,
+"lon": 12.445,
+"quota": 12,
+"fonte": "Aeronautica Militare (SYNOP)",
+"wmo": "16245"
+},
+{
+"id": "WMO16235",
+"nome": "Roma Urbe",
+"lat": 41.952,
+"lon": 12.499,
+"quota": 17,
+"fonte": "Aeronautica Militare (SYNOP)",
+"wmo": "16235"
+},
+{
+"id": "WMO16224",
+"nome": "Vigna di Valle",
+"lat": 42.083,
+"lon": 12.217,
+"quota": 270,
+"fonte": "Aeronautica Militare (SYNOP)",
+"wmo": "16224"
+},
+{
+"id": "WMO16214",
+"nome": "Civitavecchia",
+"lat": 42.017,
+"lon": 11.817,
+"quota": 4,
+"fonte": "Aeronautica Militare (SYNOP)",
+"wmo": "16214"
+},
+{
+"id": "WMO16216",
+"nome": "Viterbo",
+"lat": 42.43,
+"lon": 12.064,
+"quota": 302,
+"fonte": "Aeronautica Militare (SYNOP)",
+"wmo": "16216"
+},
+{
+"id": "WMO16217",
+"nome": "Orte",
+"lat": 42.483,
+"lon": 12.333,
+"quota": 75,
+"fonte": "Aeronautica Militare (SYNOP)",
+"wmo": "16217"
+},
+{
+"id": "WMO16221",
+"nome": "Rieti",
+"lat": 42.417,
+"lon": 12.85,
+"quota": 389,
+"fonte": "Aeronautica Militare (SYNOP)",
+"wmo": "16221"
+},
+{
+"id": "WMO16219",
+"nome": "Monte Terminillo",
+"lat": 42.467,
+"lon": 12.983,
+"quota": 1875,
+"fonte": "Aeronautica Militare (SYNOP)",
+"wmo": "16219"
+},
+{
+"id": "WMO16280",
+"nome": "Ponza",
+"lat": 40.917,
+"lon": 12.95,
+"quota": 185,
+"fonte": "Aeronautica Militare (SYNOP)",
+"wmo": "16280"
+},
+{
+"id": "WMO16253",
+"nome": "Grazzanise",
+"lat": 41.061,
+"lon": 14.082,
+"quota": 9,
+"fonte": "Aeronautica Militare (SYNOP)",
+"wmo": "16253"
+}
+]
+}

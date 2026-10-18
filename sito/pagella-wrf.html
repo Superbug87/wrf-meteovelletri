@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pagella previsioni WRF</title>
+<style>
+  :root {
+    --sfondo: #f3f2ee; --carta: #ffffff; --testo: #14130f; --sec: #5d5b54; --linea: #d8d6cc;
+    --acc: #2a78d6; --acc-testo: #ffffff; --meglio: #1d7f3a; --meglio-sfondo: #e3f3e7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-tema="chiaro"]) {
+      --sfondo: #141412; --carta: #1f1f1c; --testo: #f1f0ea; --sec: #a9a79d; --linea: #3a3a35; --acc: #5b9cf0; --acc-testo: #0b0b0b;
+      --meglio: #7fd497; --meglio-sfondo: #1d3324;
+    }
+  }
+  :root[data-tema="scuro"] {
+    --sfondo: #141412; --carta: #1f1f1c; --testo: #f1f0ea; --sec: #a9a79d; --linea: #3a3a35; --acc: #5b9cf0; --acc-testo: #0b0b0b;
+    --meglio: #7fd497; --meglio-sfondo: #1d3324;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--sfondo); color: var(--testo); font: 16px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 12px 16px 24px; }
+  h1 { font-size: 1.1rem; margin: 4px 0 4px; }
+  .sotto { color: var(--sec); font-size: .9rem; margin: 0 0 10px; }
+  .righe { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; margin-bottom: 4px; }
+  .righe button { flex: none; }
+  button { font: inherit; color: var(--testo); background: var(--carta); border: 1px solid var(--linea); border-radius: 999px;
+           padding: 8px 14px; min-height: 40px; cursor: pointer; }
+  button[aria-pressed="true"] { background: var(--acc); color: var(--acc-testo); border-color: var(--acc); font-weight: 600; }
+  button:focus-visible { outline: 3px solid var(--acc); outline-offset: 2px; }
+  .scheda { margin: 10px 0; background: var(--carta); border: 1px solid var(--linea); border-radius: 12px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .92rem; }
+  th, td { padding: 8px 8px; border-bottom: 1px solid var(--linea); text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; white-space: normal; width: 36%; }
+  thead th { font-size: .8rem; color: var(--sec); font-weight: 600; vertical-align: bottom; }
+  tr.gruppo td { background: var(--sfondo); font-weight: 600; font-size: .85rem; color: var(--sec); text-align: left; }
+  td.meglio { color: var(--meglio); background: var(--meglio-sfondo); font-weight: 700; }
+  td .n { display: block; font-size: .72rem; color: var(--sec); font-weight: 400; }
+  .msg { padding: 24px; text-align: center; color: var(--sec); }
+  dl { margin: 6px 0 0; font-size: .88rem; color: var(--sec); }
+  dt { color: var(--testo); font-weight: 600; margin-top: 8px; }
+  dd { margin: 2px 0 0; }
+  small { color: var(--sec); display: block; margin-top: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Pagella delle previsioni WRF</h1>
+  <p class="sotto" id="stato">Carico…</p>
+  <div id="zone" class="righe" role="group" aria-label="Zona"></div>
+  <div id="periodi" class="righe" role="group" aria-label="Periodo"></div>
+  <div id="scadenze" class="righe" role="group" aria-label="Scadenza della previsione"></div>
+  <div class="scheda" id="scheda"><div class="msg">Carico…</div></div>
+  <dl>
+    <dt>Come si legge</dt>
+    <dd>Ogni mattina le previsioni del giorno prima vengono confrontate con quello che è successo davvero. In verde il modello migliore per ogni riga.</dd>
+    <dt>Temperatura e vento</dt>
+    <dd><b>Errore tipico</b>: di quanto sbaglia di solito (più basso è meglio). <b>Errore medio</b>: se sta sistematicamente sopra (+) o sotto (−) il vero.</dd>
+    <dt>Pioggia ai pluviometri (almeno 1 mm in 6 ore)</dt>
+    <dd><b>Presa</b>: delle piogge vere, quante erano previste. <b>Falsi allarmi</b>: delle piogge previste, quante non ci sono state.</dd>
+    <dt>Pioggia col radar (almeno 0,5 mm in 6 ore, 10 km di tolleranza)</dt>
+    <dd><b>Nel posto giusto</b>: della pioggia prevista, quanta aveva pioggia vera entro 10 km. <b>Vista</b>: della pioggia vera, quanta era prevista entro 10 km.</dd>
+    <dt>Primo e secondo giorno</dt>
+    <dd>Le prime 24 ore di ogni run e quelle dalla 25ª alla 48ª. I modelli originali (ECMWF e ICON-2I) sono le loro previsioni più recenti, cioè a breve scadenza: sono un riferimento, non un confronto alla pari.</dd>
+  </dl>
+  <small id="fonte">Osservazioni: Centro Funzionale della Regione Lazio, Aeronautica Militare (SYNOP via OGIMET), radar della Protezione Civile
+    (Radar-DPC, CC BY-SA 4.0). Riferimento: ECMWF e ICON-2I (Agenzia ItaliaMeteo con Arpae-SIMC) via Open-Meteo (CC BY 4.0).</small>
+  <small>Esperimento personale, non un servizio ufficiale: non sostituisce bollettini e allerte della Protezione Civile.</small>
+</main>
+<script>
+const URL_PAGELLA = "https://raw.githubusercontent.com/Superbug87/wrf-meteovelletri/verifica/pagella.json";
+const ZONE = { castelli: "Castelli Romani", lazio: "Lazio" };
+const PERIODI = { "7": "Ultimi 7 giorni", "30": "Ultimi 30 giorni" };
+const SCADENZE = { g1: "Primo giorno", g2: "Secondo giorno" };
+const COLONNE = [
+  { chiave: "ecmwf", titolo: "WRF<br>ECMWF" }, { chiave: "icon2i", titolo: "WRF<br>ICON-2I" },
+  { chiave: "rif-ecmwf", titolo: "ECMWF<br>originale" }, { chiave: "rif-icon2i", titolo: "ICON-2I<br>originale" },
+];
+const N_MIN = 20;                 // sotto questo numero di confronti il valore e' poco affidabile
+let pagella = null;
+const scelta = { zona: leggi("pag_zona", "castelli"), periodo: leggi("pag_periodo", "7"), scadenza: leggi("pag_scad", "g1") };
+
+function leggi(k, d) { try { return localStorage.getItem(k) || d; } catch (e) { return d; } }
+function salva(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* niente memoria: pazienza */ } }
+const el = id => document.getElementById(id);
+const num = (v, dec = 1) => v.toFixed(dec).replace(".", ",").replace("-", "−");
+
+function bottoni(id, voci, chiave, chiaveLS) {
+  const box = el(id); box.innerHTML = "";
+  for (const [k, testo] of Object.entries(voci)) {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = testo; b.setAttribute("aria-pressed", String(scelta[chiave] === k));
+    b.onclick = () => { scelta[chiave] = k; salva(chiaveLS, k); disegna(); };
+    box.appendChild(b);
+  }
+}
+
+// righe della tabella: come leggere il valore da un insieme di indici e se "meglio" vuol dire piu' basso o piu' alto
+const RIGHE = [
+  { gruppo: "Temperatura a 2 m (°C)" },
+  { nome: "Errore tipico", val: i => i.t2 && [i.t2.tipico, i.t2.n], meglio: "basso" },
+  { nome: "Errore medio", val: i => i.t2 && [i.t2.medio, i.t2.n], meglio: "zero", segno: true },
+  { nome: "Errore tipico di notte", val: i => i.t2_notte && [i.t2_notte.tipico, i.t2_notte.n], meglio: "basso" },
+  { nome: "Errore tipico di giorno", val: i => i.t2_giorno && [i.t2_giorno.tipico, i.t2_giorno.n], meglio: "basso" },
+  { gruppo: "Vento a 10 m (km/h)" },
+  { nome: "Errore tipico", val: i => i.vento && [i.vento.tipico * 3.6, i.vento.n], meglio: "basso" },
+  { nome: "Errore medio", val: i => i.vento && [i.vento.medio * 3.6, i.vento.n], meglio: "zero", segno: true },
+  { gruppo: "Pioggia ai pluviometri (≥ 1 mm in 6 ore)" },
+  { nome: "Presa (%)", val: i => i.pioggia && i.pioggia["1.0"].presa !== null && [i.pioggia["1.0"].presa, i.pioggia["1.0"].piovuto], meglio: "alto", dec: 0 },
+  { nome: "Falsi allarmi (%)", val: i => i.pioggia && i.pioggia["1.0"].falsi !== null && [i.pioggia["1.0"].falsi, i.pioggia["1.0"].previsto], meglio: "basso", dec: 0 },
+  { gruppo: "Pioggia col radar (≥ 0,5 mm in 6 ore, entro 10 km)" },
+  { nome: "Nel posto giusto (%)", val: i => i.radar && i.radar["0.5"].prevista_giusta !== null && [i.radar["0.5"].prevista_giusta, i.radar["0.5"].celle_previste], meglio: "alto", dec: 0, soloWrf: true },
+  { nome: "Vista (%)", val: i => i.radar && i.radar["0.5"].osservata_presa !== null && [i.radar["0.5"].osservata_presa, i.radar["0.5"].celle_osservate], meglio: "alto", dec: 0, soloWrf: true },
+];
+
+function indiciDi(modelli, colonna) {
+  const chiave = `${scelta.zona}-${colonna}`;
+  const m = modelli[chiave];
+  if (!m) return null;
+  return colonna.startsWith("rif-") ? m.breve : m[scelta.scadenza];
+}
+
+function disegna() {
+  bottoni("zone", ZONE, "zona", "pag_zona");
+  bottoni("periodi", PERIODI, "periodo", "pag_periodo");
+  bottoni("scadenze", SCADENZE, "scadenza", "pag_scad");
+  if (!pagella) return;
+  const per = pagella.periodi[scelta.periodo];
+  if (!per || !per.giorni) { el("scheda").innerHTML = '<div class="msg">Nessun giorno verificato in questo periodo.</div>'; return; }
+  const ind = COLONNE.map(c => indiciDi(per.modelli, c.chiave));
+  let h = '<table><thead><tr><th></th>' + COLONNE.map(c => `<th scope="col">${c.titolo}</th>`).join("") + "</tr></thead><tbody>";
+  for (const r of RIGHE) {
+    if (r.gruppo) { h += `<tr class="gruppo"><td colspan="${COLONNE.length + 1}">${r.gruppo}</td></tr>`; continue; }
+    const valori = ind.map((i, k) => {
+      if (!i || (r.soloWrf && COLONNE[k].chiave.startsWith("rif-"))) return null;
+      const v = r.val(i); return v ? { v: v[0], n: v[1] } : null;
+    });
+    const validi = valori.filter(x => x && x.n >= N_MIN);
+    let migliore = null;
+    if (validi.length > 1) {
+      const punteggio = x => r.meglio === "alto" ? -x.v : r.meglio === "zero" ? Math.abs(x.v) : x.v;
+      migliore = validi.reduce((a, b) => punteggio(b) < punteggio(a) ? b : a);
+    }
+    h += `<tr><th scope="row" style="font-weight:400">${r.nome}</th>`;
+    for (const x of valori) {
+      if (!x) { h += '<td>–</td>'; continue; }
+      const testo = (r.segno && x.v > 0 ? "+" : "") + num(x.v, r.dec ?? 1);
+      const poco = x.n < N_MIN ? ' style="opacity:.55" title="pochi casi: valore poco affidabile"' : "";
+      h += `<td class="${x === migliore ? "meglio" : ""}"${poco}>${testo}<span class="n">${x.n} ${r.dec === 0 ? "casi" : "confr."}</span></td>`;
+    }
+    h += "</tr>";
+  }
+  el("scheda").innerHTML = h + "</tbody></table>";
+}
+
+async function carica() {
+  try {
+    const r = await fetch(URL_PAGELLA + "?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) throw new Error(r.status);
+    pagella = await r.json();
+    const g = pagella.periodi[scelta.periodo] ? pagella.periodi[scelta.periodo].giorni : 0;
+    el("stato").textContent = `Ultimo giorno verificato: ${pagella.ultimo_giorno.split("-").reverse().join("/")} · aggiornata ${pagella.aggiornata}`;
+  } catch (e) {
+    el("stato").textContent = "La pagella non è ancora disponibile: la prima verifica esce la mattina dopo i primi run.";
+    el("scheda").innerHTML = '<div class="msg">Nessun dato.</div>';
+  }
+  disegna();
+}
+disegna();
+carica();
+</script>
+</body>
+</html>
