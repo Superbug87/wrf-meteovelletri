@@ -58,7 +58,8 @@
     <dt>Come si legge</dt>
     <dd>Ogni mattina le previsioni del giorno prima vengono confrontate con quello che è successo davvero. In verde il modello migliore per ogni riga.</dd>
     <dt>Temperatura e vento</dt>
-    <dd><b>Errore tipico</b>: di quanto sbaglia di solito (più basso è meglio). <b>Errore medio</b>: se sta sistematicamente sopra (+) o sotto (−) il vero.</dd>
+    <dd><b>Errore tipico</b>: di quanto sbaglia di solito (più basso è meglio). <b>Errore medio</b>: se sta sistematicamente sopra (+) o sotto (−) il vero.
+      <b>Vento corretto</b>: lo stesso vento di WRF ridotto (o aumentato) secondo quanto ha sbagliato, per ogni intensità, nei 30 giorni prima: una prova per vedere se conviene correggere le mappe, che per ora restano senza correzione.</dd>
     <dt>Pioggia ai pluviometri (almeno 1 mm in 6 ore)</dt>
     <dd><b>Presa</b>: delle piogge vere, quante erano previste. <b>Falsi allarmi</b>: delle piogge previste, quante non ci sono state.</dd>
     <dt>Pioggia col radar (almeno 0,5 mm in 6 ore, 10 km di tolleranza)</dt>
@@ -108,6 +109,8 @@ const RIGHE = [
   { gruppo: "Vento a 10 m: errore (km/h)" },
   { nome: "Tipico", val: i => i.vento && [i.vento.tipico * 3.6, i.vento.n], meglio: "basso" },
   { nome: "Medio", val: i => i.vento && [i.vento.medio * 3.6, i.vento.n], meglio: "zero", segno: true },
+  { nome: "Tipico, corretto", val: i => i.vento_corr && [i.vento_corr.tipico * 3.6, i.vento_corr.n], meglio: "basso", soloWrf: true },
+  { nome: "Medio, corretto", val: i => i.vento_corr && [i.vento_corr.medio * 3.6, i.vento_corr.n], meglio: "zero", segno: true, soloWrf: true },
   { gruppo: "Pioggia ai pluviometri (≥ 1 mm in 6 ore)" },
   { nome: "Presa %", val: i => i.pioggia && i.pioggia["1.0"].presa !== null && [i.pioggia["1.0"].presa, i.pioggia["1.0"].piovuto], meglio: "alto", dec: 0 },
   { nome: "Falsi allarmi %", val: i => i.pioggia && i.pioggia["1.0"].falsi !== null && [i.pioggia["1.0"].falsi, i.pioggia["1.0"].previsto], meglio: "basso", dec: 0 },

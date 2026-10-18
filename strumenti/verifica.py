@@ -36,6 +36,11 @@ SOGLIE_PIOGGIA = (0.2, 1.0, 5.0)         # mm in 6 ore, ai pluviometri
 SOGLIE_RADAR = (0.5, 2.0)                # mm in 6 ore, sul radar
 TOLLERANZA_KM = 10.0
 NOTTE = set(range(18, 24)) | set(range(0, 6))   # ore UTC
+# correzione del vento a 10 m (prova): classi del vento previsto, in m/s; per ogni classe il rapporto osservato/previsto
+# dei 30 giorni prima (minimo MIN_CORREZIONE confronti), calcolato senza il giorno che si verifica
+CLASSI_VENTO = (0.0, 1.0, 2.0, 3.0, 4.0, 6.0, 9.0, 1e9)
+MIN_CORREZIONE = 30
+GIORNI_CORREZIONE = 30
 SESSIONE = requests.Session()
 SESSIONE.headers["User-Agent"] = "wrf-meteovelletri-verifica (GitHub Actions)"
 
@@ -266,7 +271,8 @@ def riferimento_openmeteo(punti, giorno):
 # ---------------------------------------------------------------------------------------------------------------
 def vuoto():
     return {"t2": [0, 0.0, 0.0], "t2_giorno": [0, 0.0, 0.0], "t2_notte": [0, 0.0, 0.0], "td2": [0, 0.0, 0.0],
-            "vento": [0, 0.0, 0.0], "mslp": [0, 0.0, 0.0],
+            "vento": [0, 0.0, 0.0], "vento_corr": [0, 0.0, 0.0], "mslp": [0, 0.0, 0.0],
+            "vento_classi": {str(i): [0, 0.0, 0.0] for i in range(len(CLASSI_VENTO) - 1)},
             "pioggia": {str(s): [0, 0, 0, 0] for s in SOGLIE_PIOGGIA},
             "radar": {str(s): [0, 0, 0, 0] for s in SOGLIE_RADAR}, "cicli": []}
 
@@ -275,6 +281,34 @@ def aggiungi(acc, chiave, err):
     acc[chiave][0] += 1
     acc[chiave][1] += float(err)
     acc[chiave][2] += float(err) ** 2
+
+
+def classe_vento(v):
+    for i in range(len(CLASSI_VENTO) - 1):
+        if v < CLASSI_VENTO[i + 1]:
+            return str(i)
+    return str(len(CLASSI_VENTO) - 2)
+
+
+def correzioni_vento(archivio, giorno, fino_a_incluso=False):
+    """{'<zona>-<pilota>': {classe: fattore}} dai giorni/ dei GIORNI_CORREZIONE giorni prima di `giorno`
+    (con fino_a_incluso anche `giorno`). Classi con pochi confronti: fattore 1 (nessuna correzione)."""
+    tot = {}
+    for f in glob.glob(os.path.join(archivio, "giorni", "*.json")):
+        g = os.path.basename(f)[:-5]
+        inizio = (giorno - timedelta(days=GIORNI_CORREZIONE - (1 if fino_a_incluso else 0))).isoformat()
+        fine = giorno.isoformat()
+        if not (inizio <= g < fine or (fino_a_incluso and g == fine)):
+            continue
+        for chiave, per_scad in json.load(open(f))["modelli"].items():
+            if "-rif-" in chiave:
+                continue
+            for acc in per_scad.values():
+                for c, (n, sm, so) in acc.get("vento_classi", {}).items():
+                    t = tot.setdefault(chiave, {}).setdefault(c, [0, 0.0, 0.0])
+                    t[0] += n; t[1] += sm; t[2] += so
+    return {k: {c: (round(so / sm, 3) if n >= MIN_CORREZIONE and sm > 0 else 1.0) for c, (n, sm, so) in v.items()}
+            for k, v in tot.items()}
 
 
 def scadenza(ore):
@@ -293,7 +327,7 @@ def conta_pioggia(acc, prev, oss):
         c[0] += int(f and o); c[1] += int(f and not o); c[2] += int(o and not f); c[3] += int(not f and not o)
 
 
-def verifica_estratto(e, oss, quote, radar_ore, radar_mod, acc_per_scad):
+def verifica_estratto(e, oss, quote, radar_ore, radar_mod, acc_per_scad, corr_vento=None):
     ciclo = datetime.strptime(str(e["ciclo"]), "%Y%m%d%H").replace(tzinfo=timezone.utc)
     # le ore fino alla fine del nudging erano gia' passate quando il modello ha smesso di vedere le stazioni:
     # non sono previsione (e con le stazioni ufficiali il modello le ha viste proprio qui). Si contano solo le successive.
@@ -329,7 +363,12 @@ def verifica_estratto(e, oss, quote, radar_ore, radar_mod, acc_per_scad):
                 aggiungi(acc, "td2", float(e["td2"][k, j]) - otd)
             ov = o.get("vento", {}).get(t)
             if ov is not None and 0 <= ov < 60 and np.isfinite(e["vento"][k, j]):
-                aggiungi(acc, "vento", float(e["vento"][k, j]) - ov)
+                vm = float(e["vento"][k, j])
+                aggiungi(acc, "vento", vm - ov)
+                c = classe_vento(vm)
+                cl = acc["vento_classi"][c]
+                cl[0] += 1; cl[1] += vm; cl[2] += ov
+                aggiungi(acc, "vento_corr", vm * (corr_vento or {}).get(c, 1.0) - ov)
             op = o.get("mslp", {}).get(t)
             if op is not None and 950 < op < 1060 and np.isfinite(e["mslp"][k, j]):
                 aggiungi(acc, "mslp", float(e["mslp"][k, j]) - op)
@@ -398,8 +437,8 @@ def verifica_riferimento(rif, oss, ids, acc):
 def indici(acc):
     """Indici leggibili da un insieme di somme."""
     out = {}
-    for k in ("t2", "t2_giorno", "t2_notte", "td2", "vento", "mslp"):
-        n, s, s2 = acc[k]
+    for k in ("t2", "t2_giorno", "t2_notte", "td2", "vento", "vento_corr", "mslp"):
+        n, s, s2 = acc.get(k, [0, 0.0, 0.0])
         out[k] = None if n == 0 else {"n": n, "medio": round(s / n, 2), "tipico": round((s2 / n) ** 0.5, 2)}
     out["pioggia"] = {}
     for s, (a, b, c, d) in acc["pioggia"].items():
@@ -480,11 +519,12 @@ def main():
     radar_ore, radar_mod = ({}, None) if a.senza_radar else radar_giorno(GIORNO)
     rif = riferimento_openmeteo({k: pos[k] for k in servono if k in pos}, GIORNO)
 
-    risultato = {"giorno": GIORNO.isoformat(), "modelli": {}}
+    corr = correzioni_vento(a.archivio, GIORNO)
+    risultato = {"giorno": GIORNO.isoformat(), "modelli": {}, "correzioni_vento": corr}
     for (z, p), lista in estratti.items():
         acc = {"g1": vuoto(), "g2": vuoto()}
         for e in lista:
-            verifica_estratto(e, oss, quote, radar_ore, radar_mod, acc)
+            verifica_estratto(e, oss, quote, radar_ore, radar_mod, acc, corr.get(f"{z}-{p}"))
         if any(acc[s]["cicli"] for s in acc):
             risultato["modelli"][f"{z}-{p}"] = acc
     for z in ZONE:
@@ -505,7 +545,11 @@ def main():
             log(f"  {k:22s} {s:5s} T2 {('%+.1f/%.1f' % (t['medio'], t['tipico'])) if t else '-':>10s} su {t['n'] if t else 0:4d} | "
                 f"pioggia>=1mm presa {pg['presa']} falsi {pg['falsi']} ({pg['casi']} casi) | radar giusta {rd['prevista_giusta']} presa {rd['osservata_presa']}")
     pagella(a.archivio, GIORNO)
-    log("pagella aggiornata")
+    # fattori per le mappe (se un giorno si decidera' di correggerle): ultimi 30 giorni, oggi compreso
+    nuove = correzioni_vento(a.archivio, GIORNO, fino_a_incluso=True)
+    json.dump({"giorno": GIORNO.isoformat(), "classi_m_s": CLASSI_VENTO[:-1], "fattori": nuove},
+              open(os.path.join(a.archivio, "correzione_vento.json"), "w"), indent=1)
+    log(f"pagella aggiornata; correzione del vento: {nuove}")
 
 
 if __name__ == "__main__":
