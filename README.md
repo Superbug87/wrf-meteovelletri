@@ -65,6 +65,16 @@ Riunisce in un solo repository i progetti `wrf-castelli`, `wrf-lazio` e `wrf-ico
 - `MH_EMAIL`, `MH_PASSWORD`: account MeteoHub (per ICON-2I).
 - `WU_API_KEY`: chiave Weather Underground, per il nudging sulle stazioni (senza, WRF gira libero).
 
+## Partenza a orario (regista)
+I lanci programmati di GitHub nei repository nuovi arrivano con ore di ritardo o saltano (misurato: 0 lanci in 10 ore qui, 1-4 ore di
+ritardo nei vecchi repository). Per questo i run li lancia `regista.yml` (`strumenti/regista.py`): a ogni sveglia guarda, per ogni workflow,
+l'ultimo ciclo il cui orario è passato e lo lancia se non è pubblicato, se non c'è già un run in corso e se non ha già fatto 3 tentativi
+(uno all'ora); lo stesso per la verifica del mattino. La sveglia arriva da fuori ogni 15 minuti: un lavoro su [cron-job.org](https://cron-job.org)
+che fa `POST https://api.github.com/repos/Superbug87/wrf-meteovelletri/actions/workflows/regista.yml/dispatches` con corpo `{"ref":"main"}` e
+intestazioni `Authorization: Bearer <token>`, `Accept: application/vnd.github+json`. Il token è "fine-grained", limitato a questo repository
+e al solo permesso Actions (lettura e scrittura): può solo lanciare workflow. Gli orari scritti nei quattro workflow restano come riserva:
+se GitHub li rispetta e il ciclo è già pubblicato, il run non rifà nulla.
+
 ## Avvio a mano
 Actions → il workflow della zona e del modello → **Run workflow**. Campi: `ciclo` (vuoto = l'ultimo), `ore` (48), `ore_segmento` (16),
 `stazioni`, `mare` (temperatura del mare MUR), `radar` (confronto con il radar della Protezione Civile).

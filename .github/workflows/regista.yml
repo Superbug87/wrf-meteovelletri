@@ -1,0 +1,37 @@
+name: Regista (lancia i run a orario)
+
+# I lanci programmati di GitHub, nei repository nuovi, arrivano con ore di ritardo o non arrivano: questo workflow li
+# sostituisce. Lo sveglia ogni 15 minuti un servizio esterno (cron-job.org, chiamata POST all'API workflow_dispatch con
+# un token che puo' solo lanciare i workflow di questo repository); strumenti/regista.py guarda cosa e' in ritardo e lo
+# lancia. Ogni sveglia dura pochi secondi. L'orario qui sotto e' solo una riserva, se GitHub lo rispetta.
+on:
+  workflow_dispatch:
+    inputs:
+      prova:
+        description: "Dice solo cosa lancerebbe"
+        type: boolean
+        default: false
+  schedule:
+    - cron: "7,22,37,52 * * * *"
+
+permissions:
+  contents: read
+  actions: write                  # serve a lanciare gli altri workflow (workflow_dispatch funziona anche con GITHUB_TOKEN)
+
+concurrency:
+  group: regista
+  cancel-in-progress: false
+
+jobs:
+  regista:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          sparse-checkout: strumenti
+      - name: Cosa c'e' da lanciare
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROVA: ${{ inputs.prova && '--prova' || '' }}
+        run: python3 strumenti/regista.py $PROVA
