@@ -1,0 +1,18 @@
+name: Sonda orari (temporanea)
+
+# Serve solo a capire se GitHub fa partire i lanci programmati in questo repository: un job vuoto ogni 10 minuti.
+# Da togliere appena si vede un lancio "schedule".
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sonda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - run: echo "lancio ${{ github.event_name }} alle $(date -u +%H:%M) UTC"
