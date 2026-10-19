@@ -14,7 +14,7 @@ on:
         default: castelli
       pilota:
         type: choice
-        options: [ecmwf, icon2i]
+        options: [ecmwf, icon2i, iconeu, gfs]
         default: ecmwf
       ciclo:
         description: "Ciclo AAAAMMGGHH (vuoto = l'ultimo disponibile)"

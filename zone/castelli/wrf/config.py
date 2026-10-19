@@ -28,7 +28,7 @@ if FISICA - _NOTE_FISICA:
 # Il modello di partenza arriva dalla variabile d'ambiente PILOTA (la imposta il workflow; esegui.sh la esporta).
 def intervallo(pilota=None):
     p = (pilota or os.environ.get("PILOTA") or "icon2i").lower()
-    return 21600 if p == "icon2i" else 10800
+    return 21600 if p in ("icon2i", "iconeu") else 10800
 
 # s sul dominio 1; 15 s e 5 s nei nidi (parent_time_step_ratio 1:3:3). Deve dividere esattamente la durata di un
 # segmento (16 h = 57600 s): con 54 s l'ultimo passo di d01 sforava le 16:00 e WRF non scriveva i restart di d01 e d02.
@@ -183,7 +183,7 @@ def namelist_input(inizio, fine, riprendi, nlev, nsoil, obs_minuti=None, obs_ven
         t += "/\n\n"
 
     t += "&bdy_control\n spec_bdy_width = 5,\n spec_zone = 1,\n relax_zone = 4,\n"
-    if (os.environ.get("PILOTA") or "icon2i") == "icon2i" and os.environ.get("IDRO", "1") != "0":
+    if (os.environ.get("PILOTA") or "icon2i") in ("icon2i", "iconeu", "gfs") and os.environ.get("IDRO", "1") != "0":
         t += " have_bcs_moist = .true.,\n"        # acqua di nube e pioggia entrano dai bordi (campi di ICON-2I)
     t += riga("specified", [".true.", ".false.", ".false."]) + riga("nested", [".false.", ".true.", ".true."])
     t += "/\n\n&namelist_quilt\n nio_tasks_per_group = 0,\n nio_groups = 1,\n/\n"
@@ -220,7 +220,7 @@ def main():
     w.add_argument("--ciclo", default="2026010100")
     w.add_argument("--ore", type=int, default=24)
     w.add_argument("--geog", default="/percorso/WPS_GEOG")
-    w.add_argument("--pilota", choices=["ecmwf", "gfs", "icon2i"], default="icon2i",
+    w.add_argument("--pilota", choices=["ecmwf", "gfs", "icon2i", "iconeu"], default="icon2i",
                    help="modello globale da cui WRF prende condizioni iniziali e al contorno")
     w.add_argument("--sst", action="store_true", help="metgrid usa anche i file SST:* (temperatura del mare ad alta risoluzione)")
     i = sub.add_parser("input")

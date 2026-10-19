@@ -376,7 +376,7 @@ def main():
     ap.add_argument("--uscite", required=True, help="cartella con i wrfout_d03_* (anche in sottocartelle)")
     ap.add_argument("--out", default="mappe")
     ap.add_argument("--ciclo", default="", help="AAAAMMGGHH del ciclo usato, solo per il titolo e il CSV")
-    ap.add_argument("--pilota", default="icon2i", choices=["icon2i", "ecmwf", "gfs"])
+    ap.add_argument("--pilota", default="icon2i", choices=["icon2i", "ecmwf", "gfs", "iconeu"])
     ap.add_argument("--radar-fine", default="", help="prova: istante UTC ISO dell'ultimo mosaico (default: l'ultimo pubblicato)")
     a = ap.parse_args()
     Path(a.out).mkdir(parents=True, exist_ok=True)

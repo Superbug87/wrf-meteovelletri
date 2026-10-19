@@ -10,7 +10,7 @@ on:
         type: string
         required: true
       pilota:
-        description: "modello che dà le condizioni iniziali e al contorno: ecmwf o icon2i"
+        description: "modello che dà le condizioni iniziali e al contorno: ecmwf, icon2i, iconeu o gfs"
         type: string
         required: true
       ciclo:
@@ -200,9 +200,9 @@ jobs:
         run: |
           pip install -q requests numpy
           PILOTA=${IN_PILOTA}; ORE=${IN_ORE:-48}; SEG=${IN_SEG:-16}
-          case "$PILOTA" in ecmwf|icon2i) ;; *) echo "pilota: ecmwf o icon2i"; exit 1;; esac
+          case "$PILOTA" in ecmwf|icon2i|iconeu|gfs) ;; *) echo "pilota: ecmwf, icon2i, iconeu o gfs"; exit 1;; esac
           case "$ORE$SEG" in *[!0-9]*) echo "ore e ore_segmento devono essere numeri"; exit 1;; esac
-          PASSO=3; [ "$PILOTA" = icon2i ] && PASSO=6        # ICON-2I si scarica ogni 6 ore, ECMWF ogni 3
+          PASSO=3; { [ "$PILOTA" = icon2i ] || [ "$PILOTA" = iconeu ]; } && PASSO=6        # ICON-2I e ICON-EU si scaricano ogni 6 ore, ECMWF e GFS ogni 3
           if [ $((ORE % PASSO)) -ne 0 ] || [ "$ORE" -lt "$PASSO" ] || [ "$ORE" -gt 48 ]; then echo "ore: multiplo di $PASSO tra $PASSO e 48"; exit 1; fi
           if [ "$SEG" -lt 1 ] || [ $(( (ORE + SEG - 1) / SEG )) -gt 4 ]; then echo "servono al massimo 4 segmenti: alza ore_segmento"; exit 1; fi
           CICLO=${IN_CICLO}
@@ -291,6 +291,22 @@ jobs:
         with:
           path: /home/runner/ecmwf-dati
           key: ecmwf-dati-v1-${{ inputs.zona }}-${{ env.CICLO }}-${{ env.ORE }}
+      - name: Dati ICON-EU già scaricati per questo ciclo (cache condivisa tra le due zone)
+        id: dati-iconeu
+        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'iconeu'
+        uses: actions/cache/restore@v5
+        with:
+          path: /home/runner/iconeu-dati
+          key: iconeu-dati-v1-${{ env.CICLO }}-${{ env.ORE }}
+      - name: Scarico ICON-EU da DWD (se non è già in cache)
+        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'iconeu' && steps.dati-iconeu.outputs.cache-hit != 'true'
+        run: python3 wrf/scarica_iconeu.py --ciclo "$CICLO" --ore "$ORE" --out /home/runner/iconeu-dati
+      - name: Salvo i dati ICON-EU in cache per l'altra zona
+        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'iconeu' && steps.dati-iconeu.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v5
+        with:
+          path: /home/runner/iconeu-dati
+          key: iconeu-dati-v1-${{ env.CICLO }}-${{ env.ORE }}
       - name: Dati ICON-2I già scaricati per questo ciclo (cache condivisa tra le due zone)
         id: dati
         if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'icon2i'
@@ -313,7 +329,7 @@ jobs:
       - name: Dati globali, ungrib, metgrid, real, stazioni (solo primo segmento)
         if: steps.s.outputs.attivo == 'true' && matrix.seg == 0
         env:
-          DATI_PRONTI: ${{ inputs.pilota == 'icon2i' && '/home/runner/icon2i-dati' || inputs.pilota == 'ecmwf' && '/home/runner/ecmwf-dati' || '' }}
+          DATI_PRONTI: ${{ inputs.pilota == 'icon2i' && '/home/runner/icon2i-dati' || inputs.pilota == 'ecmwf' && '/home/runner/ecmwf-dati' || inputs.pilota == 'iconeu' && '/home/runner/iconeu-dati' || '' }}
           WU_API_KEY: ${{ inputs.stazioni && secrets.WU_API_KEY || '' }}   # senza, niente stazioni Wunderground
           STAZIONI: ${{ inputs.stazioni }}
           NUDGING_FONTI: ${{ inputs.nudging || env.NUDGING_DEFAULT }}
@@ -406,7 +422,7 @@ jobs:
           python3 strumenti/estrai_verifica.py --uscite uscite --stazioni strumenti/stazioni_verifica.json \
             --ciclo "$CICLO" --out "mappe/estratto_${{ inputs.zona }}-${{ inputs.pilota }}${FISICA:+-$FISICA}_${CICLO}.npz"
       - name: Mappe (senza nudging sulle stazioni, correzione dopo il calcolo se c'è la chiave)
-        if: ${{ inputs.fisica == '' }}          # le prove di fisica lasciano solo l'estratto: niente immagini
+        if: ${{ inputs.fisica == '' && !(inputs.prova && (inputs.pilota == 'iconeu' || inputs.pilota == 'gfs')) }}          # le prove (fisica, ICON-EU, GFS) lasciano solo l'estratto: niente immagini
         env:
           WU_API_KEY: ${{ secrets.WU_API_KEY }}
           CICLO: ${{ needs.pianifica.outputs.ciclo }}
@@ -435,7 +451,7 @@ jobs:
       # Prove di fisica: l'estratto (pochi kB) va nel ramo prove-fisica, da dove lo legge la verifica giornaliera.
       # Qui senza continue-on-error: se non si pubblica, la prova e' persa e il run deve risultare fallito.
       - name: Pubblico l'estratto nel ramo prove-fisica
-        if: ${{ inputs.prova && inputs.fisica != '' }}
+        if: ${{ inputs.prova && (inputs.fisica != '' || inputs.pilota == 'iconeu' || inputs.pilota == 'gfs') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash strumenti/pubblica_estratto.sh mappe

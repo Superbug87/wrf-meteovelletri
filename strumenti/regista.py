@@ -51,6 +51,12 @@ for _wf, _z, _p in (("castelli-ecmwf.yml", "castelli", "ecmwf"), ("castelli-icon
                     ("lazio-ecmwf.yml", "lazio", "ecmwf"), ("lazio-icon2i.yml", "lazio", "icon2i")):
     PROVE.append({"workflow": _wf, "zona": _z, "pilota": _p, "varianti": ("wu",), "fisiche": FISICHE, "controllo": "false",
                   "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026101900", "fino_a": "2026-10-31"})
+# prove di piloti diversi (ICON-EU del DWD e GFS di NOAA, entrambi con acqua di nube ai bordi): stesse zone, nudging wu, mai pubblicate;
+# l'estratto va nel ramo prove-fisica e la pagella le mette a confronto. ICON-EU e GFS sono pronti circa 4 ore dopo il ciclo.
+for _z in ("castelli", "lazio"):
+    for _p in ("iconeu", "gfs"):
+        PROVE.append({"workflow": f"{_z}-icon2i.yml", "zona": _z, "pilota": _p, "varianti": ("wu",), "controllo": "false",
+                      "ritardi": {0: (5, 0), 12: (5, 0)}, "dal_ciclo": "2026101912", "fino_a": "2026-10-31"})
 # GitHub non ha priorita' tra i lavori: con 20 lavori contemporanei (limite dei runner gratuiti, per account) un segmento dei run
 # normali che finisce il suo turno si rimette in coda dietro agli altri. Per lasciare sempre posti liberi ai run normali (al
 # massimo 4 insieme) le prove ne usano al piu' MAX_PROVE alla volta; le altre aspettano la sveglia dopo.

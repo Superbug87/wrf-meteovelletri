@@ -11,7 +11,7 @@ GEO=${GEO:-$HOME/wrf-geo}
 LAVORO=${LAVORO:-$HOME/lavoro}
 export OMP_NUM_THREADS=1
 PILOTA=${PILOTA:-icon2i}; export PILOTA            # config.py ne ricava l'intervallo tra i file dei bordi
-case "$PILOTA" in icon2i|ecmwf|gfs) ;; *) echo "PILOTA deve essere icon2i, ecmwf o gfs"; exit 2;; esac
+case "$PILOTA" in icon2i|ecmwf|iconeu|gfs) ;; *) echo "PILOTA deve essere icon2i, ecmwf, iconeu o gfs"; exit 2;; esac
 PREFISSO=$(echo "$PILOTA" | tr a-z A-Z)          # prefisso dei file intermedi di WPS: ECMWF o GFS
 cmd=${1:?comando}; CICLO=${2:?ciclo}
 
@@ -50,7 +50,7 @@ prepara)
   cd WPS
   python3 "$QUI/config.py" wps --ciclo "$CICLO" --ore "$ORE" --pilota "$PILOTA" > namelist.wps
   ./link_grib.csh ../dati/*
-  if [ "$PILOTA" = ecmwf ] || [ "$PILOTA" = icon2i ]; then ln -sf "$QUI/Vtable.ECMWF_OD" Vtable; else ln -sf ungrib/Variable_Tables/Vtable.GFS Vtable; fi
+  if [ "$PILOTA" = gfs ]; then ln -sf "$QUI/Vtable.GFS_IDRO" Vtable; else ln -sf "$QUI/Vtable.ECMWF_OD" Vtable; fi
   ./ungrib.exe > ungrib.log 2>&1 || { tail -n 40 ungrib.log; exit 1; }
   ls "$PREFISSO":* | head -n 3
   if [ -L ../dati ]; then rm -f ../dati; else rm -rf ../dati; fi; rm -rf GRIBFILE.*

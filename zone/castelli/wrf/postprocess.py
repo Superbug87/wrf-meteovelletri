@@ -210,7 +210,7 @@ def main():
     ap.add_argument("--uscite", required=True, help="cartella con i wrfout_d03_* (anche in sottocartelle)")
     ap.add_argument("--out", default="mappe")
     ap.add_argument("--ciclo", default="", help="AAAAMMGGHH del ciclo usato, solo per il titolo")
-    ap.add_argument("--pilota", default="icon2i", choices=["icon2i", "ecmwf", "gfs"], help="modello globale usato, solo per il titolo")
+    ap.add_argument("--pilota", default="icon2i", choices=["icon2i", "ecmwf", "gfs", "iconeu"], help="modello globale usato, solo per il titolo")
     ap.add_argument("--n", type=int, default=80, help="punti per lato della griglia delle mappe (80 = una cella ogni 0,5 km)")
     ap.add_argument("--senza-stazioni", action="store_true")
     ap.add_argument("--max-stazioni", type=int, default=60)

@@ -69,6 +69,8 @@
       <b>PBL MYNN</b>: altro schema per lo strato d'aria vicino al suolo (al posto di YSU); la correzione del vento sul terreno è del solo YSU, quindi qui è spenta.
       <b>Suolo Noah-MP</b>: modello del suolo e della vegetazione più dettagliato (al posto di Noah).
       <b>MYNN + Noah-MP</b>: le due cose insieme.</dd>
+    <dt>ICON-EU e GFS</dt>
+    <dd>Altri due modelli di partenza in prova (non pubblicati): <b>ICON-EU</b> del servizio meteo tedesco e <b>GFS</b> americano. Danno a WRF anche acqua di nube e ghiaccio (GFS anche pioggia e neve) dai bordi e dall'inizio, cosi' nubi e piogge in arrivo da fuori zona non nascono da zero. Hanno una sola riga, senza modello originale di confronto.</dd>
     <dt>Come si legge</dt>
     <dd>Ogni mattina le previsioni del giorno prima vengono confrontate con quello che è successo davvero. In verde il migliore di ogni colonna, nello stesso gruppo.
       Sotto ogni valore: per il WRF normale e gli originali, quanti confronti; per le varianti, quanto cambia rispetto al WRF normale (verde = meglio, rosso = peggio, grigio = quasi uguale).
@@ -91,6 +93,7 @@ const PERIODI = { "7": "Ultimi 7 giorni", "30": "Ultimi 30 giorni" };
 const SCADENZE = { g1: "Primo giorno", g2: "Secondo giorno" };
 const METRICHE = { temp: "Temperatura", vento: "Vento", pioggia: "Pioggia" };
 const PILOTI = { ecmwf: "Partenza ECMWF", icon2i: "Partenza ICON-2I" };
+const PILOTI_PROVA = { iconeu: "Partenza ICON-EU (prova, con nubi)", gfs: "Partenza GFS (prova, con nubi)" };   // solo in prova: una riga, senza originale
 const VARIANTI = ["topo2", "mynn", "noahmp", "mynn-noahmp"];
 const NOMI_VAR = { topo2: "Vento terreno 2", mynn: "MYNN", noahmp: "Noah-MP", "mynn-noahmp": "MYNN + Noah-MP" };
 const N_MIN = 20;                 // sotto questo numero di confronti il valore e' poco affidabile
@@ -135,11 +138,12 @@ function bottoni(id, voci, chiave, chiaveLS) {
 }
 
 // righe di un gruppo (un modello di partenza): [{nome, indici}] con il riferimento, il WRF normale e le varianti presenti
-function righeDi(modelli, pilota) {
+function righeDi(modelli, pilota, soloProva = false) {
   const z = scelta.zona, s = scelta.scadenza;
   const rif = modelli[`${z}-rif-${pilota}`];
   const righe = [{ nome: "Originale", rif: true, indici: rif ? rif.breve : null },
-                 { nome: "WRF normale", base: true, indici: (modelli[`${z}-${pilota}`] || {})[s] || null }];
+                 { nome: soloProva ? "WRF" : "WRF normale", base: true, indici: (modelli[`${z}-${pilota}`] || {})[s] || null }];
+  if (soloProva) return righe;
   for (const v of VARIANTI) righe.push({ nome: NOMI_VAR[v], indici: (modelli[`${z}-${pilota}-${v}`] || {})[s] || null });
   return righe;
 }
@@ -156,8 +160,8 @@ function valoriDi(riga, c) {
 function tabella(per) {
   const cols = COLONNE[scelta.metrica];
   let h = '<table><thead><tr><th></th>' + cols.map(c => `<th scope="col">${c.t}</th>`).join("") + "</tr></thead><tbody>";
-  for (const [p, titolo] of Object.entries(PILOTI)) {
-    const righe = righeDi(per.modelli, p);
+  for (const [p, titolo] of Object.entries({ ...PILOTI, ...PILOTI_PROVA })) {
+    const righe = righeDi(per.modelli, p, p in PILOTI_PROVA);
     h += `<tr class="gruppo"><td colspan="${cols.length + 1}">${titolo}</td></tr>`;
     const val = righe.map(r => cols.map(c => valoriDi(r, c)));
     const base = val[1];

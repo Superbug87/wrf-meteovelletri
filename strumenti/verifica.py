@@ -31,6 +31,7 @@ QUI = os.path.dirname(os.path.abspath(__file__))
 REPO = os.environ.get("GITHUB_REPOSITORY", "Superbug87/wrf-meteovelletri")
 ZONE = ["castelli", "lazio"]
 PILOTI = ["ecmwf", "icon2i"]
+PILOTI_PROVA = ["iconeu", "gfs"]          # piloti solo in prova: senza run normale ne' modello originale di riferimento
 # prove di fisica (run non pubblicati; gli estratti stanno nel ramo prove-fisica, vedi strumenti/pubblica_estratto.sh):
 # nei risultati compaiono come "<zona>-<pilota>-<variante>", per esempio "castelli-ecmwf-noahmp"
 VARIANTI = ["topo2", "mynn", "noahmp", "mynn-noahmp"]
@@ -126,6 +127,18 @@ def carica_estratti(giorno, cartella):
                 if lista:
                     out[(z, f"{p}-{v}")] = lista
                     log(f"{z}-{p}-{v}: estratti {[str(e['ciclo']) for e in lista]}")
+        for p in PILOTI_PROVA:
+            lista = []
+            for nome in sorted(n for n in disponibili if n.startswith(f"estratto_{z}-{p}_") and n[-14:-4] in cicli):
+                try:
+                    n = disponibili[nome]
+                    dati = np.load(io.BytesIO(ricevi("GET", n, headers=hdr).content)) if n.startswith("http") else np.load(n)
+                    lista.append({k: dati[k] for k in dati.files})
+                except Exception as e:
+                    log("  estratto non leggibile:", nome, e)
+            if lista:
+                out[(z, p)] = lista
+                log(f"{z}-{p}: estratti {[str(e['ciclo']) for e in lista]}")
     return out
 
 
@@ -491,7 +504,8 @@ def somma(a, b):
     return a
 
 
-NOMI = {"ecmwf": "WRF con ECMWF", "icon2i": "WRF con ICON-2I", "rif-ecmwf": "ECMWF originale", "rif-icon2i": "ICON-2I originale"}
+NOMI = {"ecmwf": "WRF con ECMWF", "icon2i": "WRF con ICON-2I", "rif-ecmwf": "ECMWF originale", "rif-icon2i": "ICON-2I originale",
+         "iconeu": "WRF con ICON-EU (prova)", "gfs": "WRF con GFS (prova)"}
 NOMI_VARIANTI = {"topo2": "vento sul terreno (topo_wind 2)", "mynn": "PBL MYNN", "noahmp": "suolo Noah-MP",
                  "mynn-noahmp": "MYNN + Noah-MP"}
 
