@@ -58,6 +58,7 @@
   <div id="periodi" class="righe" role="group" aria-label="Periodo"></div>
   <div id="scadenze" class="righe" role="group" aria-label="Scadenza della previsione"></div>
   <div id="metriche" class="righe" role="group" aria-label="Cosa guardare"></div>
+  <div id="viste" class="righe" role="group" aria-label="Come mostrare i run"></div>
   <div class="avviso" id="riepilogo" hidden></div>
   <div class="scheda" id="scheda"><div class="msg">Carico…</div></div>
   <dl>
@@ -91,6 +92,7 @@ const URL_PAGELLA = "https://raw.githubusercontent.com/Superbug87/wrf-meteovelle
 const ZONE = { castelli: "Castelli Romani", lazio: "Lazio" };
 const PERIODI = { "7": "Ultimi 7 giorni", "30": "Ultimi 30 giorni" };
 const SCADENZE = { g1: "Primo giorno", g2: "Secondo giorno" };
+const VISTE = { gruppi: "Per modello", tutti: "Tutti insieme" };
 const METRICHE = { temp: "Temperatura", vento: "Vento", pioggia: "Pioggia" };
 const PILOTI = { ecmwf: "Partenza ECMWF", icon2i: "Partenza ICON-2I" };
 const PILOTI_PROVA = { iconeu: "Partenza ICON-EU (prova, con nubi)", gfs: "Partenza GFS (prova, con nubi)" };   // solo in prova: una riga, senza originale
@@ -121,7 +123,7 @@ const COLONNE = {
 };
 
 let pagella = null;
-const scelta = { zona: leggi("pf_zona", "castelli"), periodo: leggi("pf_periodo", "7"), scadenza: leggi("pf_scad", "g1"), metrica: leggi("pf_met", "temp") };
+const scelta = { zona: leggi("pf_zona", "castelli"), periodo: leggi("pf_periodo", "7"), scadenza: leggi("pf_scad", "g1"), metrica: leggi("pf_met", "temp"), vista: leggi("pf_vista", "gruppi") };
 function leggi(k, d) { try { return localStorage.getItem(k) || d; } catch (e) { return d; } }
 function salva(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* niente memoria: pazienza */ } }
 const el = id => document.getElementById(id);
@@ -143,7 +145,7 @@ function righeDi(modelli, pilota, soloProva = false) {
   const rif = modelli[`${z}-rif-${pilota}`];
   const righe = [{ nome: "Originale", rif: true, indici: rif ? rif.breve : null },
                  { nome: soloProva ? "WRF" : "WRF normale", base: true, indici: (modelli[`${z}-${pilota}`] || {})[s] || null }];
-  if (soloProva) return righe;
+  if (soloProva) return [righe[1]];                      // senza modello originale di confronto: una riga sola
   for (const v of VARIANTI) righe.push({ nome: NOMI_VAR[v], indici: (modelli[`${z}-${pilota}-${v}`] || {})[s] || null });
   return righe;
 }
@@ -159,27 +161,35 @@ function valoriDi(riga, c) {
 
 function tabella(per) {
   const cols = COLONNE[scelta.metrica];
+  const tutti = scelta.vista === "tutti";
   let h = '<table><thead><tr><th></th>' + cols.map(c => `<th scope="col">${c.t}</th>`).join("") + "</tr></thead><tbody>";
+  const gruppi = [];
   for (const [p, titolo] of Object.entries({ ...PILOTI, ...PILOTI_PROVA })) {
     const righe = righeDi(per.modelli, p, p in PILOTI_PROVA);
-    h += `<tr class="gruppo"><td colspan="${cols.length + 1}">${titolo}</td></tr>`;
     const val = righe.map(r => cols.map(c => valoriDi(r, c)));
-    const base = val[1];
-    cols.forEach((c, j) => {                                   // il migliore di ogni colonna, tra le righe con abbastanza confronti
-      const validi = val.map((x, i) => ({ x: x[j], i })).filter(o => o.x && o.x.n >= N_MIN);
-      if (validi.length > 1) validi.reduce((a, b) => punteggio(c, b.x.v) < punteggio(c, a.x.v) ? b : a).x.meglio = true;
-    });
-    righe.forEach((r, i) => {
-      h += `<tr><th scope="row" style="font-weight:${r.base ? 700 : 400}">${r.nome}</th>`;
+    gruppi.push({ p, titolo, righe, val, base: val[righe.length === 1 ? 0 : 1], breve: titolo.replace("Partenza ", "").replace(/ \(.*\)/, "") });
+  }
+  // il migliore di ogni colonna, tra le righe con abbastanza confronti: nel gruppo, oppure tra tutti i run
+  const marca = lista => cols.forEach((c, j) => {
+    const validi = lista.flatMap(g => g.val.map(x => x[j])).filter(x => x && x.n >= N_MIN);
+    if (validi.length > 1) validi.reduce((a, b) => punteggio(c, b.v) < punteggio(c, a.v) ? b : a).meglio = true;
+  });
+  if (tutti) marca(gruppi); else gruppi.forEach(g => marca([g]));
+  for (const g of gruppi) {
+    if (tutti) { if (g === gruppi[0]) h += `<tr class="gruppo"><td colspan="${cols.length + 1}">Tutti i run: ufficiali (WRF normale) e in prova</td></tr>`; }
+    else h += `<tr class="gruppo"><td colspan="${cols.length + 1}">${g.titolo}</td></tr>`;
+    g.righe.forEach((r, i) => {
+      const nome = tutti ? `<small style="display:inline;margin:0;font-size:.72rem">${g.breve}</small><br>${r.nome}` : r.nome;
+      h += `<tr><th scope="row" style="font-weight:${r.base ? 700 : 400}">${nome}</th>`;
       cols.forEach((c, j) => {
-        const x = val[i][j];
+        const x = g.val[i][j];
         if (!x) { h += "<td>–</td>"; return; }
         const dec = c.dec ?? 1;
         const testo = (c.segno && x.v > 0 ? "+" : "") + num(x.v, dec);
         let delta = "";
-        if (!r.base && !r.rif && base[j]) {
-          const d = x.v - base[j].v, soglia = dec === 0 ? 0.5 : 0.05;
-          const bene = punteggio(c, x.v) < punteggio(c, base[j].v);
+        if (!r.base && !r.rif && g.base[j]) {
+          const d = x.v - g.base[j].v, soglia = dec === 0 ? 0.5 : 0.05;
+          const bene = punteggio(c, x.v) < punteggio(c, g.base[j].v);
           const cls = Math.abs(d) < soglia ? "" : bene ? "d-bene" : "d-male";
           delta = `<span class="${cls}">${d > 0 ? "+" : ""}${num(d, dec)}</span>`;
         }
@@ -225,6 +235,7 @@ function disegna() {
   bottoni("periodi", PERIODI, "periodo", "pf_periodo");
   bottoni("scadenze", SCADENZE, "scadenza", "pf_scad");
   bottoni("metriche", METRICHE, "metrica", "pf_met");
+  bottoni("viste", VISTE, "vista", "pf_vista");
   if (!pagella) return;
   const per = pagella.periodi[scelta.periodo];
   if (!per || !per.giorni) { el("scheda").innerHTML = '<div class="msg">Nessun giorno verificato in questo periodo.</div>'; el("riepilogo").hidden = true; return; }
