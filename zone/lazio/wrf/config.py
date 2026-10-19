@@ -16,6 +16,14 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import dominio as D  # noqa: E402
 
+# Prove di fisica (variabile FISICA, vuota nei lanci normali): sigle separate da "-" tra topo2, mynn, noahmp.
+# Vuota = fisica in uso. Esempi: "topo2", "mynn-noahmp".
+FISICA = set(filter(None, os.environ.get("FISICA", "").lower().split("-")))
+_NOTE_FISICA = {"topo2", "mynn", "noahmp"}
+if FISICA - _NOTE_FISICA:
+    sys.exit(f"FISICA: sigle sconosciute {sorted(FISICA - _NOTE_FISICA)} (ammesse: {sorted(_NOTE_FISICA)})")
+
+
 # s tra i file dei bordi: ICON-2I si scarica ogni 6 ore (ogni file pesa 300-450 MB), ECMWF e GFS ogni 3 ore.
 # Il modello di partenza arriva dalla variabile d'ambiente PILOTA (la imposta il workflow; esegui.sh la esporta).
 def intervallo(pilota=None):
@@ -138,10 +146,12 @@ def namelist_input(inizio, fine, riprendi, nlev, nsoil, obs_minuti=None, obs_ven
     t += riga("mp_physics", [8] * 3)                       # Thompson
     t += riga("ra_lw_physics", [4] * 3) + riga("ra_sw_physics", [4] * 3)   # RRTMG
     t += riga("radt", [18, 6, 6])                           # minuti tra due calcoli della radiazione (RRTMG): 12, 12 e 36 passi; nel dominio a 2 km ogni 6 min invece di 3 (molto meno calcolo, effetto trascurabile)
-    t += riga("sf_sfclay_physics", [1] * 3) + riga("sf_surface_physics", [2] * 3)  # Noah
-    t += riga("bl_pbl_physics", [1] * 3) + riga("bldt", [0] * 3)           # YSU
+    t += riga("sf_sfclay_physics", [5 if "mynn" in FISICA else 1] * 3)     # strato superficiale: MM5 (default) o MYNN (con il PBL MYNN)
+    t += riga("sf_surface_physics", [4 if "noahmp" in FISICA else 2] * 3)  # suolo: Noah (default) o Noah-MP
+    t += riga("bl_pbl_physics", [5 if "mynn" in FISICA else 1] * 3) + riga("bldt", [0] * 3)   # PBL: YSU (default) o MYNN 2.5
     t += riga("cu_physics", [1, 1, 0]) + riga("cudt", [0] * 3)             # Kain-Fritsch a 18 e 6 km, convezione esplicita a 2 km
-    t += riga("topo_wind", [1] * 3)
+    # correzione del vento sul terreno: e' del PBL YSU, quindi con MYNN si spegne; topo2 = variante 2 della correzione
+    t += riga("topo_wind", [0 if "mynn" in FISICA else 2 if "topo2" in FISICA else 1] * 3)
     t += riga("lightning_option", [3, 3, 3])   # LPI in TUTTI i domini: solo nel nido azzera il terreno nella cornice del dominio (provato)
     t += riga("slope_rad", [0] * 3) + riga("topo_shading", [0] * 3)        # servono sotto circa 1-2 km di passo
     t += " isfflx = 1,\n ifsnow = 1,\n icloud = 1,\n surface_input_source = 1,\n"

@@ -31,6 +31,9 @@ QUI = os.path.dirname(os.path.abspath(__file__))
 REPO = os.environ.get("GITHUB_REPOSITORY", "Superbug87/wrf-meteovelletri")
 ZONE = ["castelli", "lazio"]
 PILOTI = ["ecmwf", "icon2i"]
+# prove di fisica (run non pubblicati; gli estratti stanno nel ramo prove-fisica, vedi strumenti/pubblica_estratto.sh):
+# nei risultati compaiono come "<zona>-<pilota>-<variante>", per esempio "castelli-ecmwf-noahmp"
+VARIANTI = ["topo2", "mynn", "noahmp", "mynn-noahmp"]
 PORTALE = "https://temporeale.regione.lazio.it/datascapeA"
 SOGLIE_PIOGGIA = (0.2, 1.0, 5.0)         # mm in 6 ore, ai pluviometri
 SOGLIE_RADAR = (0.5, 2.0)                # mm in 6 ore, sul radar
@@ -100,6 +103,29 @@ def carica_estratti(giorno, cartella):
                     log("  estratto non leggibile:", n, e)
             out[(z, p)] = lista
             log(f"{z}-{p}: estratti {[str(e['ciclo']) for e in lista]}")
+
+    # prove di fisica: un solo elenco del ramo prove-fisica, poi si scelgono i file di ogni zona, modello e variante
+    disponibili = {}                                    # nome del file -> percorso o indirizzo
+    if cartella:
+        disponibili = {os.path.basename(f): f for f in glob.glob(os.path.join(cartella, "*.npz"))}
+    else:
+        r = ricevi("GET", f"https://api.github.com/repos/{REPO}/contents/estratti?ref=prove-fisica", headers=hdr)
+        if r is not None and r.status_code == 200:
+            disponibili = {v["name"]: v["download_url"] for v in r.json() if v["name"].endswith(".npz")}
+    for z in ZONE:
+        for p in PILOTI:
+            for v in VARIANTI:
+                lista = []
+                for nome in sorted(n for n in disponibili if n.startswith(f"estratto_{z}-{p}-{v}_") and n[-14:-4] in cicli):
+                    try:
+                        n = disponibili[nome]
+                        dati = np.load(io.BytesIO(ricevi("GET", n, headers=hdr).content)) if n.startswith("http") else np.load(n)
+                        lista.append({k: dati[k] for k in dati.files})
+                    except Exception as e:
+                        log("  estratto non leggibile:", nome, e)
+                if lista:
+                    out[(z, f"{p}-{v}")] = lista
+                    log(f"{z}-{p}-{v}: estratti {[str(e['ciclo']) for e in lista]}")
     return out
 
 
@@ -466,12 +492,14 @@ def somma(a, b):
 
 
 NOMI = {"ecmwf": "WRF con ECMWF", "icon2i": "WRF con ICON-2I", "rif-ecmwf": "ECMWF originale", "rif-icon2i": "ICON-2I originale"}
+NOMI_VARIANTI = {"topo2": "vento sul terreno (topo_wind 2)", "mynn": "PBL MYNN", "noahmp": "suolo Noah-MP",
+                 "mynn-noahmp": "MYNN + Noah-MP"}
 
 
 def pagella(archivio, oggi):
     giorni = sorted(glob.glob(os.path.join(archivio, "giorni", "*.json")))
     out = {"aggiornata": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"), "ultimo_giorno": oggi.isoformat(),
-           "periodi": {}, "nomi": NOMI,
+           "periodi": {}, "nomi": NOMI, "varianti": NOMI_VARIANTI,
            "note": "Errori: medio = previsto meno osservato (positivo = modello troppo caldo/ventoso), tipico = scarto quadratico medio. "
                    "Pioggia ai pluviometri, in 6 ore: presa = piogge vere previste (%), falsi = previsioni senza pioggia vera (%). "
                    "Radar, in 6 ore, con 10 km di tolleranza: prevista giusta = pioggia prevista con pioggia vera vicina (%), "

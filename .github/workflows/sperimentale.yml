@@ -1,8 +1,9 @@
 name: Prova sperimentale (manuale)
-run-name: "Prova ${{ inputs.zona }} ${{ inputs.pilota }} ${{ inputs.nudging }} ${{ inputs.ciclo }}"
+run-name: "Prova ${{ inputs.zona }} ${{ inputs.pilota }} ${{ inputs.nudging }}${{ inputs.fisica && format(' {0}', inputs.fisica) || '' }} ${{ inputs.ciclo }}"
 
-# Un run di WRF per provare una scelta prima di metterla nei lanci normali: NON pubblica nulla (mappe ed estratto per la
-# verifica restano negli allegati del run per 14 giorni). Si possono lanciare piu' prove insieme, anche sullo stesso ciclo:
+# Un run di WRF per provare una scelta prima di metterla nei lanci normali: NON pubblica le mappe (restano negli allegati del
+# run per 14 giorni). Le prove di fisica (campo "fisica") non fanno nemmeno le mappe: lasciano l'estratto per la verifica
+# nel ramo prove-fisica, e la pagella le mette a confronto con i run normali. Si possono lanciare piu' prove insieme, anche sullo stesso ciclo:
 # ogni combinazione zona/modello/fonti ha la sua coda e non disturba i quattro workflow normali.
 on:
   workflow_dispatch:
@@ -30,12 +31,15 @@ on:
         description: "Tieni fuori dal nudging un quarto delle stazioni della Regione (per misurare l'effetto)"
         type: boolean
         default: true
+      fisica:
+        description: "Fisica diversa da quella in uso: topo2, mynn, noahmp o mynn-noahmp (vuoto = quella in uso)"
+        default: ""
 
 permissions:
-  contents: read
+  contents: write                 # le prove di fisica pubblicano l'estratto nel ramo prove-fisica
 
 concurrency:
-  group: sperimentale-${{ inputs.zona }}-${{ inputs.pilota }}-${{ inputs.nudging }}
+  group: sperimentale-${{ inputs.zona }}-${{ inputs.pilota }}-${{ inputs.nudging }}-${{ inputs.fisica }}
   cancel-in-progress: false
 
 jobs:
@@ -50,6 +54,7 @@ jobs:
       nudging: ${{ inputs.nudging != 'nessuno' && inputs.nudging || 'wu' }}
       controllo: ${{ inputs.controllo }}
       prova: true
+      fisica: ${{ inputs.fisica }}
       mare: true
       radar: false
     secrets: inherit

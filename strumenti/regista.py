@@ -42,6 +42,15 @@ PROVE = [
     {"workflow": "lazio-ecmwf.yml", "zona": "lazio3", "pilota": "ecmwf", "varianti": ("wu",),
      "controllo": "false", "dal_ciclo": "2026101812", "fino_a": "2026-10-25"},
 ]
+# prove di fisica (sperimentale.yml con il campo "fisica": non pubblicano, lasciano l'estratto per la pagella): per ogni zona e
+# modello, una prova per ciascuna di queste varianti, con il nudging in uso (wu). Partono dopo i run normali, cosi' i dati
+# globali sono gia' in cache: ICON-2I 3:30 dopo il ciclo (come il Lazio normale), ECMWF 8:20 (30 minuti dopo il normale).
+FISICHE = ("topo2", "mynn", "noahmp", "mynn-noahmp")
+RITARDI_PROVE = {"icon2i": {0: (3, 30), 12: (3, 30)}, "ecmwf": {0: (8, 20), 12: (8, 20)}}
+for _wf, _z, _p in (("castelli-ecmwf.yml", "castelli", "ecmwf"), ("castelli-icon2i.yml", "castelli", "icon2i"),
+                    ("lazio-ecmwf.yml", "lazio", "ecmwf"), ("lazio-icon2i.yml", "lazio", "icon2i")):
+    PROVE.append({"workflow": _wf, "zona": _z, "pilota": _p, "varianti": ("wu",), "fisiche": FISICHE, "controllo": "false",
+                  "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026101912", "fino_a": "2026-10-31"})  # dal_ciclo: portato a 2026101900 dopo la prova veloce
 FINESTRA = timedelta(hours=10)
 TENTATIVI = 3
 PAUSA = timedelta(minutes=50)          # le sveglie arrivano a distanza di circa un'ora: un po' di margine
@@ -119,7 +128,7 @@ def main():
     for prova in PROVE:
         if adesso.date().isoformat() > prova["fino_a"]:
             continue
-        ritardi = PREVISIONI[prova["workflow"]][1]
+        ritardi = prova.get("ritardi") or PREVISIONI[prova["workflow"]][1]
         cand = [(g + timedelta(hours=o) + timedelta(hours=h, minutes=m), g + timedelta(hours=o))
                 for g in (oggi - timedelta(days=1), oggi) for o, (h, m) in ritardi.items()]
         cand = [x for x in cand if x[0] <= adesso < x[0] + FINESTRA]
@@ -129,17 +138,19 @@ def main():
         if c < prova["dal_ciclo"]:
             continue
         try:
-            fatte = {r["displayTitle"] for r in gh("run", "list", "-R", REPO, "--workflow", "sperimentale.yml", "-L", "60",
+            fatte = {r["displayTitle"] for r in gh("run", "list", "-R", REPO, "--workflow", "sperimentale.yml", "-L", "100",
                                                     "--json", "displayTitle")}
             for v in prova["varianti"]:
-                titolo = f"Prova {prova['zona']} {prova['pilota']} {v} {c}"
-                if titolo in fatte:
-                    continue
-                print(f"  sperimentale.yml: LANCIO {titolo}")
-                if not a.prova:
-                    gh("workflow", "run", "sperimentale.yml", "-R", REPO, "--ref", "main", "-f", f"zona={prova['zona']}",
-                       "-f", f"pilota={prova['pilota']}", "-f", f"ciclo={c}", "-f", f"nudging={v}",
-                       "-f", f"controllo={prova['controllo']}", json_out=False)
+                for f in prova.get("fisiche") or ("",):
+                    # stesso titolo che sperimentale.yml da' al run (run-name): se c'e' gia', anche fallito, non si rilancia
+                    titolo = f"Prova {prova['zona']} {prova['pilota']} {v}{' ' + f if f else ''} {c}"
+                    if titolo in fatte:
+                        continue
+                    print(f"  sperimentale.yml: LANCIO {titolo}")
+                    if not a.prova:
+                        gh("workflow", "run", "sperimentale.yml", "-R", REPO, "--ref", "main", "-f", f"zona={prova['zona']}",
+                           "-f", f"pilota={prova['pilota']}", "-f", f"ciclo={c}", "-f", f"nudging={v}",
+                           "-f", f"controllo={prova['controllo']}", "-f", f"fisica={f}", json_out=False)
         except RuntimeError as e:
             print(f"  !! sperimentale.yml: {e}")
 

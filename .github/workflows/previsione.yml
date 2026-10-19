@@ -44,6 +44,11 @@ on:
       prova:
         type: boolean
         default: false
+      # solo prove di fisica: sigle separate da "-" tra topo2, mynn, noahmp (vuoto = fisica in uso). Con una sigla la prova
+      # non fa le mappe: lascia solo l'estratto per la verifica, nel ramo prove-fisica
+      fisica:
+        type: string
+        default: ""
 
 env:
   NUDGING_DEFAULT: wu             # fonti del nudging nei lanci normali (wu / ufficiali / tutte)
@@ -234,6 +239,7 @@ jobs:
       PILOTA: ${{ needs.pianifica.outputs.pilota }}
       ORE: ${{ needs.pianifica.outputs.ore }}
       SEG: ${{ needs.pianifica.outputs.seg }}
+      FISICA: ${{ inputs.fisica }}          # config.py: scelte di fisica diverse da quelle in uso (solo prove)
     steps:
       - uses: actions/checkout@v5
       - name: Codice della zona (${{ inputs.zona }})
@@ -268,6 +274,23 @@ jobs:
           bash wrf/dipendenze.sh
           pip install -q requests netCDF4 numpy eccodes
           python3 -c "import eccodes; print('ecCodes', eccodes.codes_get_api_version())"
+      # ECMWF: i dati ritagliati su una zona si scaricano una volta sola per ciclo (le prove di fisica ripartono dalla stessa cache)
+      - name: Dati ECMWF già scaricati per questo ciclo e zona
+        id: dati-ecmwf
+        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'ecmwf'
+        uses: actions/cache/restore@v5
+        with:
+          path: /home/runner/ecmwf-dati
+          key: ecmwf-dati-v1-${{ inputs.zona }}-${{ env.CICLO }}-${{ env.ORE }}
+      - name: Scarico ECMWF (se non è già in cache)
+        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'ecmwf' && steps.dati-ecmwf.outputs.cache-hit != 'true'
+        run: python3 wrf/scarica_ecmwf.py --ciclo "$CICLO" --ore "$ORE" --out /home/runner/ecmwf-dati
+      - name: Salvo i dati ECMWF in cache
+        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'ecmwf' && steps.dati-ecmwf.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v5
+        with:
+          path: /home/runner/ecmwf-dati
+          key: ecmwf-dati-v1-${{ inputs.zona }}-${{ env.CICLO }}-${{ env.ORE }}
       - name: Dati ICON-2I già scaricati per questo ciclo (cache condivisa tra le due zone)
         id: dati
         if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'icon2i'
@@ -290,7 +313,7 @@ jobs:
       - name: Dati globali, ungrib, metgrid, real, stazioni (solo primo segmento)
         if: steps.s.outputs.attivo == 'true' && matrix.seg == 0
         env:
-          DATI_PRONTI: ${{ inputs.pilota == 'icon2i' && '/home/runner/icon2i-dati' || '' }}
+          DATI_PRONTI: ${{ inputs.pilota == 'icon2i' && '/home/runner/icon2i-dati' || inputs.pilota == 'ecmwf' && '/home/runner/ecmwf-dati' || '' }}
           WU_API_KEY: ${{ inputs.stazioni && secrets.WU_API_KEY || '' }}   # senza, niente stazioni Wunderground
           STAZIONI: ${{ inputs.stazioni }}
           NUDGING_FONTI: ${{ inputs.nudging || env.NUDGING_DEFAULT }}
@@ -314,14 +337,14 @@ jobs:
         with:
           name: stato-${{ matrix.seg }}
           path: /home/runner/lavoro/stato.tgz
-          retention-days: 2
+          retention-days: ${{ inputs.prova && 1 || 2 }}
       - name: Salvo le uscite del dominio fine
         if: steps.s.outputs.attivo == 'true'
         uses: actions/upload-artifact@v6
         with:
           name: uscite-${{ matrix.seg }}
           path: /home/runner/lavoro/uscite.tgz
-          retention-days: 3
+          retention-days: ${{ inputs.prova && 1 || 3 }}
       - name: Log (solo se qualcosa è andato storto)
         if: failure() && steps.s.outputs.attivo == 'true'
         uses: actions/upload-artifact@v6
@@ -376,11 +399,14 @@ jobs:
         continue-on-error: true          # la verifica e' un in piu': se qualcosa va storto le mappe escono lo stesso
         env:
           CICLO: ${{ needs.pianifica.outputs.ciclo }}
+          FISICA: ${{ inputs.fisica }}
         run: |
           mkdir -p mappe
+          # prove di fisica: la sigla della variante entra nel nome (castelli-ecmwf-noahmp), cosi' la verifica le tiene separate
           python3 strumenti/estrai_verifica.py --uscite uscite --stazioni strumenti/stazioni_verifica.json \
-            --ciclo "$CICLO" --out "mappe/estratto_${{ inputs.zona }}-${{ inputs.pilota }}_${CICLO}.npz"
+            --ciclo "$CICLO" --out "mappe/estratto_${{ inputs.zona }}-${{ inputs.pilota }}${FISICA:+-$FISICA}_${CICLO}.npz"
       - name: Mappe (senza nudging sulle stazioni, correzione dopo il calcolo se c'è la chiave)
+        if: ${{ inputs.fisica == '' }}          # le prove di fisica lasciano solo l'estratto: niente immagini
         env:
           WU_API_KEY: ${{ secrets.WU_API_KEY }}
           CICLO: ${{ needs.pianifica.outputs.ciclo }}
@@ -406,6 +432,13 @@ jobs:
             mappe/*.csv
             mappe/*.npz
           retention-days: 14
+      # Prove di fisica: l'estratto (pochi kB) va nel ramo prove-fisica, da dove lo legge la verifica giornaliera.
+      # Qui senza continue-on-error: se non si pubblica, la prova e' persa e il run deve risultare fallito.
+      - name: Pubblico l'estratto nel ramo prove-fisica
+        if: ${{ inputs.prova && inputs.fisica != '' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash strumenti/pubblica_estratto.sh mappe
       - name: Pubblico nel ramo risultati
         if: ${{ !inputs.prova }}
         env:
