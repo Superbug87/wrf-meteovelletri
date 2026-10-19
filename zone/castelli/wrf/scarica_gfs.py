@@ -46,7 +46,7 @@ def scarica(u, destinazione, tentativi=6):
             with requests.get(u, stream=True, timeout=120) as r:
                 r.raise_for_status()
                 atteso = int(r.headers.get("Content-Length", 0))
-                tmp = destinazione.with_suffix(".parte")
+                tmp = destinazione.parent / (destinazione.name + ".parte")      # with_suffix darebbe lo stesso nome a tutti i file (.f000, .f003 ...)
                 with open(tmp, "wb") as f:
                     for blocco in r.iter_content(1 << 20):
                         f.write(blocco)
