@@ -112,6 +112,12 @@ jobs:
       - name: "Tappa 1: JasPer, sorgenti, configure"
         if: steps.cache.outputs.cache-hit != 'true'
         run: bash wrf/costruisci.sh prepara
+      - name: Collegamento netCDF per ARM
+        if: steps.cache.outputs.cache-hit != 'true' && inputs.runner != 'ubuntu-22.04'
+        run: |
+          grep -n "^LIB_EXTERNAL" -A2 "$HOME/wrf-src/WRF/configure.wrf" || true
+          printf '\nLIB_EXTERNAL += -L$(NETCDFPATH)/lib -lnetcdff -lnetcdf\n' >> "$HOME/wrf-src/WRF/configure.wrf"
+          ls -l "$HOME/netcdf-combinato/lib" | head
       - name: "Tappa 2: compilazione di WRF (40-90 minuti la prima volta, avanzamento nel log)"
         if: steps.cache.outputs.cache-hit != 'true'
         run: bash wrf/costruisci.sh wrf
