@@ -51,6 +51,12 @@ prepara)
   python3 "$QUI/config.py" wps --ciclo "$CICLO" --ore "$ORE" --pilota "$PILOTA" > namelist.wps
   ./link_grib.csh ../dati/*
   if [ "$PILOTA" = gfs ]; then ln -sf "$QUI/Vtable.GFS_IDRO" Vtable; else ln -sf "$QUI/Vtable.ECMWF_OD" Vtable; fi
+  if [ "$PILOTA" = gfs ]; then
+    # i campi di acqua di nube di GFS stanno solo su una parte dei livelli di pressione: metgrid vuole gli stessi livelli
+    # di tutti gli altri campi, quindi quelli mancanti si riempiono con zero (invece di fermarsi con un errore di scrittura)
+    awk '/^name=/ {blocco = ($0 ~ /^name=(QC|QI|QR|QS|QG)$/)} blocco && /fill_lev=/ {print "        fill_lev=all:const(0.)"; next} {print}' \
+      metgrid/METGRID.TBL > metgrid/METGRID.TBL.nuova && mv metgrid/METGRID.TBL.nuova metgrid/METGRID.TBL
+  fi
   ./ungrib.exe > ungrib.log 2>&1 || { tail -n 40 ungrib.log; exit 1; }
   ls "$PREFISSO":* | head -n 3
   if [ -L ../dati ]; then rm -f ../dati; else rm -rf ../dati; fi; rm -rf GRIBFILE.*
