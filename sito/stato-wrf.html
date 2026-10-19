@@ -49,8 +49,8 @@ function ciclo(c) { return c ? c.slice(6, 8) + "/" + c.slice(4, 6) + " " + c.sli
 const STATI = {in_progress: ["in corso", "att"], queued: ["in coda", "att"], waiting: ["in attesa", "att"], pending: ["in attesa", "att"], requested: ["in attesa", "att"]};
 const ESITI = {success: ["ok", "ok"], failure: ["fallito", "ko"], cancelled: ["annullato", "nd"], skipped: ["saltato", "nd"], timed_out: ["scaduto", "ko"]};
 function disegna(d) {
-  const vecchio = (Date.now() - new Date(d.aggiornato)) > 45 * 60000;
-  el("agg").innerHTML = "Aggiornato " + fa(d.aggiornato) + (vecchio ? " — <b class=\"ko\">dati vecchi: il regista non ha scritto da piu' di 45 minuti</b>" : "");
+  const vecchio = (Date.now() - new Date(d.aggiornato)) > 4 * 3600000;
+  el("agg").innerHTML = "Aggiornato " + fa(d.aggiornato) + (vecchio ? " — <b class=\"ko\">dati vecchi: il regista non scrive da piu' di 4 ore</b>" : "");
   let h = "<h2>Run ufficiali</h2>";
   d.ufficiali.forEach(u => {
     const s = u.in_corso ? STATI[u.in_corso.stato] || [u.in_corso.stato, "att"] : null;
@@ -79,7 +79,7 @@ async function carica() {
     if (!r.ok) throw new Error("HTTP " + r.status);
     disegna(await r.json());
   } catch (e) {
-    el("agg").textContent = "Stato non disponibile (" + e.message + "). Il regista lo scrive a ogni sveglia, ogni 15 minuti circa.";
+    el("agg").textContent = "Stato non disponibile (" + e.message + "). Il regista lo scrive a ogni sveglia (alcune volte al giorno).";
   }
 }
 el("ricarica").onclick = carica;
