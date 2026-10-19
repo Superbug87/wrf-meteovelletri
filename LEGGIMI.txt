@@ -1,0 +1,1 @@
+# Ramo di servizio del regista: lanciate.txt (prove gia lanciate) e stato.json (letto da stato-wrf.html)
