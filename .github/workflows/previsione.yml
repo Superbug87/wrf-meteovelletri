@@ -13,6 +13,10 @@ on:
         description: "modello che dà le condizioni iniziali e al contorno: ecmwf, icon2i, iconeu o gfs"
         type: string
         required: true
+      runner:
+        description: "macchina di GitHub: ubuntu-22.04 (x86, quella in uso) o ubuntu-22.04-arm (prova ARM, compila WRF a parte)"
+        type: string
+        default: "ubuntu-22.04"
       ciclo:
         type: string
         default: ""
@@ -63,7 +67,7 @@ jobs:
     env:
       WRF_TAG: v4.7.0
       WPS_TAG: v4.7.0
-    runs-on: ubuntu-22.04
+    runs-on: ${{ inputs.runner }}
     timeout-minutes: 340
     steps:
       - uses: actions/checkout@v5
@@ -76,7 +80,7 @@ jobs:
         uses: actions/cache@v5
         with:
           path: /home/runner/wrf-install
-          key: wrf-build-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ hashFiles('wrf/costruisci.sh', 'wrf/dipendenze.sh') }}
+          key: wrf-build-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ hashFiles('wrf/costruisci.sh', 'wrf/dipendenze.sh') }}${{ inputs.runner != 'ubuntu-22.04' && format('-{0}', inputs.runner) || '' }}
       - name: Sorgente parziale di una compilazione interrotta
         id: parziale
         if: steps.cache.outputs.cache-hit != 'true'
@@ -85,14 +89,26 @@ jobs:
           path: |
             /home/runner/wrf-src
             /home/runner/jasper
-          key: wrf-src-v1-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ github.run_id }}-${{ github.run_attempt }}
+          key: wrf-src-v1${{ inputs.runner != 'ubuntu-22.04' && '-arm' || '' }}-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ github.run_id }}-${{ github.run_attempt }}
           # La chiave non dipende dagli script: una correzione a costruisci.sh non butta via gli oggetti già compilati.
           # Se serve ripartire da zero basta cambiare "v1".
           restore-keys: |
-            wrf-src-v1-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-
+            wrf-src-v1${{ inputs.runner != 'ubuntu-22.04' && '-arm' || '' }}-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-
       - name: Dipendenze di sistema
         if: steps.cache.outputs.cache-hit != 'true'
         run: bash wrf/dipendenze.sh
+      # ARM (solo prova): i configure di WPS e WRF riconoscono "x86_64" ma non "aarch64"; WRF vale la stessa opzione gfortran su
+      # entrambe, quindi per la durata di questo lavoro `uname -m` risponde x86_64. Le librerie netCDF stanno in un'altra cartella.
+      - name: Adattamenti per ARM
+        if: steps.cache.outputs.cache-hit != 'true' && inputs.runner != 'ubuntu-22.04'
+        run: |
+          [ -e /usr/lib/x86_64-linux-gnu ] || sudo ln -s /usr/lib/aarch64-linux-gnu /usr/lib/x86_64-linux-gnu
+          sudo tee /usr/local/bin/uname >/dev/null <<'EOF'
+          #!/bin/sh
+          if [ "$1" = "-m" ]; then echo x86_64; else exec /usr/bin/uname "$@"; fi
+          EOF
+          sudo chmod +x /usr/local/bin/uname
+          uname -m; /usr/bin/uname -m
       - name: "Tappa 1: JasPer, sorgenti, configure"
         if: steps.cache.outputs.cache-hit != 'true'
         run: bash wrf/costruisci.sh prepara
@@ -136,7 +152,7 @@ jobs:
     env:
       WRF_TAG: v4.7.0
       WPS_TAG: v4.7.0
-    runs-on: ubuntu-22.04
+    runs-on: ${{ inputs.runner }}
     timeout-minutes: 200
     steps:
       - uses: actions/checkout@v5
@@ -155,7 +171,7 @@ jobs:
         uses: actions/cache/restore@v5
         with:
           path: /home/runner/wrf-install
-          key: wrf-build-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ hashFiles('wrf/costruisci.sh', 'wrf/dipendenze.sh') }}
+          key: wrf-build-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ hashFiles('wrf/costruisci.sh', 'wrf/dipendenze.sh') }}${{ inputs.runner != 'ubuntu-22.04' && format('-{0}', inputs.runner) || '' }}
           fail-on-cache-miss: true
       - name: Dipendenze di sistema
         if: steps.geo.outputs.cache-hit != 'true'
@@ -221,7 +237,7 @@ jobs:
   previsione:
     needs: [pianifica, costruzione, statico]
     if: ${{ needs.pianifica.outputs.fatto != 'true' }}
-    runs-on: ubuntu-22.04
+    runs-on: ${{ inputs.runner }}
     timeout-minutes: 355
     strategy:
       max-parallel: 1             # i segmenti girano uno dopo l'altro, nell'ordine
@@ -259,7 +275,7 @@ jobs:
         uses: actions/cache/restore@v5
         with:
           path: /home/runner/wrf-install
-          key: wrf-build-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ hashFiles('wrf/costruisci.sh', 'wrf/dipendenze.sh') }}
+          key: wrf-build-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ hashFiles('wrf/costruisci.sh', 'wrf/dipendenze.sh') }}${{ inputs.runner != 'ubuntu-22.04' && format('-{0}', inputs.runner) || '' }}
           fail-on-cache-miss: true
       - name: Recupero i dati statici
         if: steps.s.outputs.attivo == 'true'
