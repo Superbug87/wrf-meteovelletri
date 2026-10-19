@@ -60,6 +60,9 @@ Riunisce in un solo repository i progetti `wrf-castelli`, `wrf-lazio` e `wrf-ico
   e quelle ore erano già passate quando la previsione è uscita.
 - Risultati nel ramo `verifica`: `giorni/AAAA-MM-GG.json` (somme del giorno) e `pagella.json` (ultimi 7 e 30 giorni), letto da `sito/pagella-wrf.html`.
 - Elenco delle stazioni: `strumenti/stazioni_verifica.json` (da rifare se la rete regionale cambia).
+- **Prove di fisica**: oltre ai run normali girano, senza pubblicare, quattro varianti per ogni zona e modello (vedi sotto). Il loro estratto va
+  nel ramo `prove-fisica` (`strumenti/pubblica_estratto.sh`, 20 giorni di cicli) e la verifica le mette in `pagella.json` come
+  `<zona>-<modello>-<variante>`, per esempio `castelli-ecmwf-noahmp`; le legge `sito/pagella-wrf-fisica.html`.
 
 ## Segreti del repository (Settings → Secrets and variables → Actions)
 - `MH_EMAIL`, `MH_PASSWORD`: account MeteoHub (per ICON-2I).
@@ -84,6 +87,23 @@ Actions → il workflow della zona e del modello → **Run workflow**. Campi: `c
 **Prove** (`sperimentale.yml`, Actions → Prova sperimentale): un run che non pubblica nulla, con la zona, il modello, il ciclo e le stazioni
 del nudging scelti (`wu`, `ufficiali`, `tutte`, `nessuno`); `controllo` tiene fuori dal nudging un quarto fisso delle stazioni della Regione,
 per misurare l'effetto su stazioni che il modello non ha visto. Mappe ed estratto restano negli allegati del run.
+
+## Prove di fisica
+Per scegliere la fisica migliore si confrontano, sugli stessi cicli, stesse stazioni e stesso nudging del run normale (fisica YSU,
+suolo Noah, `topo_wind` 1), quattro varianti, una per ciascuna sigla della variabile `FISICA` letta da `config.py`:
+
+| sigla | cosa cambia |
+|---|---|
+| `topo2` | `topo_wind` 2 (variante della correzione del vento sul terreno) |
+| `mynn` | PBL MYNN 2.5 (`bl_pbl_physics` 5) con lo strato superficiale MYNN (`sf_sfclay_physics` 5); `topo_wind` a 0, perche' e' una correzione del solo YSU |
+| `noahmp` | suolo Noah-MP (`sf_surface_physics` 4) |
+| `mynn-noahmp` | le due cose insieme (con MYNN il `topo_wind` e' spento, quindi non esiste un "tutte e tre") |
+
+Le lancia il regista (`PROVE` in `strumenti/regista.py`) dal ciclo 19/10 00 UTC al 31/10, per le quattro combinazioni zona/modello: sono 16 run in piu'
+a ciclo (`sperimentale.yml`, campo `fisica`), partono dopo i run normali (ICON-2I 3:30, ECMWF 8:20 dopo il ciclo) perche' i dati
+globali sono gia' in cache (i dati ECMWF si scaricano una volta per zona e ciclo: chiave `ecmwf-dati-v1-<zona>-<ciclo>-<ore>`).
+Non fanno le mappe: lasciano solo l'estratto, negli allegati restano 1 giorno. Con 20 lavori contemporanei (limite dei runner gratuiti)
+qualcuno aspetta in coda. Quando una variante risulta migliore del run normale su almeno una settimana, si porta nella fisica in uso.
 
 ## Stato
 - 18/10/2026: primi run riusciti di tutti e quattro i workflow (ciclo 17/10 12 UTC; Castelli ICON-2I anche 18/10 00 UTC), controllo di plausibilità passato, mappe pubblicate.
