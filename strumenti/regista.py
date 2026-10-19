@@ -51,6 +51,11 @@ for _wf, _z, _p in (("castelli-ecmwf.yml", "castelli", "ecmwf"), ("castelli-icon
                     ("lazio-ecmwf.yml", "lazio", "ecmwf"), ("lazio-icon2i.yml", "lazio", "icon2i")):
     PROVE.append({"workflow": _wf, "zona": _z, "pilota": _p, "varianti": ("wu",), "fisiche": FISICHE, "controllo": "false",
                   "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026101912", "fino_a": "2026-10-31"})  # dal_ciclo: portato a 2026101900 dopo la prova veloce
+# GitHub non ha priorita' tra i lavori: con 20 lavori contemporanei (limite dei runner gratuiti, per account) un segmento dei run
+# normali che finisce il suo turno si rimette in coda dietro agli altri. Per lasciare sempre posti liberi ai run normali (al
+# massimo 4 insieme) le prove ne usano al piu' MAX_PROVE alla volta; le altre aspettano la sveglia dopo.
+MAX_PROVE = 12
+ATTIVI = ("queued", "in_progress", "waiting", "pending", "requested")
 FINESTRA = timedelta(hours=10)
 TENTATIVI = 3
 PAUSA = timedelta(minutes=50)          # le sveglie arrivano a distanza di circa un'ora: un po' di margine
@@ -125,6 +130,7 @@ def main():
         except RuntimeError as e:                    # un workflow che non risponde non ferma gli altri
             print(f"  !! {wf}: {e}")
 
+    lanciate_ora = 0                 # la lista dei run di GitHub puo' non mostrare subito quelli appena lanciati
     for prova in PROVE:
         if adesso.date().isoformat() > prova["fino_a"]:
             continue
@@ -138,14 +144,19 @@ def main():
         if c < prova["dal_ciclo"]:
             continue
         try:
-            fatte = {r["displayTitle"] for r in gh("run", "list", "-R", REPO, "--workflow", "sperimentale.yml", "-L", "100",
-                                                    "--json", "displayTitle")}
+            elenco = gh("run", "list", "-R", REPO, "--workflow", "sperimentale.yml", "-L", "100", "--json", "displayTitle,status")
+            fatte = {r["displayTitle"] for r in elenco}
+            in_corso = sum(r["status"] in ATTIVI for r in elenco) + lanciate_ora
             for v in prova["varianti"]:
                 for f in prova.get("fisiche") or ("",):
                     # stesso titolo che sperimentale.yml da' al run (run-name): se c'e' gia', anche fallito, non si rilancia
                     titolo = f"Prova {prova['zona']} {prova['pilota']} {v}{' ' + f if f else ''} {c}"
                     if titolo in fatte:
                         continue
+                    if in_corso >= MAX_PROVE:
+                        print(f"  sperimentale.yml: rimando {titolo} ({in_corso} prove gia' in coda o in corso)")
+                        continue
+                    in_corso += 1; lanciate_ora += 1
                     print(f"  sperimentale.yml: LANCIO {titolo}")
                     if not a.prova:
                         gh("workflow", "run", "sperimentale.yml", "-R", REPO, "--ref", "main", "-f", f"zona={prova['zona']}",
