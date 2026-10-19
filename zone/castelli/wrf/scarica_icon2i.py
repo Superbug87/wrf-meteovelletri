@@ -336,12 +336,14 @@ def un_istante(hub, ciclo, ora, out, z3=None, lsm=None, sup_tutti=None, modello=
     prodotti = (prod("Temperature (K)") + prod("Specific humidity (kg/kg)") + prod("u-component of wind (m/s)")
                 + prod("v-component of wind (m/s)") + prod("Pressure (Pa)"))
     livelli = liv_mod
-    if IDRO:
-        prodotti = prodotti + sum((prod(d) for _, d in IDROMETEORE), [])
     if ora == 0:          # la quota dei livelli (sul mare, uno strato per livello come gli altri campi) si chiede all'ora 0
         prodotti = prodotti + prod("Geometric height (m)")
     filtri = {"product": prodotti, "level": livelli, "timerange": tempo(fm["timerange"], ora)}
     campi, lats, lons, _ = leggi(estrai_con_attesa(hub, MODELLO, ciclo, filtri, nome + "_mod"))
+    if IDRO:       # in una richiesta a parte: l'account MeteoHub ha ~1 GB e una richiesta sola da ~700 MB lo riempie
+        filtri_h = {"product": sum((prod(d) for _, d in IDROMETEORE), []), "level": livelli, "timerange": filtri["timerange"]}
+        campi_h, _, _, _ = leggi(estrai_con_attesa(hub, MODELLO, ciclo, filtri_h, nome + "_idro"))
+        campi = campi + campi_h
     nz = 65
 
     def pila(num_par):
@@ -465,7 +467,7 @@ def main():
     lsm = maschera_terra(hub, ciclo)
     sup, modello = superficie_tutti(hub, ciclo, ore)
     z3 = un_istante(hub, ciclo, 0, a.out, lsm=lsm, sup_tutti=sup, modello=modello)
-    with ThreadPoolExecutor(2) as ex:                      # ogni richiesta pesa ~300 MB e lo spazio dell account e ~1 GB
+    with ThreadPoolExecutor(1) as ex:                      # ogni richiesta pesa ~350 MB e lo spazio dell account e ~1 GB (anche per l'altra zona)
         for _ in ex.map(lambda h: un_istante(hub, ciclo, h, a.out, z3, lsm, sup, modello), ore[1:]):
             pass
 
