@@ -485,11 +485,13 @@ code{font-size:.88em;background:var(--bg);padding:1px 5px;border-radius:4px}
 
   <div id="v-wrftest" data-view hidden>
     <div class="tabs" id="wt-tabs" role="group" aria-label="Pagine di test WRF">
-      <button type="button" data-wt="pagella" aria-pressed="true">Pagella</button>
+      <button type="button" data-wt="stato" aria-pressed="true">Stato</button>
+      <button type="button" data-wt="pagella" aria-pressed="false">Pagella</button>
       <button type="button" data-wt="castelli" aria-pressed="false">Confronto Castelli</button>
       <button type="button" data-wt="lazio" aria-pressed="false">Confronto Lazio</button>
     </div>
-    <iframe id="wt-fr-pagella" title="Pagella WRF" data-src="pagella-wrf.html" style="width:100%;height:1000px;border:0;display:block"></iframe>
+    <iframe id="wt-fr-stato" title="Stato dei run WRF" data-src="stato-wrf.html" style="width:100%;height:1000px;border:0;display:block"></iframe>
+    <iframe id="wt-fr-pagella" title="Pagella WRF" data-src="pagella-wrf.html" style="width:100%;height:1000px;border:0;display:none"></iframe>
     <iframe id="wt-fr-castelli" title="Confronto modelli Castelli Romani" data-src="confronto-wrf.html" style="width:100%;height:1000px;border:0;display:none"></iframe>
     <iframe id="wt-fr-lazio" title="Confronto modelli Lazio" data-src="confronto-wrf-lazio.html" style="width:100%;height:1000px;border:0;display:none"></iframe>
   </div>
@@ -3462,7 +3464,7 @@ function wrfTema() {
   const cs = getComputedStyle(document.documentElement), v = n => cs.getPropertyValue(n).trim();
   const scuro = document.documentElement.getAttribute('data-theme') === 'dark';
   const mappa = {'--sfondo': v('--bg'), '--carta': v('--panel'), '--testo': v('--ink'), '--sec': v('--mute'), '--linea': v('--line'), '--acc': v('--brand'), '--acc-testo': v('--onbrand')};
-  ['wrf-fr', 'wrf-fr-lazio', 'wt-fr-pagella', 'wt-fr-castelli', 'wt-fr-lazio'].forEach(id => {
+  ['wrf-fr', 'wrf-fr-lazio', 'wt-fr-stato', 'wt-fr-pagella', 'wt-fr-castelli', 'wt-fr-lazio'].forEach(id => {
     try {
       const d = document.getElementById(id).contentDocument;
       if (!d || !d.documentElement) return;
@@ -3471,7 +3473,7 @@ function wrfTema() {
     } catch (e) { /* pagina di un altro sito o non ancora pronta: non si tocca */ }
   });
 }
-['wrf-fr', 'wrf-fr-lazio', 'wt-fr-pagella', 'wt-fr-castelli', 'wt-fr-lazio'].forEach(id => {
+['wrf-fr', 'wrf-fr-lazio', 'wt-fr-stato', 'wt-fr-pagella', 'wt-fr-castelli', 'wt-fr-lazio'].forEach(id => {
   const fr = document.getElementById(id);
   fr.addEventListener('load', () => {
     // se il file non e' ancora sul sito il server puo' rispondere con questa stessa pagina: non la si mostra dentro se stessa
@@ -3509,10 +3511,10 @@ document.getElementById('wrf-tabs').addEventListener('click', e => {
   try { history.replaceState(null, '', b.dataset.wrf === 'lazio' ? '#wrf-lazio' : '#wrf'); } catch (x) { /* niente */ }
 });
 // WRF test: pagella e confronto modelli (Castelli, Lazio), una alla volta
-let wtSez = 'pagella';
+let wtSez = 'stato';
 function wtMostra(z) {
   wtSez = z;
-  ['pagella', 'castelli', 'lazio'].forEach(k => {
+  ['stato', 'pagella', 'castelli', 'lazio'].forEach(k => {
     const fr = document.getElementById('wt-fr-' + k);
     fr.style.display = k === z ? 'block' : 'none';
     if (k === z && !fr.getAttribute('src')) {
@@ -3546,7 +3548,7 @@ window.addEventListener('hashchange', () => { route(); window.scrollTo(0, 0); })
 // le pagine WRF (previsioni-wrf.html e previsioni-wrf-lazio.html) dicono quanto sono alte: l'iframe che ha scritto si adatta
 window.addEventListener('message', e => {
   if (e.origin !== location.origin || !e.data || !e.data.wrfAltezza) return;
-  ['wrf-fr', 'wrf-fr-lazio', 'wt-fr-pagella', 'wt-fr-castelli', 'wt-fr-lazio'].forEach(id => {
+  ['wrf-fr', 'wrf-fr-lazio', 'wt-fr-stato', 'wt-fr-pagella', 'wt-fr-castelli', 'wt-fr-lazio'].forEach(id => {
     const fr = document.getElementById(id);
     if (fr.contentWindow === e.source) fr.style.height = e.data.wrfAltezza + 'px';
   });

@@ -1,4 +1,5 @@
-name: Lazio · ICON-2I
+name: "UFFICIALE · Lazio · ICON-2I"
+run-name: "UFFICIALE Lazio ICON-2I ${{ inputs.ciclo }}"
 
 # Previsione WRF a 48 ore: zona lazio (dominio fine a 2 km), condizioni iniziali e al contorno da ICON-2I (MeteoHub).
 # Il lavoro lo fa il flusso comune previsione.yml. GitHub a volte ritarda o salta i lanci programmati: ogni ciclo ha un lancio

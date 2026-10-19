@@ -13,10 +13,15 @@ da 10 ore) e lo lancia se:
 Fa lo stesso con la verifica giornaliera (una volta al giorno, dopo le 05:20 UTC).
 Ogni sveglia lancia al massimo un run per workflow; la sveglia dopo vede il run gia' partito.
 
+Memoria: l'elenco delle prove gia' lanciate sta nel file lanciate.txt del ramo "regista" (non nella lista dei run di GitHub, che
+si puo' ripulire senza che il regista rilanci prove gia' fatte). Nello stesso ramo scrive stato.json, letto dalla pagina
+stato-wrf.html del sito: ultimo ciclo pubblicato, run in corso e prove attive.
+
   regista.py [--prova]       --prova: dice cosa farebbe senza lanciare nulla
 Serve `gh` con GH_TOKEN (permessi actions: write, contents: read).
 """
 import argparse
+import base64
 import json
 import os
 import subprocess
@@ -72,6 +77,47 @@ def gh(*args, json_out=True):
     if r.returncode != 0:
         raise RuntimeError(f"gh {' '.join(args[:3])}...: {r.stderr.strip()[:300]}")
     return json.loads(r.stdout) if json_out else r.stdout
+
+
+RAMO_STATO = "regista"
+
+
+def leggi_file(nome):
+    """(testo, sha) di un file del ramo regista; ("", None) se manca."""
+    r = subprocess.run(["gh", "api", f"repos/{REPO}/contents/{nome}?ref={RAMO_STATO}"], capture_output=True, text=True)
+    if r.returncode != 0:
+        return "", None
+    d = json.loads(r.stdout)
+    return base64.b64decode(d["content"]).decode(), d["sha"]
+
+
+def scrivi_file(nome, testo, sha, messaggio):
+    args = ["api", "-X", "PUT", f"repos/{REPO}/contents/{nome}", "-f", f"message={messaggio}", "-f", f"branch={RAMO_STATO}",
+            "-f", "content=" + base64.b64encode(testo.encode()).decode()]
+    if sha:
+        args += ["-f", f"sha={sha}"]
+    gh(*args, json_out=False)
+
+
+def stato_attuale(adesso):
+    """Fotografia per la pagina del sito: per ogni run normale l'ultimo ciclo pubblicato e il run in corso."""
+    ufficiali = []
+    for wf, (ramo, _) in PREVISIONI.items():
+        try:
+            nomi = sorted(x["name"] for x in gh("api", f"repos/{REPO}/contents/archivio?ref={ramo}") if x["name"].isdigit())
+        except RuntimeError:
+            nomi = []
+        runs = run_del_workflow(wf)
+        attivi = [r for r in runs if r["status"] in ATTIVI]
+        finiti = [r for r in runs if r["status"] == "completed"]
+        ufficiali.append({
+            "workflow": wf, "ultimo_pubblicato": nomi[-1] if nomi else None,
+            "in_corso": ({"stato": attivi[0]["status"], "da": attivi[0]["createdAt"], "id": attivi[0]["databaseId"]} if attivi else None),
+            "ultimo_esito": ({"esito": finiti[0]["conclusion"], "da": finiti[0]["createdAt"]} if finiti else None)})
+    prove = gh("run", "list", "-R", REPO, "--workflow", "sperimentale.yml", "-L", "100", "--json", "displayTitle,status,createdAt,conclusion")
+    return {"aggiornato": adesso.strftime("%Y-%m-%dT%H:%M:%SZ"), "ufficiali": ufficiali,
+            "prove": [{"titolo": r["displayTitle"], "stato": r["status"], "da": r["createdAt"], "esito": r["conclusion"]}
+                      for r in prove if r["status"] in ATTIVI or r["status"] == "completed"][:60]}
 
 
 def quando(s):
@@ -137,6 +183,9 @@ def main():
             print(f"  !! {wf}: {e}")
 
     lanciate_ora = 0                 # la lista dei run di GitHub puo' non mostrare subito quelli appena lanciati
+    testo_lanciate, sha_lanciate = leggi_file("lanciate.txt")
+    memoria = {r.strip().lower() for r in testo_lanciate.splitlines() if r.strip()}
+    nuove = []
     for prova in PROVE:
         if adesso.date().isoformat() > prova["fino_a"]:
             continue
@@ -151,13 +200,13 @@ def main():
             continue
         try:
             elenco = gh("run", "list", "-R", REPO, "--workflow", "sperimentale.yml", "-L", "100", "--json", "displayTitle,status")
-            fatte = {r["displayTitle"] for r in elenco}
+            fatte = {r["displayTitle"].lower() for r in elenco} | memoria
             in_corso = sum(r["status"] in ATTIVI for r in elenco) + lanciate_ora
             for v in prova["varianti"]:
                 for f in prova.get("fisiche") or ("",):
                     # stesso titolo che sperimentale.yml da' al run (run-name): se c'e' gia', anche fallito, non si rilancia
-                    titolo = f"Prova {prova['zona']} {prova['pilota']} {v}{' ' + f if f else ''} {c}"
-                    if titolo in fatte:
+                    titolo = f"PROVA {prova['zona']} {prova['pilota']} {v}{' ' + f if f else ''} {c}"
+                    if titolo.lower() in fatte:
                         continue
                     if in_corso >= MAX_PROVE:
                         print(f"  sperimentale.yml: rimando {titolo} ({in_corso} prove gia' in coda o in corso)")
@@ -165,11 +214,23 @@ def main():
                     in_corso += 1; lanciate_ora += 1
                     print(f"  sperimentale.yml: LANCIO {titolo}")
                     if not a.prova:
+                        nuove.append(titolo.lower()); memoria.add(titolo.lower())
                         gh("workflow", "run", "sperimentale.yml", "-R", REPO, "--ref", "main", "-f", f"zona={prova['zona']}",
                            "-f", f"pilota={prova['pilota']}", "-f", f"ciclo={c}", "-f", f"nudging={v}",
                            "-f", f"controllo={prova['controllo']}", "-f", f"fisica={f}", json_out=False)
         except RuntimeError as e:
             print(f"  !! sperimentale.yml: {e}")
+    if nuove and not a.prova:
+        try:
+            scrivi_file("lanciate.txt", "\n".join(sorted(memoria)) + "\n", sha_lanciate, f"{len(nuove)} prove lanciate")
+        except RuntimeError as e:
+            print(f"  !! non riesco a salvare l'elenco delle prove lanciate: {e}")
+    if not a.prova:
+        try:
+            scrivi_file("stato.json", json.dumps(stato_attuale(adesso), ensure_ascii=False, indent=1), leggi_file("stato.json")[1],
+                        "stato dei run")
+        except RuntimeError as e:
+            print(f"  !! stato.json: {e}")
 
     wf, (h, m) = VERIFICA
     partenza = oggi + timedelta(hours=h, minutes=m)

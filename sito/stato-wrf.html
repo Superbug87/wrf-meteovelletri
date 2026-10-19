@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stato dei run WRF</title>
+<style>
+  :root { --sfondo:#f3f2ee; --carta:#fff; --testo:#14130f; --sec:#5d5b54; --linea:#d8d6cc; --acc:#2a78d6; --ok:#1d7f3a; --ko:#b3261e; --att:#9a6a00; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-tema="chiaro"]) { --sfondo:#141412; --carta:#1f1f1c; --testo:#f1f0ea; --sec:#a9a79d; --linea:#3a3a35; --acc:#5b9cf0; --ok:#7fd497; --ko:#f2877f; --att:#e6b84d; }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--sfondo); color: var(--testo); font: 16px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 12px 16px 24px; }
+  h1 { font-size: 1.1rem; margin: 4px 0; }
+  h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--sec); margin: 18px 0 6px; }
+  .sotto { color: var(--sec); font-size: .9rem; margin: 0 0 8px; }
+  .riga { background: var(--carta); border: 1px solid var(--linea); border-radius: 12px; padding: 10px 12px; margin: 8px 0; }
+  .riga b { display: block; }
+  .riga .det { color: var(--sec); font-size: .88rem; }
+  .pillola { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600; border: 1px solid currentColor; margin-right: 6px; }
+  .ok { color: var(--ok); } .ko { color: var(--ko); } .att { color: var(--att); } .nd { color: var(--sec); }
+  .avviso { border-left: 4px solid var(--att); }
+  button { font: inherit; color: var(--testo); background: var(--carta); border: 1px solid var(--linea); border-radius: 999px; padding: 8px 14px; min-height: 40px; cursor: pointer; }
+</style>
+</head>
+<body>
+<main id="principale">
+  <h1>Stato dei run WRF</h1>
+  <p class="sotto" id="agg">Carico…</p>
+  <div id="contenuto"></div>
+  <p class="sotto" style="margin-top:14px"><button type="button" id="ricarica">Aggiorna</button></p>
+</main>
+<script>
+const URL_STATO = "https://raw.githubusercontent.com/Superbug87/wrf-meteovelletri/regista/stato.json";
+const NOMI = {
+  "castelli-icon2i.yml": "Castelli Romani · ICON-2I", "castelli-ecmwf.yml": "Castelli Romani · ECMWF",
+  "lazio-icon2i.yml": "Lazio · ICON-2I", "lazio-ecmwf.yml": "Lazio · ECMWF"
+};
+const el = id => document.getElementById(id);
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function fa(iso) {
+  if (!iso) return "";
+  const m = Math.max(0, Math.round((Date.now() - new Date(iso)) / 60000));
+  return m < 60 ? m + " min fa" : m < 1440 ? Math.floor(m / 60) + " h " + (m % 60) + " min fa" : Math.floor(m / 1440) + " g fa";
+}
+function ciclo(c) { return c ? c.slice(6, 8) + "/" + c.slice(4, 6) + " " + c.slice(8, 10) + "Z" : "—"; }
+const STATI = {in_progress: ["in corso", "att"], queued: ["in coda", "att"], waiting: ["in attesa", "att"], pending: ["in attesa", "att"], requested: ["in attesa", "att"]};
+const ESITI = {success: ["ok", "ok"], failure: ["fallito", "ko"], cancelled: ["annullato", "nd"], skipped: ["saltato", "nd"], timed_out: ["scaduto", "ko"]};
+function disegna(d) {
+  const vecchio = (Date.now() - new Date(d.aggiornato)) > 45 * 60000;
+  el("agg").innerHTML = "Aggiornato " + fa(d.aggiornato) + (vecchio ? " — <b class=\"ko\">dati vecchi: il regista non ha scritto da piu' di 45 minuti</b>" : "");
+  let h = "<h2>Run ufficiali</h2>";
+  d.ufficiali.forEach(u => {
+    const s = u.in_corso ? STATI[u.in_corso.stato] || [u.in_corso.stato, "att"] : null;
+    const e = u.ultimo_esito ? ESITI[u.ultimo_esito.esito] || [u.ultimo_esito.esito, "nd"] : null;
+    h += `<div class="riga"><b>${esc(NOMI[u.workflow] || u.workflow)}</b>` +
+      `<div class="det">Ultimo ciclo pubblicato: <b style="display:inline">${ciclo(u.ultimo_pubblicato)}</b></div>` +
+      `<div class="det">` + (s ? `<span class="pillola ${s[1]}">${s[0]}</span>da ${fa(u.in_corso.da)}` : `<span class="pillola nd">fermo</span>nessun run in corso`) +
+      (e ? ` · ultimo finito: <span class="${e[1]}">${e[0]}</span> ${fa(u.ultimo_esito.da)}` : "") + `</div></div>`;
+  });
+  const attive = d.prove.filter(p => STATI[p.stato]);
+  const finite = d.prove.filter(p => p.stato === "completed");
+  h += `<h2>Prove (${attive.length} attive)</h2>`;
+  if (!attive.length && !finite.length) h += `<div class="riga"><span class="det">Nessuna prova.</span></div>`;
+  attive.forEach(p => { const s = STATI[p.stato];
+    h += `<div class="riga"><b>${esc(p.titolo.replace(/^PROVA /i, ""))}</b><div class="det"><span class="pillola ${s[1]}">${s[0]}</span>da ${fa(p.da)}</div></div>`; });
+  if (finite.length) {
+    h += `<h2>Prove finite di recente</h2>`;
+    finite.slice(0, 12).forEach(p => { const e = ESITI[p.esito] || [p.esito || "?", "nd"];
+      h += `<div class="riga"><b>${esc(p.titolo.replace(/^PROVA /i, ""))}</b><div class="det"><span class="pillola ${e[1]}">${e[0]}</span>${fa(p.da)}</div></div>`; });
+  }
+  el("contenuto").innerHTML = h;
+}
+async function carica() {
+  try {
+    const r = await fetch(URL_STATO + "?t=" + Date.now(), {cache: "no-store"});
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    disegna(await r.json());
+  } catch (e) {
+    el("agg").textContent = "Stato non disponibile (" + e.message + "). Il regista lo scrive a ogni sveglia, ogni 15 minuti circa.";
+  }
+}
+el("ricarica").onclick = carica;
+carica(); setInterval(carica, 5 * 60 * 1000);
+if (window.parent !== window) {
+  document.body.style.background = "transparent";
+  const m = el("principale"), invia = () => { if (m.offsetHeight > 100) window.parent.postMessage({ wrfAltezza: m.offsetHeight + 24 }, location.origin); };
+  new ResizeObserver(invia).observe(m); window.addEventListener("load", invia);
+}
+</script>
+</body>
+</html>

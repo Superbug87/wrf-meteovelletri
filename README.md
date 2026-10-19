@@ -86,7 +86,7 @@ il run non rifà nulla.
 Actions → il workflow della zona e del modello → **Run workflow**. Campi: `ciclo` (vuoto = l'ultimo), `ore` (48), `ore_segmento` (16),
 `stazioni`, `mare` (temperatura del mare MUR), `radar` (confronto con il radar della Protezione Civile).
 
-**Prove** (`sperimentale.yml`, Actions → Prova sperimentale): un run che non pubblica nulla, con la zona, il modello, il ciclo e le stazioni
+**Prove** (`sperimentale.yml`, Actions → PROVE): un run che non pubblica nulla, con la zona, il modello, il ciclo e le stazioni
 del nudging scelti (`wu`, `ufficiali`, `tutte`, `nessuno`); `controllo` tiene fuori dal nudging un quarto fisso delle stazioni della Regione,
 per misurare l'effetto su stazioni che il modello non ha visto. Mappe ed estratto restano negli allegati del run.
 

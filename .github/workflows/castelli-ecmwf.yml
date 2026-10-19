@@ -1,4 +1,5 @@
-name: Castelli Romani · ECMWF
+name: "UFFICIALE · Castelli Romani · ECMWF"
+run-name: "UFFICIALE Castelli Romani ECMWF ${{ inputs.ciclo }}"
 
 # Previsione WRF a 48 ore: zona castelli (dominio fine a 1 km), condizioni iniziali e al contorno da ECMWF IFS.
 # Il lavoro lo fa il flusso comune previsione.yml. GitHub a volte ritarda o salta i lanci programmati: ogni ciclo ha un lancio

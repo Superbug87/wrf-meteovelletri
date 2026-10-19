@@ -1,4 +1,5 @@
-name: Lazio · ECMWF
+name: "UFFICIALE · Lazio · ECMWF"
+run-name: "UFFICIALE Lazio ECMWF ${{ inputs.ciclo }}"
 
 # Previsione WRF a 48 ore: zona lazio (dominio fine a 2 km), condizioni iniziali e al contorno da ECMWF IFS.
 # Il lavoro lo fa il flusso comune previsione.yml. GitHub a volte ritarda o salta i lanci programmati: ogni ciclo ha un lancio

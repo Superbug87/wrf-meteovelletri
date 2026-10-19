@@ -15,7 +15,7 @@ on:
     - cron: "7,22,37,52 * * * *"
 
 permissions:
-  contents: read
+  contents: write                 # scrive lanciate.txt e stato.json nel ramo regista
   actions: write                  # serve a lanciare gli altri workflow (workflow_dispatch funziona anche con GITHUB_TOKEN)
 
 concurrency:

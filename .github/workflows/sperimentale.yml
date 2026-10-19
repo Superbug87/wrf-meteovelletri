@@ -1,5 +1,5 @@
-name: Prova sperimentale (manuale)
-run-name: "Prova ${{ inputs.zona }} ${{ inputs.pilota }} ${{ inputs.nudging }}${{ inputs.fisica && format(' {0}', inputs.fisica) || '' }} ${{ inputs.ciclo }}"
+name: "PROVE · tutte le prove (dal regista o a mano)"
+run-name: "PROVA ${{ inputs.zona }} ${{ inputs.pilota }} ${{ inputs.nudging }}${{ inputs.fisica && format(' {0}', inputs.fisica) || '' }} ${{ inputs.ciclo }}"
 
 # Un run di WRF per provare una scelta prima di metterla nei lanci normali: NON pubblica le mappe (restano negli allegati del
 # run per 14 giorni). Le prove di fisica (campo "fisica") non fanno nemmeno le mappe: lasciano l'estratto per la verifica
