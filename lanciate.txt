@@ -23,9 +23,13 @@ prova castelli icon2i wu topo2 2026101900
 prova castelli icon2i wu topo2 2026101912
 prova castelli iconeu wu 2026101912
 prova lazio ecmwf wu mynn 2026101900
+prova lazio ecmwf wu mynn 2026101912
 prova lazio ecmwf wu mynn-noahmp 2026101900
+prova lazio ecmwf wu mynn-noahmp 2026101912
 prova lazio ecmwf wu noahmp 2026101900
+prova lazio ecmwf wu noahmp 2026101912
 prova lazio ecmwf wu topo2 2026101900
+prova lazio ecmwf wu topo2 2026101912
 prova lazio gfs wu 2026101912
 prova lazio icon2i wu mynn 2026101900
 prova lazio icon2i wu mynn 2026101912
