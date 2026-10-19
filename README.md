@@ -31,6 +31,7 @@ Riunisce in un solo repository i progetti `wrf-castelli`, `wrf-lazio` e `wrf-ico
 - Tutti chiamano lo stesso **flusso comune** (`.github/workflows/previsione.yml`): compilazione di WRF/WPS (una volta, in cache), dati statici
   della zona (geogrid, in cache), scelta del ciclo, dati di partenza, ungrib, metgrid, real, WRF a segmenti da 16 ore, controllo, mappe, pubblicazione.
 - **ICON-2I** si scarica una sola volta per ciclo (MeteoHub limita le richieste): i Castelli partono prima e lo mettono in cache, il Lazio lo ritrova.
+- Da ICON-2I entrano anche acqua di nube, ghiaccio, pioggia, neve e graupel, sia nello stato iniziale sia ai bordi (`have_bcs_moist`): nubi e piogge che arrivano da fuori dominio non nascono piu' da zero. Sono richieste a parte (spazio account ~1 GB, una alla volta). `IDRO=0` torna al comportamento precedente. ECMWF open data non ha questi campi, quindi per ECMWF resta com'era.
 - **Nudging sulle stazioni** (`wrf/stazioni_wrf.py`, `strumenti/stazioni_ufficiali.py`): nelle prime ore, fino all'ultima osservazione
   disponibile, WRF viene tenuto vicino alla temperatura e all'umidità misurate; dopo prosegue libero. Fonti (`NUDGING_DEFAULT` nel flusso
   comune, o il campo `nudging` delle prove): `wu` (stazioni Weather Underground), `ufficiali` (Regione Lazio, temperatura ogni 15 minuti
