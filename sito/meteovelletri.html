@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meteo Velletri</title>
+<style>
+  :root { --sfondo:#f3f2ee; --carta:#fff; --testo:#14130f; --sec:#5d5b54; --linea:#d8d6cc; --acc:#2a78d6; }
+  @media (prefers-color-scheme: dark) {
+    :root { --sfondo:#141412; --carta:#1f1f1c; --testo:#f1f0ea; --sec:#a9a79d; --linea:#3a3a35; --acc:#5b9cf0; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--sfondo); color:var(--testo); font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:680px; margin:0 auto; padding:16px; }
+  h1 { font-size:1.3rem; margin:4px 0 2px; }
+  h2 { font-size:.85rem; text-transform:uppercase; letter-spacing:.06em; color:var(--sec); margin:22px 0 8px; }
+  .sotto { color:var(--sec); font-size:.9rem; margin:0; }
+  a.voce { display:block; background:var(--carta); border:1px solid var(--linea); border-radius:12px; padding:12px 14px; margin:8px 0;
+           color:var(--testo); text-decoration:none; min-height:48px; }
+  a.voce:hover, a.voce:focus-visible { border-color:var(--acc); outline:none; }
+  a.voce b { display:block; }
+  a.voce span { color:var(--sec); font-size:.88rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Meteo Velletri</h1>
+  <p class="sotto">Previsioni WRF e relativi test</p>
+
+  <h2>Previsioni WRF</h2>
+  <a class="voce" href="previsioni-wrf.html"><b>Castelli Romani</b><span>Previsioni a 48 ore, mappe a 9 / 3 / 1 km</span></a>
+  <a class="voce" href="previsioni-wrf-lazio.html"><b>Lazio</b><span>Previsioni a 48 ore, mappe a 18 / 6 / 2 km</span></a>
+
+  <h2>WRF test</h2>
+  <a class="voce" href="pagella-wrf.html"><b>Pagella</b><span>Quanto ci azzecca ogni modello, ufficiali e in prova, contro le stazioni</span></a>
+  <a class="voce" href="confronto-wrf.html"><b>Confronto modelli · Castelli</b><span>Mappe affiancate di tutti i piloti e le fisiche in prova</span></a>
+  <a class="voce" href="confronto-wrf-lazio.html"><b>Confronto modelli · Lazio</b><span>Mappe affiancate di tutti i piloti e le fisiche in prova</span></a>
+  <a class="voce" href="https://github.com/Superbug87/wrf-meteovelletri/actions"><b>Esecuzioni (GitHub)</b><span>Stato dei run ufficiali e di prova</span></a>
+</main>
+</body>
+</html>
