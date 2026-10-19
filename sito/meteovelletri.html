@@ -3473,7 +3473,21 @@ function wrfTema() {
 }
 ['wrf-fr', 'wrf-fr-lazio', 'wt-fr-pagella', 'wt-fr-castelli', 'wt-fr-lazio'].forEach(id => {
   const fr = document.getElementById(id);
-  fr.addEventListener('load', () => { wrfTema(); fr.style.visibility = 'visible'; });   // si vede solo coi colori giusti
+  fr.addEventListener('load', () => {
+    // se il file non e' ancora sul sito il server puo' rispondere con questa stessa pagina: non la si mostra dentro se stessa
+    try {
+      if (fr.contentDocument && fr.contentDocument.getElementById('wt-tabs')) {
+        fr.removeAttribute('src'); fr.style.display = 'none';
+        if (!fr.nextElementSibling || !fr.nextElementSibling.classList.contains('wt-manca')) {
+          const m = document.createElement('p'); m.className = 'sub wt-manca';
+          m.textContent = 'Questa pagina non è ancora stata caricata sul sito (' + fr.dataset.src + ').';
+          fr.after(m);
+        }
+        return;
+      }
+    } catch (e) { /* non accessibile: si lascia */ }
+    wrfTema(); fr.style.visibility = 'visible';
+  });   // si vede solo coi colori giusti
 });
 new MutationObserver(wrfTema).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
 function wrfMostra(z) {
