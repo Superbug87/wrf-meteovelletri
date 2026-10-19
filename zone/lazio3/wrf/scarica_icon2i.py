@@ -40,6 +40,12 @@ LAT_MIN, LAT_MAX, LON_MIN, LON_MAX = 36.6, 47.0, 6.0, 19.6
 # livelli di pressione (hPa) su cui si riscrive; sopra il top del modello non si scrive
 LIVELLI_HPA = [1000, 975, 950, 925, 900, 875, 850, 825, 800, 775, 750, 725, 700, 675, 650, 625, 600, 575, 550, 525, 500,
                475, 450, 425, 400, 375, 350, 325, 300, 275, 250, 225, 200, 175, 150, 125, 100, 70, 50]
+# acqua di nube e precipitazione sui livelli del modello (MeteoHub): (categoria, numero GRIB2 sorgente), descrizione.
+# Si riscrivono con i codici standard WMO (22 nube, 23 ghiaccio, 24 pioggia, 25 neve, 32 graupel) letti dalla Vtable.
+IDROMETEORE = [((1, 22), "Cloud mixing ratio (kg/kg)"), ((1, 24), "Rain mixing ratio (kg/kg)"),
+               ((1, 25), "Snow mixing ratio (kg/kg)"), ((1, 32), "Graupel (snow pellets) (kg/kg)"),
+               ((1, 82), "Cloud ice mixing-ratio (kg/kg)")]
+IDRO = os.environ.get("IDRO", "1") != "0"      # IDRO=0 = come prima (nubi e pioggia entrano a zero dai bordi)
 RD, G0, CP, GAMMA = 287.04, 9.80665, 1004.0, 0.0065
 STRATI_NOAH_CM = [(0, 7), (7, 28), (28, 100), (100, 289)]
 STRATI_ICON_CM = [(0, 1), (1, 3), (3, 9), (9, 27), (27, 81), (81, 243), (243, 729)]
@@ -186,8 +192,9 @@ def rh_da_q(q, t, p):
     return np.clip(100.0 * e / (a * ew + (1 - a) * ei), 0.0, 100.0)
 
 
-def a_pressione(p3, campi, z3, ps, livelli_pa):
-    """p3, T, q, u, v, z: (nz, ny, nx) dall'alto al basso. Ritorna dict livello -> (T, RH, U, V, Z)."""
+def a_pressione(p3, campi, z3, ps, livelli_pa, extra=()):
+    """p3, T, q, u, v, z: (nz, ny, nx) dall'alto al basso. Ritorna dict livello -> (T, RH, U, V, Z, [extra...]).
+    `extra` sono altri campi (i rapporti di mescolanza dell'acqua di nube) portati sullo stesso livello e mai negativi."""
     T3, Q3, U3, V3 = campi
     nz = p3.shape[0]
     ln = np.log(p3)
@@ -199,10 +206,11 @@ def a_pressione(p3, campi, z3, ps, livelli_pa):
         a0, a1 = (np.take_along_axis(ln, k, 0)[0] for k in (k0, k1))
         w = np.clip((np.log(pl) - a0) / (a1 - a0), 0.0, 1.0)
         res = []
-        for A in (T3, Q3, U3, V3, z3):
+        for A in (T3, Q3, U3, V3, z3, *extra):
             x0, x1 = (np.take_along_axis(A, k, 0)[0] for k in (k0, k1))
             res.append(x0 + (x1 - x0) * w)
-        T, Q, U, V, Z = res
+        T, Q, U, V, Z = res[:5]
+        H = [np.maximum(x, 0.0) for x in res[5:]]
         sotto = pl > p3[-1]                                    # il livello sta sotto il livello più basso del modello
         if sotto.any():
             pb, tb = p3[-1], T3[-1]
@@ -210,7 +218,8 @@ def a_pressione(p3, campi, z3, ps, livelli_pa):
             Ze = z3[-1] - (0.5 * (Te + tb)) * RD / G0 * np.log(pl / pb)
             T, Z = np.where(sotto, Te, T), np.where(sotto, Ze, Z)
             U, V, Q = np.where(sotto, U3[-1], U), np.where(sotto, V3[-1], V), np.where(sotto, Q3[-1], Q)
-        out[pl] = (T, rh_da_q(np.maximum(Q, 0.0), T, np.float32(pl)), U, V, Z)
+            H = [np.where(sotto, e[-1], h) for h, e in zip(H, extra)]
+        out[pl] = (T, rh_da_q(np.maximum(Q, 0.0), T, np.float32(pl)), U, V, Z, H)
     return out
 
 
@@ -327,6 +336,8 @@ def un_istante(hub, ciclo, ora, out, z3=None, lsm=None, sup_tutti=None, modello=
     prodotti = (prod("Temperature (K)") + prod("Specific humidity (kg/kg)") + prod("u-component of wind (m/s)")
                 + prod("v-component of wind (m/s)") + prod("Pressure (Pa)"))
     livelli = liv_mod
+    if IDRO:
+        prodotti = prodotti + sum((prod(d) for _, d in IDROMETEORE), [])
     if ora == 0:          # la quota dei livelli (sul mare, uno strato per livello come gli altri campi) si chiede all'ora 0
         prodotti = prodotti + prod("Geometric height (m)")
     filtri = {"product": prodotti, "level": livelli, "timerange": tempo(fm["timerange"], ora)}
@@ -342,6 +353,16 @@ def un_istante(hub, ciclo, ora, out, z3=None, lsm=None, sup_tutti=None, modello=
         return np.stack([d[i] for i in range(1, nz + 1)])
 
     T3, Q3, U3, V3, P3 = pila((0, 0)), pila((1, 0)), pila((2, 2)), pila((2, 3)), pila((3, 0))
+    # --- acqua di nube, pioggia, ghiaccio, neve, graupel: se un campo manca (a +0 h l'analisi puo' non averli) si scrive zero,
+    # cosi' tutti i file hanno gli stessi campi (metgrid e real.exe non sopportano file diversi tra un istante e l'altro)
+    H3 = []
+    if IDRO:
+        for num_par, desc in IDROMETEORE:
+            try:
+                H3.append(pila(num_par))
+            except SystemExit:
+                print(f"{nome}: {desc} assente: scrivo zero", flush=True)
+                H3.append(np.zeros_like(T3))
     # --- quota dei livelli (solo all'ora 0: non cambia nel tempo); e' la quota sul livello del mare dei 65 livelli pieni
     if ora == 0:
         z3 = pila((3, 6))
@@ -391,13 +412,15 @@ def un_istante(hub, ciclo, ora, out, z3=None, lsm=None, sup_tutti=None, modello=
         strati_sm.append(v)
     # --- pressione -> livelli
     liv = [p for p in LIVELLI_HPA if p * 100.0 >= P3[0].min() * 0.98]
-    iso = a_pressione(P3, (T3, Q3, U3, V3), z3, ps, [p * 100.0 for p in liv])
+    iso = a_pressione(P3, (T3, Q3, U3, V3), z3, ps, [p * 100.0 for p in liv], H3)
     dest = Path(out) / f"icon2i.t{ciclo:%H}z.f{ora:03d}.grib2"
     with open(dest, "wb") as f:
         for pl in liv:
-            T, RH, U, V, Z = iso[pl * 100.0]
+            T, RH, U, V, Z, H = iso[pl * 100.0]
             for (c, n, val) in ((0, 0, T), (1, 1, RH), (2, 2, U), (2, 3, V), (3, 5, Z)):
                 scrivi(modello, f, lats, lons, ciclo, ora, 0, c, n, 100, pl * 100.0, val, bits=16 if c != 3 else 16)
+            for ((c, n), _), val in zip(IDROMETEORE, H):      # kg/kg: 24 bit, i valori sono piccolissimi
+                scrivi(modello, f, lats, lons, ciclo, ora, 0, c, {82: 23}.get(n, n), 100, pl * 100.0, val, bits=24)
         scrivi(modello, f, lats, lons, ciclo, ora, 0, 2, 2, 103, 10, u10)
         scrivi(modello, f, lats, lons, ciclo, ora, 0, 2, 3, 103, 10, v10)
         scrivi(modello, f, lats, lons, ciclo, ora, 0, 0, 0, 103, 2, t2)

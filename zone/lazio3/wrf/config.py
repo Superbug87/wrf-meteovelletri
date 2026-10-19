@@ -188,6 +188,8 @@ def namelist_input(inizio, fine, riprendi, nlev, nsoil, obs_minuti=None, obs_ven
         t += "/\n\n"
 
     t += "&bdy_control\n spec_bdy_width = 5,\n spec_zone = 1,\n relax_zone = 4,\n"
+    if (os.environ.get("PILOTA") or "icon2i") == "icon2i" and os.environ.get("IDRO", "1") != "0":
+        t += " have_bcs_moist = .true.,\n"        # acqua di nube e pioggia entrano dai bordi (campi di ICON-2I)
     t += riga("specified", [".true.", ".false.", ".false."]) + riga("nested", [".false.", ".true.", ".true."])
     t += "/\n\n&namelist_quilt\n nio_tasks_per_group = 0,\n nio_groups = 1,\n/\n"
     return t

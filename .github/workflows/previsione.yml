@@ -297,7 +297,7 @@ jobs:
         uses: actions/cache/restore@v5
         with:
           path: /home/runner/icon2i-dati
-          key: icon2i-dati-v1-${{ env.CICLO }}-${{ env.ORE }}
+          key: icon2i-dati-v2-${{ env.CICLO }}-${{ env.ORE }}
       - name: Scarico ICON-2I da MeteoHub (se non è già in cache)
         if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'icon2i' && steps.dati.outputs.cache-hit != 'true'
         env:
@@ -309,7 +309,7 @@ jobs:
         uses: actions/cache/save@v5
         with:
           path: /home/runner/icon2i-dati
-          key: icon2i-dati-v1-${{ env.CICLO }}-${{ env.ORE }}
+          key: icon2i-dati-v2-${{ env.CICLO }}-${{ env.ORE }}
       - name: Dati globali, ungrib, metgrid, real, stazioni (solo primo segmento)
         if: steps.s.outputs.attivo == 'true' && matrix.seg == 0
         env:

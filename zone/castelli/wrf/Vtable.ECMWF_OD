@@ -26,6 +26,11 @@ Param| Type |Level1|Level2| Name     | Units    | Description                   
   40 | 112  |   7  |  28  | SM007028 | fraction | Soil moisture of 7-28 cm ground layer    |  2  |  0  | 25  | 106 |
   41 | 112  |  28  | 100  | SM028100 | fraction | Soil moisture of 28-100 cm ground layer  |  2  |  0  | 25  | 106 |
   42 | 112  | 100  | 289  | SM100289 | fraction | Soil moisture of 100-289 cm ground layer |  2  |  0  | 25  | 106 |
+ 246 | 100  |   *  |      | QC       | kg kg-1  | Cloud water mixing ratio (solo ICON-2I)  |  0  |  1  | 22  | 100 |
+ 247 | 100  |   *  |      | QI       | kg kg-1  | Cloud ice mixing ratio (solo ICON-2I)    |  0  |  1  | 23  | 100 |
+  75 | 100  |   *  |      | QR       | kg kg-1  | Rain mixing ratio (solo ICON-2I)         |  0  |  1  | 24  | 100 |
+  76 | 100  |   *  |      | QS       | kg kg-1  | Snow mixing ratio (solo ICON-2I)         |  0  |  1  | 25  | 100 |
+ 201 | 100  |   *  |      | QG       | kg kg-1  | Graupel mixing ratio (solo ICON-2I)      |  0  |  1  | 32  | 100 |
 -----+------+------+------+----------+----------+------------------------------------------+-----------------------+
 #
 #  Vtable per i dati aperti di ECMWF (IFS, 0,25 gradi, GRIB2), come li prepara scarica_ecmwf.py:
