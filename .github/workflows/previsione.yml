@@ -422,7 +422,7 @@ jobs:
           python3 strumenti/estrai_verifica.py --uscite uscite --stazioni strumenti/stazioni_verifica.json \
             --ciclo "$CICLO" --out "mappe/estratto_${{ inputs.zona }}-${{ inputs.pilota }}${FISICA:+-$FISICA}_${CICLO}.npz"
       - name: Mappe (senza nudging sulle stazioni, correzione dopo il calcolo se c'è la chiave)
-        if: ${{ inputs.fisica == '' && !(inputs.prova && (inputs.pilota == 'iconeu' || inputs.pilota == 'gfs')) }}          # le prove (fisica, ICON-EU, GFS) lasciano solo l'estratto: niente immagini
+        if: ${{ inputs.fisica == '' }}          # le prove di fisica lasciano solo l'estratto: niente immagini (ICON-EU e GFS fanno le mappe, negli allegati)
         env:
           WU_API_KEY: ${{ secrets.WU_API_KEY }}
           CICLO: ${{ needs.pianifica.outputs.ciclo }}
