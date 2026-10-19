@@ -102,8 +102,9 @@ suolo Noah, `topo_wind` 1), quattro varianti, una per ciascuna sigla della varia
 Le lancia il regista (`PROVE` in `strumenti/regista.py`) dal ciclo 19/10 00 UTC al 31/10, per le quattro combinazioni zona/modello: sono 16 run in piu'
 a ciclo (`sperimentale.yml`, campo `fisica`), partono dopo i run normali (ICON-2I 3:30, ECMWF 8:20 dopo il ciclo) perche' i dati
 globali sono gia' in cache (i dati ECMWF si scaricano una volta per zona e ciclo: chiave `ecmwf-dati-v1-<zona>-<ciclo>-<ore>`).
-Non fanno le mappe: lasciano solo l'estratto, negli allegati restano 1 giorno. Con 20 lavori contemporanei (limite dei runner gratuiti)
-qualcuno aspetta in coda. Quando una variante risulta migliore del run normale su almeno una settimana, si porta nella fisica in uso.
+Non fanno le mappe: lasciano solo l'estratto, negli allegati restano 1 giorno. Il limite dei runner gratuiti è
+20 lavori contemporanei per account e GitHub non ha priorità: per lasciare sempre posti ai run normali il regista tiene al massimo 12 prove
+in coda o in corso (`MAX_PROVE`) e rimanda le altre alla sveglia dopo. Quando una variante risulta migliore del run normale su almeno una settimana, si porta nella fisica in uso.
 
 ## Stato
 - 18/10/2026: primi run riusciti di tutti e quattro i workflow (ciclo 17/10 12 UTC; Castelli ICON-2I anche 18/10 00 UTC), controllo di plausibilità passato, mappe pubblicate.
