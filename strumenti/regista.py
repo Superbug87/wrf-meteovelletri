@@ -50,7 +50,7 @@ RITARDI_PROVE = {"icon2i": {0: (3, 30), 12: (3, 30)}, "ecmwf": {0: (8, 20), 12: 
 for _wf, _z, _p in (("castelli-ecmwf.yml", "castelli", "ecmwf"), ("castelli-icon2i.yml", "castelli", "icon2i"),
                     ("lazio-ecmwf.yml", "lazio", "ecmwf"), ("lazio-icon2i.yml", "lazio", "icon2i")):
     PROVE.append({"workflow": _wf, "zona": _z, "pilota": _p, "varianti": ("wu",), "fisiche": FISICHE, "controllo": "false",
-                  "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026101912", "fino_a": "2026-10-31"})  # dal_ciclo: portato a 2026101900 dopo la prova veloce
+                  "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026101900", "fino_a": "2026-10-31"})
 # GitHub non ha priorita' tra i lavori: con 20 lavori contemporanei (limite dei runner gratuiti, per account) un segmento dei run
 # normali che finisce il suo turno si rimette in coda dietro agli altri. Per lasciare sempre posti liberi ai run normali (al
 # massimo 4 insieme) le prove ne usano al piu' MAX_PROVE alla volta; le altre aspettano la sveglia dopo.
