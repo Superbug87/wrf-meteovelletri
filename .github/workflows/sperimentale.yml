@@ -1,5 +1,5 @@
 name: "PROVE · tutte le prove (dal regista o a mano)"
-run-name: "PROVA ${{ inputs.zona }} ${{ inputs.pilota }} ${{ inputs.nudging }}${{ inputs.fisica && format(' {0}', inputs.fisica) || '' }} ${{ inputs.ciclo }}"
+run-name: "PROVA ${{ inputs.zona }} ${{ inputs.pilota }} ${{ inputs.nudging }}${{ inputs.fisica && format(' {0}', inputs.fisica) || '' }}${{ inputs.runner != 'ubuntu-22.04-arm' && format(' {0}', inputs.runner) || '' }} ${{ inputs.ciclo }}"
 
 # Un run di WRF per provare una scelta prima di metterla nei lanci normali: NON pubblica le mappe (restano negli allegati del
 # run per 14 giorni). Le prove di fisica (campo "fisica") non fanno nemmeno le mappe: lasciano l'estratto per la verifica
@@ -31,6 +31,9 @@ on:
         description: "Tieni fuori dal nudging un quarto delle stazioni della Regione (per misurare l'effetto)"
         type: boolean
         default: true
+      runner:
+        description: "Macchina di GitHub: ubuntu-22.04-arm (ARM, quella in uso) o ubuntu-22.04 (x86, per confronto)"
+        default: "ubuntu-22.04-arm"
       fisica:
         description: "Fisica diversa da quella in uso: topo2, mynn, noahmp o mynn-noahmp (vuoto = quella in uso)"
         default: ""
@@ -39,7 +42,7 @@ permissions:
   contents: write                 # le prove di fisica pubblicano l'estratto nel ramo prove-fisica
 
 concurrency:
-  group: sperimentale-${{ inputs.zona }}-${{ inputs.pilota }}-${{ inputs.nudging }}-${{ inputs.fisica }}
+  group: sperimentale-${{ inputs.zona }}-${{ inputs.pilota }}-${{ inputs.nudging }}-${{ inputs.fisica }}-${{ inputs.runner }}
   cancel-in-progress: false
 
 jobs:
@@ -48,6 +51,7 @@ jobs:
     with:
       zona: ${{ inputs.zona }}
       pilota: ${{ inputs.pilota }}
+      runner: ${{ inputs.runner }}
       ciclo: ${{ inputs.ciclo }}
       ore: ${{ inputs.ore }}
       stazioni: ${{ inputs.nudging != 'nessuno' }}
