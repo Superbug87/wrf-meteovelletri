@@ -257,6 +257,11 @@ async function carica() {
 }
 disegna();
 carica();
+if (window.parent !== window) {   // dentro Meteo Velletri (iframe): comunica l'altezza e prende lo sfondo della pagina
+  document.body.style.background = "transparent";
+  const m = document.querySelector("main"), invia = () => { if (m.offsetHeight > 100) window.parent.postMessage({ wrfAltezza: m.offsetHeight + 24 }, location.origin); };
+  new ResizeObserver(invia).observe(m); window.addEventListener("load", invia);
+}
 </script>
 </body>
 </html>
