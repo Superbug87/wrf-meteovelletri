@@ -138,7 +138,6 @@ def pila(ciclo, ora, var):
 
 
 def un_istante(ciclo, ora, out, z3, modello, lsm, hsurf):
-    nome = f"iconeu_{ciclo:%Y%m%d%H}_f{ora:03d}"
     T3, Q3, U3, V3, P3 = (pila(ciclo, ora, v) for v in ("t", "qv", "u", "v", "p"))
     H3 = [pila(ciclo, ora, "qc"), np.zeros_like(T3), np.zeros_like(T3), np.zeros_like(T3), pila(ciclo, ora, "qi")]
     # ordine di S.IDROMETEORE: nube, pioggia, neve, graupel, ghiaccio
