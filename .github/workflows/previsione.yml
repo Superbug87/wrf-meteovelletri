@@ -109,6 +109,15 @@ jobs:
           EOF
           sudo chmod +x /usr/local/bin/uname
           uname -m; /usr/bin/uname -m
+          # gfortran che al collegamento aggiunge netCDF-Fortran (WPS non lo mette da solo su ARM)
+          mkdir -p "$HOME/wrapper"
+          cat > "$HOME/wrapper/gfortran" <<'EOF'
+          #!/bin/bash
+          for a in "$@"; do [ "$a" = "-c" ] && exec /usr/bin/gfortran "$@"; done
+          exec /usr/bin/gfortran "$@" -L$HOME/netcdf-combinato/lib -lnetcdff -lnetcdf
+          EOF
+          chmod +x "$HOME/wrapper/gfortran"
+          echo "$HOME/wrapper" >> "$GITHUB_PATH"
       - name: "Tappa 1: JasPer, sorgenti, configure"
         if: steps.cache.outputs.cache-hit != 'true'
         run: bash wrf/costruisci.sh prepara
