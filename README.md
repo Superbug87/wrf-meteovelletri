@@ -62,7 +62,7 @@ Riunisce in un solo repository i progetti `wrf-castelli`, `wrf-lazio` e `wrf-ico
 - Elenco delle stazioni: `strumenti/stazioni_verifica.json` (da rifare se la rete regionale cambia).
 - **Prove di fisica**: oltre ai run normali girano, senza pubblicare, quattro varianti per ogni zona e modello (vedi sotto). Il loro estratto va
   nel ramo `prove-fisica` (`strumenti/pubblica_estratto.sh`, 20 giorni di cicli) e la verifica le mette in `pagella.json` come
-  `<zona>-<modello>-<variante>`, per esempio `castelli-ecmwf-noahmp`; le legge `sito/pagella-wrf-fisica.html`.
+  `<zona>-<modello>-<variante>`, per esempio `castelli-ecmwf-noahmp`; le legge `sito/pagella-wrf.html`.
 
 ## Segreti del repository (Settings → Secrets and variables → Actions)
 - `MH_EMAIL`, `MH_PASSWORD`: account MeteoHub (per ICON-2I).

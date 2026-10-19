@@ -7,17 +7,17 @@
 <style>
   :root {
     --sfondo: #f3f2ee; --carta: #ffffff; --testo: #14130f; --sec: #5d5b54; --linea: #d8d6cc;
-    --acc: #2a78d6; --acc-testo: #ffffff; --meglio: #1d7f3a; --meglio-sfondo: #e3f3e7;
+    --acc: #2a78d6; --acc-testo: #ffffff; --meglio: #1d7f3a; --meglio-sfondo: #e3f3e7; --peggio: #b3261e;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-tema="chiaro"]) {
       --sfondo: #141412; --carta: #1f1f1c; --testo: #f1f0ea; --sec: #a9a79d; --linea: #3a3a35; --acc: #5b9cf0; --acc-testo: #0b0b0b;
-      --meglio: #7fd497; --meglio-sfondo: #1d3324;
+      --meglio: #7fd497; --meglio-sfondo: #1d3324; --peggio: #f2877f;
     }
   }
   :root[data-tema="scuro"] {
     --sfondo: #141412; --carta: #1f1f1c; --testo: #f1f0ea; --sec: #a9a79d; --linea: #3a3a35; --acc: #5b9cf0; --acc-testo: #0b0b0b;
-    --meglio: #7fd497; --meglio-sfondo: #1d3324;
+    --meglio: #7fd497; --meglio-sfondo: #1d3324; --peggio: #f2877f;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
@@ -31,14 +31,18 @@
            padding: 8px 14px; min-height: 40px; cursor: pointer; }
   button[aria-pressed="true"] { background: var(--acc); color: var(--acc-testo); border-color: var(--acc); font-weight: 600; }
   button:focus-visible { outline: 3px solid var(--acc); outline-offset: 2px; }
+  .avviso { margin: 10px 0; padding: 10px 12px; border-radius: 12px; background: var(--carta); border: 1px solid var(--linea); font-size: .9rem; }
+  .avviso b { display: block; margin-bottom: 2px; }
+  .avviso ul { margin: 4px 0 0; padding-left: 18px; }
   .scheda { margin: 10px 0; background: var(--carta); border: 1px solid var(--linea); border-radius: 12px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .92rem; }
-  th, td { padding: 8px 8px; border-bottom: 1px solid var(--linea); text-align: right; white-space: nowrap; }
-  th:first-child, td:first-child { text-align: left; white-space: normal; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .88rem; }
+  th, td { padding: 7px 5px; border-bottom: 1px solid var(--linea); text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; white-space: normal; width: 4.6rem; padding-left: 8px; }
   thead th { font-size: .8rem; color: var(--sec); font-weight: 600; vertical-align: bottom; }
   tr.gruppo td { background: var(--sfondo); font-weight: 600; font-size: .85rem; color: var(--sec); text-align: left; }
   td.meglio { color: var(--meglio); background: var(--meglio-sfondo); font-weight: 700; }
   td .n { display: block; font-size: .72rem; color: var(--sec); font-weight: 400; }
+  .d-bene { color: var(--meglio); } .d-male { color: var(--peggio); }
   .msg { padding: 24px; text-align: center; color: var(--sec); }
   dl { margin: 6px 0 0; font-size: .88rem; color: var(--sec); }
   dt { color: var(--testo); font-weight: 600; margin-top: 8px; }
@@ -53,19 +57,28 @@
   <div id="zone" class="righe" role="group" aria-label="Zona"></div>
   <div id="periodi" class="righe" role="group" aria-label="Periodo"></div>
   <div id="scadenze" class="righe" role="group" aria-label="Scadenza della previsione"></div>
+  <div id="metriche" class="righe" role="group" aria-label="Cosa guardare"></div>
+  <div class="avviso" id="riepilogo" hidden></div>
   <div class="scheda" id="scheda"><div class="msg">Carico…</div></div>
   <dl>
+    <dt>Le prove di fisica</dt>
+    <dd>Per ogni zona e modello di partenza girano, oltre al WRF normale, quattro varianti che <b>non vengono pubblicate</b>: servono solo a capire se la fisica del modello si può migliorare.
+      Tutte partono dagli stessi dati e con le stesse stazioni del WRF normale: cambia una sola cosa alla volta.</dd>
+    <dt>Le varianti</dt>
+    <dd><b>Vento sul terreno 2</b>: stessa fisica del WRF normale con una correzione diversa del vento vicino al suolo (topo_wind 2 invece di 1).
+      <b>PBL MYNN</b>: altro schema per lo strato d'aria vicino al suolo (al posto di YSU); la correzione del vento sul terreno è del solo YSU, quindi qui è spenta.
+      <b>Suolo Noah-MP</b>: modello del suolo e della vegetazione più dettagliato (al posto di Noah).
+      <b>MYNN + Noah-MP</b>: le due cose insieme.</dd>
     <dt>Come si legge</dt>
-    <dd>Ogni mattina le previsioni del giorno prima vengono confrontate con quello che è successo davvero. In verde il modello migliore per ogni riga.</dd>
-    <dt>Temperatura e vento</dt>
-    <dd><b>Errore tipico</b>: di quanto sbaglia di solito (più basso è meglio). <b>Errore medio</b>: se sta sistematicamente sopra (+) o sotto (−) il vero.
-      <b>Vento corretto</b>: lo stesso vento di WRF ridotto (o aumentato) secondo quanto ha sbagliato, per ogni intensità, nei 30 giorni prima: una prova per vedere se conviene correggere le mappe, che per ora restano senza correzione.</dd>
-    <dt>Pioggia ai pluviometri (almeno 1 mm in 6 ore)</dt>
-    <dd><b>Presa</b>: delle piogge vere, quante erano previste. <b>Falsi allarmi</b>: delle piogge previste, quante non ci sono state.</dd>
-    <dt>Pioggia col radar (almeno 0,5 mm in 6 ore, 10 km di tolleranza)</dt>
-    <dd><b>Nel posto giusto</b>: della pioggia prevista, quanta aveva pioggia vera entro 10 km. <b>Vista</b>: della pioggia vera, quanta era prevista entro 10 km.</dd>
-    <dt>Primo e secondo giorno</dt>
-    <dd>Le prime 24 ore di ogni run e quelle dalla 25ª alla 48ª. I modelli originali (ECMWF e ICON-2I) sono le loro previsioni più recenti, cioè a breve scadenza: sono un riferimento, non un confronto alla pari.</dd>
+    <dd>Ogni mattina le previsioni del giorno prima vengono confrontate con quello che è successo davvero. In verde il migliore di ogni colonna, nello stesso gruppo.
+      Sotto ogni valore: per il WRF normale e gli originali, quanti confronti; per le varianti, quanto cambia rispetto al WRF normale (verde = meglio, rosso = peggio, grigio = quasi uguale).
+      <b>Tipico</b>: di quanto sbaglia di solito (più basso è meglio). <b>Medio</b>: se sta sistematicamente sopra (+) o sotto (−) il vero.
+      <b>Corretto</b>: lo stesso vento di WRF ridotto o aumentato secondo l'errore dei 30 giorni prima, per ogni intensità: una prova per vedere se conviene correggere le mappe, che per ora restano senza correzione.
+      <b>Presa</b>: delle piogge vere (≥ 1 mm in 6 ore), quante erano previste. <b>Falsi</b>: delle piogge previste, quante non ci sono state.
+      <b>Radar</b>: pioggia (≥ 0,5 mm in 6 ore, 10 km di tolleranza) prevista nel posto giusto e pioggia vera vista.</dd>
+    <dt>Quanto fidarsi</dt>
+    <dd>Con pochi giorni le differenze piccole (sotto 0,1–0,2 °C, o poche piogge) sono rumore. Serve almeno una settimana, e meglio un episodio di pioggia vera.
+      Le righe con meno di 20 confronti sono sbiadite. I modelli originali sono le loro previsioni più recenti, cioè a breve scadenza: un riferimento, non un confronto alla pari.</dd>
   </dl>
   <small id="fonte">Osservazioni: Centro Funzionale della Regione Lazio, Aeronautica Militare (SYNOP via OGIMET), radar della Protezione Civile
     (Radar-DPC, CC BY-SA 4.0). Riferimento: ECMWF e ICON-2I (Agenzia ItaliaMeteo con Arpae-SIMC) via Open-Meteo (CC BY 4.0).</small>
@@ -76,14 +89,36 @@ const URL_PAGELLA = "https://raw.githubusercontent.com/Superbug87/wrf-meteovelle
 const ZONE = { castelli: "Castelli Romani", lazio: "Lazio" };
 const PERIODI = { "7": "Ultimi 7 giorni", "30": "Ultimi 30 giorni" };
 const SCADENZE = { g1: "Primo giorno", g2: "Secondo giorno" };
-const COLONNE = [
-  { chiave: "ecmwf", titolo: "WRF<br>ECMWF" }, { chiave: "icon2i", titolo: "WRF<br>ICON-2I" },
-  { chiave: "rif-ecmwf", titolo: "ECMWF<br>originale" }, { chiave: "rif-icon2i", titolo: "ICON-2I<br>originale" },
-];
+const METRICHE = { temp: "Temperatura", vento: "Vento", pioggia: "Pioggia" };
+const PILOTI = { ecmwf: "Partenza ECMWF", icon2i: "Partenza ICON-2I" };
+const VARIANTI = ["topo2", "mynn", "noahmp", "mynn-noahmp"];
+const NOMI_VAR = { topo2: "Vento terreno 2", mynn: "MYNN", noahmp: "Noah-MP", "mynn-noahmp": "MYNN + Noah-MP" };
 const N_MIN = 20;                 // sotto questo numero di confronti il valore e' poco affidabile
-let pagella = null;
-const scelta = { zona: leggi("pag_zona", "castelli"), periodo: leggi("pag_periodo", "7"), scadenza: leggi("pag_scad", "g1") };
+const GIORNI_MIN = 5;             // sotto questo numero di giorni si avverte che e' presto per concludere
 
+// colonne di ogni gruppo di indici: val(indici) -> [valore, confronti]; m = cosa vuol dire "meglio"
+const COLONNE = {
+  temp: [
+    { t: "Tipico", val: i => i.t2 && [i.t2.tipico, i.t2.n], m: "basso" },
+    { t: "Medio", val: i => i.t2 && [i.t2.medio, i.t2.n], m: "zero", segno: true },
+    { t: "Notte", val: i => i.t2_notte && [i.t2_notte.tipico, i.t2_notte.n], m: "basso" },
+    { t: "Giorno", val: i => i.t2_giorno && [i.t2_giorno.tipico, i.t2_giorno.n], m: "basso" },
+  ],
+  vento: [
+    { t: "Tipico<br>km/h", val: i => i.vento && [i.vento.tipico * 3.6, i.vento.n], m: "basso" },
+    { t: "Medio<br>km/h", val: i => i.vento && [i.vento.medio * 3.6, i.vento.n], m: "zero", segno: true },
+    { t: "Tipico<br>corretto", val: i => i.vento_corr && [i.vento_corr.tipico * 3.6, i.vento_corr.n], m: "basso", soloWrf: true },
+  ],
+  pioggia: [
+    { t: "Presa<br>%", val: i => i.pioggia && i.pioggia["1.0"].presa !== null && [i.pioggia["1.0"].presa, i.pioggia["1.0"].piovuto], m: "alto", dec: 0 },
+    { t: "Falsi<br>%", val: i => i.pioggia && i.pioggia["1.0"].falsi !== null && [i.pioggia["1.0"].falsi, i.pioggia["1.0"].previsto], m: "basso", dec: 0 },
+    { t: "Radar<br>giusto %", val: i => i.radar && i.radar["0.5"].prevista_giusta !== null && [i.radar["0.5"].prevista_giusta, i.radar["0.5"].celle_previste], m: "alto", dec: 0, soloWrf: true },
+    { t: "Radar<br>visto %", val: i => i.radar && i.radar["0.5"].osservata_presa !== null && [i.radar["0.5"].osservata_presa, i.radar["0.5"].celle_osservate], m: "alto", dec: 0, soloWrf: true },
+  ],
+};
+
+let pagella = null;
+const scelta = { zona: leggi("pf_zona", "castelli"), periodo: leggi("pf_periodo", "7"), scadenza: leggi("pf_scad", "g1"), metrica: leggi("pf_met", "temp") };
 function leggi(k, d) { try { return localStorage.getItem(k) || d; } catch (e) { return d; } }
 function salva(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* niente memoria: pazienza */ } }
 const el = id => document.getElementById(id);
@@ -99,64 +134,98 @@ function bottoni(id, voci, chiave, chiaveLS) {
   }
 }
 
-// righe della tabella: come leggere il valore da un insieme di indici e se "meglio" vuol dire piu' basso o piu' alto
-const RIGHE = [
-  { gruppo: "Temperatura a 2 m: errore (°C)" },
-  { nome: "Tipico", val: i => i.t2 && [i.t2.tipico, i.t2.n], meglio: "basso" },
-  { nome: "Medio", val: i => i.t2 && [i.t2.medio, i.t2.n], meglio: "zero", segno: true },
-  { nome: "Tipico di notte", val: i => i.t2_notte && [i.t2_notte.tipico, i.t2_notte.n], meglio: "basso" },
-  { nome: "Tipico di giorno", val: i => i.t2_giorno && [i.t2_giorno.tipico, i.t2_giorno.n], meglio: "basso" },
-  { gruppo: "Vento a 10 m: errore (km/h)" },
-  { nome: "Tipico", val: i => i.vento && [i.vento.tipico * 3.6, i.vento.n], meglio: "basso" },
-  { nome: "Medio", val: i => i.vento && [i.vento.medio * 3.6, i.vento.n], meglio: "zero", segno: true },
-  { nome: "Tipico, corretto", val: i => i.vento_corr && [i.vento_corr.tipico * 3.6, i.vento_corr.n], meglio: "basso", soloWrf: true },
-  { nome: "Medio, corretto", val: i => i.vento_corr && [i.vento_corr.medio * 3.6, i.vento_corr.n], meglio: "zero", segno: true, soloWrf: true },
-  { gruppo: "Pioggia ai pluviometri (≥ 1 mm in 6 ore)" },
-  { nome: "Presa %", val: i => i.pioggia && i.pioggia["1.0"].presa !== null && [i.pioggia["1.0"].presa, i.pioggia["1.0"].piovuto], meglio: "alto", dec: 0 },
-  { nome: "Falsi allarmi %", val: i => i.pioggia && i.pioggia["1.0"].falsi !== null && [i.pioggia["1.0"].falsi, i.pioggia["1.0"].previsto], meglio: "basso", dec: 0 },
-  { gruppo: "Pioggia col radar (≥ 0,5 mm in 6 ore, entro 10 km)" },
-  { nome: "Posto giusto %", val: i => i.radar && i.radar["0.5"].prevista_giusta !== null && [i.radar["0.5"].prevista_giusta, i.radar["0.5"].celle_previste], meglio: "alto", dec: 0, soloWrf: true },
-  { nome: "Vista %", val: i => i.radar && i.radar["0.5"].osservata_presa !== null && [i.radar["0.5"].osservata_presa, i.radar["0.5"].celle_osservate], meglio: "alto", dec: 0, soloWrf: true },
-];
+// righe di un gruppo (un modello di partenza): [{nome, indici}] con il riferimento, il WRF normale e le varianti presenti
+function righeDi(modelli, pilota) {
+  const z = scelta.zona, s = scelta.scadenza;
+  const rif = modelli[`${z}-rif-${pilota}`];
+  const righe = [{ nome: "Originale", rif: true, indici: rif ? rif.breve : null },
+                 { nome: "WRF normale", base: true, indici: (modelli[`${z}-${pilota}`] || {})[s] || null }];
+  for (const v of VARIANTI) righe.push({ nome: NOMI_VAR[v], indici: (modelli[`${z}-${pilota}-${v}`] || {})[s] || null });
+  return righe;
+}
 
-function indiciDi(modelli, colonna) {
-  const chiave = `${scelta.zona}-${colonna}`;
-  const m = modelli[chiave];
-  if (!m) return null;
-  return colonna.startsWith("rif-") ? m.breve : m[scelta.scadenza];
+// punteggio: piu' basso = meglio
+const punteggio = (c, v) => c.m === "alto" ? -v : c.m === "zero" ? Math.abs(v) : v;
+
+function valoriDi(riga, c) {
+  if (!riga.indici || (c.soloWrf && riga.rif)) return null;
+  const v = c.val(riga.indici);
+  return v ? { v: v[0], n: v[1] } : null;
+}
+
+function tabella(per) {
+  const cols = COLONNE[scelta.metrica];
+  let h = '<table><thead><tr><th></th>' + cols.map(c => `<th scope="col">${c.t}</th>`).join("") + "</tr></thead><tbody>";
+  for (const [p, titolo] of Object.entries(PILOTI)) {
+    const righe = righeDi(per.modelli, p);
+    h += `<tr class="gruppo"><td colspan="${cols.length + 1}">${titolo}</td></tr>`;
+    const val = righe.map(r => cols.map(c => valoriDi(r, c)));
+    const base = val[1];
+    cols.forEach((c, j) => {                                   // il migliore di ogni colonna, tra le righe con abbastanza confronti
+      const validi = val.map((x, i) => ({ x: x[j], i })).filter(o => o.x && o.x.n >= N_MIN);
+      if (validi.length > 1) validi.reduce((a, b) => punteggio(c, b.x.v) < punteggio(c, a.x.v) ? b : a).x.meglio = true;
+    });
+    righe.forEach((r, i) => {
+      h += `<tr><th scope="row" style="font-weight:${r.base ? 700 : 400}">${r.nome}</th>`;
+      cols.forEach((c, j) => {
+        const x = val[i][j];
+        if (!x) { h += "<td>–</td>"; return; }
+        const dec = c.dec ?? 1;
+        const testo = (c.segno && x.v > 0 ? "+" : "") + num(x.v, dec);
+        let delta = "";
+        if (!r.base && !r.rif && base[j]) {
+          const d = x.v - base[j].v, soglia = dec === 0 ? 0.5 : 0.05;
+          const bene = punteggio(c, x.v) < punteggio(c, base[j].v);
+          const cls = Math.abs(d) < soglia ? "" : bene ? "d-bene" : "d-male";
+          delta = `<span class="${cls}">${d > 0 ? "+" : ""}${num(d, dec)}</span>`;
+        }
+        const poco = x.n < N_MIN ? ' style="opacity:.55" title="pochi casi: valore poco affidabile"' : "";
+        h += `<td class="${x.meglio ? "meglio" : ""}"${poco}>${testo}<span class="n">${delta || x.n}</span></td>`;
+      });
+      h += "</tr>";
+    });
+  }
+  return h + "</tbody></table>";
+}
+
+// riepilogo a parole: per ogni modello di partenza, quale variante batte il WRF normale sulla temperatura e sul vento
+function riepilogo(per) {
+  const box = el("riepilogo");
+  const righe = [];
+  const note = [];
+  let conProve = false;
+  if (per.giorni < GIORNI_MIN) note.push(`Solo ${per.giorni} ${per.giorni === 1 ? "giorno verificato" : "giorni verificati"}: è presto per concludere, le differenze piccole sono rumore.`);
+  for (const [p, titolo] of Object.entries(PILOTI)) {
+    const rs = righeDi(per.modelli, p);
+    for (const [nome, c] of [["temperatura", COLONNE.temp[0]], ["vento", COLONNE.vento[0]]]) {
+      const base = valoriDi(rs[1], c);
+      if (!base || base.n < N_MIN) continue;
+      const prove = rs.slice(2).map(r => ({ r, x: valoriDi(r, c) })).filter(o => o.x && o.x.n >= N_MIN);
+      if (!prove.length) continue;                              // nessuna variante con abbastanza confronti: niente da dire
+      conProve = true;
+      const migliori = prove.filter(o => o.x.v < base.v - 0.005);
+      if (!migliori.length) { righe.push(`${titolo.replace("Partenza ", "")}, ${nome}: nessuna variante batte il WRF normale.`); continue; }
+      const m = migliori.reduce((a, b) => b.x.v < a.x.v ? b : a);
+      const perc = Math.round(100 * (base.v - m.x.v) / base.v);
+      righe.push(`${titolo.replace("Partenza ", "")}, ${nome}: meglio <b>${m.r.nome}</b> (${num(m.x.v)} contro ${num(base.v)}, ${perc}% in meno di errore).`);
+    }
+  }
+  if (!conProve) note.unshift("Le prove di fisica non hanno ancora abbastanza confronti: i primi dati escono dopo la prima verifica del mattino.");
+  box.hidden = false;
+  box.innerHTML = "<b>In breve (errore tipico di temperatura e vento)</b>" + (righe.length ? "<ul>" + righe.map(x => `<li>${x}</li>`).join("") + "</ul>" : "")
+    + (note.length ? `<div style="margin-top:6px;color:var(--sec)">${note.join(" ")}</div>` : "");
 }
 
 function disegna() {
-  bottoni("zone", ZONE, "zona", "pag_zona");
-  bottoni("periodi", PERIODI, "periodo", "pag_periodo");
-  bottoni("scadenze", SCADENZE, "scadenza", "pag_scad");
+  bottoni("zone", ZONE, "zona", "pf_zona");
+  bottoni("periodi", PERIODI, "periodo", "pf_periodo");
+  bottoni("scadenze", SCADENZE, "scadenza", "pf_scad");
+  bottoni("metriche", METRICHE, "metrica", "pf_met");
   if (!pagella) return;
   const per = pagella.periodi[scelta.periodo];
-  if (!per || !per.giorni) { el("scheda").innerHTML = '<div class="msg">Nessun giorno verificato in questo periodo.</div>'; return; }
-  const ind = COLONNE.map(c => indiciDi(per.modelli, c.chiave));
-  let h = '<table><thead><tr><th></th>' + COLONNE.map(c => `<th scope="col">${c.titolo}</th>`).join("") + "</tr></thead><tbody>";
-  for (const r of RIGHE) {
-    if (r.gruppo) { h += `<tr class="gruppo"><td colspan="${COLONNE.length + 1}">${r.gruppo}</td></tr>`; continue; }
-    const valori = ind.map((i, k) => {
-      if (!i || (r.soloWrf && COLONNE[k].chiave.startsWith("rif-"))) return null;
-      const v = r.val(i); return v ? { v: v[0], n: v[1] } : null;
-    });
-    const validi = valori.filter(x => x && x.n >= N_MIN);
-    let migliore = null;
-    if (validi.length > 1) {
-      const punteggio = x => r.meglio === "alto" ? -x.v : r.meglio === "zero" ? Math.abs(x.v) : x.v;
-      migliore = validi.reduce((a, b) => punteggio(b) < punteggio(a) ? b : a);
-    }
-    h += `<tr><th scope="row" style="font-weight:400">${r.nome}</th>`;
-    for (const x of valori) {
-      if (!x) { h += '<td>–</td>'; continue; }
-      const testo = (r.segno && x.v > 0 ? "+" : "") + num(x.v, r.dec ?? 1);
-      const poco = x.n < N_MIN ? ' style="opacity:.55" title="pochi casi: valore poco affidabile"' : "";
-      h += `<td class="${x === migliore ? "meglio" : ""}"${poco}>${testo}<span class="n">${x.n} ${r.dec === 0 ? "casi" : "confr."}</span></td>`;
-    }
-    h += "</tr>";
-  }
-  el("scheda").innerHTML = h + "</tbody></table>";
+  if (!per || !per.giorni) { el("scheda").innerHTML = '<div class="msg">Nessun giorno verificato in questo periodo.</div>'; el("riepilogo").hidden = true; return; }
+  riepilogo(per);
+  el("scheda").innerHTML = tabella(per);
 }
 
 async function carica() {
@@ -164,7 +233,6 @@ async function carica() {
     const r = await fetch(URL_PAGELLA + "?t=" + Date.now(), { cache: "no-store" });
     if (!r.ok) throw new Error(r.status);
     pagella = await r.json();
-    const g = pagella.periodi[scelta.periodo] ? pagella.periodi[scelta.periodo].giorni : 0;
     el("stato").textContent = `Ultimo giorno verificato: ${pagella.ultimo_giorno.split("-").reverse().join("/")} · aggiornata ${pagella.aggiornata}`;
   } catch (e) {
     el("stato").textContent = "La pagella non è ancora disponibile: la prima verifica esce la mattina dopo i primi run.";
