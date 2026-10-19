@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-19T16:56:14Z",
+ "aggiornato": "2026-10-19T17:30:33Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -36,10 +36,22 @@
  ],
  "prove": [
   {
-   "titolo": "Prova castelli icon2i nessuno 2026101900",
-   "stato": "queued",
-   "da": "2026-10-19T16:32:31Z",
+   "titolo": "PROVA castelli gfs wu 2026101912",
+   "stato": "in_progress",
+   "da": "2026-10-19T17:30:48Z",
    "esito": ""
+  },
+  {
+   "titolo": "PROVA castelli iconeu wu 2026101912",
+   "stato": "in_progress",
+   "da": "2026-10-19T17:30:45Z",
+   "esito": ""
+  },
+  {
+   "titolo": "Prova castelli icon2i nessuno 2026101900",
+   "stato": "completed",
+   "da": "2026-10-19T16:32:31Z",
+   "esito": "success"
   },
   {
    "titolo": "Prova castelli icon2i wu mynn-noahmp 2026101912",
