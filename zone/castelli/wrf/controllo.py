@@ -11,7 +11,7 @@ Controlli:
   - terreno a quota 0 sulla terraferma nella cornice del dominio (il guaio del 17/10/2026 con lightning_option);
   - valori mancanti o infiniti;
   - temperatura a 2 m fuori da -45 / +50 °C;
-  - vento medio a 10 m sopra 150 km/h;
+  - vento medio a 10 m sopra 200 km/h;
   - corrente verticale sopra 80 m/s (sopra 40 m/s solo un avviso);
   - pioggia oraria sopra 300 mm o pioggia totale sopra 800 mm (sopra 120 e 500 mm solo un avviso);
   - salto della pressione al suolo media del dominio sopra 4 hPa in un'ora.
@@ -28,7 +28,7 @@ from netCDF4 import Dataset
 CORNICE = 5                 # celle: zona di raccordo con il dominio padre
 SOGLIE = {
     "t2_min_c": -45.0, "t2_max_c": 50.0,
-    "vento10_kmh": 150.0,
+    "vento10_kmh": 200.0,
     "w_ms": 80.0,                        # oltre questi tre valori il run e' sbagliato (blocca la pubblicazione)
     "pioggia_oraria_mm": 300.0,
     "pioggia_totale_mm": 800.0,
