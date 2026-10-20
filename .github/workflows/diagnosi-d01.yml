@@ -1,0 +1,93 @@
+name: "DIAGNOSI · dominio esterno da 9 km con bordi diversi (a mano)"
+run-name: "DIAGNOSI dominio 9 km Castelli ${{ inputs.ciclo }}"
+
+# Diagnosi una tantum: rifa' girare WRF solo sul dominio esterno (9 km, pochi minuti) partendo dallo stato di due run gia'
+# fatti (bordi senza acqua e bordi con acqua) e salva la pioggia oraria, per vedere come entra dal mare.
+# Non tocca i run e non pubblica nulla.
+on:
+  workflow_dispatch:
+    inputs:
+      ciclo:
+        description: "Ciclo (AAAAMMGGHH)"
+        default: "2026102000"
+        type: string
+      run_vecchio:
+        description: "Numero del run con i bordi senza acqua"
+        default: "39363144531"
+        type: string
+      run_nuovo:
+        description: "Numero del run con i bordi con acqua"
+        default: "39381039862"
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  d01:
+    runs-on: ubuntu-22.04-arm
+    timeout-minutes: 90
+    env:
+      WRF_TAG: v4.7.0
+      WPS_TAG: v4.7.0
+      PILOTA: icon2i
+    steps:
+      - uses: actions/checkout@v5
+      - name: Codice della zona (castelli)
+        run: cp -a zone/castelli/. .
+      - name: Recupero WRF e WPS compilati
+        uses: actions/cache/restore@v5
+        with:
+          path: /home/runner/wrf-install
+          key: wrf-build-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ hashFiles('wrf/costruisci.sh', 'wrf/dipendenze.sh') }}-ubuntu-22.04-arm
+          fail-on-cache-miss: true
+      - name: Dipendenze
+        run: |
+          bash wrf/dipendenze.sh
+          pip install -q netCDF4 numpy
+      - name: Stato del run con bordi senza acqua
+        uses: actions/download-artifact@v7
+        with:
+          name: stato-0
+          run-id: ${{ inputs.run_vecchio }}
+          github-token: ${{ github.token }}
+          path: /home/runner/stato_vecchio
+      - name: Stato del run con bordi con acqua
+        uses: actions/download-artifact@v7
+        with:
+          name: stato-0
+          run-id: ${{ inputs.run_nuovo }}
+          github-token: ${{ github.token }}
+          path: /home/runner/stato_nuovo
+      - name: WRF sul solo dominio esterno, due volte
+        run: |
+          for TAG in vecchio nuovo; do
+            D=/home/runner/run_$TAG; mkdir -p "$D"; cd "$D"
+            cp -aL "$HOME/wrf-install/WRF/run/." .; cp -L "$HOME/wrf-install/WRF/wrf.exe" .
+            tar -xzf "/home/runner/stato_$TAG/stato.tgz" wrfinput_d01 wrfbdy_d01
+            NLEV=$(python3 -c "from netCDF4 import Dataset; print(Dataset('wrfinput_d01').getncattr('NUM_METGRID_LEVELS'))")
+            python3 "$GITHUB_WORKSPACE/wrf/config.py" input --ciclo "${{ inputs.ciclo }}" --da 0 --a 48 --nlev "$NLEV" --nsoil 4 > namelist.input
+            sed -i 's/\(max_dom *= *\)[0-9]\+/\11/' namelist.input
+            grep -n "max_dom\|have_bcs_moist" namelist.input
+            echo "== wrf.exe ($TAG) $(date -u +%H:%M)"
+            mpirun -np "$(nproc --all)" ./wrf.exe > wrf.log 2>&1 || { tail -n 30 wrf.log; tail -n 20 rsl.error.0000; exit 1; }
+            tail -n 2 rsl.error.0000
+            python3 - "$TAG" <<'PY'
+          import sys, glob
+          import numpy as np
+          from netCDF4 import Dataset
+          tag = sys.argv[1]
+          f = sorted(glob.glob("wrfout_d01_*"))[0]
+          n = Dataset(f)
+          t = [x.tobytes().decode() for x in n["Times"][:]]
+          np.savez_compressed(f"/home/runner/d01_{tag}.npz", tempi=t, lat=n["XLAT"][0], lon=n["XLONG"][0],
+                              pioggia=np.array(n["RAINNC"][:]) + np.array(n["RAINC"][:]),
+                              u10=np.array(n["U10"][:]), v10=np.array(n["V10"][:]))
+          print(tag, "istanti", len(t), t[0], t[-1])
+          PY
+          done
+      - uses: actions/upload-artifact@v6
+        with:
+          name: d01
+          path: /home/runner/d01_*.npz
