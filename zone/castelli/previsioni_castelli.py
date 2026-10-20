@@ -1014,7 +1014,12 @@ def disegna_fogli(c, z_f, lat_f, lon_f, tempi, banner, modello_txt, out):
             fig.text(MARG / W, 1 - 1.20 / H, banner, fontsize=11, weight="bold", color=INK, va="center",
                      bbox=dict(boxstyle="round,pad=0.4", fc="#ffffff", ec=INK, lw=1.2))
         else:
-            fig.text(MARG / W, 1 - 1.20 / H, banner, fontsize=10.5, color=SEC, va="center")
+            if len(banner) > 74 and " + " in banner:          # riga troppo lunga per il foglio: il "+ ..." va a capo
+                prima, resto = banner.split(" + ", 1)
+                fig.text(MARG / W, 1 - 1.20 / H, prima, fontsize=10.5, color=SEC, va="center")
+                fig.text(MARG / W, 1 - 1.46 / H, "+ " + resto, fontsize=10.5, color=SEC, va="center")
+            else:
+                fig.text(MARG / W, 1 - 1.20 / H, banner, fontsize=10.5, color=SEC, va="center")
 
     creati = []
     for n, f in enumerate(fogli, start=1):
