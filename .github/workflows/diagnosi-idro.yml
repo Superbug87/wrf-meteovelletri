@@ -1,0 +1,93 @@
+name: "DIAGNOSI · idrometeore ai bordi (a mano)"
+run-name: "DIAGNOSI idrometeore Castelli ICON-2I ${{ inputs.ciclo }}"
+
+# Diagnosi una tantum: rifà ungrib, metgrid e real.exe di Castelli ICON-2I con i dati già in cache e controlla se
+# acqua di nube, pioggia, neve e ghiaccio arrivano nei file dei bordi. Non lancia WRF e non pubblica nulla.
+on:
+  workflow_dispatch:
+    inputs:
+      ciclo:
+        description: "Ciclo con i dati ICON-2I già in cache (AAAAMMGGHH)"
+        default: "2026102000"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  diagnosi:
+    runs-on: ubuntu-22.04-arm
+    timeout-minutes: 60
+    env:
+      WRF_TAG: v4.7.0
+      WPS_TAG: v4.7.0
+      CICLO: ${{ inputs.ciclo }}
+      PILOTA: icon2i
+      ORE: 48
+      DIAGNOSI: /home/runner/diagnosi
+    steps:
+      - uses: actions/checkout@v5
+      - name: Codice della zona (castelli)
+        run: cp -a zone/castelli/. .
+      - name: Recupero WRF e WPS compilati
+        uses: actions/cache/restore@v5
+        with:
+          path: /home/runner/wrf-install
+          key: wrf-build-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ hashFiles('wrf/costruisci.sh', 'wrf/dipendenze.sh') }}-ubuntu-22.04-arm
+          fail-on-cache-miss: true
+      - name: Recupero i dati statici
+        uses: actions/cache/restore@v5
+        with:
+          path: /home/runner/wrf-geo
+          key: wrf-geo-${{ hashFiles('wrf/dominio.py', 'wrf/statico.sh') }}
+          fail-on-cache-miss: true
+      - name: Dipendenze
+        run: |
+          bash wrf/dipendenze.sh
+          pip install -q requests netCDF4 numpy eccodes
+      - name: Dati ICON-2I in cache
+        uses: actions/cache/restore@v5
+        with:
+          path: /home/runner/icon2i-dati
+          key: icon2i-dati-v2-${{ env.CICLO }}-${{ env.ORE }}
+          fail-on-cache-miss: true
+      - name: ungrib, metgrid, real.exe (senza stazioni)
+        env:
+          DATI_PRONTI: /home/runner/icon2i-dati
+          STAZIONI: "false"
+          SST_MARE: "0"
+        run: bash wrf/esegui.sh prepara "$CICLO" "$ORE"
+      - name: Controllo dei campi di acqua
+        run: |
+          cd "$DIAGNOSI"
+          {
+            echo "== namelist.input: bdy_control"; sed -n '/&bdy_control/,/^\//p' namelist.input
+            echo; echo "== real.log: righe su moist/bcs"; grep -in "moist\|bcs" real.log | head -20
+            python3 - <<'PY'
+          import glob
+          from netCDF4 import Dataset
+          import numpy as np
+          print("\n== met_em.d01: massimo dei campi di acqua per istante")
+          for f in sorted(glob.glob("met_em.d01.*")):
+              d = Dataset(f)
+              riga = [f[-19:]]
+              for q in ("QC", "QR", "QS", "QI", "QG"):
+                  riga.append(f"{q}=" + (f"{float(np.nanmax(d[q][:])):.1e}" if q in d.variables else "ASSENTE"))
+              print(*riga)
+          PY
+          } 2>&1 | tee diagnosi.txt
+      - name: Campi di acqua nei file dei bordi
+        run: |
+          F=$(find "$HOME/lavoro" -name wrfbdy_d01 | head -1); echo "wrfbdy: $F"
+          python3 - "$F" <<'PY' 2>&1 | tee -a "$DIAGNOSI/diagnosi.txt"
+          import sys
+          from netCDF4 import Dataset
+          b = Dataset(sys.argv[1])
+          print("\n== wrfbdy_d01: massimo dei campi di acqua ai bordi (tutti i lati e istanti)")
+          for q in ("QVAPOR", "QCLOUD", "QRAIN", "QICE", "QSNOW", "QGRAUP"):
+              print(q, " ".join(f"{l}={float(abs(b[f'{q}_{l}'][:]).max()):.1e}" for l in ("BXS", "BXE", "BYS", "BYE")))
+          PY
+      - uses: actions/upload-artifact@v6
+        with:
+          name: diagnosi
+          path: /home/runner/diagnosi/diagnosi.txt

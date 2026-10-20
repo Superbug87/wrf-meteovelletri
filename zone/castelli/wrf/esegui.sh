@@ -83,6 +83,9 @@ prepara)
   mpirun -np 1 ./real.exe > real.log 2>&1 || { tail -n 40 real.log; tail -n 30 rsl.error.0000 || true; exit 1; }
   esito_wrf rsl.error.0000
   ls -la wrfinput_d0* wrfbdy_d01
+  if [ -n "${DIAGNOSI:-}" ]; then            # solo diagnosi: conserva met_em, namelist e log di real.exe
+    mkdir -p "$DIAGNOSI"; cp "$LAVORO"/WPS/met_em.d01.* namelist.input real.log "$DIAGNOSI"/ 2>/dev/null || true
+  fi
   rm -rf "$LAVORO/WPS"
 
   # NUDGING_FONTI: wu (Wunderground, serve WU_API_KEY), ufficiali (Regione Lazio e Aeronautica) o tutte; STAZIONI=false: niente
