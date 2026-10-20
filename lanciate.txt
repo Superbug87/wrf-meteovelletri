@@ -2,10 +2,12 @@ prova castelli ecmwf tutte 2026101812
 prova castelli ecmwf tutte 2026101900
 prova castelli ecmwf tutte 2026101912
 prova castelli ecmwf tutte 2026102000
+prova castelli ecmwf tutte 2026102012
 prova castelli ecmwf ufficiali 2026101812
 prova castelli ecmwf ufficiali 2026101900
 prova castelli ecmwf ufficiali 2026101912
 prova castelli ecmwf ufficiali 2026102000
+prova castelli ecmwf ufficiali 2026102012
 prova castelli ecmwf wu mynn 2026101900
 prova castelli ecmwf wu mynn 2026101912
 prova castelli ecmwf wu mynn 2026102000
@@ -60,6 +62,7 @@ prova lazio ecmwf wu topo2 2026101912
 prova lazio ecmwf wu topo2 2026102000
 prova lazio gfs wu 2026101912
 prova lazio gfs wu 2026102000
+prova lazio gfs wu 2026102012
 prova lazio icon2i wu mynn 2026101900
 prova lazio icon2i wu mynn 2026101912
 prova lazio icon2i wu mynn 2026102000
