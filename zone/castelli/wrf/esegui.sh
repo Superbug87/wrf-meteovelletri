@@ -83,6 +83,11 @@ prepara)
   mpirun -np 1 ./real.exe > real.log 2>&1 || { tail -n 40 real.log; tail -n 30 rsl.error.0000 || true; exit 1; }
   esito_wrf rsl.error.0000
   ls -la wrfinput_d0* wrfbdy_d01
+  if [ "${IDRO:-1}" != 0 ] && [ "$PILOTA" != ecmwf ]; then     # real.exe scrive nei bordi solo il vapore: l'acqua di ICON/GFS ce la mette questo script
+    echo "== acqua di nube, pioggia, neve nei bordi"
+    python3 "$QUI/idro_bordi.py" --run . --ciclo "$CICLO" ||
+      { echo "!! idro_bordi non riuscito: WRF gira senza acqua nei bordi"; echo "errore dello script" > idro_ko.txt; }
+  fi
   if [ -n "${DIAGNOSI:-}" ]; then            # solo diagnosi: conserva met_em, namelist e log di real.exe
     mkdir -p "$DIAGNOSI"; cp "$LAVORO"/WPS/met_em.d01.* namelist.input real.log "$DIAGNOSI"/ 2>/dev/null || true
   fi
@@ -141,6 +146,7 @@ modello)
   USC=(); [ -s obs_fdda_end.txt ] && USC+=(obs_fdda_end.txt)
   if [ -s sst_usata.txt ]; then EXTRA+=(sst_usata.txt); USC+=(sst_usata.txt); fi
   if [ -s obs_fdda_end.txt ] && [ -s obs_fonti.txt ]; then EXTRA+=(obs_fonti.txt); USC+=(obs_fonti.txt); fi
+  [ -e idro_ko.txt ] && EXTRA+=(idro_ko.txt)
   tar -czf "$LAVORO/stato.tgz" wrfinput_d0* wrfbdy_d01 wrfrst_d0*_"$FINE" "${EXTRA[@]}"
   tar -czf "$LAVORO/uscite.tgz" wrfout_d03_* wrfxtrm_d03_* "${USC[@]}"
   ls -la "$LAVORO"/*.tgz
