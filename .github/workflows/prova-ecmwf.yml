@@ -1,0 +1,49 @@
+name: "PROVA ECMWF · idrometeore dal catalogo completo (a mano)"
+run-name: "PROVA ECMWF idrometeore (richiesta di un solo istante)"
+
+# Prova una tantum: con l'account ECMWF chiede un solo istante dell'ultimo run (livelli di pressione e livelli del modello)
+# e controlla se arrivano acqua di nube, ghiaccio, pioggia e neve. Non tocca i run e non pubblica nulla.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prova:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    env:
+      ECMWF_API_URL: https://api.ecmwf.int/v1
+      ECMWF_API_KEY: ${{ secrets.ECMWF_API_KEY }}
+      ECMWF_API_EMAIL: ${{ secrets.ECMWF_API_EMAIL }}
+    steps:
+      - name: Client ECMWF
+        run: pip install -q ecmwf-api-client eccodes
+      - name: Richieste di prova
+        run: |
+          python3 - <<'PY'
+          import datetime as dt, json, os, sys
+          from ecmwfapi import ECMWFService
+          ieri = (dt.datetime.utcnow() - dt.timedelta(days=1)).strftime("%Y%m%d")
+          s = ECMWFService("mars")
+          base = {"class": "od", "stream": "oper", "expver": "1", "type": "fc", "date": ieri, "time": "00", "step": "6",
+                  "param": "246/247/75/76", "grid": "0.25/0.25", "area": "46/8/38/18"}
+          prove = {
+              "livelli di pressione 850 hPa": dict(base, levtype="pl", levelist="850"),
+              "livelli del modello 100-137": dict(base, levtype="ml", levelist="100/to/137"),
+          }
+          for nome, req in prove.items():
+              print("\n=== ", nome, flush=True)
+              try:
+                  s.execute(req, "out.grib")
+                  import eccodes as ec
+                  tro = {}
+                  with open("out.grib", "rb") as f:
+                      while (g := ec.codes_grib_new_from_file(f)) is not None:
+                          tro[ec.codes_get(g, "shortName")] = tro.get(ec.codes_get(g, "shortName"), 0) + 1
+                          ec.codes_release(g)
+                  print("OK, campi arrivati:", tro, "byte:", os.path.getsize("out.grib"), flush=True)
+              except Exception as e:
+                  print("RIFIUTATA O ERRORE:", str(e)[:1500], flush=True)
+          PY
