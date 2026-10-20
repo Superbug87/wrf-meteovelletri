@@ -5,15 +5,15 @@
 
 Legge tutti i wrfout_d03_* (anche in sottocartelle) e cerca i segni di un run andato storto. Se ne trova
 anche uno, esce con codice 1: il workflow si ferma, le mappe non si pubblicano e sul sito resta la previsione
-precedente. Le soglie sono larghe di proposito: devono fermare i run sbagliati, non i fenomeni forti veri.
+precedente. Le soglie sono larghe di proposito: devono fermare i run sbagliati, non i fenomeni forti veri (questi danno solo un avviso).
 
 Controlli:
   - terreno a quota 0 sulla terraferma nella cornice del dominio (il guaio del 17/10/2026 con lightning_option);
   - valori mancanti o infiniti;
   - temperatura a 2 m fuori da -45 / +50 °C;
   - vento medio a 10 m sopra 150 km/h;
-  - corrente verticale sopra 40 m/s;
-  - pioggia oraria sopra 120 mm o pioggia totale sopra 500 mm;
+  - corrente verticale sopra 80 m/s (sopra 40 m/s solo un avviso);
+  - pioggia oraria sopra 300 mm o pioggia totale sopra 800 mm (sopra 120 e 500 mm solo un avviso);
   - salto della pressione al suolo media del dominio sopra 4 hPa in un'ora.
 """
 import argparse
@@ -29,12 +29,15 @@ CORNICE = 5                 # celle: zona di raccordo con il dominio padre
 SOGLIE = {
     "t2_min_c": -45.0, "t2_max_c": 50.0,
     "vento10_kmh": 150.0,
-    "w_ms": 40.0,
-    "pioggia_oraria_mm": 120.0,
-    "pioggia_totale_mm": 500.0,
+    "w_ms": 80.0,                        # oltre questi tre valori il run e' sbagliato (blocca la pubblicazione)
+    "pioggia_oraria_mm": 300.0,
+    "pioggia_totale_mm": 800.0,
     "salto_psfc_hpa": 4.0,
     "cornice_quota_zero": 0.05,          # frazione delle celle di terra della cornice con quota 0
 }
+# Valori forti ma possibili con convezione esplicita (temporali, nubifragi): le mappe si pubblicano lo stesso e il valore
+# resta scritto nel rapporto come avviso, da guardare con la pagella.
+AVVISI = {"w_ms": 40.0, "pioggia_oraria_mm": 120.0, "pioggia_totale_mm": 500.0}
 
 
 def tempi(ds):
@@ -52,7 +55,7 @@ def main():
         print("nessun wrfout_d03 da controllare")
         sys.exit(1)
 
-    problemi, visti = [], {}
+    problemi, visti, avvisi = [], {}, []
     pioggia_prec = None
     psfc_prec = None
     massimi = {"vento10_kmh": 0.0, "w_ms": 0.0, "pioggia_oraria_mm": 0.0, "pioggia_totale_mm": 0.0, "salto_psfc_hpa": 0.0,
@@ -113,13 +116,17 @@ def main():
                           ("salto_psfc_hpa", "salto della pressione media {:.1f} hPa in un'ora")):
         if massimi[chiave] > SOGLIE[chiave]:
             problemi.append(testo.format(massimi[chiave]) + f" (soglia {SOGLIE[chiave]:g})")
+        elif chiave in AVVISI and massimi[chiave] > AVVISI[chiave]:
+            avvisi.append(testo.format(massimi[chiave]) + f" (sopra {AVVISI[chiave]:g}: forte ma possibile, pubblicato)")
 
     print(f"Controllati {len(visti)} istanti in {len(files)} file.")
     for k, v in massimi.items():
         print(f"  {k}: {v:.2f}  (soglia {SOGLIE[k]:g})")
     if a.rapporto:
-        json.dump({"istanti": len(visti), "massimi": massimi, "soglie": SOGLIE, "problemi": problemi},
+        json.dump({"istanti": len(visti), "massimi": massimi, "soglie": SOGLIE, "avvisi": avvisi, "problemi": problemi},
                   open(a.rapporto, "w"), indent=1)
+    for av in avvisi:
+        print("   ! avviso:", av)
     if problemi:
         print("!! RUN NON PLAUSIBILE: le mappe non si pubblicano.")
         for p in problemi[:30]:
