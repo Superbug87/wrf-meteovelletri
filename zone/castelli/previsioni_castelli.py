@@ -515,7 +515,7 @@ FASCE = {
     "shear": ["#f6efb2", "#f2d35c", "#f1a73a", "#ea7430", "#d9422f", "#b5233f", "#8a1d7a", "#52176f"],
     "rischio": ["#bfe3b4", "#7fcf6f", "#e4df3a", "#f5a73b", "#e2452e", "#b3226f", "#5c1a8c"],
 }
-# pressione: scala fissa (984-1044 hPa, fasce da 2)
+# pressione: scala fissa (984-1044 hPa, fasce da 1)
 ARCOBALENO = ["#4b3a9e", "#3a73c9", "#3fb0c7", "#5fc47f", "#c3dc58", "#f5d83f", "#f29a33", "#d9432f"]
 PASSI = (1, 2, 3, 5, 10, 15, 20, 25, 50)
 LIVELLI_PIOGGIA_1H = [0.1, 0.2, 0.5, 1, 1.5, 2, 3, 4, 6, 8, 12, 16, 24, 32]
@@ -538,8 +538,9 @@ def tick_utili(liv, massimo=10):
 
 # Scale FISSE: stessi estremi e stesse fasce in ogni mappa, cosi' lo stesso colore vale sempre lo stesso valore.
 # Si allargano solo se il dato esce dall'intervallo (caso raro), senza cambiare i colori gia' assegnati.
-RANGE_FISSO = {"temp": (-12, 42), "vento": (0, 100), "umid": (0, 100)}
-PRESSIONE_FISSA = (984, 1044, 2)                          # hPa: da, a, passo
+RANGE_FISSO = {"temp": (-20, 50), "vento": (0, 200), "umid": (0, 100)}
+PASSO_FISSO = {"temp": 1, "vento": 10, "umid": 5}
+PRESSIONE_FISSA = (984, 1044, 1)                          # hPa: da, a, passo
 
 
 def scala_assoluta(nome, valori, passo, massimo=None, max_fasce=12, min_fasce=4):
@@ -550,13 +551,10 @@ def scala_assoluta(nome, valori, passo, massimo=None, max_fasce=12, min_fasce=4)
     lo, hi = float(np.min(valori)), float(np.max(valori))
     f_lo, f_hi = RANGE_FISSO[nome]
     lo, hi = min(lo, f_lo), max(hi, f_hi)
-    max_fasce = max(max_fasce, 20)
-    for p_ in [q for q in PASSI if q >= passo]:
-        a, b = np.floor(lo / p_) * p_, np.ceil(hi / p_) * p_
-        if massimo is not None:
-            b = min(b, massimo)
-        if (b - a) / p_ <= max_fasce:
-            break
+    p_ = PASSO_FISSO[nome]
+    a, b = np.floor(lo / p_) * p_, np.ceil(hi / p_) * p_
+    if massimo is not None:
+        b = min(b, massimo)
     liv = np.arange(a, b + p_ / 2, p_)
     medi = (liv[:-1] + liv[1:]) / 2
     cols = [cmap(float(np.clip((m - v[0]) / (v[-1] - v[0]), 0, 1))) for m in medi]
