@@ -149,7 +149,9 @@ def namelist_input(inizio, fine, riprendi, nlev, nsoil, obs_minuti=None, obs_ven
     t += riga("sf_sfclay_physics", [5 if "mynn" in FISICA else 1] * 3)     # strato superficiale: MM5 (default) o MYNN (con il PBL MYNN)
     t += riga("sf_surface_physics", [4 if "noahmp" in FISICA else 2] * 3)  # suolo: Noah (default) o Noah-MP
     t += riga("bl_pbl_physics", [5 if "mynn" in FISICA else 1] * 3) + riga("bldt", [0] * 3)   # PBL: YSU (default) o MYNN 2.5
-    t += riga("cu_physics", [1, 1, 0]) + riga("cudt", [0] * 3)             # Kain-Fritsch a 18 e 6 km, convezione esplicita a 2 km
+    # 18 e 6 km: Grell-Freitas (cu_physics 3), schema "scale-aware" che si riduce da solo sulle griglie fini (dal 20/10/2026, come nei Castelli:
+    # con Kain-Fritsch la pioggia parametrizzata del dominio grande non passava ai nidi). 2 km: convezione esplicita.
+    t += riga("cu_physics", [3, 3, 0]) + riga("cudt", [0] * 3) + " cugd_avedx = 1,\n"
     # correzione del vento sul terreno: e' del PBL YSU, quindi con MYNN si spegne; topo2 = variante 2 della correzione
     t += riga("topo_wind", [0 if "mynn" in FISICA else 2 if "topo2" in FISICA else 1] * 3)
     t += riga("lightning_option", [3, 3, 3])   # LPI in TUTTI i domini: solo nel nido azzera il terreno nella cornice del dominio (provato)
