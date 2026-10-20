@@ -87,6 +87,10 @@ jobs:
           for q in ("QVAPOR", "QCLOUD", "QRAIN", "QICE", "QSNOW", "QGRAUP"):
               print(q, " ".join(f"{l}={float(abs(b[f'{q}_{l}'][:]).max()):.1e}" for l in ("BXS", "BXE", "BYS", "BYE")))
           PY
+      - name: Dove WRF usa have_bcs_moist
+        run: |
+          cd "$HOME/wrf-install/WRF" 2>/dev/null && pwd && ls | head -30
+          grep -rn "have_bcs_moist" --include=*.F --include=Registry* . 2>/dev/null | head -40 || true
       - uses: actions/upload-artifact@v6
         with:
           name: diagnosi
