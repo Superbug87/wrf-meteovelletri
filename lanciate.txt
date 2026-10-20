@@ -1,9 +1,11 @@
 prova castelli ecmwf tutte 2026101812
 prova castelli ecmwf tutte 2026101900
 prova castelli ecmwf tutte 2026101912
+prova castelli ecmwf tutte 2026102000
 prova castelli ecmwf ufficiali 2026101812
 prova castelli ecmwf ufficiali 2026101900
 prova castelli ecmwf ufficiali 2026101912
+prova castelli ecmwf ufficiali 2026102000
 prova castelli ecmwf wu mynn 2026101900
 prova castelli ecmwf wu mynn 2026101912
 prova castelli ecmwf wu mynn-noahmp 2026101900
@@ -57,3 +59,4 @@ prova lazio iconeu wu 2026102000
 prova lazio3 ecmwf wu 2026101812
 prova lazio3 ecmwf wu 2026101900
 prova lazio3 ecmwf wu 2026101912
+prova lazio3 ecmwf wu 2026102000
