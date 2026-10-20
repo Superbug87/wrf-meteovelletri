@@ -1,5 +1,6 @@
 """Geometria dei tre domini annidati (27 -> 9 -> 3 km) centrati sul Lazio, dal 20/10/2026.
-Prima erano 18 -> 6 -> 2 km: a 2 km un run durava troppo (la prova a 3 km, zona lazio3, costa circa 3 volte meno calcolo).
+Prima erano 18 -> 6 -> 2 km: a 2 km un run durava troppo (a 3 km il calcolo e' circa 3 volte minore).
+Il dominio esterno e' di 918 km (37,7-45,95 N, 7,2-18,3 E), come prima: piu' largo uscirebbe dai dati ICON-2I e ICON-EU e metgrid fallirebbe.
 
 Geometria dei tre domini annidati centrati sul Lazio.
 
@@ -14,7 +15,7 @@ LAT0, LON0 = 41.82, 12.72          # centro comune dei tre domini (Lazio: 40,8-4
 TRUELAT1, TRUELAT2 = 39.5, 44.0    # proiezione conforme di Lambert
 DX = [27000, 9000, 3000]           # metri
 RATIO = [1, 3, 3]                  # rapporto con il dominio padre
-E = [49, 61, 103]                  # punti per lato (e_we = e_sn): 1296 km, 540 km, 306 km
+E = [35, 61, 103]                  # punti per lato (e_we = e_sn): 918 km, 540 km, 306 km (il primo sta dentro i dati ICON-2I/ICON-EU: scarica_icon2i.py)
 E_VERT = 40                        # livelli verticali (39 di massa)
 
 
