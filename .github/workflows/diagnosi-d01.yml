@@ -66,7 +66,7 @@ jobs:
             D=/home/runner/run_$TAG; mkdir -p "$D"; cd "$D"
             cp -aL "$HOME/wrf-install/WRF/run/." .; cp -L "$HOME/wrf-install/WRF/wrf.exe" .
             tar -xzf "/home/runner/stato_$TAG/stato.tgz" wrfinput_d01 wrfbdy_d01
-            NLEV=$(python3 -c "from netCDF4 import Dataset; print(Dataset('wrfinput_d01').getncattr('NUM_METGRID_LEVELS'))")
+            NLEV=40      # livelli di metgrid di ICON-2I (lo dice il log di prepara: "livelli metgrid: 40")
             python3 "$GITHUB_WORKSPACE/wrf/config.py" input --ciclo "${{ inputs.ciclo }}" --da 0 --a 48 --nlev "$NLEV" --nsoil 4 > namelist.input
             sed -i 's/\(max_dom *= *\)[0-9]\+/\11/' namelist.input
             grep -n "max_dom\|have_bcs_moist" namelist.input
