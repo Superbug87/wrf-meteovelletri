@@ -146,10 +146,11 @@ def namelist_input(inizio, fine, riprendi, nlev, nsoil, obs_minuti=None, obs_ven
     t += riga("sf_surface_physics", [4 if "noahmp" in FISICA else 2] * 3)  # suolo: Noah (default) o Noah-MP
     t += riga("bl_pbl_physics", [5 if "mynn" in FISICA else 1] * 3) + riga("bldt", [0] * 3)   # PBL: YSU (default) o MYNN 2.5
     t += riga("lightning_option", [3, 3, 3])   # LPI in TUTTI i domini: solo nel nido azzera il terreno nella cornice del dominio (provato)
-    # convezione esplicita in TUTTI i domini (dal 20/10/2026): con Kain-Fritsch sul 9 km il 76% della pioggia era
-    # convettiva parametrizzata (nessuna acqua in aria) e non passava ai nidi: nello stesso riquadro 27 mm sul 9 km,
-    # 3 mm sul 3 km e 5 mm sul 1 km. Con cu_physics = 0 tutta la pioggia e' esplicita e arriva ai nidi dai bordi.
-    t += riga("cu_physics", [0, 0, 0]) + riga("cudt", [0] * 3)
+    # 9 km: Grell-Freitas (cu_physics 3), schema "scale-aware" che si riduce da solo sulle griglie fini (dal 20/10/2026).
+    # Con Kain-Fritsch (1) il 76-99% della pioggia del 9 km era parametrizzata e non passava ai nidi (27 mm sul 9 km, 3 mm
+    # sul 3 km, 5 mm sul 1 km nello stesso riquadro); con tutto esplicito (0) il 9 km esagerava: w 46 m/s, 102 mm/h in una cella.
+    # 3 km e 1 km: convezione esplicita.
+    t += riga("cu_physics", [3, 0, 0]) + riga("cudt", [0] * 3) + " cugd_avedx = 1,\n"
     # correzione del vento sul terreno: e' del PBL YSU, quindi con MYNN si spegne; topo2 = variante 2 della correzione
     t += riga("topo_wind", [0 if "mynn" in FISICA else 2 if "topo2" in FISICA else 1] * 3)
     t += riga("slope_rad", [0, 0, 1]) + riga("topo_shading", [0, 0, 1])
