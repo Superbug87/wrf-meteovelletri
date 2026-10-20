@@ -273,7 +273,7 @@ def main():
     c = {k: (v[i0:] if isinstance(v, np.ndarray) else v) for k, v in c.items()}
     print(f"{len(tempi)} ore da {tempi[0]:%a %d %H:%M} a {tempi[-1]:%a %d %H:%M} (ora locale)")
 
-    pil = a.pilota.upper()
+    pil = {"ICON2I": "ICON-2I", "ICONEU": "ICON-EU"}.get(a.pilota.upper(), a.pilota.upper())
     ciclo_txt = f"{pil} {a.ciclo[:8]} {a.ciclo[8:]}Z" if a.ciclo else pil
     banner = f"WRF by Meteo Velletri · 3 km · PROVA · base {ciclo_txt}"
     raff_txt = ("Raffiche: stima, vento massimo orario più un termine turbolento tipo ECMWF (7,71 u* f)."
