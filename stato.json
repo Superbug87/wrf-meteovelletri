@@ -1,17 +1,13 @@
 {
- "aggiornato": "2026-10-20T07:53:15Z",
+ "aggiornato": "2026-10-20T08:56:09Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
    "ultimo_pubblicato": "2026102000",
-   "in_corso": {
-    "stato": "queued",
-    "da": "2026-10-20T06:33:14Z",
-    "id": 39381039862
-   },
+   "in_corso": null,
    "ultimo_esito": {
     "esito": "success",
-    "da": "2026-10-20T03:13:21Z"
+    "da": "2026-10-20T06:33:14Z"
    }
   },
   {
@@ -27,7 +23,7 @@
    "workflow": "castelli-ecmwf.yml",
    "ultimo_pubblicato": "2026101912",
    "in_corso": {
-    "stato": "in_progress",
+    "stato": "queued",
     "da": "2026-10-20T07:53:17Z",
     "id": 39389516099
    },
@@ -40,7 +36,7 @@
    "workflow": "lazio-ecmwf.yml",
    "ultimo_pubblicato": "2026101912",
    "in_corso": {
-    "stato": "in_progress",
+    "stato": "queued",
     "da": "2026-10-20T07:53:19Z",
     "id": 39389520177
    },
@@ -52,20 +48,44 @@
  ],
  "prove": [
   {
-   "titolo": "PROVA lazio3 ecmwf wu 2026102000",
+   "titolo": "PROVA castelli ecmwf wu mynn-noahmp 2026102000",
    "stato": "in_progress",
+   "da": "2026-10-20T08:56:21Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA castelli ecmwf wu noahmp 2026102000",
+   "stato": "queued",
+   "da": "2026-10-20T08:56:19Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA castelli ecmwf wu mynn 2026102000",
+   "stato": "in_progress",
+   "da": "2026-10-20T08:56:18Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA castelli ecmwf wu topo2 2026102000",
+   "stato": "in_progress",
+   "da": "2026-10-20T08:56:17Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA lazio3 ecmwf wu 2026102000",
+   "stato": "queued",
    "da": "2026-10-20T07:53:27Z",
    "esito": ""
   },
   {
    "titolo": "PROVA castelli ecmwf tutte 2026102000",
-   "stato": "in_progress",
+   "stato": "queued",
    "da": "2026-10-20T07:53:24Z",
    "esito": ""
   },
   {
    "titolo": "PROVA castelli ecmwf ufficiali 2026102000",
-   "stato": "in_progress",
+   "stato": "queued",
    "da": "2026-10-20T07:53:23Z",
    "esito": ""
   },
@@ -107,9 +127,9 @@
   },
   {
    "titolo": "PROVA lazio icon2i wu mynn-noahmp 2026102000",
-   "stato": "queued",
+   "stato": "completed",
    "da": "2026-10-20T03:33:26Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio icon2i wu noahmp 2026102000",
@@ -119,9 +139,9 @@
   },
   {
    "titolo": "PROVA lazio icon2i wu mynn 2026102000",
-   "stato": "queued",
+   "stato": "completed",
    "da": "2026-10-20T03:33:23Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio icon2i wu topo2 2026102000",
