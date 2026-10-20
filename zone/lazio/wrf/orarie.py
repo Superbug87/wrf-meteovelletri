@@ -39,7 +39,7 @@ def _scala(f, dati):
     return liv, cols, False
 
 
-def disegna_orarie(c, z_f, lat_f, lon_f, tempi, tempi_utc, ciclo, out):
+def disegna_orarie(c, z_f, lat_f, lon_f, tempi, tempi_utc, ciclo, out, modello=""):
     """tempi: ore locali (naive) delle mappe; tempi_utc: le stesse in UTC; ciclo: AAAAMMGGHH (UTC) o ''."""
     out = Path(out) / "orarie"
     if ciclo:
@@ -78,7 +78,7 @@ def disegna_orarie(c, z_f, lat_f, lon_f, tempi, tempi_utc, ciclo, out):
             fig = plt.figure(figsize=(L, A), facecolor=pc.SFONDO)
             fig.text(MARG / L, 1 - 0.30 / A, f"{f['titolo']} ({f['unita']})", fontsize=17, weight="bold",
                      color=pc.INK, va="center")
-            fig.text(MARG / L, 1 - 0.68 / A, f"Run  {run_txt}", fontsize=12, color=pc.SEC, va="center")
+            fig.text(MARG / L, 1 - 0.68 / A, f"Run  {run_txt}" + (f" · base {modello}" if modello else "") + " · WRF by Meteo Velletri", fontsize=12, color=pc.SEC, va="center")
             fig.text(MARG / L, 1 - 1.02 / A, f"Mappa  {pc.etichetta(t_loc)}", fontsize=14, weight="bold",
                      color=pc.INK, va="center")
 

@@ -275,7 +275,7 @@ def main():
 
     pil = a.pilota.upper()
     ciclo_txt = f"{pil} {a.ciclo[:8]} {a.ciclo[8:]}Z" if a.ciclo else pil
-    banner = f"WRF 1 km ({ciclo_txt})"
+    banner = f"WRF by Meteo Velletri · 1 km · base {ciclo_txt}"
     raff_txt = ("Raffiche: stima, vento massimo orario più un termine turbolento tipo ECMWF (7,71 u* f)."
                 if metodo_raffiche == "turbolento" else "Raffiche: stima, massimo orario del vento a 10 m x 1,4.")
     modello_txt = (f"WRF: modello fisico con tre domini annidati (9, 3 e 1 km) alimentato da {pil}; le mappe "
@@ -325,7 +325,7 @@ def main():
     for f in creati:
         print("Creato:", f)
     if not a.senza_orarie:
-        disegna_orarie(c, z_f, lat_f, lon_f, tempi, tempi_utc, a.ciclo, a.out)
+        disegna_orarie(c, z_f, lat_f, lon_f, tempi, tempi_utc, a.ciclo, a.out, pil)
 
     iy = int(np.abs(lat_f - pc.STAZIONE[1]).argmin())
     ix = int(np.abs(lon_f - pc.STAZIONE[2]).argmin())

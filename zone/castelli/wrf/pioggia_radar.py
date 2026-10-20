@@ -398,7 +398,7 @@ def main():
 
     pil = a.pilota.upper()
     ciclo_txt = f"{pil} {a.ciclo[:8]} {a.ciclo[8:]}Z" if a.ciclo else pil
-    banner = f"WRF 1 km ({ciclo_txt}) + Radar-DPC"
+    banner = f"WRF by Meteo Velletri · 1 km · base {ciclo_txt} + Radar-DPC"
     ora_radar_loc = locale(da_ms(istanti[-1]))
 
     ris = verifica(frames, istanti, orig, wrf, LAT, LON, passo_km)
