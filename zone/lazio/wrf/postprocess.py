@@ -275,10 +275,10 @@ def main():
 
     pil = {"ICON2I": "ICON-2I", "ICONEU": "ICON-EU"}.get(a.pilota.upper(), a.pilota.upper())
     ciclo_txt = f"{pil} {a.ciclo[:8]} {a.ciclo[8:]}Z" if a.ciclo else pil
-    banner = f"WRF by Meteo Velletri · 2 km · base {ciclo_txt}"
+    banner = f"WRF by Meteo Velletri · 3 km · base {ciclo_txt}"
     raff_txt = ("Raffiche: stima, vento massimo orario più un termine turbolento tipo ECMWF (7,71 u* f)."
                 if metodo_raffiche == "turbolento" else "Raffiche: stima, massimo orario del vento a 10 m x 1,4.")
-    modello_txt = (f"WRF: modello fisico con tre domini annidati (18, 6 e 2 km) alimentato da {pil}; le mappe "
+    modello_txt = (f"WRF: modello fisico con tre domini annidati (27, 9 e 3 km) alimentato da {pil}; le mappe "
                    f"sono ricampionate a {2 * pc.MEZZO_LAT * 111.32 / (a.n - 1):.1f} km. {raff_txt} "
                    "CAPE e CIN: parcelle sollevate dal modello (MU: la più instabile nei primi 300 hPa; ML: strato di 100 hPa). "
                    "Fulmini, supercelle e tornado sono indici di ambiente favorevole (LPI e correnti ascendenti, SCP, STP): "

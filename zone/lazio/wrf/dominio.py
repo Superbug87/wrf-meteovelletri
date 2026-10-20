@@ -1,4 +1,7 @@
-"""Geometria dei tre domini annidati (18 -> 6 -> 2 km) centrati sul Lazio.
+"""Geometria dei tre domini annidati (27 -> 9 -> 3 km) centrati sul Lazio, dal 20/10/2026.
+Prima erano 18 -> 6 -> 2 km: a 2 km un run durava troppo (la prova a 3 km, zona lazio3, costa circa 3 volte meno calcolo).
+
+Geometria dei tre domini annidati centrati sul Lazio.
 
 Il dominio a 2 km (300 km di lato) copre tutta la regione con un margine di 20 km o più da ogni lato;
 quello a 6 km e quello a 18 km portano le condizioni di ECMWF/GFS (25 km) fino al dominio fine.
@@ -9,9 +12,9 @@ Se cambi qualcosa qui, la cache dei dati statici (geogrid) viene rifatta da zero
 
 LAT0, LON0 = 41.82, 12.72          # centro comune dei tre domini (Lazio: 40,8-42,85 N, 11,45-14,0 E)
 TRUELAT1, TRUELAT2 = 39.5, 44.0    # proiezione conforme di Lambert
-DX = [18000, 6000, 2000]           # metri
+DX = [27000, 9000, 3000]           # metri
 RATIO = [1, 3, 3]                  # rapporto con il dominio padre
-E = [53, 73, 151]                  # punti per lato (e_we = e_sn): 936 km, 432 km, 300 km
+E = [49, 61, 103]                  # punti per lato (e_we = e_sn): 1296 km, 540 km, 306 km
 E_VERT = 40                        # livelli verticali (39 di massa)
 
 

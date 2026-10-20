@@ -43,9 +43,7 @@ VERIFICA = ("verifica.yml", (5, 20))
 PROVE = [
     {"workflow": "castelli-ecmwf.yml", "zona": "castelli", "pilota": "ecmwf", "varianti": ("ufficiali", "tutte"),
      "controllo": "true", "dal_ciclo": "2026101812", "fino_a": "2026-10-25"},
-    # Lazio a 3 km invece di 2 (zona lazio3), stesso nudging dei lanci normali: si confronta con il run normale
-    {"workflow": "lazio-ecmwf.yml", "zona": "lazio3", "pilota": "ecmwf", "varianti": ("wu",),
-     "controllo": "false", "dal_ciclo": "2026101812", "fino_a": "2026-10-25"},
+    # (la prova del Lazio a 3 km, zona lazio3, e' finita il 20/10/2026: il Lazio normale e' passato a 27-9-3 km)
 ]
 # prove di fisica (sperimentale.yml con il campo "fisica": non pubblicano, lasciano l'estratto per la pagella): per ogni zona e
 # modello, una prova per ciascuna di queste varianti, con il nudging in uso (wu). Partono dopo i run normali, cosi' i dati

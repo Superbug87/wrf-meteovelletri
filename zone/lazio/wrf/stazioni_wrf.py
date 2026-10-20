@@ -49,7 +49,7 @@ CHIAMATE_AL_SECONDO = float(os.environ.get("WU_CHIAMATE_AL_SECONDO", "40"))
 THREAD = int(os.environ.get("WU_THREAD", "24"))
 TOLLERANZA_QUOTA = {3: 400.0, 2: 600.0, 1: 800.0}      # m: quota dichiarata - terreno del modello (a 3 km il rilievo è levigato)
 CELLE_KM = {3: 6.0, 2: 18.0, 1: 54.0}                  # superosservazioni WU con NUDGING_FONTI=tutte
-RISOLUZIONI = {3: "2 km", 2: "6 km", 1: "18 km"}
+RISOLUZIONI = {3: "3 km", 2: "9 km", 1: "27 km"}
 ETA_MASSIMA_ELENCO = timedelta(hours=48)               # dall'elenco della ricerca si scartano solo le stazioni mute da due giorni
 ETA_MASSIMA_DATO = timedelta(hours=3)                  # l'ultimo dato letto deve essere di meno di 3 ore fa
 LATO_INIZIALE = 0.30                                   # gradi: riquadri di partenza della ricerca (circa 33 x 25 km)

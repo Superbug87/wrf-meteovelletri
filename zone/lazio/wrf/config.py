@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Genera i namelist di WPS e WRF per i tre domini annidati sul Lazio (18, 6 e 2 km: vedi dominio.py).
+"""Genera i namelist di WPS e WRF per i tre domini annidati sul Lazio (27, 9 e 3 km: vedi dominio.py).
 
   config.py wps   --ciclo 2026101600 --ore 48 [--pilota icon2i|ecmwf|gfs] [--geog PERCORSO]   > namelist.wps
   config.py input --ciclo 2026101600 --da 0 --a 16 [--nlev 34 --nsoil 4] > namelist.input
@@ -30,11 +30,11 @@ def intervallo(pilota=None):
     p = (pilota or os.environ.get("PILOTA") or "icon2i").lower()
     return 21600 if p in ("icon2i", "iconeu") else 10800
 
-# s sul dominio 1 (18 km); 30 s e 10 s nei nidi (parent_time_step_ratio 1:3:3), circa 5 s per km di passo griglia.
+# s sul dominio 1 (27 km); 48 s e 16 s nei nidi (parent_time_step_ratio 1:3:3), circa 5 s per km di passo griglia.
 # Deve dividere esattamente la durata di un segmento (16 h = 57600 s), l'intervallo dei bordi (3 h) e le uscite
 # orarie: con 54 s (nei Castelli, a 9 km) l'ultimo passo di d01 sforava le 16:00 e WRF non scriveva i restart di
-# d01 e d02. 90 s divide 57600 (640 passi), 10800 (120) e 3600 (40); e 90 / 9 = 10 s è intero.
-TIME_STEP = 90
+# d01 e d02. 144 s divide 57600 (400 passi), 10800 (75) e 3600 (25); e 144 / 9 = 16 s è intero.
+TIME_STEP = 144                    # 144 s a 27 km, 48 s a 9 km, 16 s a 3 km (divide 57600, 10800 e 3600)
 # le osservazioni delle stazioni si rileggono ogni 4 passi del dominio 1 (360 s, 6 minuti di simulazione)
 OBS_INTERVALLO_S = 4 * TIME_STEP
 
@@ -145,12 +145,12 @@ def namelist_input(inizio, fine, riprendi, nlev, nsoil, obs_minuti=None, obs_ven
     t += "&physics\n"
     t += riga("mp_physics", [8] * 3)                       # Thompson
     t += riga("ra_lw_physics", [4] * 3) + riga("ra_sw_physics", [4] * 3)   # RRTMG
-    t += riga("radt", [18, 6, 6])                           # minuti tra due calcoli della radiazione (RRTMG): 12, 12 e 36 passi; nel dominio a 2 km ogni 6 min invece di 3 (molto meno calcolo, effetto trascurabile)
+    t += riga("radt", [27, 9, 9])                           # minuti tra due calcoli della radiazione (RRTMG): 12, 12 e 36 passi; nel dominio a 3 km ogni 9 min invece di 3 (molto meno calcolo, effetto trascurabile)
     t += riga("sf_sfclay_physics", [5 if "mynn" in FISICA else 1] * 3)     # strato superficiale: MM5 (default) o MYNN (con il PBL MYNN)
     t += riga("sf_surface_physics", [4 if "noahmp" in FISICA else 2] * 3)  # suolo: Noah (default) o Noah-MP
     t += riga("bl_pbl_physics", [5 if "mynn" in FISICA else 1] * 3) + riga("bldt", [0] * 3)   # PBL: YSU (default) o MYNN 2.5
-    # 18 e 6 km: Grell-Freitas (cu_physics 3), schema "scale-aware" che si riduce da solo sulle griglie fini (dal 20/10/2026, come nei Castelli:
-    # con Kain-Fritsch la pioggia parametrizzata del dominio grande non passava ai nidi). 2 km: convezione esplicita.
+    # 27 e 9 km: Grell-Freitas (cu_physics 3), schema "scale-aware" che si riduce da solo sulle griglie fini (dal 20/10/2026, come nei Castelli:
+    # con Kain-Fritsch la pioggia parametrizzata del dominio grande non passava ai nidi). 3 km: convezione esplicita.
     t += riga("cu_physics", [3, 3, 0]) + riga("cudt", [0] * 3) + " cugd_avedx = 1,\n"
     # correzione del vento sul terreno: e' del PBL YSU, quindi con MYNN si spegne; topo2 = variante 2 della correzione
     t += riga("topo_wind", [0 if "mynn" in FISICA else 2 if "topo2" in FISICA else 1] * 3)
