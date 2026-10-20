@@ -34,7 +34,7 @@ PILOTI = ["ecmwf", "icon2i"]
 PILOTI_PROVA = ["iconeu", "gfs"]          # piloti solo in prova: senza run normale ne' modello originale di riferimento
 # prove di fisica (run non pubblicati; gli estratti stanno nel ramo prove-fisica, vedi strumenti/pubblica_estratto.sh):
 # nei risultati compaiono come "<zona>-<pilota>-<variante>", per esempio "castelli-ecmwf-noahmp"
-VARIANTI = ["topo2", "mynn", "noahmp", "mynn-noahmp"]
+VARIANTI = ["topo2", "mynn", "noahmp", "mynn-noahmp", "radt6", "radt15"]
 PORTALE = "https://temporeale.regione.lazio.it/datascapeA"
 SOGLIE_PIOGGIA = (0.2, 1.0, 5.0)         # mm in 6 ore, ai pluviometri
 SOGLIE_RADAR = (0.5, 2.0)                # mm in 6 ore, sul radar
@@ -507,7 +507,7 @@ def somma(a, b):
 NOMI = {"ecmwf": "WRF con ECMWF", "icon2i": "WRF con ICON-2I", "rif-ecmwf": "ECMWF originale", "rif-icon2i": "ICON-2I originale",
          "iconeu": "WRF con ICON-EU (prova)", "gfs": "WRF con GFS (prova)"}
 NOMI_VARIANTI = {"topo2": "vento sul terreno (topo_wind 2)", "mynn": "PBL MYNN", "noahmp": "suolo Noah-MP",
-                 "mynn-noahmp": "MYNN + Noah-MP"}
+                 "mynn-noahmp": "MYNN + Noah-MP", "radt6": "radiazione ogni 6 min (1 km)", "radt15": "radiazione ogni 15 min (1 km)"}
 
 
 def pagella(archivio, oggi):

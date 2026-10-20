@@ -56,6 +56,10 @@ for _wf, _z, _p in (("castelli-ecmwf.yml", "castelli", "ecmwf"), ("castelli-icon
                     ("lazio-ecmwf.yml", "lazio", "ecmwf"), ("lazio-icon2i.yml", "lazio", "icon2i")):
     PROVE.append({"workflow": _wf, "zona": _z, "pilota": _p, "varianti": ("wu",), "fisiche": FISICHE, "controllo": "false",
                   "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026101900", "fino_a": "2026-10-31"})
+# prove della frequenza della radiazione (solo Castelli, dominio da 1 km: 6 e 15 minuti invece di 3): stessi ritardi delle altre prove di fisica
+for _wf, _p in (("castelli-ecmwf.yml", "ecmwf"), ("castelli-icon2i.yml", "icon2i")):
+    PROVE.append({"workflow": _wf, "zona": "castelli", "pilota": _p, "varianti": ("wu",), "fisiche": ("radt6", "radt15"),
+                  "controllo": "false", "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026102000", "fino_a": "2026-10-31"})
 # prove di piloti diversi (ICON-EU del DWD e GFS di NOAA, entrambi con acqua di nube ai bordi): stesse zone, nudging wu, mai pubblicate;
 # l'estratto va nel ramo prove-fisica e la pagella le mette a confronto. ICON-EU e GFS sono pronti circa 4 ore dopo il ciclo.
 for _z in ("castelli", "lazio"):

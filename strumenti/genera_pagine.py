@@ -28,6 +28,7 @@ FONTE_ICON2I = "Dati di partenza: ICON-2I, Agenzia ItaliaMeteo in cooperation wi
 FONTE_ICONEU = "Dati di partenza: ICON-EU, Deutscher Wetterdienst (CC BY 4.0), elaborati e modificati con WRF."
 FONTE_GFS = "Dati di partenza: GFS, NOAA/NCEP, elaborati e modificati con WRF."
 FISICHE = {"topo2": "vento terreno 2", "mynn": "MYNN", "noahmp": "Noah-MP", "mynn-noahmp": "MYNN + Noah-MP"}
+FISICHE_SOLO = {"castelli": {"radt6": "radiazione 6 min", "radt15": "radiazione 15 min"}}      # prove fatte solo in una zona
 
 
 def modelli_confronto(zona):
@@ -36,7 +37,7 @@ def modelli_confronto(zona):
          ("iconeu", "ICON-EU (prova)", f"prove-{zona}-iconeu", FONTE_ICONEU + " Prova, non pubblicata come previsione."),
          ("gfs", "GFS (prova)", f"prove-{zona}-gfs", FONTE_GFS + " Prova, non pubblicata come previsione.")]
     for pil, nome in (("ecmwf", "ECMWF"), ("icon2i", "ICON-2I")):
-        for f, nf in FISICHE.items():
+        for f, nf in {**FISICHE, **FISICHE_SOLO.get(zona, {})}.items():
             m.append((f"{pil}-{f}", f"{nome} · {nf}", f"prove-{zona}-{pil}-{f}",
                       (FONTE_ECMWF if pil == "ecmwf" else FONTE_ICON2I) + f" Prova di fisica ({nf}), non pubblicata come previsione."))
     return m

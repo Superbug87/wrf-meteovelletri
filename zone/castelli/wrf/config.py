@@ -19,7 +19,7 @@ import dominio as D  # noqa: E402
 # Prove di fisica (variabile FISICA, vuota nei lanci normali): sigle separate da "-" tra topo2, mynn, noahmp.
 # Vuota = fisica in uso. Esempi: "topo2", "mynn-noahmp".
 FISICA = set(filter(None, os.environ.get("FISICA", "").lower().split("-")))
-_NOTE_FISICA = {"topo2", "mynn", "noahmp"}
+_NOTE_FISICA = {"topo2", "mynn", "noahmp", "radt6", "radt15"}   # radt6/radt15: radiazione ogni 6 o 15 minuti nel dominio da 1 km (3 in uso)
 if FISICA - _NOTE_FISICA:
     sys.exit(f"FISICA: sigle sconosciute {sorted(FISICA - _NOTE_FISICA)} (ammesse: {sorted(_NOTE_FISICA)})")
 
@@ -141,7 +141,7 @@ def namelist_input(inizio, fine, riprendi, nlev, nsoil, obs_minuti=None, obs_ven
     t += "&physics\n"
     t += riga("mp_physics", [8] * 3)                       # Thompson
     t += riga("ra_lw_physics", [4] * 3) + riga("ra_sw_physics", [4] * 3)   # RRTMG
-    t += riga("radt", [10, 6, 3])
+    t += riga("radt", [10, 6, 15 if "radt15" in FISICA else 6 if "radt6" in FISICA else 3])   # minuti tra due calcoli della radiazione (RRTMG)
     t += riga("sf_sfclay_physics", [5 if "mynn" in FISICA else 1] * 3)     # strato superficiale: MM5 (default) o MYNN (con il PBL MYNN)
     t += riga("sf_surface_physics", [4 if "noahmp" in FISICA else 2] * 3)  # suolo: Noah (default) o Noah-MP
     t += riga("bl_pbl_physics", [5 if "mynn" in FISICA else 1] * 3) + riga("bldt", [0] * 3)   # PBL: YSU (default) o MYNN 2.5

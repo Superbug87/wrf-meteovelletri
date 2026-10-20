@@ -100,6 +100,7 @@ suolo Noah, `topo_wind` 1), quattro varianti, una per ciascuna sigla della varia
 | `mynn` | PBL MYNN 2.5 (`bl_pbl_physics` 5) con lo strato superficiale MYNN (`sf_sfclay_physics` 5); `topo_wind` a 0, perche' e' una correzione del solo YSU |
 | `noahmp` | suolo Noah-MP (`sf_surface_physics` 4) |
 | `mynn-noahmp` | le due cose insieme (con MYNN il `topo_wind` e' spento, quindi non esiste un "tutte e tre") |
+| `radt6`, `radt15` | solo Castelli: la radiazione (RRTMG) si ricalcola ogni 6 o 15 minuti nel dominio da 1 km invece di 3 (meno calcolo; la pagella dice se la temperatura peggiora) |
 
 Le lancia il regista (`PROVE` in `strumenti/regista.py`) dal ciclo 19/10 00 UTC al 31/10, per le quattro combinazioni zona/modello: sono 16 run in piu'
 a ciclo (`sperimentale.yml`, campo `fisica`), partono dopo i run normali (ICON-2I 3:30, ECMWF 8:20 dopo il ciclo) perche' i dati
