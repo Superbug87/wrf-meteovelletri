@@ -15,6 +15,8 @@ prova castelli ecmwf wu mynn-noahmp 2026102000
 prova castelli ecmwf wu noahmp 2026101900
 prova castelli ecmwf wu noahmp 2026101912
 prova castelli ecmwf wu noahmp 2026102000
+prova castelli ecmwf wu radt15 2026102000
+prova castelli ecmwf wu radt6 2026102000
 prova castelli ecmwf wu topo2 2026101900
 prova castelli ecmwf wu topo2 2026101912
 prova castelli ecmwf wu topo2 2026102000
