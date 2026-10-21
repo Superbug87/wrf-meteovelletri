@@ -19,7 +19,7 @@ import dominio as D  # noqa: E402
 # Prove di fisica (variabile FISICA, vuota nei lanci normali): sigle separate da "-" tra topo2, mynn, noahmp.
 # Vuota = fisica in uso. Esempi: "topo2", "mynn-noahmp".
 FISICA = set(filter(None, os.environ.get("FISICA", "").lower().split("-")))
-_NOTE_FISICA = {"topo2", "mynn", "noahmp", "radt6", "radt15", "idroec"}   # radt6/radt15: radiazione ogni 6 o 15 minuti nel dominio da 1 km (3 in uso)
+_NOTE_FISICA = {"topo2", "mynn", "noahmp", "radt6", "radt15", "idroec", "urbano"}   # radt6/radt15: radiazione ogni 6 o 15 minuti nel dominio da 1 km (3 in uso)
 if FISICA - _NOTE_FISICA:
     sys.exit(f"FISICA: sigle sconosciute {sorted(FISICA - _NOTE_FISICA)} (ammesse: {sorted(_NOTE_FISICA)})")
 
@@ -156,7 +156,7 @@ def namelist_input(inizio, fine, riprendi, nlev, nsoil, obs_minuti=None, obs_ven
     t += riga("slope_rad", [0, 0, 1]) + riga("topo_shading", [0, 0, 1])
     t += " isfflx = 1,\n ifsnow = 1,\n icloud = 1,\n surface_input_source = 1,\n"
     t += " num_soil_layers = 4,\n num_land_cat = 21,\n sst_update = 0,\n"
-    t += riga("sf_urban_physics", [0] * 3)
+    t += riga("sf_urban_physics", [1 if "urbano" in FISICA and "noahmp" not in FISICA else 0] * 3)   # urbano = modello urbano a strato singolo (UCM) sulle celle "urbane" (Roma)
     t += "/\n\n"
 
     t += "&dynamics\n"

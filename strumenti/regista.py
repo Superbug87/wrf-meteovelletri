@@ -58,6 +58,11 @@ for _wf, _z, _p in (("castelli-ecmwf.yml", "castelli", "ecmwf"), ("castelli-icon
 for _wf, _p in (("castelli-ecmwf.yml", "ecmwf"), ("castelli-icon2i.yml", "icon2i")):
     PROVE.append({"workflow": _wf, "zona": "castelli", "pilota": _p, "varianti": ("wu",), "fisiche": ("radt6", "radt15"),
                   "controllo": "false", "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026102000", "fino_a": "2026-10-31"})
+# prova del modello urbano (UCM, Roma): come le altre prove di fisica, una per zona e modello, con il nudging wu; non pubblica
+for _wf, _z, _p in (("castelli-ecmwf.yml", "castelli", "ecmwf"), ("castelli-icon2i.yml", "castelli", "icon2i"),
+                    ("lazio-ecmwf.yml", "lazio", "ecmwf"), ("lazio-icon2i.yml", "lazio", "icon2i")):
+    PROVE.append({"workflow": _wf, "zona": _z, "pilota": _p, "varianti": ("wu",), "fisiche": ("urbano",), "controllo": "false",
+                  "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026102100", "fino_a": "2026-10-31"})
 # prove di piloti diversi (ICON-EU del DWD e GFS di NOAA, entrambi con acqua di nube ai bordi): stesse zone, nudging wu, mai pubblicate;
 # l'estratto va nel ramo prove-fisica e la pagella le mette a confronto. ICON-EU e GFS sono pronti circa 4 ore dopo il ciclo.
 for _z in ("castelli", "lazio"):
