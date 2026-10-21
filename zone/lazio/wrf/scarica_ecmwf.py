@@ -199,8 +199,9 @@ def main():
     if a.solo_ciclo:
         print(ciclo)
         return
-    if ciclo[8:] not in ("00", "12"):
-        sys.exit("I dati aperti di ECMWF a 48 ore e oltre ci sono solo per i cicli delle 00 e delle 12 UTC.")
+    if ciclo[8:] not in ("00", "12") and (ciclo[8:] not in ("06", "18") or a.ore > 90):
+        # i cicli delle 06 e delle 18 arrivano fino a +90 h: si usano solo su richiesta (prove del radar, run brevi)
+        sys.exit("I dati aperti di ECMWF oltre le 90 ore ci sono solo per i cicli delle 00 e delle 12 UTC.")
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     ore = list(range(0, a.ore + 1, 3))
