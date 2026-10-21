@@ -505,6 +505,9 @@ ANCORE = {
 FASCE = {
     "pioggia": ["#d2ecf8", "#9bd3f2", "#58aeea", "#2f7fda", "#2a4fc0", "#22a9a0", "#37b95a", "#9fd33f", "#f2e03a",
                 "#f6b333", "#f0752c", "#d93a2d", "#b0238c", "#701c9e"],
+    # colori in piu' per la pioggia oraria oltre 40 mm/h (40-50, 50-60, 60-80, 80-100, 100-150, 150-200, oltre 200):
+    # i primi 14 colori della pioggia restano quelli di sempre
+    "pioggia_oltre": ["#4b1580", "#7a0f5c", "#a8105a", "#d81b7a", "#f24fb0", "#f59ad6", "#1a1a1a"],
     "cape": ["#d4eccb", "#97d98f", "#54c05f", "#e4df3a", "#f5a73b", "#e2452e", "#b3226f", "#5c1a8c"],
     # quota dello zero termico: bassa = viola/blu (freddo), alta = arancio/rosso
     "zero": ["#5a2d82", "#3a6fd8", "#3fa7e0", "#46c3d6", "#3dbb8c", "#6fcb4b", "#bfe03a", "#f5e03a", "#f7b733",
@@ -518,7 +521,7 @@ FASCE = {
 # pressione: la variazione sul dominio è di pochi hPa, quindi la scala segue i valori del giorno
 ARCOBALENO = ["#4b3a9e", "#3a73c9", "#3fb0c7", "#5fc47f", "#c3dc58", "#f5d83f", "#f29a33", "#d9432f"]
 PASSI = (1, 2, 3, 5, 10, 15, 20, 25, 50)
-LIVELLI_PIOGGIA_1H = [0.1, 0.2, 0.5, 1, 1.5, 2, 3, 4, 6, 8, 12, 16, 24, 32]
+LIVELLI_PIOGGIA_1H = [0.1, 0.2, 0.5, 1, 1.5, 2, 3, 4, 6, 8, 12, 16, 24, 32, 40, 50, 60, 80, 100, 150, 200]   # fino a 200 mm/h (dal 21/10/2026)
 
 
 def colori_fasce(nome, n):
@@ -526,12 +529,17 @@ def colori_fasce(nome, n):
     base = FASCE[nome]
     if len(base) == n:
         return list(base)
+    oltre = FASCE.get(nome + "_oltre", [])
+    if len(base) < n <= len(base) + len(oltre):            # scala allungata: stessi colori di prima, piu' quelli nuovi in coda
+        return list(base) + list(oltre[:n - len(base)])
     cmap = LinearSegmentedColormap.from_list("fasce", base)
     return [cmap(x) for x in np.linspace(0, 1, n)]
 
 
 def tick_utili(liv, massimo=10):
     """Non più di `massimo` etichette sulla barra dei colori."""
+    if list(liv) == LIVELLI_PIOGGIA_1H:                   # pioggia oraria: le etichette piu' utili, scelte a mano
+        return [0.1, 0.5, 1, 2, 4, 8, 16, 32, 60, 100, 200]
     passo = -(-len(liv) // massimo)
     return list(liv)[::passo]
 
