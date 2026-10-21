@@ -1,0 +1,129 @@
+name: "PROVE · radar nel modello (run brevi)"
+run-name: "RADAR ${{ inputs.zona }} ${{ inputs.pilota }} ${{ inputs.fisica }} ${{ inputs.ciclo }}"
+
+# Prove per la previsione a 1-6 ore con il radar: run brevi (9 ore) di WRF, senza stazioni, senza mappe, che lasciano
+# solo la pioggia oraria del dominio fine nel ramo prove-radar (strumenti/pioggia_oraria_d03.py).
+#   fisica = rad0   run di confronto, identico a quello normale (solo senza nudging delle stazioni)
+#   fisica = radq   nella prima ora l'umidita' e' spinta verso la saturazione dove il radar vede pioggia (wrf/radar_nudging.py)
+# Il ciclo puo' essere anche di giorni passati (ECMWF: 00, 06, 12, 18; i dati vecchi stanno nell'archivio aperto su AWS).
+# Non tocca i rami risultati-*, ne' i quattro workflow normali; usa le stesse cache di WRF compilato e dei dati statici.
+on:
+  workflow_dispatch:
+    inputs:
+      zona:
+        type: choice
+        options: [lazio]
+        default: lazio
+      pilota:
+        type: choice
+        options: [ecmwf, icon2i]
+        default: ecmwf
+      ciclo:
+        description: "Ciclo AAAAMMGGHH (obbligatorio)"
+        required: true
+      ore:
+        description: "Ore di previsione (multiplo di 3 per ECMWF, di 6 per ICON-2I)"
+        default: "9"
+      fisica:
+        description: "rad0 (confronto) o radq (umidita' dal radar); piu' sigle separate da '-'"
+        default: "rad0"
+
+permissions:
+  contents: write                 # pubblica la pioggia oraria nel ramo prove-radar
+
+concurrency:
+  group: radar-prove-${{ inputs.zona }}-${{ inputs.pilota }}-${{ inputs.fisica }}-${{ inputs.ciclo }}
+  cancel-in-progress: false
+
+jobs:
+  wrf:
+    runs-on: ubuntu-22.04-arm
+    timeout-minutes: 150
+    env:
+      WRF_TAG: v4.7.0
+      WPS_TAG: v4.7.0
+      CICLO: ${{ inputs.ciclo }}
+      PILOTA: ${{ inputs.pilota }}
+      ORE: ${{ inputs.ore }}
+      FISICA: ${{ inputs.fisica }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Codice della zona (${{ inputs.zona }})
+        run: |
+          case "$CICLO" in [0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]) ;; *) echo "ciclo: AAAAMMGGHH"; exit 1;; esac
+          cp -a "zone/${{ inputs.zona }}/." .
+          rm -rf zone
+      - name: Recupero WRF e WPS compilati
+        uses: actions/cache/restore@v5
+        with:
+          path: /home/runner/wrf-install
+          key: wrf-build-${{ env.WRF_TAG }}-${{ env.WPS_TAG }}-${{ hashFiles('wrf/costruisci.sh', 'wrf/dipendenze.sh') }}-ubuntu-22.04-arm
+          fail-on-cache-miss: true
+      - name: Recupero i dati statici
+        uses: actions/cache/restore@v5
+        with:
+          path: /home/runner/wrf-geo
+          key: wrf-geo-${{ hashFiles('wrf/dominio.py', 'wrf/statico.sh') }}
+          fail-on-cache-miss: true
+      - name: Dipendenze
+        run: |
+          bash wrf/dipendenze.sh
+          pip install -q requests netCDF4 numpy scipy eccodes pyproj tifffile imagecodecs
+      - name: Dati ECMWF già scaricati per questo ciclo e zona
+        id: dati-ecmwf
+        if: inputs.pilota == 'ecmwf'
+        uses: actions/cache/restore@v5
+        with:
+          path: /home/runner/ecmwf-dati
+          key: ecmwf-dati-v1-${{ inputs.zona }}-${{ env.CICLO }}-${{ env.ORE }}
+      - name: Scarico ECMWF (se non è già in cache)
+        if: inputs.pilota == 'ecmwf' && steps.dati-ecmwf.outputs.cache-hit != 'true'
+        run: python3 wrf/scarica_ecmwf.py --ciclo "$CICLO" --ore "$ORE" --out /home/runner/ecmwf-dati
+      - name: Salvo i dati ECMWF in cache
+        if: inputs.pilota == 'ecmwf' && steps.dati-ecmwf.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v5
+        with:
+          path: /home/runner/ecmwf-dati
+          key: ecmwf-dati-v1-${{ inputs.zona }}-${{ env.CICLO }}-${{ env.ORE }}
+      - name: Scarico ICON-2I da MeteoHub
+        if: inputs.pilota == 'icon2i'
+        env:
+          MH_EMAIL: ${{ secrets.MH_EMAIL }}
+          MH_PASSWORD: ${{ secrets.MH_PASSWORD }}
+        run: python3 wrf/scarica_icon2i.py --ciclo "$CICLO" --ore "$ORE" --out /home/runner/icon2i-dati
+      - name: ungrib, metgrid, real (e sonde dal radar se radq)
+        env:
+          DATI_PRONTI: ${{ inputs.pilota == 'icon2i' && '/home/runner/icon2i-dati' || '/home/runner/ecmwf-dati' }}
+          STAZIONI: "false"
+          SST_MARE: "1"
+        run: bash wrf/esegui.sh prepara "$CICLO" "$ORE"
+      - name: WRF
+        run: bash wrf/esegui.sh modello "$CICLO" 0 "$ORE"
+      - name: Pioggia oraria del dominio fine
+        run: |
+          mkdir -p uscita
+          python3 strumenti/pioggia_oraria_d03.py --uscite /home/runner/lavoro/run --ciclo "$CICLO" \
+            --out "uscita/pioggia_${{ inputs.zona }}-${{ inputs.pilota }}-${FISICA}_${CICLO}.npz"
+      - uses: actions/upload-artifact@v6
+        with:
+          name: pioggia
+          path: uscita/*.npz
+          retention-days: 14
+      - name: Pubblico nel ramo prove-radar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash strumenti/pubblica_prove_radar.sh uscita
+      - name: Log (solo se qualcosa è andato storto)
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: log
+          path: |
+            /home/runner/lavoro/run/namelist.input
+            /home/runner/lavoro/run/real.log
+            /home/runner/lavoro/run/rsl.error.0000
+            /home/runner/lavoro/run/rsl.out.0000
+            /home/runner/lavoro/run/OBS_DOMAIN301
+            /home/runner/lavoro/WPS/*.log
+          retention-days: 7
+          if-no-files-found: ignore

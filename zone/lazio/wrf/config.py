@@ -19,7 +19,9 @@ import dominio as D  # noqa: E402
 # Prove di fisica (variabile FISICA, vuota nei lanci normali): sigle separate da "-" tra topo2, mynn, noahmp.
 # Vuota = fisica in uso. Esempi: "topo2", "mynn-noahmp".
 FISICA = set(filter(None, os.environ.get("FISICA", "").lower().split("-")))
-_NOTE_FISICA = {"topo2", "mynn", "noahmp", "idroec", "cu27", "urbano"}
+_NOTE_FISICA = {"topo2", "mynn", "noahmp", "idroec", "cu27", "urbano", "rad0", "radq"}
+# rad0 e radq: prove del radar (.github/workflows/radar-prove.yml). rad0 = nessun cambiamento (solo un nome per il run di
+# confronto); radq = nella prima ora l'umidita' e' spinta verso la saturazione dove il radar vede pioggia (radar_nudging.py)
 if FISICA - _NOTE_FISICA:
     sys.exit(f"FISICA: sigle sconosciute {sorted(FISICA - _NOTE_FISICA)} (ammesse: {sorted(_NOTE_FISICA)})")
 
@@ -172,7 +174,24 @@ def namelist_input(inizio, fine, riprendi, nlev, nsoil, obs_minuti=None, obs_ven
     t += riga("moist_adv_opt", [1] * 3) + riga("scalar_adv_opt", [1] * 3)
     t += " gwd_opt = 0,\n/\n\n"
 
-    if obs_minuti is not None:
+    if obs_minuti is not None and "radq" in FISICA:
+        # PROVA radq: le "osservazioni" sono sonde finte sature dove piove (radar_nudging.py), solo nei domini a 9 e 3 km.
+        # Solo umidita' (la temperatura delle sonde e' quella iniziale: spingerla fermerebbe il calore della condensazione),
+        # raggi piccoli (la pioggia e' vista a 1 km), finestra di 10 minuti come il passo delle sonde.
+        t += "&fdda\n"
+        t += riga("obs_nudge_opt", [0, 1, 1]) + " max_obs = 200000,\n"
+        t += riga("fdda_start", ["0."] * 3) + riga("fdda_end", [f"{float(obs_minuti):.1f}"] * 3)
+        t += riga("obs_nudge_wind", [0] * 3) + riga("obs_coef_wind", ["6.E-4"] * 3)
+        t += riga("obs_nudge_temp", [0] * 3) + riga("obs_coef_temp", ["6.E-4"] * 3)
+        t += riga("obs_nudge_mois", [1] * 3) + riga("obs_coef_mois", ["1.E-3"] * 3)
+        t += riga("obs_rinxy", ["50.", "20.", "8."])
+        t += " obs_rinsig = 0.05,\n"
+        t += riga("obs_twindo", ["0.1666667"] * 3) + " obs_npfi = 10,\n"
+        t += riga("obs_ionf", [1] * 3) + " obs_idynin = 0,\n obs_dtramp = 10.,\n"
+        t += " obs_prt_max = 10,\n obs_prt_freq = 100, 100, 100,\n"
+        t += " obs_ipf_in4dob = .false.,\n obs_ipf_errob = .false.,\n obs_ipf_nudob = .false.,\n obs_ipf_init = .true.,\n"
+        t += "/\n\n"
+    elif obs_minuti is not None:
         # Nudging verso le stazioni fino all'ultima osservazione (fdda_end, minuti dall'inizio del ciclo);
         # dopo il modello prosegue libero. Raggi di influenza (km) piccoli nei domini fini: la quota conta.
         # Il Lazio è montuoso (Appennino fino a 2200 m): raggio di 50 km nel nido fine.

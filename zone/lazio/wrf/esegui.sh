@@ -103,6 +103,15 @@ prepara)
     python3 "$QUI/stazioni_wrf.py" --ciclo "$CICLO" --geo "$GEO" --out . ||
       { echo "!! Stazioni non utilizzabili: WRF girera' senza nudging"; rm -f OBS_DOMAIN* obs_fdda_end.txt obs_fonti.txt; }
   fi
+  if [[ "-${FISICA:-}-" == *-radq-* ]]; then   # PROVA radq: il radar spinge l'umidita' nella prima ora (radar_nudging.py)
+    if [ -s OBS_DOMAIN301 ]; then
+      echo "!! radq: ci sono gia' le osservazioni delle stazioni, il radar non si aggiunge (usare nudging nessuno)"
+    else
+      echo "== Sonde finte dal radar per il nudging dell'umidita' (prova radq)"
+      python3 "$QUI/radar_nudging.py" --run . --ciclo "$CICLO" ||
+        { echo "!! radar_nudging non riuscito: WRF gira senza radar"; rm -f OBS_DOMAIN* obs_fdda_end.txt obs_fonti.txt; }
+    fi
+  fi
   ;;
 modello)
   DA=${3:?da ora}; A=${4:?a ora}
