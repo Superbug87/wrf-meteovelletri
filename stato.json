@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-20T21:55:41Z",
+ "aggiornato": "2026-10-21T00:06:42Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -41,63 +41,63 @@
  "prove": [
   {
    "titolo": "PROVA castelli ecmwf wu radt15 2026102012",
-   "stato": "queued",
+   "stato": "completed",
    "da": "2026-10-20T21:55:55Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu radt6 2026102012",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-20T21:55:54Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio ecmwf wu mynn-noahmp 2026102012",
-   "stato": "queued",
+   "stato": "completed",
    "da": "2026-10-20T21:33:14Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio ecmwf wu noahmp 2026102012",
-   "stato": "queued",
+   "stato": "completed",
    "da": "2026-10-20T21:33:13Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio ecmwf wu mynn 2026102012",
-   "stato": "queued",
+   "stato": "completed",
    "da": "2026-10-20T21:33:12Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio ecmwf wu topo2 2026102012",
-   "stato": "queued",
+   "stato": "completed",
    "da": "2026-10-20T20:56:38Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu mynn-noahmp 2026102012",
-   "stato": "queued",
+   "stato": "completed",
    "da": "2026-10-20T20:56:32Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu noahmp 2026102012",
-   "stato": "queued",
+   "stato": "completed",
    "da": "2026-10-20T20:56:30Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu mynn 2026102012",
-   "stato": "queued",
+   "stato": "completed",
    "da": "2026-10-20T20:56:29Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu topo2 2026102012",
-   "stato": "queued",
+   "stato": "completed",
    "da": "2026-10-20T20:56:27Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio gfs wu 2026102012",
