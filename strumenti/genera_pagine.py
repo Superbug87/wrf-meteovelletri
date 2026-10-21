@@ -27,7 +27,7 @@ FONTE_ECMWF = "Dati di partenza: ECMWF IFS (open data, CC BY 4.0), elaborati e m
 FONTE_ICON2I = "Dati di partenza: ICON-2I, Agenzia ItaliaMeteo in cooperation with Arpae Emilia-Romagna Idro-Meteo-Clima Service (CC BY 4.0), elaborati e modificati con WRF."
 FONTE_ICONEU = "Dati di partenza: ICON-EU, Deutscher Wetterdienst (CC BY 4.0), elaborati e modificati con WRF."
 FONTE_GFS = "Dati di partenza: GFS, NOAA/NCEP, elaborati e modificati con WRF."
-FISICHE = {"topo2": "vento terreno 2", "mynn": "MYNN", "noahmp": "Noah-MP", "mynn-noahmp": "MYNN + Noah-MP"}
+FISICHE = {"topo2": "vento terreno 2", "mynn": "MYNN", "noahmp": "Noah-MP", "mynn-noahmp": "MYNN + Noah-MP", "urbano": "modello urbano"}
 FISICHE_SOLO = {"castelli": {"radt6": "radiazione 6 min", "radt15": "radiazione 15 min"}}      # prove fatte solo in una zona
 
 

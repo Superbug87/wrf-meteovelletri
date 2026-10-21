@@ -1,0 +1,31 @@
+name: Concordanza pioggia
+
+# Mappe di concordanza della pioggia tra le versioni WRF dello stesso ciclo (ECMWF, ICON-2I e loro prove). Pochi minuti, niente WRF.
+# Pubblica nel ramo "concordanza". Si rifa' ogni 3 ore, e a mano se serve.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "50 */3 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: concordanza
+  cancel-in-progress: false
+
+jobs:
+  concordanza:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Librerie
+        run: pip install -q numpy matplotlib scipy pyproj requests
+      - name: Mappe di concordanza
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash strumenti/concordanza.sh
