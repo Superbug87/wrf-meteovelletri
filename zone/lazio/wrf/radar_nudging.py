@@ -63,15 +63,68 @@ def sonda(istante, lat, lon, quota, livelli):
     return "\n".join(righe) + "\n"
 
 
+def nubi(run, t0):
+    """PROVA radnubi: pioggia, neve, nube e vapore iniziali dal radar nel wrfinput dei domini a 9 e 3 km.
+    Nelle colonne dove il radar vede pioggia: vapore alla saturazione e 0,3 g/kg di acqua di nube dalla base alla cima
+    dell'eco; acqua di pioggia (sotto lo zero termico) o neve (sopra) dal contenuto d'acqua M = 0,072 R^0,88 g/m3
+    (Marshall-Palmer), con il numero di gocce di una distribuzione esponenziale (N0 = 8e6 m^-4) per Thompson.
+    Dove il radar non vede nulla non si toglie niente (le nubi senza pioggia esistono)."""
+    from netCDF4 import Dataset
+    from scipy.ndimage import maximum_filter, uniform_filter
+
+    ms = int(t0.timestamp() * 1000)
+    sri = radar.scarica("SRI", ms)
+    if sri is None:
+        raise SystemExit("radar SRI mancante all'istante iniziale: niente nubi dal radar")
+    etm = radar.scarica("ETM", ms)
+    for d in (2, 3):
+        lat, lon, hgt, z, p, t = leggi_colonne(run / f"wrfinput_d0{d}")
+        lato = 9 if d == 2 else 3
+        r = radar.campiona(uniform_filter(np.nan_to_num(sri), lato), lat, lon)
+        v = radar.campiona(uniform_filter(np.isfinite(sri).astype("float32"), lato), lat, lon)
+        c = radar.campiona(maximum_filter(np.nan_to_num(etm), lato), lat, lon) if etm is not None else np.full(lat.shape, np.nan)
+        umida = (r >= SOGLIA_MMH) & (v > 0.9)
+        base = hgt + np.where(r >= 5, 500.0, 1000.0)
+        top = np.where(np.isfinite(c) & (c > base + 1000), c, np.maximum(CIMA_DEFAULT, base + 1500))
+        top = np.minimum(top, CIMA_MAX)
+        es = 611.2 * np.exp(17.67 * (t - 273.15) / (t - 29.65))
+        qs = 0.622 * es / np.maximum(p - es, 1.0)
+        rho = p / (287.0 * t)
+        dentro = umida[None] & (z >= base[None]) & (z <= top[None])
+        sotto_cima = umida[None] & (z <= top[None])
+        m = 0.072e-3 * np.maximum(r, 0)[None] ** 0.88 / rho            # kg/kg
+        liquida = sotto_cima & (t > 273.15)
+        ghiaccio = sotto_cima & (t <= 273.15)
+        with Dataset(run / f"wrfinput_d0{d}", "r+") as ds:
+            def agg(nome, nuovo, dove):
+                if nome in ds.variables:
+                    x = ds.variables[nome][0]
+                    ds.variables[nome][0] = np.where(dove, np.maximum(x, nuovo), x)
+            agg("QVAPOR", qs, dentro)
+            agg("QCLOUD", np.full(qs.shape, 3e-4), dentro)
+            agg("QRAIN", m, liquida)
+            agg("QSNOW", m, ghiaccio)
+            if "QNRAIN" in ds.variables:
+                lam = (np.pi * 1000.0 * 8e6 / np.maximum(rho * m, 1e-12)) ** 0.25
+                agg("QNRAIN", 8e6 / lam / rho, liquida)
+        print(f"nubi dal radar nel dominio {d}: {int(umida.sum())} colonne con pioggia su {umida.size}")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--run", default=".")
     ap.add_argument("--ciclo", required=True)
     ap.add_argument("--minuti", type=int, default=60)
     ap.add_argument("--passo", type=int, default=10)
+    ap.add_argument("--nubi", action="store_true", help="pioggia, neve e nubi iniziali dal radar nel wrfinput (radnubi)")
+    ap.add_argument("--niente-nudging", action="store_true", help="solo --nubi, senza sonde per il nudging")
     a = ap.parse_args()
     run = Path(a.run)
     t0 = datetime.strptime(a.ciclo, "%Y%m%d%H").replace(tzinfo=timezone.utc)
+    if a.nubi:
+        nubi(run, t0)
+    if a.niente_nudging:
+        return
     istanti = [t0 + timedelta(minutes=m) for m in range(0, a.minuti + 1, a.passo)]
 
     domini = {d: leggi_colonne(run / f"wrfinput_d0{d}") for d in (2, 3)}

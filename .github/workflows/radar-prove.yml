@@ -25,7 +25,7 @@ on:
         description: "Ore di previsione (multiplo di 3 per ECMWF, di 6 per ICON-2I)"
         default: "9"
       fisica:
-        description: "rad0 (confronto) o radq (umidita' dal radar); piu' sigle separate da '-'"
+        description: "rad0 (confronto), radq (umidita' dal radar), radnubi (pioggia e nubi iniziali dal radar), radforte (con radq: nudging piu' forte); piu' sigle separate da '-'"
         default: "rad0"
 
 permissions:
