@@ -67,3 +67,23 @@ Bias WRF +1 h: rad0 0.18 (il modello non ha ancora fatto piovere: spin-up), radq
 Prima impressione: il radar dentro WRF toglie gran parte dello spin-up della prima-seconda ora; dopo +3 h l'effetto
 si perde e WRF esagera la pioggia (bias 3-4 a +4..+6 h in tutti i run, anche senza radar). Da confermare su molti cicli.
 Costo: un run di 9 ore = circa 17 minuti di runner ARM (15 di WRF); le sonde dal radar aggiungono 30 secondi.
+
+## Risultati 3 - nowcast solo radar su 4 eventi (96 emissioni: 25/09 notte, 5-9/10, 12/10, 20-21/10)
+FSS 20 km, 0,5 mm/h (tutte le emissioni insieme):
+
+| metodo | +1h | +2h | +3h | +4h | +5h | +6h |
+|---|---|---|---|---|---|---|
+| radar fermo | 0.83 | 0.57 | 0.42 | 0.35 | 0.29 | 0.27 |
+| unif (in uso) | 0.92 | 0.75 | 0.60 | 0.46 | 0.36 | 0.31 |
+| lk | 0.93 | 0.75 | 0.60 | 0.45 | 0.38 | 0.33 |
+| anvil | 0.94 | 0.79 | 0.63 | 0.46 | 0.38 | 0.33 |
+| steps | 0.93 | 0.77 | 0.61 | 0.46 | 0.31 | 0.20 |
+
+FSS 10 km, 2 mm/h: unif 0.85/0.65/0.48/0.33/0.23/0.19; anvil 0.87/0.68/0.49/0.32/0.24/0.20.
+Anvil - unif (bootstrap a blocchi di 6 h, intervallo 90%): +0.014 [+0.01,+0.03] a +1 h, +0.033 [+0.01,+0.07] a +2 h,
++0.028 [-0.01,+0.09] a +3 h, poi non distinguibile da zero. lk - unif: nessuna differenza significativa.
+Ora di arrivo nei punti (163 mila casi punto-emissione): mancati 50% unif, 36% lk e anvil, 90% radar fermo;
+entro +-1 h: 39% unif, 49% anvil. Il guadagno di anvil/lk sull'ora di arrivo viene dalla velocita' minima del metodo
+in uso (sotto 24 km/h la pioggia resta ferma): unif0 (stesso metodo senza soglia) manca il 40%.
+Conclusione parziale: anvil migliora poco ma in modo misurabile la prima-seconda ora; nessun metodo radar tiene oltre
++3 h (FSS < 0,5 e bias 0,6-0,7: la pioggia che nasce dopo l'emissione non puo' esserci).
