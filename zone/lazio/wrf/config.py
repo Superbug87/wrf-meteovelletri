@@ -19,7 +19,7 @@ import dominio as D  # noqa: E402
 # Prove di fisica (variabile FISICA, vuota nei lanci normali): sigle separate da "-" tra topo2, mynn, noahmp.
 # Vuota = fisica in uso. Esempi: "topo2", "mynn-noahmp".
 FISICA = set(filter(None, os.environ.get("FISICA", "").lower().split("-")))
-_NOTE_FISICA = {"topo2", "mynn", "noahmp", "idroec"}
+_NOTE_FISICA = {"topo2", "mynn", "noahmp", "idroec", "cu27"}
 if FISICA - _NOTE_FISICA:
     sys.exit(f"FISICA: sigle sconosciute {sorted(FISICA - _NOTE_FISICA)} (ammesse: {sorted(_NOTE_FISICA)})")
 
@@ -151,7 +151,8 @@ def namelist_input(inizio, fine, riprendi, nlev, nsoil, obs_minuti=None, obs_ven
     t += riga("bl_pbl_physics", [5 if "mynn" in FISICA else 1] * 3) + riga("bldt", [0] * 3)   # PBL: YSU (default) o MYNN 2.5
     # 27 e 9 km: Grell-Freitas (cu_physics 3), schema "scale-aware" che si riduce da solo sulle griglie fini (dal 20/10/2026, come nei Castelli:
     # con Kain-Fritsch la pioggia parametrizzata del dominio grande non passava ai nidi). 3 km: convezione esplicita.
-    t += riga("cu_physics", [3, 3, 0]) + riga("cudt", [0] * 3) + " cugd_avedx = 1,\n"
+    # prova cu27: Grell-Freitas solo a 27 km, 9 km esplicito come nei Castelli (la pioggia parametrizzata del 9 km non entra nel 3 km)
+    t += riga("cu_physics", [3, 0 if "cu27" in FISICA else 3, 0]) + riga("cudt", [0] * 3) + " cugd_avedx = 1,\n"
     # correzione del vento sul terreno: e' del PBL YSU, quindi con MYNN si spegne; topo2 = variante 2 della correzione
     t += riga("topo_wind", [0 if "mynn" in FISICA else 2 if "topo2" in FISICA else 1] * 3)
     t += riga("lightning_option", [3, 3, 3])   # LPI in TUTTI i domini: solo nel nido azzera il terreno nella cornice del dominio (provato)
