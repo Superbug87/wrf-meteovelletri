@@ -1135,6 +1135,7 @@ def disegna_fogli(c, z_f, lat_f, lon_f, tempi, banner, modello_txt, out):
             riempi(ax, dati[k])
             ax.contour(lon_f, lat_f, z_f, levels=LIVELLI_QUOTA, colors=TENUE,
                        linewidths=0.4, alpha=0.8, zorder=2)
+            disegna_confini(ax, scala=0.5)                 # regione e province, come nelle mappe orarie
             if frecce is not None:
                 disegna_flusso(ax, lon_f, lat_f, frecce[0][k], frecce[1][k], densita=0.9, spessore=0.45, scala=1.7)
             ax.plot(STAZIONE[2], STAZIONE[1], "*", ms=8, color=INK, mec=SFONDO, mew=0.6, zorder=8)

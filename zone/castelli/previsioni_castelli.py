@@ -669,13 +669,13 @@ def carica_confini():
     return _CONFINI
 
 
-def disegna_confini(ax):
-    """Confini comunali (linea molto fine) e provinciali (fine, un po' più scura)."""
+def disegna_confini(ax, scala=1.0):
+    """Confini comunali (linea molto fine) e provinciali (fine, un po' più scura). `scala` assottiglia le linee nei riquadri piccoli."""
     comuni, province = carica_confini()
     for a in comuni:
-        ax.plot(a[:, 0], a[:, 1], color=INK, lw=0.35, alpha=0.5, zorder=3, solid_joinstyle="round")
+        ax.plot(a[:, 0], a[:, 1], color=INK, lw=0.35 * scala, alpha=0.5, zorder=3, solid_joinstyle="round")
     for a in province:
-        ax.plot(a[:, 0], a[:, 1], color=INK, lw=0.9, alpha=0.85, zorder=3.5, solid_joinstyle="round")
+        ax.plot(a[:, 0], a[:, 1], color=INK, lw=0.9 * scala, alpha=0.85, zorder=3.5, solid_joinstyle="round")
 
 
 _LAGHI_VERI = None
@@ -1093,6 +1093,8 @@ def disegna_fogli(c, z_f, lat_f, lon_f, tempi, banner, modello_txt, out):
             riempi(ax, dati[k])
             ax.contour(lon_f, lat_f, z_f, levels=np.arange(200, 1200, 200), colors=TENUE,
                        linewidths=0.4, alpha=0.8, zorder=2)
+            disegna_confini(ax, scala=0.8)                 # comuni e province, come nelle mappe orarie
+            disegna_laghi(ax)
             if frecce is not None:
                 disegna_flusso(ax, lon_f, lat_f, frecce[0][k], frecce[1][k], densita=0.55, spessore=0.45, scala=0.3)
             ax.plot(STAZIONE[2], STAZIONE[1], "*", ms=8, color=INK, mec=SFONDO, mew=0.6, zorder=8)
