@@ -88,6 +88,11 @@ prepara)
     python3 "$QUI/idro_bordi.py" --run . --ciclo "$CICLO" ||
       { echo "!! idro_bordi non riuscito: WRF gira senza acqua nei bordi"; echo "errore dello script" > idro_ko.txt; }
   fi
+  if [ "$PILOTA" = ecmwf ] && [[ "-${FISICA:-}-" == *-idroec-* ]]; then   # PROVA: ECMWF non da' nubi e pioggia in quota
+    echo "== nubi, ghiaccio e pioggia iniziali ricostruiti dai totali di colonna di ECMWF"
+    python3 "$QUI/idro_iniziale.py" --run . --ciclo "$CICLO" ||
+      echo "!! idro_iniziale non riuscito: WRF parte senza nubi, come nei run normali"
+  fi
   if [ -n "${DIAGNOSI:-}" ]; then            # solo diagnosi: conserva met_em, namelist e log di real.exe
     mkdir -p "$DIAGNOSI"; cp "$LAVORO"/WPS/met_em.d01.* namelist.input real.log "$DIAGNOSI"/ 2>/dev/null || true
   fi
