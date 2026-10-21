@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-21T18:59:47Z",
+ "aggiornato": "2026-10-21T19:53:23Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -22,7 +22,11 @@
   {
    "workflow": "castelli-ecmwf.yml",
    "ultimo_pubblicato": "2026102100",
-   "in_corso": null,
+   "in_corso": {
+    "stato": "queued",
+    "da": "2026-10-21T19:53:26Z",
+    "id": 39665540049
+   },
    "ultimo_esito": {
     "esito": "success",
     "da": "2026-10-21T07:53:07Z"
@@ -31,7 +35,11 @@
   {
    "workflow": "lazio-ecmwf.yml",
    "ultimo_pubblicato": "2026102100",
-   "in_corso": null,
+   "in_corso": {
+    "stato": "in_progress",
+    "da": "2026-10-21T19:53:28Z",
+    "id": 39665546626
+   },
    "ultimo_esito": {
     "esito": "success",
     "da": "2026-10-21T07:53:09Z"
@@ -40,14 +48,26 @@
  ],
  "prove": [
   {
+   "titolo": "PROVA castelli ecmwf tutte 2026102112",
+   "stato": "queued",
+   "da": "2026-10-21T19:53:36Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA castelli ecmwf ufficiali 2026102112",
+   "stato": "queued",
+   "da": "2026-10-21T19:53:34Z",
+   "esito": ""
+  },
+  {
    "titolo": "PROVA lazio gfs wu 2026102112",
-   "stato": "in_progress",
+   "stato": "queued",
    "da": "2026-10-21T19:00:21Z",
    "esito": ""
   },
   {
    "titolo": "PROVA lazio iconeu wu 2026102112",
-   "stato": "in_progress",
+   "stato": "queued",
    "da": "2026-10-21T19:00:14Z",
    "esito": ""
   },
@@ -59,7 +79,7 @@
   },
   {
    "titolo": "PROVA castelli iconeu wu 2026102112",
-   "stato": "in_progress",
+   "stato": "queued",
    "da": "2026-10-21T19:00:06Z",
    "esito": ""
   },
@@ -71,15 +91,15 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu urbano 2026102112",
-   "stato": "in_progress",
+   "stato": "queued",
    "da": "2026-10-21T18:59:58Z",
    "esito": ""
   },
   {
    "titolo": "PROVA lazio ecmwf nessuno 2026102012",
-   "stato": "queued",
+   "stato": "completed",
    "da": "2026-10-21T17:56:34Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu radt15 2026102112",
@@ -385,18 +405,6 @@
    "titolo": "PROVA castelli ecmwf tutte 2026102012",
    "stato": "completed",
    "da": "2026-10-20T19:53:26Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA castelli ecmwf ufficiali 2026102012",
-   "stato": "completed",
-   "da": "2026-10-20T19:53:25Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA lazio iconeu wu 2026102012",
-   "stato": "completed",
-   "da": "2026-10-20T18:36:02Z",
    "esito": "success"
   }
  ]
