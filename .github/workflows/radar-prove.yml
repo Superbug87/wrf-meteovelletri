@@ -1,5 +1,5 @@
 name: "PROVE · radar nel modello (run brevi)"
-run-name: "RADAR ${{ inputs.zona }} ${{ inputs.pilota }} ${{ inputs.fisica }} ${{ inputs.ciclo }}"
+run-name: "RADAR ${{ inputs.zona }} ${{ inputs.pilota }} ${{ inputs.fisica }} ${{ inputs.ciclo }}${{ inputs.dati && format(' dati {0}', inputs.dati) || '' }}"
 
 # Prove per la previsione a 1-6 ore con il radar: run brevi (9 ore) di WRF, senza stazioni, senza mappe, che lasciano
 # solo la pioggia oraria del dominio fine nel ramo prove-radar (strumenti/pioggia_oraria_d03.py).
@@ -21,6 +21,9 @@ on:
       ciclo:
         description: "Ciclo AAAAMMGGHH (obbligatorio)"
         required: true
+      dati:
+        description: "Solo ECMWF: ciclo dei dati se diverso dall'avvio (es. avvio 2026100609 con i dati del 2026100600, come in tempo reale)"
+        default: ""
       ore:
         description: "Ore di previsione (multiplo di 3 per ECMWF, di 6 per ICON-2I)"
         default: "9"
@@ -32,7 +35,7 @@ permissions:
   contents: write                 # pubblica la pioggia oraria nel ramo prove-radar
 
 concurrency:
-  group: radar-prove-${{ inputs.zona }}-${{ inputs.pilota }}-${{ inputs.fisica }}-${{ inputs.ciclo }}
+  group: radar-prove-${{ inputs.zona }}-${{ inputs.pilota }}-${{ inputs.fisica }}-${{ inputs.ciclo }}-${{ inputs.dati }}
   cancel-in-progress: false
 
 jobs:
@@ -46,6 +49,7 @@ jobs:
       PILOTA: ${{ inputs.pilota }}
       ORE: ${{ inputs.ore }}
       FISICA: ${{ inputs.fisica }}
+      DATI: ${{ inputs.dati || inputs.ciclo }}
     steps:
       - uses: actions/checkout@v5
       - name: Codice della zona (${{ inputs.zona }})
@@ -53,6 +57,11 @@ jobs:
           case "$CICLO" in [0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]) ;; *) echo "ciclo: AAAAMMGGHH"; exit 1;; esac
           cp -a "zone/${{ inputs.zona }}/." .
           rm -rf zone
+          # dati di un ciclo precedente (come in tempo reale): si scaricano le ore dall'inizio dei dati alla fine del run
+          OFF=$(( ( $(date -u -d "${CICLO:0:8} ${CICLO:8:2}" +%s) - $(date -u -d "${DATI:0:8} ${DATI:8:2}" +%s) ) / 3600 ))
+          [ "$OFF" -ge 0 ] && [ $((OFF % 3)) -eq 0 ] || { echo "dati: un ciclo che precede l'avvio di un multiplo di 3 ore"; exit 1; }
+          echo "ORE_DATI=$((OFF + ORE))" >> "$GITHUB_ENV"
+          echo "avvio $CICLO, dati ECMWF del $DATI (+$OFF h)"
       - name: Recupero WRF e WPS compilati
         uses: actions/cache/restore@v5
         with:
@@ -75,16 +84,16 @@ jobs:
         uses: actions/cache/restore@v5
         with:
           path: /home/runner/ecmwf-dati
-          key: ecmwf-dati-v1-${{ inputs.zona }}-${{ env.CICLO }}-${{ env.ORE }}
+          key: ecmwf-dati-v1-${{ inputs.zona }}-${{ env.DATI }}-${{ env.ORE_DATI }}
       - name: Scarico ECMWF (se non è già in cache)
         if: inputs.pilota == 'ecmwf' && steps.dati-ecmwf.outputs.cache-hit != 'true'
-        run: python3 wrf/scarica_ecmwf.py --ciclo "$CICLO" --ore "$ORE" --out /home/runner/ecmwf-dati
+        run: python3 wrf/scarica_ecmwf.py --ciclo "$DATI" --ore "$ORE_DATI" --out /home/runner/ecmwf-dati
       - name: Salvo i dati ECMWF in cache
         if: inputs.pilota == 'ecmwf' && steps.dati-ecmwf.outputs.cache-hit != 'true'
         uses: actions/cache/save@v5
         with:
           path: /home/runner/ecmwf-dati
-          key: ecmwf-dati-v1-${{ inputs.zona }}-${{ env.CICLO }}-${{ env.ORE }}
+          key: ecmwf-dati-v1-${{ inputs.zona }}-${{ env.DATI }}-${{ env.ORE_DATI }}
       - name: Scarico ICON-2I da MeteoHub
         if: inputs.pilota == 'icon2i'
         env:
@@ -103,7 +112,7 @@ jobs:
         run: |
           mkdir -p uscita
           python3 strumenti/pioggia_oraria_d03.py --uscite /home/runner/lavoro/run --ciclo "$CICLO" \
-            --out "uscita/pioggia_${{ inputs.zona }}-${{ inputs.pilota }}-${FISICA}_${CICLO}.npz"
+            --out "uscita/pioggia_${{ inputs.zona }}-${{ inputs.pilota }}${{ inputs.dati && inputs.dati != inputs.ciclo && 'vecchio' || '' }}-${FISICA}_${CICLO}.npz"
       - uses: actions/upload-artifact@v6
         with:
           name: pioggia
