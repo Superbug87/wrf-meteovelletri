@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-22T07:53:18Z",
+ "aggiornato": "2026-10-22T08:56:06Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -23,7 +23,7 @@
    "workflow": "castelli-ecmwf.yml",
    "ultimo_pubblicato": "2026102112",
    "in_corso": {
-    "stato": "in_progress",
+    "stato": "queued",
     "da": "2026-10-22T07:53:20Z",
     "id": 39743684529
    },
@@ -36,7 +36,7 @@
    "workflow": "lazio-ecmwf.yml",
    "ultimo_pubblicato": "2026102112",
    "in_corso": {
-    "stato": "in_progress",
+    "stato": "queued",
     "da": "2026-10-22T07:53:22Z",
     "id": 39743688078
    },
@@ -47,6 +47,72 @@
   }
  ],
  "prove": [
+  {
+   "titolo": "PROVA castelli ecmwf tutte 2026102200",
+   "stato": "queued",
+   "da": "2026-10-22T08:56:14Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA castelli ecmwf ufficiali 2026102200",
+   "stato": "queued",
+   "da": "2026-10-22T08:56:13Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA lazio icon2i wu mynn-noahmp 2026102200",
+   "stato": "queued",
+   "da": "2026-10-22T08:21:20Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA lazio icon2i wu noahmp 2026102200",
+   "stato": "queued",
+   "da": "2026-10-22T08:21:16Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA lazio icon2i wu topo2 2026102200",
+   "stato": "queued",
+   "da": "2026-10-22T08:21:12Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA lazio icon2i wu mynn 2026102200",
+   "stato": "queued",
+   "da": "2026-10-22T08:21:08Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA lazio icon2i wu urbano 2026102200",
+   "stato": "queued",
+   "da": "2026-10-22T08:21:04Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA castelli icon2i wu radt15 2026102200",
+   "stato": "queued",
+   "da": "2026-10-22T08:21:01Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA castelli icon2i wu radt6 2026102200",
+   "stato": "queued",
+   "da": "2026-10-22T08:20:57Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA castelli icon2i wu mynn-noahmp 2026102200",
+   "stato": "queued",
+   "da": "2026-10-22T08:20:53Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA castelli icon2i wu noahmp 2026102200",
+   "stato": "queued",
+   "da": "2026-10-22T08:20:49Z",
+   "esito": ""
+  },
   {
    "titolo": "PROVA lazio gfs wu 2026102200",
    "stato": "completed",
@@ -339,72 +405,6 @@
    "titolo": "PROVA castelli icon2i wu mynn 2026102112",
    "stato": "completed",
    "da": "2026-10-21T15:33:30Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA castelli icon2i wu topo2 2026102112",
-   "stato": "completed",
-   "da": "2026-10-21T15:33:28Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA lazio ecmwf wu cu27 2026102012",
-   "stato": "completed",
-   "da": "2026-10-21T13:12:31Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA castelli ecmwf wu radt15 2026102100",
-   "stato": "completed",
-   "da": "2026-10-21T09:57:17Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA castelli ecmwf wu radt6 2026102100",
-   "stato": "completed",
-   "da": "2026-10-21T09:42:37Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA lazio ecmwf wu mynn-noahmp 2026102100",
-   "stato": "completed",
-   "da": "2026-10-21T09:42:31Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA lazio ecmwf wu noahmp 2026102100",
-   "stato": "completed",
-   "da": "2026-10-21T09:42:29Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA lazio ecmwf wu mynn 2026102100",
-   "stato": "completed",
-   "da": "2026-10-21T09:42:28Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA lazio ecmwf wu topo2 2026102100",
-   "stato": "completed",
-   "da": "2026-10-21T08:56:06Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA castelli ecmwf wu mynn-noahmp 2026102100",
-   "stato": "completed",
-   "da": "2026-10-21T08:55:59Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA castelli ecmwf wu noahmp 2026102100",
-   "stato": "completed",
-   "da": "2026-10-21T08:55:57Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA castelli ecmwf wu mynn 2026102100",
-   "stato": "completed",
-   "da": "2026-10-21T08:55:56Z",
    "esito": "success"
   }
  ]
