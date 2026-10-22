@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-22T08:56:06Z",
+ "aggiornato": "2026-10-22T09:33:06Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -21,32 +21,30 @@
   },
   {
    "workflow": "castelli-ecmwf.yml",
-   "ultimo_pubblicato": "2026102112",
-   "in_corso": {
-    "stato": "queued",
-    "da": "2026-10-22T07:53:20Z",
-    "id": 39743684529
-   },
+   "ultimo_pubblicato": "2026102200",
+   "in_corso": null,
    "ultimo_esito": {
     "esito": "success",
-    "da": "2026-10-21T19:53:26Z"
+    "da": "2026-10-22T07:53:20Z"
    }
   },
   {
    "workflow": "lazio-ecmwf.yml",
-   "ultimo_pubblicato": "2026102112",
-   "in_corso": {
-    "stato": "queued",
-    "da": "2026-10-22T07:53:22Z",
-    "id": 39743688078
-   },
+   "ultimo_pubblicato": "2026102200",
+   "in_corso": null,
    "ultimo_esito": {
     "esito": "success",
-    "da": "2026-10-21T19:53:28Z"
+    "da": "2026-10-22T07:53:22Z"
    }
   }
  ],
  "prove": [
+  {
+   "titolo": "PROVA castelli ecmwf wu topo2 2026102200",
+   "stato": "queued",
+   "da": "2026-10-22T09:33:18Z",
+   "esito": ""
+  },
   {
    "titolo": "PROVA castelli ecmwf tutte 2026102200",
    "stato": "queued",
@@ -399,12 +397,6 @@
    "titolo": "PROVA castelli icon2i wu noahmp 2026102112",
    "stato": "completed",
    "da": "2026-10-21T15:33:32Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA castelli icon2i wu mynn 2026102112",
-   "stato": "completed",
-   "da": "2026-10-21T15:33:30Z",
    "esito": "success"
   }
  ]
