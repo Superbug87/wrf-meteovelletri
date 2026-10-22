@@ -194,6 +194,42 @@ def osservazioni_regione(stazioni, giorno, servono):
     return out
 
 
+URL_STORICO_WU = "https://api.weather.com/v2/pws/history/hourly"
+
+
+def osservazioni_wu(stazioni, giorno, chiave):
+    """Stazioni Weather Underground scelte per la verifica (lista "wu" di stazioni_verifica.json, ID "WU_<id>"):
+    {id: {'t2','td2','vento','raffica': {ora: v}}}. Lo storico orario di WU da' medie dell'ora; l'ora di un valore e' quella in cui
+    inizia l'ora (confrontata con il valore del modello a quell'ora: una piccola approssimazione di mezz'ora). Vento in m/s."""
+    out = {}
+    d = giorno.strftime("%Y%m%d")
+    for s in stazioni:
+        wid = s["id"].replace("WU_", "", 1)
+        time.sleep(0.4)
+        r = ricevi("GET", URL_STORICO_WU, params={"stationId": wid, "format": "json", "units": "m", "numericPrecision": "decimal",
+                                                  "date": d, "apiKey": chiave})
+        if r is None or r.status_code != 200:
+            continue
+        try:
+            osservati = r.json().get("observations") or []
+        except ValueError:
+            continue
+        o = out.setdefault(s["id"], {"t2": {}, "td2": {}, "vento": {}, "raffica": {}})
+        for x in osservati:
+            try:
+                ora = datetime.fromtimestamp(int(x["epoch"]), timezone.utc).replace(minute=0, second=0, microsecond=0)
+            except (KeyError, TypeError, ValueError):
+                continue
+            m = x.get("metric", {})
+            for nome, v in (("t2", m.get("tempAvg")), ("td2", m.get("dewptAvg")),
+                            ("vento", None if m.get("windspeedAvg") is None else m["windspeedAvg"] / 3.6),
+                            ("raffica", None if m.get("windgustHigh") is None else m["windgustHigh"] / 3.6)):
+                if v is not None and abs(v) < 1e4:
+                    o[nome][ora] = float(v)
+    log(f"Weather Underground: {len(out)} stazioni con dati")
+    return out
+
+
 def _syn_t(gr):
     if len(gr) == 5 and gr[1] in "01" and gr[2:].isdigit():
         return (-1 if gr[1] == "1" else 1) * int(gr[2:]) / 10.0
@@ -311,6 +347,7 @@ def riferimento_openmeteo(punti, giorno):
 def vuoto():
     return {"t2": [0, 0.0, 0.0], "t2_giorno": [0, 0.0, 0.0], "t2_notte": [0, 0.0, 0.0], "td2": [0, 0.0, 0.0],
             "vento": [0, 0.0, 0.0], "vento_corr": [0, 0.0, 0.0], "mslp": [0, 0.0, 0.0],
+            "t2_wu": [0, 0.0, 0.0], "td2_wu": [0, 0.0, 0.0], "vento_wu": [0, 0.0, 0.0],
             "vento_classi": {str(i): [0, 0.0, 0.0] for i in range(len(CLASSI_VENTO) - 1)},
             "pioggia": {str(s): [0, 0, 0, 0] for s in SOGLIE_PIOGGIA},
             "radar": {str(s): [0, 0, 0, 0] for s in SOGLIE_RADAR}, "cicli": []}
@@ -392,6 +429,17 @@ def verifica_estratto(e, oss, quote, radar_ore, radar_mod, acc_per_scad, corr_ve
                 continue                             # l'istante iniziale e le ore assimilate non sono previsione
             acc = acc_per_scad[scadenza(ore_prev)]
             usati.add(scadenza(ore_prev))
+            if sid.startswith("WU_"):               # stazioni Weather Underground a norma: indici a parte
+                ot = o.get("t2", {}).get(t)
+                if ot is not None and -40 < ot < 50 and np.isfinite(e["t2"][k, j]):
+                    aggiungi(acc, "t2_wu", float(e["t2"][k, j]) + 0.0065 * dz - ot)
+                otd = o.get("td2", {}).get(t)
+                if otd is not None and np.isfinite(e["td2"][k, j]):
+                    aggiungi(acc, "td2_wu", float(e["td2"][k, j]) - otd)
+                ov = o.get("vento", {}).get(t)
+                if ov is not None and 0 <= ov < 60 and np.isfinite(e["vento"][k, j]):
+                    aggiungi(acc, "vento_wu", float(e["vento"][k, j]) - ov)
+                continue
             ot = o.get("t2", {}).get(t)
             if ot is not None and -40 < ot < 50 and np.isfinite(e["t2"][k, j]):
                 err = float(e["t2"][k, j]) + 0.0065 * dz - ot
@@ -476,7 +524,7 @@ def verifica_riferimento(rif, oss, ids, acc):
 def indici(acc):
     """Indici leggibili da un insieme di somme."""
     out = {}
-    for k in ("t2", "t2_giorno", "t2_notte", "td2", "vento", "vento_corr", "mslp"):
+    for k in ("t2", "t2_giorno", "t2_notte", "td2", "vento", "vento_corr", "mslp", "t2_wu", "td2_wu", "vento_wu"):
         n, s, s2 = acc.get(k, [0, 0.0, 0.0])
         out[k] = None if n == 0 else {"n": n, "medio": round(s / n, 2), "tipico": round((s2 / n) ** 0.5, 2)}
     out["pioggia"] = {}
@@ -548,8 +596,8 @@ def main():
     log(f"== Verifica del {GIORNO} (00-24 UTC)")
 
     st = json.load(open(os.path.join(QUI, "stazioni_verifica.json")))
-    quote = {s["id"]: float(s["quota"]) for s in st["regione"] + st["aeronautica"] if s.get("quota") is not None}
-    pos = {s["id"]: (s["lat"], s["lon"], float(s.get("quota") or 0)) for s in st["regione"] + st["aeronautica"]}
+    quote = {s["id"]: float(s["quota"]) for s in st["regione"] + st["aeronautica"] + st.get("wu", []) if s.get("quota") is not None}
+    pos = {s["id"]: (s["lat"], s["lon"], float(s.get("quota") or 0)) for s in st["regione"] + st["aeronautica"] + st.get("wu", [])}
 
     estratti = carica_estratti(GIORNO, a.estratti)
     servono = {str(x) for lst in estratti.values() for e in lst for x in e["stazioni"]}
@@ -558,8 +606,12 @@ def main():
     oss = osservazioni_regione(st["regione"], GIORNO, servono)
     for k, v in osservazioni_synop(st["aeronautica"], GIORNO).items():
         oss.setdefault(k, {}).update(v)
+    chiave_wu = os.environ.get("WU_API_KEY")
+    if st.get("wu") and chiave_wu:
+        for k, v in osservazioni_wu([w for w in st["wu"] if w["id"] in servono], GIORNO, chiave_wu).items():
+            oss.setdefault(k, {}).update(v)
     radar_ore, radar_mod = ({}, None) if a.senza_radar else radar_giorno(GIORNO)
-    rif = riferimento_openmeteo({k: pos[k] for k in servono if k in pos}, GIORNO)
+    rif = riferimento_openmeteo({k: pos[k] for k in servono if k in pos and not k.startswith("WU_")}, GIORNO)
 
     corr = correzioni_vento(a.archivio, GIORNO)
     risultato = {"giorno": GIORNO.isoformat(), "modelli": {}, "correzioni_vento": corr}
@@ -570,7 +622,7 @@ def main():
         if any(acc[s]["cicli"] for s in acc):
             risultato["modelli"][f"{z}-{p}"] = acc
     for z in ZONE:
-        ids = {str(x) for (zz, _), lst in estratti.items() if zz == z for e in lst for x in e["stazioni"]}
+        ids = {str(x) for (zz, _), lst in estratti.items() if zz == z for e in lst for x in e["stazioni"] if not str(x).startswith("WU_")}
         for p in PILOTI:
             acc = vuoto()
             verifica_riferimento(rif[p], oss, ids, acc)

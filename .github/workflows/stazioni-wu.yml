@@ -1,0 +1,39 @@
+name: Stazioni WU per la verifica
+
+# Aggiunge alla verifica stazioni Weather Underground "a norma" (ID separati da spazi). Legge posizione e quota da WU con la chiave
+# del repository e le scrive in strumenti/stazioni_verifica.json (lista "wu"). Vedi strumenti/aggiungi_stazioni_wu.py.
+run-name: "STAZIONI WU ${{ inputs.ids }}"
+on:
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: "ID delle stazioni WU, separati da spazi (es. IROMA123 IVELLE45)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  aggiungi:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - run: pip install -q requests
+      - name: Aggiungi
+        env:
+          WU_API_KEY: ${{ secrets.WU_API_KEY }}
+          IDS: ${{ inputs.ids }}
+        run: |
+          read -ra ELENCO <<< "$IDS"
+          python3 strumenti/aggiungi_stazioni_wu.py "${ELENCO[@]}"
+      - name: Salva
+        run: |
+          git config user.name "github-actions"; git config user.email "actions@users.noreply.github.com"
+          git add strumenti/stazioni_verifica.json
+          git diff --cached --quiet && { echo "niente da salvare"; exit 0; }
+          git commit -qm "Stazioni WU per la verifica: ${{ inputs.ids }}"
+          git push

@@ -59,7 +59,7 @@ def main():
 
     # stazioni nel dominio (fuori dalla cornice): cella piu' vicina
     st = json.load(open(a.stazioni))
-    elenco = [(s["id"], s["lat"], s["lon"]) for s in st["regione"] + st["aeronautica"]]
+    elenco = [(s["id"], s["lat"], s["lon"]) for s in st["regione"] + st["aeronautica"] + st.get("wu", [])]
     ids, jj, ii = [], [], []
     coslat = np.cos(np.radians(lat.mean()))
     for sid, la, lo in elenco:

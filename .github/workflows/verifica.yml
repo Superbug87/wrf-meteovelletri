@@ -31,5 +31,6 @@ jobs:
       - name: Verifica e pagella
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WU_API_KEY: ${{ secrets.WU_API_KEY }}      # solo per le stazioni WU a norma (lista "wu" in stazioni_verifica.json)
           GIORNO: ${{ github.event.inputs.giorno }}
         run: bash strumenti/verifica.sh ${GIORNO:+"$GIORNO"}
