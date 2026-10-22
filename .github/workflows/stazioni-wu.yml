@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       ids:
-        description: "ID delle stazioni WU, separati da spazi (es. IROMA123 IVELLE45)"
+        description: "ID delle stazioni WU separati da spazi (es. IROMA123 IVELLE45), oppure --campione 150 per una prova con 150 stazioni sparse"
         required: true
 
 permissions:
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
-      - run: pip install -q requests
+      - run: pip install -q requests numpy
       - name: Aggiungi
         env:
           WU_API_KEY: ${{ secrets.WU_API_KEY }}

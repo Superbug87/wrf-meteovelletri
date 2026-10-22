@@ -2,6 +2,7 @@
 """Aggiunge stazioni Weather Underground "a norma" alla verifica (lista "wu" di strumenti/stazioni_verifica.json).
 
   WU_API_KEY=... aggiungi_stazioni_wu.py IROMA123 ICASTE45 ...
+  WU_API_KEY=... aggiungi_stazioni_wu.py --campione 150      una prova: 150 stazioni WU sparse sul Lazio (non controllate!)
 
 Per ogni ID legge da WU posizione e quota (osservazione attuale) e li scrive nella lista. Da quel momento: gli estratti dei nuovi cicli
 includono quei punti (estrai_verifica.py) e la verifica del mattino li confronta in indici a parte (t2_wu, td2_wu, vento_wu), senza
@@ -18,10 +19,37 @@ QUI = os.path.dirname(os.path.abspath(__file__))
 URL = "https://api.weather.com/v2/pws/observations/current"
 
 
+def campione(chiave, quante):
+    """ID di stazioni WU sparse sul Lazio: la piu' vicina a ogni punto di una griglia di circa 20 km, poi le seguenti fino a `quante`.
+    Sono stazioni qualsiasi, senza controllo di qualita': servono solo a una prova."""
+    import numpy as np
+    punti = [(la, lo) for la in np.arange(40.8, 42.95, 0.18) for lo in np.arange(11.3, 14.0, 0.24)]
+    trovate, per_punto = [], []
+    for la, lo in punti:
+        r = requests.get("https://api.weather.com/v3/location/near", params={"geocode": f"{la:.4f},{lo:.4f}", "product": "pws",
+                                                                              "format": "json", "apiKey": chiave}, timeout=30)
+        try:
+            loc = r.json()["location"]
+            ids = [i for i in loc["stationId"] if i]
+        except (KeyError, ValueError, TypeError):
+            continue
+        per_punto.append(ids)
+        trovate += ids
+    scelte, viste = [], set()
+    for livello in range(10):
+        for ids in per_punto:
+            if livello < len(ids) and ids[livello] not in viste:
+                viste.add(ids[livello]); scelte.append(ids[livello])
+    print(len(punti), "punti,", len(viste), "stazioni diverse")
+    return scelte[:quante]
+
+
 def main():
     chiave = os.environ.get("WU_API_KEY")
     if not chiave or len(sys.argv) < 2:
         raise SystemExit(__doc__)
+    if sys.argv[1] == "--campione":
+        sys.argv = [sys.argv[0]] + campione(chiave, int(sys.argv[2]))
     p = os.path.join(QUI, "stazioni_verifica.json")
     testo = open(p).read()
     st = json.loads(testo)
