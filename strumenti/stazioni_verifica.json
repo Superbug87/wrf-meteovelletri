@@ -2889,5 +2889,1134 @@
 "wmo": "16253"
 }
 ],
- "wu": []
+ "wu": [
+ {
+  "id": "WU_IROME8280",
+  "nome": "IROME8280",
+  "lat": 41.728,
+  "lon": 12.284,
+  "quota": 7.6,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IANZIO41",
+  "nome": "IANZIO41",
+  "lat": 41.455,
+  "lon": 12.62,
+  "quota": 3.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISABAU3",
+  "nome": "ISABAU3",
+  "lat": 41.306383,
+  "lon": 13.009055,
+  "quota": 2.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILAZIOVE9",
+  "nome": "ILAZIOVE9",
+  "lat": 40.788319,
+  "lon": 13.422429,
+  "quota": 14.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IFORIO9",
+  "nome": "IFORIO9",
+  "lat": 40.741568,
+  "lon": 13.868085,
+  "quota": 12.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICASAM14",
+  "nome": "ICASAM14",
+  "lat": 40.750159,
+  "lon": 13.908856,
+  "quota": 1.2,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IFIUMI18",
+  "nome": "IFIUMI18",
+  "lat": 41.769248,
+  "lon": 12.220781,
+  "quota": 0.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISANFE24",
+  "nome": "ISANFE24",
+  "lat": 41.251761,
+  "lon": 13.092946,
+  "quota": 6.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IMONDR12",
+  "nome": "IMONDR12",
+  "lat": 41.10967,
+  "lon": 13.898461,
+  "quota": 1.2,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IVILLA1812",
+  "nome": "IVILLA1812",
+  "lat": 40.959612,
+  "lon": 14.071971,
+  "quota": 6.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ITERRA145",
+  "nome": "ITERRA145",
+  "lat": 41.286103,
+  "lon": 13.21955,
+  "quota": 1.2,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IGAETA11",
+  "nome": "IGAETA11",
+  "lat": 41.213,
+  "lon": 13.56,
+  "quota": 1.5,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISESSA27",
+  "nome": "ISESSA27",
+  "lat": 41.188363,
+  "lon": 13.814316,
+  "quota": 1.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IMONDR1",
+  "nome": "IMONDR1",
+  "lat": 41.112999,
+  "lon": 13.899,
+  "quota": 9.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IROMELID3",
+  "nome": "IROMELID3",
+  "lat": 41.719376,
+  "lon": 12.302118,
+  "quota": 10.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IANZIO49",
+  "nome": "IANZIO49",
+  "lat": 41.499,
+  "lon": 12.584,
+  "quota": 6.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILATIN64",
+  "nome": "ILATIN64",
+  "lat": 41.416,
+  "lon": 12.82,
+  "quota": 1.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISABAU17",
+  "nome": "ISABAU17",
+  "lat": 41.317,
+  "lon": 13.02,
+  "quota": 1.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ITERRA192",
+  "nome": "ITERRA192",
+  "lat": 41.314,
+  "lon": 13.24,
+  "quota": 5.5,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IFONDI9",
+  "nome": "IFONDI9",
+  "lat": 41.342949,
+  "lon": 13.45072,
+  "quota": 3.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IESPER24",
+  "nome": "IESPER24",
+  "lat": 41.384529,
+  "lon": 13.680707,
+  "quota": 481.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IROCCA168",
+  "nome": "IROCCA168",
+  "lat": 41.296987,
+  "lon": 13.972464,
+  "quota": 324.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISANTA373",
+  "nome": "ISANTA373",
+  "lat": 42.051,
+  "lon": 11.828,
+  "quota": 11.3,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IPOMEZ37",
+  "nome": "IPOMEZ37",
+  "lat": 41.649,
+  "lon": 12.433,
+  "quota": 0.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IARDEA18",
+  "nome": "IARDEA18",
+  "lat": 41.549,
+  "lon": 12.544,
+  "quota": 2.4,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IAPRIL36",
+  "nome": "IAPRIL36",
+  "lat": 41.535853,
+  "lon": 12.740811,
+  "quota": 10.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISERMO6",
+  "nome": "ISERMO6",
+  "lat": 41.515263,
+  "lon": 12.96733,
+  "quota": 4.6,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IMAENZ1",
+  "nome": "IMAENZ1",
+  "lat": 41.534,
+  "lon": 13.18,
+  "quota": 66.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IFROSINO7",
+  "nome": "IFROSINO7",
+  "lat": 41.527344,
+  "lon": 13.499174,
+  "quota": 104.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IPIEDI12",
+  "nome": "IPIEDI12",
+  "lat": 41.496454,
+  "lon": 13.761291,
+  "quota": 35.4,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IVALLE383",
+  "nome": "IVALLE383",
+  "lat": 41.548714,
+  "lon": 13.913025,
+  "quota": 631.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IRMROME2",
+  "nome": "IRMROME2",
+  "lat": 41.950001,
+  "lon": 12.07,
+  "quota": 3.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IPOMEZ38",
+  "nome": "IPOMEZ38",
+  "lat": 41.701612,
+  "lon": 12.541855,
+  "quota": 36.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IVELLE28",
+  "nome": "IVELLE28",
+  "lat": 41.700646,
+  "lon": 12.755248,
+  "quota": 152.4,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISEGNI9",
+  "nome": "ISEGNI9",
+  "lat": 41.724,
+  "lon": 13.023,
+  "quota": 214.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IFEREN1",
+  "nome": "IFEREN1",
+  "lat": 41.654564,
+  "lon": 13.226623,
+  "quota": 150.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IVEROL9",
+  "nome": "IVEROL9",
+  "lat": 41.679504,
+  "lon": 13.43717,
+  "quota": 452.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICASAL91",
+  "nome": "ICASAL91",
+  "lat": 41.665875,
+  "lon": 13.697179,
+  "quota": 399.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IALFED8",
+  "nome": "IALFED8",
+  "lat": 41.735,
+  "lon": 14.037,
+  "quota": 278.6,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICIVIT53",
+  "nome": "ICIVIT53",
+  "lat": 42.09,
+  "lon": 11.794,
+  "quota": 30.5,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISANTA1173",
+  "nome": "ISANTA1173",
+  "lat": 42.038326,
+  "lon": 11.878016,
+  "quota": 11.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILAZIOAR11",
+  "nome": "ILAZIOAR11",
+  "lat": 41.912941,
+  "lon": 12.260547,
+  "quota": 15.2,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IROME180",
+  "nome": "IROME180",
+  "lat": 41.87431,
+  "lon": 12.506569,
+  "quota": 48.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IZAGAR30",
+  "nome": "IZAGAR30",
+  "lat": 41.878311,
+  "lon": 12.752595,
+  "quota": 40.2,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISANVI15",
+  "nome": "ISANVI15",
+  "lat": 41.882,
+  "lon": 12.982,
+  "quota": 219.5,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ITREVI108",
+  "nome": "ITREVI108",
+  "lat": 41.869,
+  "lon": 13.26,
+  "quota": 228.6,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ITRASA4",
+  "nome": "ITRASA4",
+  "lat": 41.951133,
+  "lon": 13.537035,
+  "quota": 214.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICAMPO496",
+  "nome": "ICAMPO496",
+  "lat": 41.813167,
+  "lon": 13.743773,
+  "quota": 554.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IROCCA60",
+  "nome": "IROCCA60",
+  "lat": 41.852422,
+  "lon": 14.078292,
+  "quota": 1236.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ITARQU17",
+  "nome": "ITARQU17",
+  "lat": 42.242,
+  "lon": 11.688,
+  "quota": 0.3,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICIVIT33",
+  "nome": "ICIVIT33",
+  "lat": 42.096,
+  "lon": 11.79,
+  "quota": 6.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICIVIT21",
+  "nome": "ICIVIT21",
+  "lat": 42.070781,
+  "lon": 11.816722,
+  "quota": 7.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICERVE53",
+  "nome": "ICERVE53",
+  "lat": 42.027408,
+  "lon": 12.061125,
+  "quota": 21.3,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IANGUI27",
+  "nome": "IANGUI27",
+  "lat": 42.086,
+  "lon": 12.269,
+  "quota": 203.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IROME8368",
+  "nome": "IROME8368",
+  "lat": 42.042887,
+  "lon": 12.463867,
+  "quota": 20.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IPALOM18",
+  "nome": "IPALOM18",
+  "lat": 42.062,
+  "lon": 12.759,
+  "quota": 76.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IORICO1",
+  "nome": "IORICO1",
+  "lat": 42.048605,
+  "lon": 13.039262,
+  "quota": 184.4,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ITAGLI52",
+  "nome": "ITAGLI52",
+  "lat": 42.071091,
+  "lon": 13.212995,
+  "quota": 1040.6,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IAVEZZ6",
+  "nome": "IAVEZZ6",
+  "lat": 42.044,
+  "lon": 13.429,
+  "quota": 714.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISULMO7",
+  "nome": "ISULMO7",
+  "lat": 42.046498,
+  "lon": 13.931817,
+  "quota": 124.4,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICAPAL3",
+  "nome": "ICAPAL3",
+  "lat": 42.41,
+  "lon": 11.375,
+  "quota": 4.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ITARQU27",
+  "nome": "ITARQU27",
+  "lat": 42.242926,
+  "lon": 11.767089,
+  "quota": 26.5,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IBLERA1",
+  "nome": "IBLERA1",
+  "lat": 42.273966,
+  "lon": 12.026209,
+  "quota": 269.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISUTRI23",
+  "nome": "ISUTRI23",
+  "lat": 42.243,
+  "lon": 12.247,
+  "quota": 82.3,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISANTO352",
+  "nome": "ISANTO352",
+  "lat": 42.228493,
+  "lon": 12.495506,
+  "quota": 237.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILAZIOPO6",
+  "nome": "ILAZIOPO6",
+  "lat": 42.262112,
+  "lon": 12.687045,
+  "quota": 259.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ITORRI96",
+  "nome": "ITORRI96",
+  "lat": 42.267559,
+  "lon": 12.876927,
+  "quota": 192.6,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IRIETINE2",
+  "nome": "IRIETINE2",
+  "lat": 42.194874,
+  "lon": 13.176609,
+  "quota": 826.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IOCRE4",
+  "nome": "IOCRE4",
+  "lat": 42.287671,
+  "lon": 13.471174,
+  "quota": 812.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_INAVEL4",
+  "nome": "INAVEL4",
+  "lat": 42.23506,
+  "lon": 13.732025,
+  "quota": 699.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IPIETR6",
+  "nome": "IPIETR6",
+  "lat": 42.272,
+  "lon": 13.911,
+  "quota": 512.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IORBET12",
+  "nome": "IORBET12",
+  "lat": 42.420227,
+  "lon": 11.29856,
+  "quota": 9.4,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IMONTA181",
+  "nome": "IMONTA181",
+  "lat": 42.401358,
+  "lon": 11.49753,
+  "quota": 21.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICANIN11",
+  "nome": "ICANIN11",
+  "lat": 42.433,
+  "lon": 11.72,
+  "quota": 119.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IVITER51",
+  "nome": "IVITER51",
+  "lat": 42.413956,
+  "lon": 12.06199,
+  "quota": 75.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IOTRIC1",
+  "nome": "IOTRIC1",
+  "lat": 42.438445,
+  "lon": 12.530601,
+  "quota": 70.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IGRECC2",
+  "nome": "IGRECC2",
+  "lat": 42.452249,
+  "lon": 12.754592,
+  "quota": 170.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IRIETI22",
+  "nome": "IRIETI22",
+  "lat": 42.453971,
+  "lon": 12.987114,
+  "quota": 515.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILAQUI39",
+  "nome": "ILAQUI39",
+  "lat": 42.394493,
+  "lon": 13.282521,
+  "quota": 239.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILAQUI36",
+  "nome": "ILAQUI36",
+  "lat": 42.365846,
+  "lon": 13.452077,
+  "quota": 631.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICALAS9",
+  "nome": "ICALAS9",
+  "lat": 42.325843,
+  "lon": 13.694489,
+  "quota": 1219.2,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILORET28",
+  "nome": "ILORET28",
+  "lat": 42.425729,
+  "lon": 13.960124,
+  "quota": 109.4,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IMAGLI37",
+  "nome": "IMAGLI37",
+  "lat": 42.6013,
+  "lon": 11.281114,
+  "quota": 84.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IMANCI38",
+  "nome": "IMANCI38",
+  "lat": 42.60852,
+  "lon": 11.52692,
+  "quota": 95.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IGRADOLI3",
+  "nome": "IGRADOLI3",
+  "lat": 42.630455,
+  "lon": 11.849186,
+  "quota": 505.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICELLE171",
+  "nome": "ICELLE171",
+  "lat": 42.558855,
+  "lon": 12.148322,
+  "quota": 285.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISANGE141",
+  "nome": "ISANGE141",
+  "lat": 42.606,
+  "lon": 12.538,
+  "quota": 299.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IFEREN3",
+  "nome": "IFEREN3",
+  "lat": 42.619223,
+  "lon": 12.736946,
+  "quota": 502.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILEONE2",
+  "nome": "ILEONE2",
+  "lat": 42.579,
+  "lon": 12.953,
+  "quota": 947.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILAZIOLA26",
+  "nome": "ILAZIOLA26",
+  "lat": 42.630753,
+  "lon": 13.232709,
+  "quota": 1029.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ITERAM9",
+  "nome": "ITERAM9",
+  "lat": 42.62012,
+  "lon": 13.618172,
+  "quota": 473.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IBASCI1",
+  "nome": "IBASCI1",
+  "lat": 42.59655,
+  "lon": 13.732747,
+  "quota": 310.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICAMPA38",
+  "nome": "ICAMPA38",
+  "lat": 42.786344,
+  "lon": 11.272249,
+  "quota": 67.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISEMPR1",
+  "nome": "ISEMPR1",
+  "lat": 42.726002,
+  "lon": 11.541,
+  "quota": 563.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISORAN13",
+  "nome": "ISORAN13",
+  "lat": 42.765881,
+  "lon": 11.773527,
+  "quota": 335.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICASTE516",
+  "nome": "ICASTE516",
+  "lat": 42.785416,
+  "lon": 12.02819,
+  "quota": 48.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ITODI9",
+  "nome": "ITODI9",
+  "lat": 42.785313,
+  "lon": 12.312224,
+  "quota": 579.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IMASSA92",
+  "nome": "IMASSA92",
+  "lat": 42.769323,
+  "lon": 12.509372,
+  "quota": 317.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISPOLE8",
+  "nome": "ISPOLE8",
+  "lat": 42.793411,
+  "lon": 12.750475,
+  "quota": 241.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICASCI23",
+  "nome": "ICASCI23",
+  "lat": 42.717519,
+  "lon": 13.011518,
+  "quota": 615.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IARQUA3",
+  "nome": "IARQUA3",
+  "lat": 42.807331,
+  "lon": 13.290697,
+  "quota": 1155.2,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IASCOL6",
+  "nome": "IASCOL6",
+  "lat": 42.843795,
+  "lon": 13.56004,
+  "quota": 91.4,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICIVIT107",
+  "nome": "ICIVIT107",
+  "lat": 42.782816,
+  "lon": 13.721019,
+  "quota": 106.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ITERAMOT2",
+  "nome": "ITERAMOT2",
+  "lat": 42.797218,
+  "lon": 13.946497,
+  "quota": 0.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IANZIO15",
+  "nome": "IANZIO15",
+  "lat": 41.495,
+  "lon": 12.59,
+  "quota": 18.3,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IANZIO52",
+  "nome": "IANZIO52",
+  "lat": 41.468242,
+  "lon": 12.635426,
+  "quota": 104.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_INETTU1",
+  "nome": "INETTU1",
+  "lat": 41.463001,
+  "lon": 12.647,
+  "quota": 39.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISANFE189",
+  "nome": "ISANFE189",
+  "lat": 41.252,
+  "lon": 13.104,
+  "quota": 4.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IFORIO13",
+  "nome": "IFORIO13",
+  "lat": 40.733,
+  "lon": 13.868,
+  "quota": 26.5,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IISCHI21",
+  "nome": "IISCHI21",
+  "lat": 40.743,
+  "lon": 13.946,
+  "quota": 1.5,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IGIUGL21",
+  "nome": "IGIUGL21",
+  "lat": 40.915,
+  "lon": 14.058,
+  "quota": 2.7,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISABAU16",
+  "nome": "ISABAU16",
+  "lat": 41.299903,
+  "lon": 13.030613,
+  "quota": 6.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IGAETA4",
+  "nome": "IGAETA4",
+  "lat": 41.218978,
+  "lon": 13.568951,
+  "quota": 7.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IMINTU3",
+  "nome": "IMINTU3",
+  "lat": 41.251018,
+  "lon": 13.714836,
+  "quota": 0.3,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICAMPANI85",
+  "nome": "ICAMPANI85",
+  "lat": 41.109234,
+  "lon": 13.905779,
+  "quota": 7.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IPOMEZ9",
+  "nome": "IPOMEZ9",
+  "lat": 41.607,
+  "lon": 12.477,
+  "quota": 0.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILATIN67",
+  "nome": "ILATIN67",
+  "lat": 41.406402,
+  "lon": 12.869571,
+  "quota": 0.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IFONDI16",
+  "nome": "IFONDI16",
+  "lat": 41.353496,
+  "lon": 13.435552,
+  "quota": 3.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IFORMIA6",
+  "nome": "IFORMIA6",
+  "lat": 41.281261,
+  "lon": 13.679749,
+  "quota": 256.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISESSA11",
+  "nome": "ISESSA11",
+  "lat": 41.277,
+  "lon": 13.93,
+  "quota": 411.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILZISOLA6",
+  "nome": "ILZISOLA6",
+  "lat": 41.757961,
+  "lon": 12.25674,
+  "quota": 1.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IROME8378",
+  "nome": "IROME8378",
+  "lat": 41.736,
+  "lon": 12.277,
+  "quota": 1.5,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IPOMEZ41",
+  "nome": "IPOMEZ41",
+  "lat": 41.649,
+  "lon": 12.433,
+  "quota": 3.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IARDEA9",
+  "nome": "IARDEA9",
+  "lat": 41.564457,
+  "lon": 12.525777,
+  "quota": 1.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILATIN5",
+  "nome": "ILATIN5",
+  "lat": 41.510181,
+  "lon": 12.77399,
+  "quota": 22.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILATIN60",
+  "nome": "ILATIN60",
+  "lat": 41.524483,
+  "lon": 12.941654,
+  "quota": 4.3,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IGIULI3",
+  "nome": "IGIULI3",
+  "lat": 41.531,
+  "lon": 13.278,
+  "quota": 150.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICEPRA1",
+  "nome": "ICEPRA1",
+  "lat": 41.545,
+  "lon": 13.517,
+  "quota": 104.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILAZIOPO8",
+  "nome": "ILAZIOPO8",
+  "lat": 41.458069,
+  "lon": 13.667422,
+  "quota": 97.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICASSI6",
+  "nome": "ICASSI6",
+  "lat": 41.51,
+  "lon": 13.883,
+  "quota": 279.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IFIUMI35",
+  "nome": "IFIUMI35",
+  "lat": 41.812282,
+  "lon": 12.212502,
+  "quota": 1.5,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IPOMEZ1",
+  "nome": "IPOMEZ1",
+  "lat": 41.667999,
+  "lon": 12.504,
+  "quota": 29.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IVELLE42",
+  "nome": "IVELLE42",
+  "lat": 41.71505,
+  "lon": 12.744325,
+  "quota": 184.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ISEGNI8",
+  "nome": "ISEGNI8",
+  "lat": 41.720538,
+  "lon": 13.031137,
+  "quota": 202.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IVEROL2",
+  "nome": "IVEROL2",
+  "lat": 41.703178,
+  "lon": 13.413976,
+  "quota": 637.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ICAMPO306",
+  "nome": "ICAMPO306",
+  "lat": 41.735793,
+  "lon": 13.687686,
+  "quota": 587.0,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IALFED14",
+  "nome": "IALFED14",
+  "lat": 41.73933,
+  "lon": 14.038879,
+  "quota": 268.2,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_ILADIS5",
+  "nome": "ILADIS5",
+  "lat": 41.951442,
+  "lon": 12.070754,
+  "quota": 1.8,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IFIUMI36",
+  "nome": "IFIUMI36",
+  "lat": 41.913755,
+  "lon": 12.251069,
+  "quota": 21.9,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IROME8461",
+  "nome": "IROME8461",
+  "lat": 41.87362,
+  "lon": 12.488993,
+  "quota": 6.1,
+  "fonte": "Weather Underground (a norma)"
+ },
+ {
+  "id": "WU_IZAGAR21",
+  "nome": "IZAGAR21",
+  "lat": 41.862,
+  "lon": 12.749,
+  "quota": 157.9,
+  "fonte": "Weather Underground (a norma)"
+ }
+]
 }
