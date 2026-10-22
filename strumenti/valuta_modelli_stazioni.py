@@ -65,8 +65,16 @@ def main():
         t = datetime.strptime(c, "%Y%m%d%H").replace(tzinfo=timezone.utc)
         for h in range(0, 49, 6):
             giorni.add((t + timedelta(hours=h)).date())
+    import pickle
+    cache = os.path.join(a.out, "osservazioni.pkl")
     oss = {}
-    for g in sorted(giorni):
+    mancanti = sorted(giorni)
+    if os.path.exists(cache):
+        c = pickle.load(open(cache, "rb"))
+        oss, fatti = c["oss"], c["giorni"]
+        mancanti = [g for g in sorted(giorni) if g not in fatti]
+        print("osservazioni dalla copia locale, da scaricare:", len(mancanti), "giorni", flush=True)
+    for g in mancanti:
         V.GIORNO = g
         for k, v in V.osservazioni_regione(st["regione"], g, servono).items():
             for var, serie in v.items():
@@ -74,6 +82,7 @@ def main():
         for k, v in V.osservazioni_synop(st["aeronautica"], g).items():
             for var, serie in v.items():
                 oss.setdefault(k, {}).setdefault(var, {}).update(serie)
+    pickle.dump({"oss": oss, "giorni": set(giorni) | (c["giorni"] if os.path.exists(cache) and "c" in dir() else set())}, open(cache, "wb"))
     for k, o in oss.items():                                   # umidita' dei SYNOP da T e rugiada
         if "ur" not in o and "td2" in o and "t2" in o:
             o["ur"] = {t: float(ur_magnus(o["t2"][t], td)) for t, td in o["td2"].items() if t in o["t2"]}

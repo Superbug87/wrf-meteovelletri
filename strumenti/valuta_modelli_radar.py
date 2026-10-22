@@ -33,6 +33,20 @@ SOGLIE = (0.5, 2.0)
 BIN = 3                                           # ore per punto del grafico
 
 
+def radar_orario_cache(t_ini, t_fine, cartella):
+    """Come radar_orario, ma tiene in cartella/radar_orario.npz le ore gia' scaricate (il download e' la parte lenta)."""
+    import pickle
+    f = os.path.join(cartella, "radar_orario.pkl")
+    if os.path.exists(f):
+        c = pickle.load(open(f, "rb"))
+        if c["t_ini"] <= t_ini and c["t_fine"] >= t_fine:
+            print("radar dalla copia locale", flush=True)
+            return c["per"], c["orig"]
+    per, orig = radar_orario(t_ini, t_fine)
+    pickle.dump({"t_ini": t_ini, "t_fine": t_fine, "per": per, "orig": orig}, open(f, "wb"))
+    return per, orig
+
+
 def radar_orario(t_ini, t_fine):
     """{ora_fine_ms: matrice 2 km (mm/h medi nell'ora che finisce a quell'istante)}, orig, ora per ora."""
     n = int((t_fine - t_ini) / 300000) + 1
@@ -57,6 +71,8 @@ def main():
     ap.add_argument("--cicli", type=int, default=0, help="con --ridisegna: numero di cicli da scrivere nel titolo")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
+    import valuta_ciclo_rapido as VC
+    VC.NB = 10 if a.zona == "lazio" else 5            # 20 km sul Lazio, 10 km sui Castelli (il dominio e' di poche decine di km)
     if a.ridisegna:
         J = json.load(open(a.ridisegna))
         acc = {tuple(k.split("|")): {(int(b), float(s)): x for kk, x in v["fss"].items() for b, s in [kk.split("|")]} for k, v in J.items()}
@@ -79,7 +95,7 @@ def main():
     t0 = int(datetime.strptime(cicli[0], "%Y%m%d%H").replace(tzinfo=timezone.utc).timestamp() * 1000)
     t1 = int((datetime.strptime(cicli[-1], "%Y%m%d%H").replace(tzinfo=timezone.utc) + timedelta(hours=48)).timestamp() * 1000)
     print("radar", cicli[0], "->", cicli[-1], "+48 h", flush=True)
-    per, orig = radar_orario(t0, t1)
+    per, orig = radar_orario_cache(t0, t1, a.out)
     print("ore di radar:", len(per), flush=True)
     H, W = next(iter(per.values())).shape
     lat_r, lon_r = lonlat_griglia(orig, H, W)
@@ -168,8 +184,9 @@ def disegna(acc, bias, zona, ncicli, out):
             assi[riga][col].grid(alpha=.3)
             assi[riga][col].set_xlabel("ore di previsione")
         assi[2][col].axhline(1, color="k", lw=.8)
-    assi[0][0].set_ylabel("FSS 20 km, ≥ 0,5 mm/h (1 = perfetto)")
-    assi[1][0].set_ylabel("FSS 20 km, ≥ 2 mm/h")
+    km = 20 if zona == "lazio" else 10
+    assi[0][0].set_ylabel(f"FSS {km} km, ≥ 0,5 mm/h (1 = perfetto)")
+    assi[1][0].set_ylabel(f"FSS {km} km, ≥ 2 mm/h")
     assi[2][0].set_ylabel("pioggia prevista / osservata")
     for riga in range(2):
         for col in range(3):
