@@ -73,6 +73,12 @@ for _z in ("castelli", "lazio"):
 # normali che finisce il suo turno si rimette in coda dietro agli altri. Per lasciare sempre posti liberi ai run normali (al
 # massimo 4 insieme) le prove ne usano al piu' MAX_PROVE alla volta; le altre aspettano la sveglia dopo.
 MAX_PROVE = 12
+# Le prove di fisica usano i dati scaricati dal run ufficiale (cache): se partono prima che il run ufficiale li abbia scaricati, ognuna
+# li chiede da capo e lo spazio dell'account MeteoHub si riempie (22/10/2026: 10 richieste insieme, run ufficiale fallito). Quindi una prova
+# parte solo se il run ufficiale dello stesso ciclo, zona e modello e' partito da almeno ATTESA_UFFICIALE e non e' fallito, e a ogni
+# sveglia se ne lanciano al massimo MAX_NUOVE_PER_SVEGLIA (scaglionate di 15 minuti).
+ATTESA_UFFICIALE = timedelta(minutes=25)
+MAX_NUOVE_PER_SVEGLIA = 3
 ATTIVI = ("queued", "in_progress", "waiting", "pending", "requested")
 FINESTRA = timedelta(hours=10)
 TENTATIVI = 3
@@ -139,6 +145,23 @@ def pubblicato(ramo, ciclo):
     r = subprocess.run(["gh", "api", f"repos/{REPO}/contents/archivio/{ciclo}?ref={ramo}", "--silent"],
                        capture_output=True, text=True)
     return r.returncode == 0
+
+
+def ufficiale_pronto(zona, pilota, c, adesso):
+    """None se il run ufficiale di quel ciclo ha gia' scaricato i dati (partito da abbastanza ed e' vivo o riuscito),
+    altrimenti il motivo per aspettare."""
+    wf = {"castelli": "castelli", "lazio": "lazio"}[zona] + f"-{pilota}.yml"
+    nome = f" {c}".lower()
+    run = [r for r in gh("run", "list", "-R", REPO, "--workflow", wf, "-L", "10", "--json", "displayTitle,status,conclusion,createdAt")
+           if r["displayTitle"].lower().endswith(nome)]
+    if not run:
+        return f"il run ufficiale {wf} del ciclo {c} non c'e'"
+    r = max(run, key=lambda x: x["createdAt"])
+    if r["status"] == "completed" and r["conclusion"] != "success":
+        return f"il run ufficiale del ciclo {c} e' {r['conclusion']}"
+    if adesso - quando(r["createdAt"]) < ATTESA_UFFICIALE:
+        return f"il run ufficiale del ciclo {c} e' partito da meno di {ATTESA_UFFICIALE.seconds // 60} minuti"
+    return None
 
 
 def decidi(runs, partenza, adesso):
@@ -209,6 +232,12 @@ def main():
             elenco = gh("run", "list", "-R", REPO, "--workflow", "sperimentale.yml", "-L", "100", "--json", "displayTitle,status")
             fatte = {r["displayTitle"].lower() for r in elenco} | memoria
             in_corso = sum(r["status"] in ATTIVI for r in elenco) + lanciate_ora
+            usa_dati_ufficiali = prova["pilota"] in ("icon2i", "ecmwf")
+            if usa_dati_ufficiali:
+                attesa = ufficiale_pronto(prova["zona"], prova["pilota"], c, adesso)
+                if attesa:
+                    print(f"  sperimentale.yml: prove {prova['zona']} {prova['pilota']} {c} rimandate: {attesa}")
+                    continue
             for v in prova["varianti"]:
                 for f in prova.get("fisiche") or ("",):
                     # stesso titolo che sperimentale.yml da' al run (run-name): se c'e' gia', anche fallito, non si rilancia
@@ -217,6 +246,9 @@ def main():
                         continue
                     if in_corso >= MAX_PROVE:
                         print(f"  sperimentale.yml: rimando {titolo} ({in_corso} prove gia' in coda o in corso)")
+                        continue
+                    if usa_dati_ufficiali and lanciate_ora >= MAX_NUOVE_PER_SVEGLIA:
+                        print(f"  sperimentale.yml: rimando {titolo} (gia' {lanciate_ora} prove lanciate in questa sveglia)")
                         continue
                     in_corso += 1; lanciate_ora += 1
                     print(f"  sperimentale.yml: LANCIO {titolo}")
