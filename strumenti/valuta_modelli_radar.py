@@ -53,8 +53,16 @@ def main():
     ap.add_argument("--zona", default="lazio", choices=["lazio", "castelli"])
     ap.add_argument("--giorni", type=int, default=5)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--ridisegna", help="rifa solo il grafico dal JSON gia' calcolato")
+    ap.add_argument("--cicli", type=int, default=0, help="con --ridisegna: numero di cicli da scrivere nel titolo")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
+    if a.ridisegna:
+        J = json.load(open(a.ridisegna))
+        acc = {tuple(k.split("|")): {(int(b), float(s)): x for kk, x in v["fss"].items() for b, s in [kk.split("|")]} for k, v in J.items()}
+        bias = {tuple(k.split("|")): {int(b): x for b, x in v["bias"].items()} for k, v in J.items()}
+        disegna(acc, bias, a.zona, a.cicli, os.path.join(a.out, f"confronto_modelli_radar_{a.zona}.png"))
+        return
     adesso = datetime.now(timezone.utc)
     files = {}
     for f in glob.glob(os.path.join(a.estratti, f"estratto_{a.zona}-*.npz")):
@@ -124,7 +132,18 @@ def nome(p, v):
     return base + (f" + {v}" if v else " (ufficiale)")
 
 
+def ore_utili(bias):
+    """Gruppi di scadenza con abbastanza pioggia osservata (almeno il 25% di quella del gruppo piu' piovoso, uguale per tutte le versioni)."""
+    tot = {}
+    for k, d in bias.items():
+        for b, x in d.items():
+            tot[b] = max(tot.get(b, 0.0), x[1])
+    top = max(tot.values()) if tot else 0.0
+    return {b for b, v in tot.items() if v >= 0.25 * top}
+
+
 def disegna(acc, bias, zona, ncicli, out):
+    utili = ore_utili(bias)
     famiglie = [("Famiglia ECMWF", lambda p: p == "ecmwf"), ("Famiglia ICON-2I", lambda p: p == "icon2i"),
                 ("ICON-EU e GFS (prove) con gli ufficiali", lambda p: p in ("iconeu", "gfs"))]
     cm = plt.get_cmap("tab10")
@@ -136,11 +155,11 @@ def disegna(acc, bias, zona, ncicli, out):
             ufficiale = k[1] == ""
             colore = {"ecmwf": "#264653", "icon2i": "#6a4c93"}[k[0]] if ufficiale and k[0] in ("ecmwf", "icon2i") else cm(i % 10)
             for riga, s in enumerate(SOGLIE):
-                bs = sorted({b for (b, ss) in acc[k] if ss == s})
+                bs = sorted({b for (b, ss) in acc[k] if ss == s and b in utili})
                 y = [1 - acc[k][(b, s)][0] / max(acc[k][(b, s)][1], 1e-9) for b in bs]
                 assi[riga][col].plot([b * BIN + (BIN + 1) / 2 for b in bs], y, color=colore, lw=3 if ufficiale else 1.4,
                                      marker="o" if ufficiale else None, ms=4, label=nome(*k))
-            bs = sorted(bias[k])
+            bs = sorted(b for b in bias[k] if b in utili)
             assi[2][col].plot([b * BIN + (BIN + 1) / 2 for b in bs], [bias[k][b][0] / max(bias[k][b][1], 1e-9) for b in bs],
                               color=colore, lw=3 if ufficiale else 1.4)
         assi[0][col].set_title(titolo, fontsize=11)
@@ -159,6 +178,7 @@ def disegna(acc, bias, zona, ncicli, out):
     for col in (1, 2):
         assi[2][col].set_ylim(0, 3)
     fig.suptitle(f"Tutte le versioni di WRF contro il radar - zona {zona} - {ncicli} cicli (linea spessa = versione ufficiale)", fontsize=13)
+    fig.text(0.5, 0.005, "Sono disegnate solo le scadenze in cui il radar ha visto pioggia abbastanza diffusa; con un solo evento le curve seguono i tempi di quell'evento.", ha="center", fontsize=9)
     fig.tight_layout()
     fig.savefig(out, dpi=110)
 
