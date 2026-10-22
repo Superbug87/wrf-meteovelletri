@@ -108,7 +108,7 @@ FSS 20 km, 0,5 mm/h:
 FSS 10 km, 2 mm/h: unif 0.82/0.79/0.68/0.53/0.26/0.13; rad0 0.21/0.42/0.49/0.32/0.27/0.21; radq 0.32/0.48/0.48/0.36/0.32/0.23.
 
 radq - rad0 (bootstrap, 90%): +0.28 [+0.21,+0.36] a +1 h, +0.18 [+0.11,+0.27] a +2 h, poi +0.03..+0.08 non sempre
-significativo. Per ciclo: radq meglio di rad0 nelle prime 3 ore in 15 cicli su 17, uguale negli altri.
+significativo. Per ciclo (FSS medio +1..+3 h): radq meglio di rad0 in 15 cicli su 17, pari in 1, appena peggio (-0,02) in 1.
 Bias: rad0 0.26 a +1 h e 0.51 a +2 h (lo spin-up: WRF partito da ECMWF non ha nubi ne' pioggia e ci mette 2-3 ore a
 farle); radq 0.51 e 0.81.
 
@@ -126,3 +126,31 @@ Cosa vuol dire:
   (peggiora, -0,1): all'emissione WRF ha troppo poca pioggia per stimare lo spostamento.
 - Ora di arrivo nei punti: la fusione riduce i mancati (dal 44% di unif e 29% di anvil al 17-20%) ma aumenta i falsi
   allarmi (punti rimasti asciutti dove si prevedeva pioggia: 11% unif, 35% anvil, 30-40% fusioni).
+
+## Risultati 5 - radq-radnubi (umidita' nella prima ora + pioggia/nubi iniziali dal radar) su 18 cicli
+Stessi cicli di prima piu' il 21/10 06Z (18 emissioni, 3 eventi). FSS 20 km, 0,5 mm/h:
+
+| | +1h | +2h | +3h | +4h | +5h | +6h |
+|---|---|---|---|---|---|---|
+| radar unif (in uso) | 0.90 | 0.79 | 0.72 | 0.63 | 0.44 | 0.29 |
+| radar unif0 (senza velocita' minima) | 0.92 | 0.80 | 0.73 | 0.64 | 0.47 | 0.31 |
+| radar anvil | 0.92 | 0.82 | 0.68 | 0.57 | 0.45 | 0.32 |
+| WRF rad0 | 0.26 | 0.45 | 0.58 | 0.48 | 0.45 | 0.36 |
+| WRF radq | 0.55 | 0.64 | 0.60 | 0.57 | 0.51 | 0.40 |
+| WRF radq-radnubi | 0.67 | 0.66 | 0.64 | 0.61 | 0.55 | 0.41 |
+| fusione anvil + rad0 (pesi fissi 0.9/0.7/0.5/0.3/0.2/0.1) | 0.92 | 0.81 | 0.74 | 0.61 | 0.54 | 0.37 |
+| fusione anvil + radq-radnubi (pesi fissi) | 0.92 | 0.81 | 0.70 | 0.64 | 0.56 | 0.40 |
+
+FSS 10 km, 2 mm/h: radnubi 0.36/0.48/0.50/0.43/0.36/0.23 contro rad0 0.19/0.39/0.48/0.31/0.27/0.22 e unif
+0.81/0.76/0.66/0.51/0.25/0.12.
+radq-radnubi - rad0 (bootstrap 90%): +0.41 [+0.31,+0.50] a +1 h, +0.21 [+0.13,+0.32] a +2 h, +0.06 [-0.03,+0.17],
++0.13 [+0.04,+0.22], +0.10 [+0.03,+0.18], +0.05 [-0.02,+0.11]. radq-radnubi - radq: +0.12 [+0.06,+0.16] a +1 h,
++0.04 [+0.01,+0.08] a +4 e +5 h.
+Bias +1 h: rad0 0.25, radq 0.49, radnubi 0.74. Ora di arrivo nei punti: mancati rad0 44%, radq 30%, radnubi 23%
+(falsi allarmi 17%, 30%, 35%).
+Fusione anvil + rad0 contro solo anvil: -0,004 a +1 h, +0.05 [+0.01,+0.11] a +3 h, +0.09 [0.00,+0.20] a +5 h.
+
+Lettura: mettere il radar dentro WRF (umidita' + nubi iniziali) e' la prova che piu' migliora WRF: a +4..+6 h WRF
+con il radar e' la previsione migliore di tutte (0,61/0,55/0,41 contro 0,57-0,63/0,45/0,32 del radar). Fino a +3 h
+il nowcast radar resta molto piu' preciso. ATTENZIONE: questi run partono dall'analisi ECMWF del ciclo stesso, che in
+tempo reale arriva 7,5 ore dopo: vedi Risultati 6 (dati vecchi di 9 ore).
