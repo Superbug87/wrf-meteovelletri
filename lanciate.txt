@@ -50,6 +50,7 @@ prova castelli gfs wu 2026102000
 prova castelli gfs wu 2026102012
 prova castelli gfs wu 2026102100
 prova castelli gfs wu 2026102112
+prova castelli gfs wu 2026102200
 prova castelli icon2i wu mynn 2026101900
 prova castelli icon2i wu mynn 2026101912
 prova castelli icon2i wu mynn 2026102000
@@ -95,6 +96,7 @@ prova castelli iconeu wu 2026102000
 prova castelli iconeu wu 2026102012
 prova castelli iconeu wu 2026102100
 prova castelli iconeu wu 2026102112
+prova castelli iconeu wu 2026102200
 prova lazio ecmwf wu mynn 2026101900
 prova lazio ecmwf wu mynn 2026101912
 prova lazio ecmwf wu mynn 2026102000
@@ -125,6 +127,7 @@ prova lazio gfs wu 2026102000
 prova lazio gfs wu 2026102012
 prova lazio gfs wu 2026102100
 prova lazio gfs wu 2026102112
+prova lazio gfs wu 2026102200
 prova lazio icon2i wu mynn 2026101900
 prova lazio icon2i wu mynn 2026101912
 prova lazio icon2i wu mynn 2026102000
@@ -160,6 +163,7 @@ prova lazio iconeu wu 2026102000
 prova lazio iconeu wu 2026102012
 prova lazio iconeu wu 2026102100
 prova lazio iconeu wu 2026102112
+prova lazio iconeu wu 2026102200
 prova lazio3 ecmwf wu 2026101812
 prova lazio3 ecmwf wu 2026101900
 prova lazio3 ecmwf wu 2026101912
