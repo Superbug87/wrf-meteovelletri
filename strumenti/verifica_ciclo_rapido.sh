@@ -17,7 +17,7 @@ git fetch -q --depth 1 origin prove-radar:refs/remotes/o/prove-radar || { echo "
 for p in $(git ls-tree --name-only refs/remotes/o/prove-radar pioggia/ | grep 'pioggia_lazio-ecmwf-.*\.npz$'); do
   git show "refs/remotes/o/prove-radar:$p" > "$P/$(basename "$p")"
 done
-git show refs/remotes/o/prove-radar:valutazione/ciclo_rapido.json > "$W/val/ciclo_rapido.json" 2>/dev/null || true
+git show refs/remotes/o/prove-radar:valutazione/ciclo_rapido.json > "$W/val/ciclo_rapido.json" 2>/dev/null || rm -f "$W/val/ciclo_rapido.json"
 ls "$P" | wc -l
 python3 "$QUI/valuta_ciclo_rapido.py" --pioggia "$P" --ufficiali "$U" --stato "$W/val/ciclo_rapido.json" --testo "$W/val/ciclo_rapido.txt"
 LIMITE=$(date -u -d '14 days ago' +%Y%m%d)00

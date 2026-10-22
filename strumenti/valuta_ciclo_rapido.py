@@ -179,7 +179,7 @@ def main():
     ap.add_argument("--stato", required=True)
     ap.add_argument("--testo")
     a = ap.parse_args()
-    stato = json.load(open(a.stato)) if os.path.exists(a.stato) else {}
+    stato = json.load(open(a.stato)) if os.path.exists(a.stato) and os.path.getsize(a.stato) > 0 else {}
     per_T = {}
     for f in glob.glob(os.path.join(a.pioggia, "pioggia_lazio-ecmwf-*_*.npz")):
         m = re.match(r"pioggia_lazio-ecmwf-([\w-]+)_(\d{10})\.npz$", os.path.basename(f))
