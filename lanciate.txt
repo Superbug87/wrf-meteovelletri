@@ -6,6 +6,7 @@ prova castelli ecmwf tutte 2026102012
 prova castelli ecmwf tutte 2026102100
 prova castelli ecmwf tutte 2026102112
 prova castelli ecmwf tutte 2026102200
+prova castelli ecmwf tutte 2026102212
 prova castelli ecmwf ufficiali 2026101812
 prova castelli ecmwf ufficiali 2026101900
 prova castelli ecmwf ufficiali 2026101912
@@ -14,6 +15,7 @@ prova castelli ecmwf ufficiali 2026102012
 prova castelli ecmwf ufficiali 2026102100
 prova castelli ecmwf ufficiali 2026102112
 prova castelli ecmwf ufficiali 2026102200
+prova castelli ecmwf ufficiali 2026102212
 prova castelli ecmwf wu mynn 2026101900
 prova castelli ecmwf wu mynn 2026101912
 prova castelli ecmwf wu mynn 2026102000
@@ -52,6 +54,7 @@ prova castelli ecmwf wu topo2 2026102012
 prova castelli ecmwf wu topo2 2026102100
 prova castelli ecmwf wu topo2 2026102112
 prova castelli ecmwf wu topo2 2026102200
+prova castelli ecmwf wu topo2 2026102212
 prova castelli ecmwf wu urbano 2026102112
 prova castelli ecmwf wu urbano 2026102200
 prova castelli gfs wu 2026101912
