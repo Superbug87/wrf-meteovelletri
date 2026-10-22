@@ -59,7 +59,7 @@ jobs:
           rm -rf zone
           # dati di un ciclo precedente (come in tempo reale): si scaricano le ore dall'inizio dei dati alla fine del run
           OFF=$(( ( $(date -u -d "${CICLO:0:8} ${CICLO:8:2}" +%s) - $(date -u -d "${DATI:0:8} ${DATI:8:2}" +%s) ) / 3600 ))
-          [ "$OFF" -ge 0 ] && [ $((OFF % 3)) -eq 0 ] || { echo "dati: un ciclo che precede l'avvio di un multiplo di 3 ore"; exit 1; }
+          if ! { [ "$OFF" -ge 0 ] && [ $((OFF % 3)) -eq 0 ]; }; then echo "dati: un ciclo che precede l'avvio di un multiplo di 3 ore"; exit 1; fi
           echo "ORE_DATI=$((OFF + ORE))" >> "$GITHUB_ENV"
           echo "avvio $CICLO, dati ECMWF del $DATI (+$OFF h)"
       - name: Recupero WRF e WPS compilati
