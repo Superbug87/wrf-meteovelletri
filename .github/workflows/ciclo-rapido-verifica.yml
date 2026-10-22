@@ -26,7 +26,7 @@ jobs:
           python-version: "3.11"
       - name: Librerie
         run: |
-          pip install -q numpy scipy pyproj requests tifffile imagecodecs opencv-python-headless matplotlib
+          pip install -q numpy scipy pyproj requests tifffile netCDF4 imagecodecs opencv-python-headless matplotlib
           pip install -q pysteps || echo "pysteps non si installa: il nowcast manca"
       - name: Verifica
         env:
