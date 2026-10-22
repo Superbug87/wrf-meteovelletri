@@ -79,6 +79,11 @@ MAX_PROVE = 12
 # sveglia se ne lanciano al massimo MAX_NUOVE_PER_SVEGLIA (scaglionate di 15 minuti).
 ATTESA_UFFICIALE = timedelta(minutes=25)
 MAX_NUOVE_PER_SVEGLIA = 3
+# Ciclo rapido con il radar (ombra, passo 1 della strada verso un modello tipo AROME): ogni 3 ore un WRF corto sul Lazio parte
+# dall'ora piena T (multiplo di 3) con i dati ECMWF dell'ultimo ciclo disponibile (ore 00/06/12/18, pronti ~8 ore dopo),
+# una volta senza radar (rad0) e una con il radar nell'avvio (radq-radnubi). Non pubblica nulla: scrive nel ramo prove-radar e
+# strumenti/valuta_ciclo_rapido.py li confronta con il radar e con le previsioni ufficiali.
+RAPIDO = {"dal": "2026-10-22", "fino_a": "2026-11-05", "fisiche": ("rad0", "radq-radnubi"), "ore": 9, "attesa_dati": timedelta(hours=8, minutes=5)}
 ATTIVI = ("queued", "in_progress", "waiting", "pending", "requested")
 FINESTRA = timedelta(hours=10)
 TENTATIVI = 3
@@ -259,6 +264,47 @@ def main():
                            "-f", f"controllo={prova['controllo']}", "-f", f"fisica={f}", json_out=False)
         except RuntimeError as e:
             print(f"  !! sperimentale.yml: {e}")
+
+    # ciclo rapido con il radar (solo ombra)
+    try:
+        if RAPIDO["dal"] <= adesso.date().isoformat() <= RAPIDO["fino_a"]:
+            T = adesso.replace(minute=0, second=0, microsecond=0)
+            T -= timedelta(hours=T.hour % 3)
+            if adesso - T < timedelta(hours=2, minutes=30):
+                C = adesso - RAPIDO["attesa_dati"]
+                C = C.replace(minute=0, second=0, microsecond=0)
+                C -= timedelta(hours=C.hour % 6)
+                t, d = T.strftime("%Y%m%d%H"), C.strftime("%Y%m%d%H")
+                elenco = gh("run", "list", "-R", REPO, "--workflow", "radar-prove.yml", "-L", "60", "--json", "displayTitle,status")
+                fatte_r = {r["displayTitle"].lower() for r in elenco} | memoria
+                in_corso_r = sum(r["status"] in ATTIVI for r in elenco) + lanciate_ora
+                for f in RAPIDO["fisiche"]:
+                    titolo = f"RADAR lazio ecmwf {f} {t} dati {d}"
+                    if any(x.startswith(f"radar lazio ecmwf {f} {t} ") for x in fatte_r):
+                        continue
+                    if in_corso_r >= MAX_PROVE:
+                        print(f"  radar-prove.yml: rimando {titolo} ({in_corso_r} prove in coda o in corso)")
+                        continue
+                    in_corso_r += 1
+                    print(f"  radar-prove.yml: LANCIO {titolo}")
+                    if not a.prova:
+                        memoria.add(titolo.lower()); nuove.append(titolo.lower())
+                        gh("workflow", "run", "radar-prove.yml", "-R", REPO, "--ref", "main", "-f", "zona=lazio", "-f", "pilota=ecmwf",
+                           "-f", f"ciclo={t}", "-f", f"dati={d}", "-f", f"ore={RAPIDO['ore']}", "-f", f"fisica={f}", json_out=False)
+    except RuntimeError as e:
+        print(f"  !! radar-prove.yml: {e}")
+
+    # verifica del ciclo rapido: ogni 3 ore circa (le prove di 6 ore fa sono finite)
+    try:
+        if RAPIDO["dal"] <= adesso.date().isoformat() <= RAPIDO["fino_a"]:
+            ult = [r for r in run_del_workflow("ciclo-rapido-verifica.yml")]
+            recenti = [r for r in ult if quando(r["createdAt"]) > adesso - timedelta(hours=2, minutes=40) or r["status"] in ATTIVI]
+            if not recenti:
+                print("  ciclo-rapido-verifica.yml: LANCIO")
+                if not a.prova:
+                    gh("workflow", "run", "ciclo-rapido-verifica.yml", "-R", REPO, "--ref", "main", json_out=False)
+    except RuntimeError as e:
+        print(f"  !! ciclo-rapido-verifica.yml: {e}")
     if nuove and not a.prova:
         try:
             scrivi_file("lanciate.txt", "\n".join(sorted(memoria)) + "\n", sha_lanciate, f"{len(nuove)} prove lanciate")

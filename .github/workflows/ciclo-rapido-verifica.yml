@@ -1,0 +1,34 @@
+name: Verifica ciclo rapido radar
+
+# Passo 1 verso un modello tipo AROME, in ombra: confronta con il radar le prove radar-prove.yml lanciate dal regista ogni 3 ore
+# (WRF corto senza e con il radar nell'avvio) con il nowcast radar e con le previsioni ufficiali ECMWF e ICON-2I.
+# Non tocca nulla di ufficiale. Risultati nel ramo prove-radar, cartella valutazione/ (ciclo_rapido.json e ciclo_rapido.txt).
+# Lo lancia il regista (ogni 3 ore circa), oppure a mano.
+run-name: "VERIFICA ciclo rapido"
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ciclo-rapido-verifica
+  cancel-in-progress: false
+
+jobs:
+  verifica:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Librerie
+        run: |
+          pip install -q numpy scipy pyproj requests tifffile imagecodecs opencv-python-headless matplotlib
+          pip install -q pysteps || echo "pysteps non si installa: il nowcast manca"
+      - name: Verifica
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash strumenti/verifica_ciclo_rapido.sh
