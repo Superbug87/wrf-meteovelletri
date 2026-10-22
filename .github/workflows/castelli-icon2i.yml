@@ -29,7 +29,7 @@ on:
         type: boolean
         default: true
       radar:
-        description: "Confronto con il radar della Protezione Civile e pioggia delle prossime 3 ore"
+        description: "Confronto con il radar della Protezione Civile e pioggia delle prossime 6 ore"
         type: boolean
         default: true
 

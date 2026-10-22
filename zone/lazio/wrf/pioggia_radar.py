@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-pioggia_radar.py - la pioggia di WRF messa a confronto col radar, e il radar spinto avanti di 3 ore.
+pioggia_radar.py - la pioggia di WRF messa a confronto col radar, e il radar spinto avanti di 6 ore.
 
   python wrf/pioggia_radar.py --uscite cartella_con_wrfout --out mappe --ciclo 2026101600 [--pilota ecmwf]
 
 Crea due immagini (e un CSV coi numeri) nella cartella --out:
   radar_1_verifica.png        le ultime ore (fino a 6): pioggia misurata dal radar e pioggia calcolata da WRF,
                               ora per ora, con qualche numero per capire quanto WRF ci ha preso;
-  radar_2_prossime_3_ore.png  la pioggia delle prossime 3 ore: il radar spostato lungo il movimento che ha adesso,
+  radar_2_prossime_3_ore.png  la pioggia delle prossime 6 ore (il nome del file e' rimasto quello di prima): il radar spostato lungo il movimento che ha adesso,
                               WRF, e un mix dei due (all'inizio conta il radar, poi sempre di piu' WRF).
   radar_verifica.csv          le statistiche della verifica, da conservare per vedere nel tempo se WRF migliora.
 
@@ -49,11 +49,12 @@ warnings.filterwarnings("ignore", message="Mean of empty slice")
 warnings.filterwarnings("ignore", message="All-NaN")
 
 ORE_STORIA = 6               # ore passate da verificare
-MEZZO = 250                  # il ritaglio del radar e' un quadrato di 500 km di lato: la pioggia che arriva in 3 ore da lontano ci sta
+MEZZO = 450                  # il ritaglio del radar e' un quadrato di 900 km di lato: in 6 ore la pioggia arriva anche da piu' di 250 km (con 500 km il nowcast la perdeva)
 N_GRIGLIA = 129              # punti per lato della griglia delle mappe (passo ~2 km: come i 2 km di WRF)
 SOGLIE_FSS = (0.5, 2.0)      # mm in un'ora
 LATO_FSS_KM = 10
-ORE_AVANTI = 3
+ORE_AVANTI = 6
+PESI_RADAR = [0.9, 0.7, 0.5, 0.3, 0.2, 0.1]     # peso del radar nel mix per ciascuna ora: tarati su 4-5 eventi (diario delle prove del radar), da riconfermare
 PASSO_GRIGLIA_KM = 2 * pc.MEZZO_LAT * 111.32 / (N_GRIGLIA - 1)
 ROMA = ZoneInfo("Europe/Rome")
 LIVELLI_1H = pc.LIVELLI_PIOGGIA_1H
@@ -300,48 +301,56 @@ def foglio_verifica(ris, banner, z_f, lat_f, lon_f, out, ora_radar_loc, ciclo_tx
 
 
 # PROVE (spente se le variabili non ci sono; vedi il diario claude/wrf-radar-prove.md, ramo prove-radar-diario):
-#   RADAR_PESI="0.9,0.7,0.5"  peso del radar nel mix per ciascuna ora (al posto di 0,83/0,5/0,17)
-#   RADAR_METODO=anvil        nowcast ANVIL di pysteps (moto non uniforme, crescita e calo) al posto del moto uniforme
+#   RADAR_PESI="0.9,0.7,0.5"  peso del radar nel mix per ciascuna ora (al posto di PESI_RADAR)
+#   RADAR_METODO=uniforme     moto uniforme come prima, al posto del nowcast ANVIL di pysteps (moto non uniforme, crescita e calo)
 #   RADAR_VEL_MIN=0           velocita' minima (pixel ogni 5 minuti) sotto cui il radar resta fermo (in uso: radar.VEL_MIN)
 PESI_PROVA = [float(x) for x in os.environ.get("RADAR_PESI", "").replace(" ", "").split(",") if x]
-METODO = os.environ.get("RADAR_METODO", "").strip().lower()
+METODO = os.environ.get("RADAR_METODO", "anvil").strip().lower()      # anvil (in uso) oppure uniforme (il vecchio moto uniforme)
 VEL_MIN = float(os.environ["RADAR_VEL_MIN"]) if os.environ.get("RADAR_VEL_MIN", "").strip() else None
 
 
 def peso_radar(ore_dal_via):
-    """Quanto conta il radar nel mix, a meta' dell'ora indicata: 1 subito, 0 dopo 3 ore (scelta di buon senso)."""
-    if PESI_PROVA:
-        return float(PESI_PROVA[min(int(ore_dal_via), len(PESI_PROVA) - 1)])
-    return float(np.clip(1 - ore_dal_via / ORE_AVANTI, 0, 1))
+    """Quanto conta il radar nel mix, a meta' dell'ora indicata (0,5 = prima ora): PESI_RADAR (o RADAR_PESI)."""
+    pesi = PESI_PROVA or PESI_RADAR
+    return float(pesi[min(int(ore_dal_via), len(pesi) - 1)])
 
 
 def ore_anvil(frames, istanti):
-    """PROVA RADAR_METODO=anvil: piogge orarie (mm/h medi) delle prossime ORE_AVANTI ore con pysteps ANVIL.
-    Servono i mosaici di 30, 20, 10 e 0 minuti fa; None se mancano o pysteps non c'e'."""
+    """Piogge orarie (mm/h medi) delle prossime ORE_AVANTI ore con il nowcast ANVIL di pysteps (moto non uniforme, crescita e calo).
+    Si lavora a 2 km (media di 2 x 2 pixel) come nelle prove che l'hanno scelto, poi si torna a 1 km. Servono i mosaici di
+    30, 20, 10 e 0 minuti fa; None se mancano o pysteps non c'e' (allora si usa il moto uniforme)."""
     try:
         from pysteps import motion, nowcasts
         from pysteps.utils import transformation
     except ImportError:
-        print("RADAR_METODO=anvil: pysteps non installato, si usa il moto uniforme", file=sys.stderr)
+        print("pysteps non installato: si usa il moto uniforme", file=sys.stderr)
         return None
     per_ms = {int(t): f for t, f in zip(istanti, frames) if f is not None}
     ult = int(istanti[-1])
     scelti = [per_ms.get(ult - k * 600000) for k in (3, 2, 1, 0)]
     if any(f is None for f in scelti):
         return None
-    R = np.nan_to_num(np.stack(scelti)).astype("float64")
+    H, W = scelti[0].shape
+    h2, w2 = H // 2, W // 2
+    R = np.stack([np.nan_to_num(np.nanmean(f[:h2 * 2, :w2 * 2].reshape(h2, 2, w2, 2), axis=(1, 3))) for f in scelti]).astype("float64")
     dbr = transformation.dB_transform(R, threshold=0.1, zerovalue=-15.0)[0]
     V = motion.get_method("LK")(dbr)
     fc = nowcasts.get_method("anvil")(R, V, 6 * ORE_AVANTI, ar_window_radius=25)
     fc = np.maximum(np.nan_to_num(fc), 0)
-    return [fc[6 * j:6 * (j + 1)].mean(0) for j in range(ORE_AVANTI)]
+    ore = []
+    for j in range(ORE_AVANTI):
+        m = fc[6 * j:6 * (j + 1)].mean(0)
+        g = np.zeros((H, W), "float32")
+        g[:h2 * 2, :w2 * 2] = np.repeat(np.repeat(m, 2, 0), 2, 1)
+        ore.append(g)
+    return ore
 
 
 def foglio_avanti(frames, istanti, orig, wrf, LAT, LON, banner, z_f, lat_f, lon_f, out, ciclo_txt):
     ult_ms = istanti[-1]
     R0 = frames[-1]
     if R0 is None:
-        print("Ultimo mosaico mancante: salto le prossime 3 ore.", file=sys.stderr)
+        print("Ultimo mosaico mancante: salto le prossime 6 ore.", file=sys.stderr)
         return None
     t0 = da_ms(ult_ms)
     i0 = next((i for i in range(len(frames) - 1, -1, -1)
@@ -355,6 +364,8 @@ def foglio_avanti(frames, istanti, orig, wrf, LAT, LON, banner, z_f, lat_f, lon_
     R0z = np.nan_to_num(R0)
     ore = []
     anv = ore_anvil(frames, istanti) if METODO == "anvil" else None
+    if METODO == "anvil" and anv is None:
+        info = f"{info} (nowcast ANVIL non disponibile: moto uniforme)"
     for j in range(1, ORE_AVANTI + 1):
         if anv is not None:
             ore.append(griglia_radar(anv[j - 1], orig, LAT, LON))
@@ -379,7 +390,7 @@ def foglio_avanti(frames, istanti, orig, wrf, LAT, LON, banner, z_f, lat_f, lon_
     max_w = max(float(w.max()) for w in wrf_ore) if ha_wrf else 0.0
     if max(max_r, max_w) < 0.1:
         return disegna_testo(
-            Path(out) / "radar_2_prossime_3_ore.png", "Pioggia nelle prossime 3 ore", sotto, banner,
+            Path(out) / "radar_2_prossime_3_ore.png", "Pioggia nelle prossime 6 ore", sotto, banner,
             "Nessuna pioggia prevista",
             f"Radar spostato: max {max_r:.1f} mm/h" + (f"; WRF: max {max_w:.1f} mm/h." if ha_wrf else "."),
             a_capo([FONTE_RADAR, NON_UFFICIALE]))
@@ -399,13 +410,13 @@ def foglio_avanti(frames, istanti, orig, wrf, LAT, LON, banner, z_f, lat_f, lon_
         ["★ = Velletri: il suo valore (mm nell'ora) è scritto in basso a destra di ogni riquadro.",
          f"{finestre}. {mov}",
          (f"Mix = radar spostato e WRF, con il peso del radar che scende da {peso_radar(0.5) * 100:.0f}% nella prima "
-          f"ora a {peso_radar(2.5) * 100:.0f}% nella terza. "
-          + ("Pesi di prova (RADAR_PESI)." if PESI_PROVA else "I pesi sono una scelta di buon senso, non tarata.") if ha_wrf
+          f"ora a {peso_radar(ORE_AVANTI - 0.5) * 100:.0f}% nella sesta. "
+          + ("Pesi di prova (RADAR_PESI)." if PESI_PROVA else "Pesi scelti su pochi eventi (4-5, piogge estese): vanno ancora confermati.") if ha_wrf
           else "WRF non copre queste ore: solo il radar spostato, che dopo un'ora o due perde molto valore."),
-         "Spostare il radar aiuta poco, e solo se la pioggia si muove veloce (oltre circa 24 km/h): altrimenti resta "
-         "ferma. I temporali isolati nascono e muoiono e non si prevedono così.",
+         "Il radar è spostato e fatto crescere o calare con il nowcast ANVIL (pysteps): vale soprattutto nelle prime 2-3 ore. "
+         "I temporali isolati nascono e muoiono e non si prevedono così: le celle che nasceranno dopo non ci sono.",
          FONTE_RADAR, NON_UFFICIALE])
-    return disegna_griglia(Path(out) / "radar_2_prossime_3_ore.png", "Pioggia nelle prossime 3 ore", sotto, banner,
+    return disegna_griglia(Path(out) / "radar_2_prossime_3_ore.png", "Pioggia nelle prossime 6 ore", sotto, banner,
                            riq, 3, testo, z_f, lat_f, lon_f)
 
 

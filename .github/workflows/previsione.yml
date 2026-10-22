@@ -465,6 +465,11 @@ jobs:
         if: ${{ inputs.radar }}
         continue-on-error: true
         run: pip install -q pyproj opencv-python-headless tifffile imagecodecs
+      # pysteps serve al nowcast ANVIL; se non si installa, il radar si sposta con il moto uniforme come prima
+      - name: pysteps per il nowcast
+        if: ${{ inputs.radar }}
+        continue-on-error: true
+        run: pip install -q pysteps
       - name: Radar (verifica sulle ultime ore e pioggia delle prossime 3)
         if: ${{ inputs.radar }}
         continue-on-error: true
