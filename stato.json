@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-23T21:40:19Z",
+ "aggiornato": "2026-10-23T21:45:21Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -69,7 +69,7 @@
   },
   {
    "titolo": "PROVA lazio ecmwf wu noahmp 2026102312",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-23T20:30:50Z",
    "esito": ""
   },
