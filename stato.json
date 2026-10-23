@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-23T08:35:13Z",
+ "aggiornato": "2026-10-23T08:40:19Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -49,13 +49,13 @@
  "prove": [
   {
    "titolo": "PROVA castelli ecmwf wu radt15 2026102300",
-   "stato": "in_progress",
+   "stato": "queued",
    "da": "2026-10-23T08:35:38Z",
    "esito": ""
   },
   {
    "titolo": "PROVA castelli ecmwf wu radt6 2026102300",
-   "stato": "in_progress",
+   "stato": "queued",
    "da": "2026-10-23T08:35:36Z",
    "esito": ""
   },
