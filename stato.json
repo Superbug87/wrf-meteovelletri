@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-23T05:35:13Z",
+ "aggiornato": "2026-10-23T05:40:17Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -113,9 +113,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu mynn-noahmp 2026102300",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-23T03:33:00Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu noahmp 2026102300",
