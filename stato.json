@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-23T09:50:19Z",
+ "aggiornato": "2026-10-23T09:55:14Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -40,6 +40,18 @@
  ],
  "prove": [
   {
+   "titolo": "PROVA lazio ecmwf wu urbano 2026102300",
+   "stato": "queued",
+   "da": "2026-10-23T09:55:49Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA castelli ecmwf wu urbano 2026102300",
+   "stato": "queued",
+   "da": "2026-10-23T09:55:42Z",
+   "esito": ""
+  },
+  {
    "titolo": "PROVA castelli ecmwf wu radt15 2026102300",
    "stato": "queued",
    "da": "2026-10-23T08:35:38Z",
@@ -59,9 +71,9 @@
   },
   {
    "titolo": "PROVA lazio ecmwf wu noahmp 2026102300",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-23T08:30:57Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio ecmwf wu mynn 2026102300",
@@ -71,9 +83,9 @@
   },
   {
    "titolo": "PROVA lazio ecmwf wu topo2 2026102300",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-23T08:25:37Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu mynn-noahmp 2026102300",
@@ -95,21 +107,21 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu topo2 2026102300",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-23T08:20:34Z",
    "esito": ""
   },
   {
    "titolo": "PROVA castelli ecmwf tutte 2026102300",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-23T08:15:37Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf ufficiali 2026102300",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-23T08:15:35Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio iconeu wu 2026102300",
@@ -385,18 +397,6 @@
    "titolo": "PROVA castelli icon2i wu topo2 2026102212",
    "stato": "completed",
    "da": "2026-10-22T15:30:52Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA lazio ecmwf wu urbano 2026102200",
-   "stato": "completed",
-   "da": "2026-10-22T14:25:44Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA castelli ecmwf wu urbano 2026102200",
-   "stato": "completed",
-   "da": "2026-10-22T14:25:40Z",
    "esito": "success"
   }
  ]
