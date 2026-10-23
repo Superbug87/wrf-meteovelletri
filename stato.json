@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-23T22:20:18Z",
+ "aggiornato": "2026-10-23T22:25:13Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -33,12 +33,12 @@
    "ultimo_pubblicato": "2026102300",
    "in_corso": {
     "stato": "queued",
-    "da": "2026-10-23T21:10:22Z",
-    "id": 40024789026
+    "da": "2026-10-23T22:25:15Z",
+    "id": 40033491884
    },
    "ultimo_esito": {
     "esito": "failure",
-    "da": "2026-10-23T19:50:23Z"
+    "da": "2026-10-23T21:10:22Z"
    }
   }
  ],
@@ -93,9 +93,9 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu mynn-noahmp 2026102312",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-23T20:25:29Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu noahmp 2026102312",
