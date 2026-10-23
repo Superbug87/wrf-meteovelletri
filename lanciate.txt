@@ -29,6 +29,7 @@ prova castelli ecmwf wu mynn 2026102112
 prova castelli ecmwf wu mynn 2026102200
 prova castelli ecmwf wu mynn 2026102212
 prova castelli ecmwf wu mynn 2026102300
+prova castelli ecmwf wu mynn 2026102312
 prova castelli ecmwf wu mynn-noahmp 2026101900
 prova castelli ecmwf wu mynn-noahmp 2026101912
 prova castelli ecmwf wu mynn-noahmp 2026102000
@@ -47,6 +48,7 @@ prova castelli ecmwf wu noahmp 2026102112
 prova castelli ecmwf wu noahmp 2026102200
 prova castelli ecmwf wu noahmp 2026102212
 prova castelli ecmwf wu noahmp 2026102300
+prova castelli ecmwf wu noahmp 2026102312
 prova castelli ecmwf wu radt15 2026102000
 prova castelli ecmwf wu radt15 2026102012
 prova castelli ecmwf wu radt15 2026102100
@@ -70,6 +72,7 @@ prova castelli ecmwf wu topo2 2026102112
 prova castelli ecmwf wu topo2 2026102200
 prova castelli ecmwf wu topo2 2026102212
 prova castelli ecmwf wu topo2 2026102300
+prova castelli ecmwf wu topo2 2026102312
 prova castelli ecmwf wu urbano 2026102112
 prova castelli ecmwf wu urbano 2026102200
 prova castelli ecmwf wu urbano 2026102212
