@@ -55,6 +55,10 @@ PROFONDITA_T_CM = [0, 2, 6, 18, 54, 162, 486, 1458]
 # ----------------------------------------------------------------------------
 # MeteoHub
 # ----------------------------------------------------------------------------
+class QuotaPiena(Exception):
+    """Lo spazio dell'account MeteoHub (circa 1 GB) e' esaurito da richieste rimaste in giro."""
+
+
 class RichiestaLenta(Exception):
     """La richiesta a MeteoHub e' rimasta in elaborazione oltre il tempo concesso."""
 
@@ -70,6 +74,31 @@ class Hub:
         j = r.json()
         self.h = {"Authorization": f"Bearer {j if isinstance(j, str) else j.get('token')}"}
         self.campi = {}
+        self.pulisci_vecchie(120)                  # una richiesta dura al massimo ~25 minuti: quelle di 2 ore fa sono rimaste in giro
+
+    def pulisci_vecchie(self, minuti):
+        """Cancella le richieste dell'account piu' vecchie di 'minuti'. Quelle di un altro run in corso (l'altra zona scarica in
+        parallelo) sono recenti e restano. Una richiesta dimenticata (24/10: 359 MB) riempiva l'account e faceva
+        cadere il ciclo dopo con "Disk quota exceeded". Non solleva mai eccezioni."""
+        try:
+            lista = requests.get(f"{BASE}/api/requests", headers=self.h, timeout=60).json()
+            adesso = datetime.now(timezone.utc)
+            n = mb = 0
+            for v in lista:
+                try:
+                    quando = datetime.fromisoformat(str(v.get("submission_date")).replace("Z", "")).replace(tzinfo=timezone.utc)
+                except ValueError:
+                    continue
+                if (adesso - quando).total_seconds() > minuti * 60:
+                    self.cancella(v["id"])
+                    n += 1
+                    mb += (v.get("filesize") or 0) / 1e6
+            if n:
+                print(f"MeteoHub: cancellate {n} richieste vecchie ({mb:.0f} MB) che occupavano lo spazio", flush=True)
+            return n
+        except Exception as e:
+            print(f"MeteoHub: pulizia delle richieste vecchie non riuscita ({type(e).__name__})", file=sys.stderr)
+            return 0
 
     def elenco(self, dataset):
         if dataset not in self.campi:
@@ -100,7 +129,7 @@ class Hub:
         for i in range(tentativi):
             try:
                 return self._estrai_una(dataset, ciclo, filtri, nome, attesa)
-            except (requests.RequestException, RichiestaLenta) as e:
+            except (requests.RequestException, RichiestaLenta, QuotaPiena) as e:
                 lente += isinstance(e, RichiestaLenta)
                 if i == tentativi - 1 or lente > 1:
                     sys.exit(f"[{nome}] MeteoHub non risponde ({type(e).__name__}) dopo {i + 1} tentativi")
@@ -137,6 +166,9 @@ class Hub:
                         self.cancella(rid)
                         if "empty" in v.get("error_message", ""):
                             return b""
+                        if "quota" in (v.get("error_message") or "").lower():
+                            self.pulisci_vecchie(20)           # libera lo spazio (restano le richieste degli ultimi 20 minuti)
+                            raise QuotaPiena(v.get("error_message"))
                         sys.exit(f"[{nome}] richiesta fallita: {v.get('error_message')}")
         except requests.RequestException:
             self.cancella(rid)                         # rete caduta a meta': la richiesta non resta a occupare lo spazio
