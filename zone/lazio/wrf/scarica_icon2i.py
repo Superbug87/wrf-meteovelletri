@@ -55,6 +55,10 @@ PROFONDITA_T_CM = [0, 2, 6, 18, 54, 162, 486, 1458]
 # ----------------------------------------------------------------------------
 # MeteoHub
 # ----------------------------------------------------------------------------
+class RichiestaLenta(Exception):
+    """La richiesta a MeteoHub e' rimasta in elaborazione oltre il tempo concesso."""
+
+
 class Hub:
     def __init__(self):
         email, pw = os.environ.get("MH_EMAIL", ""), os.environ.get("MH_PASSWORD", "")
@@ -69,8 +73,16 @@ class Hub:
 
     def elenco(self, dataset):
         if dataset not in self.campi:
-            r = requests.get(f"{BASE}/api/fields", params={"datasets": dataset}, headers=self.h, timeout=120)
-            r.raise_for_status()
+            for i in range(3):
+                try:
+                    r = requests.get(f"{BASE}/api/fields", params={"datasets": dataset}, headers=self.h, timeout=120)
+                    r.raise_for_status()
+                    break
+                except requests.RequestException as e:
+                    if i == 2:
+                        raise
+                    print(f"[elenco {dataset}] {type(e).__name__}: riprovo fra {30 * (i + 1)} s", file=sys.stderr, flush=True)
+                    time.sleep(30 * (i + 1))
             self.campi[dataset] = r.json()["items"]
         return self.campi[dataset]
 
@@ -80,8 +92,23 @@ class Hub:
         except requests.RequestException:
             pass
 
-    def estrai(self, dataset, ciclo, filtri, nome, attesa=1200):
-        """Una richiesta; ritorna i byte del GRIB (vuoti se non c'è nulla)."""
+    def estrai(self, dataset, ciclo, filtri, nome, attesa=1200, tentativi=3):
+        """Una richiesta; ritorna i byte del GRIB (vuoti se non c'è nulla). Se MeteoHub non risponde in tempo (timeout, connessione
+        interrotta) o la richiesta resta in elaborazione oltre 'attesa', la richiesta viene annullata e rifatta: fino a 'tentativi'
+        volte per i problemi di rete, una sola volta per la richiesta troppo lenta (ogni giro puo' costare 'attesa' secondi)."""
+        lente = 0
+        for i in range(tentativi):
+            try:
+                return self._estrai_una(dataset, ciclo, filtri, nome, attesa)
+            except (requests.RequestException, RichiestaLenta) as e:
+                lente += isinstance(e, RichiestaLenta)
+                if i == tentativi - 1 or lente > 1:
+                    sys.exit(f"[{nome}] MeteoHub non risponde ({type(e).__name__}) dopo {i + 1} tentativi")
+                pausa = 30 * (i + 1)
+                print(f"[{nome}] {type(e).__name__}: riprovo fra {pausa} s ({i + 1}/{tentativi})", file=sys.stderr, flush=True)
+                time.sleep(pausa)
+
+    def _estrai_una(self, dataset, ciclo, filtri, nome, attesa):
         t = ciclo.strftime("%Y-%m-%dT%H:%M:%S.000Z")
         corpo = {"request_name": nome, "dataset_names": [dataset], "only_reliable": False,
                  "reftime": {"from": t, "to": t}, "filters": filtri}
@@ -95,22 +122,27 @@ class Hub:
             sys.exit(f"[{nome}] richiesta rifiutata")
         rid = r.json()["request_id"]
         t0 = time.time()
-        while time.time() - t0 < attesa:
-            time.sleep(3 if time.time() - t0 < 60 else 10)
-            for v in requests.get(f"{BASE}/api/requests", headers=self.h, timeout=60).json():
-                if v["id"] != rid:
-                    continue
-                if v["status"] == "SUCCESS":
-                    d = requests.get(f"{BASE}/api/data/{v['fileoutput']}", headers=self.h, timeout=1800)
-                    d.raise_for_status()
-                    self.cancella(rid)             # lo spazio dell'account è di circa 1 GB: si libera subito
-                    return d.content
-                if v["status"] in ("FAILURE", "REVOKED"):
-                    self.cancella(rid)
-                    if "empty" in v.get("error_message", ""):
-                        return b""
-                    sys.exit(f"[{nome}] richiesta fallita: {v.get('error_message')}")
-        sys.exit(f"[{nome}] ancora in corso dopo {attesa} s")
+        try:
+            while time.time() - t0 < attesa:
+                time.sleep(3 if time.time() - t0 < 60 else 10)
+                for v in requests.get(f"{BASE}/api/requests", headers=self.h, timeout=60).json():
+                    if v["id"] != rid:
+                        continue
+                    if v["status"] == "SUCCESS":
+                        d = requests.get(f"{BASE}/api/data/{v['fileoutput']}", headers=self.h, timeout=1800)
+                        d.raise_for_status()
+                        self.cancella(rid)             # lo spazio dell'account è di circa 1 GB: si libera subito
+                        return d.content
+                    if v["status"] in ("FAILURE", "REVOKED"):
+                        self.cancella(rid)
+                        if "empty" in v.get("error_message", ""):
+                            return b""
+                        sys.exit(f"[{nome}] richiesta fallita: {v.get('error_message')}")
+        except requests.RequestException:
+            self.cancella(rid)                         # rete caduta a meta': la richiesta non resta a occupare lo spazio
+            raise
+        self.cancella(rid)
+        raise RichiestaLenta(f"[{nome}] ancora in corso dopo {attesa} s")
 
 
 def scegli(voci, test):
