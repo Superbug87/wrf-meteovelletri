@@ -30,10 +30,10 @@ from datetime import datetime, timedelta, timezone
 REPO = os.environ.get("GITHUB_REPOSITORY", "Superbug87/wrf-meteovelletri")
 # workflow -> (ramo dei risultati, {ora del ciclo: ritardo della partenza dopo l'inizio del ciclo})
 # stessi orari dei lanci programmati scritti nei workflow (i dati ECMWF escono circa 7 ore e mezza dopo il ciclo,
-# ICON-2I circa 2 ore dopo; il Lazio ICON-2I parte 20 minuti dopo i Castelli, che in circa 7 minuti mettono i dati in cache)
+# ICON-2I circa 2 ore dopo; il Lazio ICON-2I parte 35 minuti dopo i Castelli, che in circa 7 minuti mettono i dati in cache)
 PREVISIONI = {
     "castelli-icon2i.yml": ("risultati-castelli-icon2i", {0: (2, 15), 12: (2, 15)}),   # dati ICON-2I su MeteoHub circa +2 h; lo scarico aspetta fino a ~20 min se mancano
-    "lazio-icon2i.yml": ("risultati-lazio-icon2i", {0: (2, 35), 12: (2, 35)}),   # i Castelli mettono ICON-2I in cache in ~7 min
+    "lazio-icon2i.yml": ("risultati-lazio-icon2i", {0: (2, 50), 12: (2, 50)}),   # i Castelli mettono ICON-2I in cache in ~7 min; 35 min di distanza evitano che i due scarichi riempiano insieme la quota MeteoHub
     "castelli-ecmwf.yml": ("risultati-castelli-ecmwf", {0: (7, 50), 12: (7, 50)}),   # ECMWF a 48 h esce verso +7:35
     "lazio-ecmwf.yml": ("risultati-lazio-ecmwf", {0: (7, 50), 12: (7, 50)}),
 }

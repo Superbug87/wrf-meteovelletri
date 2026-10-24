@@ -72,7 +72,7 @@ Ora italiana = UTC + 2 fino al 25/10/2026 (ora legale), poi UTC + 1. Il regista 
 | workflow | partenza dopo il ciclo | cicli 00 / 12 UTC | in ora italiana (CEST) | pubblicazione tipica (CEST) |
 |---|---|---|---|---|
 | Castelli ICON-2I | +2:15 | 02:15 / 14:15 | 04:15 / 16:15 | circa 06:20-06:30 / 18:20-19:00 |
-| Lazio ICON-2I | +2:35 | 02:35 / 14:35 | 04:35 / 16:35 | circa 06:20-06:30 / 18:20-19:00 |
+| Lazio ICON-2I | +2:50 | 02:50 / 14:50 | 04:50 / 16:50 | circa 06:30-06:45 / 18:30-19:15 |
 | Castelli ECMWF | +7:50 | 07:50 / 19:50 | 09:50 / 21:50 | circa 11:10-11:30 / 23:20-23:30 |
 | Lazio ECMWF | +7:50 | 07:50 / 19:50 | 09:50 / 21:50 | circa 11:10-11:30 / 23:20-23:30 |
 
@@ -204,6 +204,7 @@ Non pubblica nulla: scrive nel ramo `prove-radar`.
 ## Stato
 - 18/10/2026: primi run riusciti di tutti e quattro i workflow, controllo di plausibilità passato, mappe pubblicate. Dal 20/10 il Lazio gira a 27 → 9 → 3 km.
 - 22-23/10/2026: l'avvio passa dalle sveglie di Claude a cron-job.org ogni 5 minuti, e ICON-2I parte prima (Castelli +2:15, Lazio +2:35).
+- 24/10/2026: il Lazio ICON-2I passa a +2:50 (35 minuti dopo i Castelli) perché i due scarichi MeteoHub non si sovrappongano e non riempiano la quota.
 - 23-24/10/2026: la chiave WU smette di valere (401) dalle 19:52 UTC del 23/10; i Castelli procedono senza stazioni, il Lazio si fermava al passo delle mappe. Corretto: il Lazio non si ferma più,
   c'è la ricerca di una chiave di riserva, il segreto è stato rinnovato e i due cicli persi (Lazio e Castelli ECMWF 12Z) sono stati rifatti con le stazioni. Lo scarico MeteoHub ora ritenta e si libera lo spazio da solo
   (una richiesta dimenticata di 359 MB aveva fatto cadere il Castelli ICON-2I 12Z del 24/10).
