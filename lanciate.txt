@@ -312,6 +312,7 @@ prova lazio iconeu wu 2026102212
 prova lazio iconeu wu 2026102300
 prova lazio iconeu wu 2026102312
 prova lazio iconeu wu 2026102400
+prova lazio iconeu wu 2026102412
 prova lazio3 ecmwf wu 2026101812
 prova lazio3 ecmwf wu 2026101900
 prova lazio3 ecmwf wu 2026101912
