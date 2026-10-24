@@ -1237,7 +1237,7 @@ def main():
                 if info["n"] >= 3:
                     banner = f"Open-Meteo ({a.modello}) + {info['n']} stazioni WU"
                     modello_txt += " " + info["nota"]
-            except Exception as e:                     # la correzione è facoltativa
+            except (Exception, SystemExit) as e:                     # la correzione è facoltativa
                 print("Stazioni Wunderground non disponibili:", _pulisci(str(e)), file=sys.stderr)
         else:
             print("Nessuna WU_API_KEY impostata: salto la correzione con le stazioni.", file=sys.stderr)

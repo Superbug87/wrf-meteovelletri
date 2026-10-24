@@ -318,7 +318,7 @@ def main():
             if info["n"] >= 3:
                 banner += f" + {info['n']} stazioni WU"
                 modello_txt += " " + info["nota"]
-        except Exception as e:                            # la correzione è facoltativa
+        except (Exception, SystemExit) as e:                            # la correzione è facoltativa
             print("Stazioni Wunderground non disponibili:", pc._pulisci(str(e)), file=sys.stderr)
 
     creati = pc.disegna_fogli(c, z_f, lat_f, lon_f, tempi, banner, modello_txt, a.out)
