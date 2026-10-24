@@ -1,0 +1,199 @@
+{
+ "ciclo": "2026102412",
+ "run": "2026-10-24T12:00:00Z",
+ "variabili": [
+  {
+   "id": "temperatura_2m",
+   "titolo": "Temperatura a 2 m",
+   "unita": "°C"
+  },
+  {
+   "id": "temperatura_925",
+   "titolo": "Temperatura a 925 hPa",
+   "unita": "°C"
+  },
+  {
+   "id": "temperatura_850",
+   "titolo": "Temperatura a 850 hPa",
+   "unita": "°C"
+  },
+  {
+   "id": "zero_termico",
+   "titolo": "Quota dello zero termico",
+   "unita": "m"
+  },
+  {
+   "id": "umidita",
+   "titolo": "Umidità relativa",
+   "unita": "%"
+  },
+  {
+   "id": "vento_medio",
+   "titolo": "Vento medio a 10 m",
+   "unita": "km/h"
+  },
+  {
+   "id": "raffiche",
+   "titolo": "Raffiche a 10 m",
+   "unita": "km/h"
+  },
+  {
+   "id": "pioggia_1h",
+   "titolo": "Pioggia nell'ultima ora",
+   "unita": "mm"
+  },
+  {
+   "id": "pioggia_3h",
+   "titolo": "Pioggia nelle ultime 3 ore",
+   "unita": "mm"
+  },
+  {
+   "id": "pioggia_6h",
+   "titolo": "Pioggia nelle ultime 6 ore",
+   "unita": "mm"
+  },
+  {
+   "id": "pioggia_12h",
+   "titolo": "Pioggia nelle ultime 12 ore",
+   "unita": "mm"
+  },
+  {
+   "id": "pioggia_24h",
+   "titolo": "Pioggia nelle ultime 24 ore",
+   "unita": "mm"
+  },
+  {
+   "id": "neve_6h",
+   "titolo": "Neve fresca nelle ultime 6 ore",
+   "unita": "cm"
+  },
+  {
+   "id": "neve_24h",
+   "titolo": "Neve fresca nelle ultime 24 ore",
+   "unita": "cm"
+  },
+  {
+   "id": "pressione",
+   "titolo": "Pressione al livello del mare",
+   "unita": "hPa"
+  },
+  {
+   "id": "nubi_totale",
+   "titolo": "Copertura nuvolosa totale",
+   "unita": "%"
+  },
+  {
+   "id": "nubi_basse",
+   "titolo": "Nubi basse",
+   "unita": "%"
+  },
+  {
+   "id": "nubi_medie",
+   "titolo": "Nubi medie",
+   "unita": "%"
+  },
+  {
+   "id": "nubi_alte",
+   "titolo": "Nubi alte",
+   "unita": "%"
+  },
+  {
+   "id": "cape_mu",
+   "titolo": "CAPE della parcella più instabile",
+   "unita": "J/kg"
+  },
+  {
+   "id": "cape_ml",
+   "titolo": "CAPE dello strato mescolato",
+   "unita": "J/kg"
+  },
+  {
+   "id": "cin",
+   "titolo": "Inibizione convettiva (CIN)",
+   "unita": "J/kg"
+  },
+  {
+   "id": "shear_01",
+   "titolo": "Shear del vento 0-1 km",
+   "unita": "m/s"
+  },
+  {
+   "id": "shear_03",
+   "titolo": "Shear del vento 0-3 km",
+   "unita": "m/s"
+  },
+  {
+   "id": "shear_06",
+   "titolo": "Shear del vento 0-6 km",
+   "unita": "m/s"
+  },
+  {
+   "id": "srh_01",
+   "titolo": "Elicità relativa alla tempesta 0-1 km",
+   "unita": "m²/s²"
+  },
+  {
+   "id": "srh_03",
+   "titolo": "Elicità relativa alla tempesta 0-3 km",
+   "unita": "m²/s²"
+  },
+  {
+   "id": "fulmini",
+   "titolo": "Rischio fulmini",
+   "unita": "indice"
+  },
+  {
+   "id": "supercelle",
+   "titolo": "Rischio supercelle",
+   "unita": "indice"
+  },
+  {
+   "id": "tornado",
+   "titolo": "Rischio tornado",
+   "unita": "indice"
+  }
+ ],
+ "ore": [
+  "2026-10-24T21:00:00Z",
+  "2026-10-24T22:00:00Z",
+  "2026-10-24T23:00:00Z",
+  "2026-10-25T00:00:00Z",
+  "2026-10-25T01:00:00Z",
+  "2026-10-25T02:00:00Z",
+  "2026-10-25T03:00:00Z",
+  "2026-10-25T04:00:00Z",
+  "2026-10-25T05:00:00Z",
+  "2026-10-25T06:00:00Z",
+  "2026-10-25T07:00:00Z",
+  "2026-10-25T08:00:00Z",
+  "2026-10-25T09:00:00Z",
+  "2026-10-25T10:00:00Z",
+  "2026-10-25T11:00:00Z",
+  "2026-10-25T12:00:00Z",
+  "2026-10-25T13:00:00Z",
+  "2026-10-25T14:00:00Z",
+  "2026-10-25T15:00:00Z",
+  "2026-10-25T16:00:00Z",
+  "2026-10-25T17:00:00Z",
+  "2026-10-25T18:00:00Z",
+  "2026-10-25T19:00:00Z",
+  "2026-10-25T20:00:00Z",
+  "2026-10-25T21:00:00Z",
+  "2026-10-25T22:00:00Z",
+  "2026-10-25T23:00:00Z",
+  "2026-10-26T00:00:00Z",
+  "2026-10-26T01:00:00Z",
+  "2026-10-26T02:00:00Z",
+  "2026-10-26T03:00:00Z",
+  "2026-10-26T04:00:00Z",
+  "2026-10-26T05:00:00Z",
+  "2026-10-26T06:00:00Z",
+  "2026-10-26T07:00:00Z",
+  "2026-10-26T08:00:00Z",
+  "2026-10-26T09:00:00Z",
+  "2026-10-26T10:00:00Z",
+  "2026-10-26T11:00:00Z",
+  "2026-10-26T12:00:00Z"
+ ],
+ "percorso": "{ciclo}/{variabile}/{ora}.png"
+}
