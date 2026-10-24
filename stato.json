@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-24T05:35:14Z",
+ "aggiornato": "2026-10-24T05:40:18Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -69,9 +69,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu urbano 2026102400",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-24T03:50:43Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu radt15 2026102400",
@@ -99,7 +99,7 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu mynn 2026102400",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-24T03:40:28Z",
    "esito": ""
   },
