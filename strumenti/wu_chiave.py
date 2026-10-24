@@ -8,6 +8,9 @@ chiave_funzionante(segreto) restituisce la chiave da usare per le richieste a ap
 La chiave del sito e' di Wunderground, non nostra: puo' cambiare quando vuole, per questo si ricerca a ogni uso (poche richieste).
 Se il modulo non e' raggiungibile da uno script, lo script usa il segreto e basta (vedi il try/except negli import).
 """
+import json
+import os
+import random
 import re
 import sys
 
@@ -19,7 +22,9 @@ except ImportError:                                  # senza requests non si pro
 URL_RICERCA = "https://api.weather.com/v3/location/near"
 URL_LETTURA = "https://api.weather.com/v2/pws/observations/current"
 PAGINA = "https://www.wunderground.com/dashboard/pws/{id}"
-STAZIONI_PAGINA = ["IGENZANO3", "IVELLE79"]          # pagine pubbliche da cui leggere le chiavi (la seconda se la prima non va)
+STAZIONI_PAGINA = ["IGENZANO3", "IVELLE79"]          # pagine di riserva, sempre provate per ultime
+FILE_STAZIONI = os.path.join(os.path.dirname(os.path.abspath(__file__)), "stazioni_verifica.json")
+PAGINE_MAX = 8                                       # quante pagine di stazioni provare al massimo
 MAX_CANDIDATE = 15
 _cache = {}
 
@@ -47,11 +52,24 @@ def funziona(chiave):
     return lettura in (200, 204)                     # 204: stazione muta, ma la chiave e' valida
 
 
+def stazioni_per_la_pagina():
+    """ID di stazioni WU del Lazio da cui provare a leggere la pagina: quelle della verifica (sparse sulla regione) in ordine
+    casuale, cosi' una stazione sparita non blocca la ricerca; in fondo le due di riserva."""
+    ids = []
+    try:
+        with open(FILE_STAZIONI, encoding="utf-8") as f:
+            ids = [w["id"].replace("WU_", "", 1) for w in json.load(f).get("wu", []) if w.get("id")]
+    except (OSError, ValueError, AttributeError, KeyError):
+        pass
+    random.shuffle(ids)
+    return (ids[:PAGINE_MAX - len(STAZIONI_PAGINA)] + STAZIONI_PAGINA)[:PAGINE_MAX]
+
+
 def chiavi_dalla_pagina():
     """Le chiavi (32 esadecimali) nella pagina pubblica di una stazione, quelle vicine a 'apiKey/API_KEY' per prime."""
     if requests is None:
         return []
-    for sid in STAZIONI_PAGINA:
+    for sid in stazioni_per_la_pagina():
         try:
             r = requests.get(PAGINA.format(id=sid), timeout=30, headers={"User-Agent": "Mozilla/5.0"})
         except requests.RequestException:
