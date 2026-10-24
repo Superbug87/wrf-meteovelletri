@@ -205,6 +205,18 @@ def ricampiona(campi, statici, lat_f, lon_f):
     return out, np.clip(z, 0, None)
 
 
+def _chiave_wu(segreto):
+    """Chiave WU da usare per le richieste: il segreto, o una trovata nella pagina pubblica di una stazione se WU lo rifiuta
+    (strumenti/wu_chiave.py). Non solleva mai eccezioni: nel peggiore dei casi resta il segreto."""
+    try:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "strumenti"))
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from wu_chiave import chiave_funzionante
+        return chiave_funzionante(segreto)
+    except Exception:
+        return segreto
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--uscite", required=True, help="cartella con i wrfout_d03_* (anche in sottocartelle)")
@@ -310,6 +322,7 @@ def main():
 
     if not nudging and not a.senza_stazioni and os.environ.get("WU_API_KEY"):
         chiave = os.environ["WU_API_KEY"]
+        chiave = _chiave_wu(chiave)
         pc.SEGRETI.append(chiave)
         try:
             scelte = pc.diradamento(pc.cerca_stazioni(chiave), a.max_stazioni)

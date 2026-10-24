@@ -44,10 +44,23 @@ def campione(chiave, quante):
     return scelte[:quante]
 
 
+def _chiave_wu(segreto):
+    """Chiave WU da usare per le richieste: il segreto, o una trovata nella pagina pubblica di una stazione se WU lo rifiuta
+    (strumenti/wu_chiave.py). Non solleva mai eccezioni: nel peggiore dei casi resta il segreto."""
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from wu_chiave import chiave_funzionante
+        return chiave_funzionante(segreto)
+    except Exception:
+        return segreto
+
+
 def main():
     chiave = os.environ.get("WU_API_KEY")
     if not chiave or len(sys.argv) < 2:
         raise SystemExit(__doc__)
+    chiave = _chiave_wu(chiave)
     if sys.argv[1] == "--campione":
         sys.argv = [sys.argv[0]] + campione(chiave, int(sys.argv[2]))
     p = os.path.join(QUI, "stazioni_verifica.json")

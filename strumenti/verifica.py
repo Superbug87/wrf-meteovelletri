@@ -584,6 +584,18 @@ def pagella(archivio, oggi):
     return out
 
 
+def _chiave_wu(segreto):
+    """Chiave WU da usare per le richieste: il segreto, o una trovata nella pagina pubblica di una stazione se WU lo rifiuta
+    (strumenti/wu_chiave.py). Non solleva mai eccezioni: nel peggiore dei casi resta il segreto."""
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from wu_chiave import chiave_funzionante
+        return chiave_funzionante(segreto)
+    except Exception:
+        return segreto
+
+
 def main():
     global GIORNO
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -608,7 +620,7 @@ def main():
         oss.setdefault(k, {}).update(v)
     chiave_wu = os.environ.get("WU_API_KEY")
     if st.get("wu") and chiave_wu:
-        for k, v in osservazioni_wu([w for w in st["wu"] if w["id"] in servono], GIORNO, chiave_wu).items():
+        for k, v in osservazioni_wu([w for w in st["wu"] if w["id"] in servono], GIORNO, _chiave_wu(chiave_wu)).items():
             oss.setdefault(k, {}).update(v)
     radar_ore, radar_mod = ({}, None) if a.senza_radar else radar_giorno(GIORNO)
     rif = riferimento_openmeteo({k: pos[k] for k in servono if k in pos and not k.startswith("WU_")}, GIORNO)

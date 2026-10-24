@@ -539,6 +539,18 @@ def importa_ufficiali():
     raise FileNotFoundError("strumenti/stazioni_ufficiali.py")
 
 
+def _chiave_wu(segreto):
+    """Chiave WU da usare per le richieste: il segreto, o una trovata nella pagina pubblica di una stazione se WU lo rifiuta
+    (strumenti/wu_chiave.py). Non solleva mai eccezioni: nel peggiore dei casi resta il segreto."""
+    try:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "strumenti"))
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from wu_chiave import chiave_funzionante
+        return chiave_funzionante(segreto)
+    except Exception:
+        return segreto
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--ciclo", required=True, help="AAAAMMGGHH, inizio della previsione (UTC)")
@@ -570,6 +582,7 @@ def main():
         elif adesso - t0 > timedelta(hours=23):
             print("Il ciclo è più vecchio di 23 ore: lo storico a 24 ore di Wunderground non basta, niente stazioni WU.")
         else:
+            chiave = _chiave_wu(chiave)
             SEGRETI.append(chiave)
             stazioni = leggi_wu(chiave, domini, t0, adesso)
     if stazioni:
