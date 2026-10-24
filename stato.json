@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-24T10:00:42Z",
+ "aggiornato": "2026-10-24T10:05:14Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -59,7 +59,7 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu radt6 2026102400",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-24T08:35:34Z",
    "esito": ""
   },
@@ -95,9 +95,9 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu noahmp 2026102400",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-24T08:20:37Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu mynn 2026102400",
