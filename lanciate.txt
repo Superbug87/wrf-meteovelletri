@@ -145,6 +145,7 @@ prova castelli icon2i wu radt15 2026102212
 prova castelli icon2i wu radt15 2026102300
 prova castelli icon2i wu radt15 2026102312
 prova castelli icon2i wu radt15 2026102400
+prova castelli icon2i wu radt15 2026102412
 prova castelli icon2i wu radt6 2026102000
 prova castelli icon2i wu radt6 2026102012
 prova castelli icon2i wu radt6 2026102100
@@ -173,6 +174,7 @@ prova castelli icon2i wu urbano 2026102212
 prova castelli icon2i wu urbano 2026102300
 prova castelli icon2i wu urbano 2026102312
 prova castelli icon2i wu urbano 2026102400
+prova castelli icon2i wu urbano 2026102412
 prova castelli iconeu wu 2026101912
 prova castelli iconeu wu 2026102000
 prova castelli iconeu wu 2026102012
