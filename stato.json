@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-24T05:40:18Z",
+ "aggiornato": "2026-10-24T05:45:22Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -12,15 +12,11 @@
   },
   {
    "workflow": "lazio-icon2i.yml",
-   "ultimo_pubblicato": "2026102312",
-   "in_corso": {
-    "stato": "in_progress",
-    "da": "2026-10-24T04:15:24Z",
-    "id": 40061622929
-   },
+   "ultimo_pubblicato": "2026102400",
+   "in_corso": null,
    "ultimo_esito": {
-    "esito": "failure",
-    "da": "2026-10-24T02:35:17Z"
+    "esito": "success",
+    "da": "2026-10-24T04:15:24Z"
    }
   },
   {
@@ -87,7 +83,7 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu mynn-noahmp 2026102400",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-24T03:45:32Z",
    "esito": ""
   },
@@ -99,9 +95,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu mynn 2026102400",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-24T03:40:28Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu topo2 2026102400",
