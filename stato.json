@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-24T05:15:20Z",
+ "aggiornato": "2026-10-24T05:20:17Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -36,7 +36,7 @@
    "workflow": "lazio-ecmwf.yml",
    "ultimo_pubblicato": "2026102300",
    "in_corso": {
-    "stato": "queued",
+    "stato": "in_progress",
     "da": "2026-10-24T04:06:54Z",
     "id": 40061055002
    },
@@ -79,7 +79,7 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu radt15 2026102400",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-24T03:45:46Z",
    "esito": ""
   },
@@ -109,7 +109,7 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu topo2 2026102400",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-24T03:40:27Z",
    "esito": ""
   },
