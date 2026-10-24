@@ -2,7 +2,7 @@
 """
 Regista: fa partire i run a orario al posto dei lanci programmati di GitHub, che nei repository nuovi arrivano con ore
 di ritardo o non arrivano affatto. Lo lancia .github/workflows/regista.yml, che a sua volta viene "svegliato" da fuori
-ogni 15 minuti (cron-job.org chiama l'API workflow_dispatch) e, quando GitHub lo fa, anche dal suo orario.
+ogni 5 minuti (cron-job.org chiama l'API workflow_dispatch) e, quando GitHub lo fa, anche dal suo orario (7, 22, 37 e 52 di ogni ora).
 
 A ogni sveglia, per ognuno dei quattro workflow guarda l'ultimo ciclo il cui orario di partenza e' passato (al massimo
 da 10 ore) e lo lancia se:
