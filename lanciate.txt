@@ -90,6 +90,7 @@ prova castelli gfs wu 2026102200
 prova castelli gfs wu 2026102212
 prova castelli gfs wu 2026102300
 prova castelli gfs wu 2026102312
+prova castelli gfs wu 2026102400
 prova castelli icon2i wu mynn 2026101900
 prova castelli icon2i wu mynn 2026101912
 prova castelli icon2i wu mynn 2026102000
@@ -167,6 +168,7 @@ prova castelli iconeu wu 2026102200
 prova castelli iconeu wu 2026102212
 prova castelli iconeu wu 2026102300
 prova castelli iconeu wu 2026102312
+prova castelli iconeu wu 2026102400
 prova lazio ecmwf wu mynn 2026101900
 prova lazio ecmwf wu mynn 2026101912
 prova lazio ecmwf wu mynn 2026102000
