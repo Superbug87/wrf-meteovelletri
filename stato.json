@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-25T23:20:18Z",
+ "aggiornato": "2026-10-25T23:25:12Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -47,7 +47,7 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu urbano 2026102512",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-25T21:51:07Z",
    "esito": ""
   },
