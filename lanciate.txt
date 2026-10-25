@@ -147,6 +147,7 @@ prova castelli icon2i wu mynn-noahmp 2026102312
 prova castelli icon2i wu mynn-noahmp 2026102400
 prova castelli icon2i wu mynn-noahmp 2026102412
 prova castelli icon2i wu mynn-noahmp 2026102500
+prova castelli icon2i wu mynn-noahmp 2026102512
 prova castelli icon2i wu noahmp 2026101900
 prova castelli icon2i wu noahmp 2026101912
 prova castelli icon2i wu noahmp 2026102000
@@ -302,6 +303,7 @@ prova lazio icon2i wu mynn 2026102312
 prova lazio icon2i wu mynn 2026102400
 prova lazio icon2i wu mynn 2026102412
 prova lazio icon2i wu mynn 2026102500
+prova lazio icon2i wu mynn 2026102512
 prova lazio icon2i wu mynn-noahmp 2026101900
 prova lazio icon2i wu mynn-noahmp 2026101912
 prova lazio icon2i wu mynn-noahmp 2026102000
@@ -341,6 +343,7 @@ prova lazio icon2i wu topo2 2026102312
 prova lazio icon2i wu topo2 2026102400
 prova lazio icon2i wu topo2 2026102412
 prova lazio icon2i wu topo2 2026102500
+prova lazio icon2i wu topo2 2026102512
 prova lazio icon2i wu urbano 2026102112
 prova lazio icon2i wu urbano 2026102200
 prova lazio icon2i wu urbano 2026102212
