@@ -81,6 +81,7 @@ prova castelli ecmwf wu radt15 2026102312
 prova castelli ecmwf wu radt15 2026102400
 prova castelli ecmwf wu radt15 2026102412
 prova castelli ecmwf wu radt15 2026102500
+prova castelli ecmwf wu radt15 2026102512
 prova castelli ecmwf wu radt6 2026102000
 prova castelli ecmwf wu radt6 2026102012
 prova castelli ecmwf wu radt6 2026102100
@@ -92,6 +93,7 @@ prova castelli ecmwf wu radt6 2026102312
 prova castelli ecmwf wu radt6 2026102400
 prova castelli ecmwf wu radt6 2026102412
 prova castelli ecmwf wu radt6 2026102500
+prova castelli ecmwf wu radt6 2026102512
 prova castelli ecmwf wu topo2 2026101900
 prova castelli ecmwf wu topo2 2026101912
 prova castelli ecmwf wu topo2 2026102000
