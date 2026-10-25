@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-25T09:55:12Z",
+ "aggiornato": "2026-10-25T09:56:12Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -77,7 +77,7 @@
   },
   {
    "titolo": "PROVA lazio ecmwf wu mynn 2026102500",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-25T08:30:43Z",
    "esito": ""
   },
