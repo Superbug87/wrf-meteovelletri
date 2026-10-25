@@ -122,6 +122,7 @@ prova castelli icon2i wu mynn 2026102300
 prova castelli icon2i wu mynn 2026102312
 prova castelli icon2i wu mynn 2026102400
 prova castelli icon2i wu mynn 2026102412
+prova castelli icon2i wu mynn 2026102500
 prova castelli icon2i wu mynn-noahmp 2026101900
 prova castelli icon2i wu mynn-noahmp 2026101912
 prova castelli icon2i wu mynn-noahmp 2026102000
@@ -146,6 +147,7 @@ prova castelli icon2i wu noahmp 2026102300
 prova castelli icon2i wu noahmp 2026102312
 prova castelli icon2i wu noahmp 2026102400
 prova castelli icon2i wu noahmp 2026102412
+prova castelli icon2i wu noahmp 2026102500
 prova castelli icon2i wu radt15 2026102000
 prova castelli icon2i wu radt15 2026102012
 prova castelli icon2i wu radt15 2026102100
@@ -178,6 +180,7 @@ prova castelli icon2i wu topo2 2026102300
 prova castelli icon2i wu topo2 2026102312
 prova castelli icon2i wu topo2 2026102400
 prova castelli icon2i wu topo2 2026102412
+prova castelli icon2i wu topo2 2026102500
 prova castelli icon2i wu urbano 2026102112
 prova castelli icon2i wu urbano 2026102200
 prova castelli icon2i wu urbano 2026102212
