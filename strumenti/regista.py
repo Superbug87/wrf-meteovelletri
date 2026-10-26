@@ -48,12 +48,18 @@ PROVE = [
 # prove di fisica (sperimentale.yml con il campo "fisica": non pubblicano, lasciano l'estratto per la pagella): per ogni zona e
 # modello, una prova per ciascuna di queste varianti, con il nudging in uso (wu). Partono dopo i run normali, cosi' i dati
 # globali sono gia' in cache: ICON-2I 3:30 dopo il ciclo (come il Lazio normale), ECMWF 8:20 (30 minuti dopo il normale).
-FISICHE = ("topo2", "mynn", "noahmp", "mynn-noahmp")
+# Dal 26/10/2026 (analisi fisica su 6 cicli, confronto appaiato): topo2, mynn e mynn-noahmp sono finite (peggio sul vento o
+# notti piu' calde); noahmp continua fino al 31/10 (decisione sulla versione ufficiale). Al loro posto, fino all'8/11:
+# livelli (50 livelli, primo strato 20 m), raggi (nudging piu' locale) e, solo nel dominio a 1 km dei Castelli, diff2.
+# (kim_tofd per il vento non c'e' in WRF 4.7.0: arriva con la 4.8.0.)
+FISICHE = {"castelli": ("livelli", "diff2", "raggi"), "lazio": ("livelli", "raggi")}
 RITARDI_PROVE = {"icon2i": {0: (3, 30), 12: (3, 30)}, "ecmwf": {0: (8, 20), 12: (8, 20)}}
 for _wf, _z, _p in (("castelli-ecmwf.yml", "castelli", "ecmwf"), ("castelli-icon2i.yml", "castelli", "icon2i"),
                     ("lazio-ecmwf.yml", "lazio", "ecmwf"), ("lazio-icon2i.yml", "lazio", "icon2i")):
-    PROVE.append({"workflow": _wf, "zona": _z, "pilota": _p, "varianti": ("wu",), "fisiche": FISICHE, "controllo": "false",
+    PROVE.append({"workflow": _wf, "zona": _z, "pilota": _p, "varianti": ("wu",), "fisiche": ("noahmp",), "controllo": "false",
                   "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026101900", "fino_a": "2026-10-31"})
+    PROVE.append({"workflow": _wf, "zona": _z, "pilota": _p, "varianti": ("wu",), "fisiche": FISICHE[_z], "controllo": "false",
+                  "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026102612", "fino_a": "2026-11-08"})
 # prove della frequenza della radiazione (solo Castelli, dominio da 1 km: 6 e 15 minuti invece di 3): stessi ritardi delle altre prove di fisica
 for _wf, _p in (("castelli-ecmwf.yml", "ecmwf"), ("castelli-icon2i.yml", "icon2i")):
     PROVE.append({"workflow": _wf, "zona": "castelli", "pilota": _p, "varianti": ("wu",), "fisiche": ("radt6", "radt15"),

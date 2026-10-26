@@ -35,7 +35,7 @@ on:
         description: "Macchina di GitHub: ubuntu-22.04-arm (ARM, quella in uso) o ubuntu-22.04 (x86, per confronto)"
         default: "ubuntu-22.04-arm"
       fisica:
-        description: "Fisica diversa da quella in uso: topo2, mynn, noahmp, mynn-noahmp, radt6 o radt15 (solo Castelli; vuoto = quella in uso)"
+        description: "Fisica diversa da quella in uso: noahmp, livelli, raggi, diff2 (solo Castelli), radt6 o radt15 (solo Castelli), urbano; anche topo2, mynn (vuoto = quella in uso)"
         default: ""
 
 permissions:

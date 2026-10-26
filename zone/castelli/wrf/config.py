@@ -19,7 +19,14 @@ import dominio as D  # noqa: E402
 # Prove di fisica (variabile FISICA, vuota nei lanci normali): sigle separate da "-" tra topo2, mynn, noahmp.
 # Vuota = fisica in uso. Esempi: "topo2", "mynn-noahmp".
 FISICA = set(filter(None, os.environ.get("FISICA", "").lower().split("-")))
-_NOTE_FISICA = {"topo2", "mynn", "noahmp", "radt6", "radt15", "idroec", "urbano"}   # radt6/radt15: radiazione ogni 6 o 15 minuti nel dominio da 1 km (3 in uso)
+_NOTE_FISICA = {"topo2", "mynn", "noahmp", "radt6", "radt15", "idroec", "urbano", "livelli", "diff2", "raggi"}   # radt6/radt15: radiazione ogni 6 o 15 minuti nel dominio da 1 km (3 in uso)
+# Prove del 26/10/2026 (analisi fisica: notte troppo calda, niente nebbia, nudging troppo largo):
+#   livelli = 50 livelli invece di 40, primo strato di 20 m invece di 50 (8 livelli sotto i 300 m invece di 4):
+#             lo strato freddo notturno vicino al suolo e la nebbia hanno bisogno di risoluzione verticale;
+#   diff2   = nel dominio a 1 km la diffusione orizzontale si calcola nello spazio fisico (diff_opt 2), ridotta sui
+#             pendii: lungo le superfici inclinate del modello porta aria tiepida dei versanti nelle conche fredde;
+#   raggi   = nudging delle stazioni piu' locale: raggio dimezzato nel dominio fine e peso che si annulla gia' con
+#             ~260 m di dislivello tra stazione e punto del modello (obs_dpsmx 3 cb invece di 7,5).
 if FISICA - _NOTE_FISICA:
     sys.exit(f"FISICA: sigle sconosciute {sorted(FISICA - _NOTE_FISICA)} (ammesse: {sorted(_NOTE_FISICA)})")
 
@@ -126,7 +133,9 @@ def namelist_input(inizio, fine, riprendi, nlev, nsoil, obs_minuti=None, obs_ven
 
     t += "&domains\n"
     t += f" time_step = {TIME_STEP},\n time_step_fract_num = 0,\n time_step_fract_den = 1,\n max_dom = 3,\n"
-    t += riga("e_we", D.E) + riga("e_sn", D.E) + riga("e_vert", [D.E_VERT] * 3)
+    t += riga("e_we", D.E) + riga("e_sn", D.E) + riga("e_vert", [50 if "livelli" in FISICA else D.E_VERT] * 3)
+    if "livelli" in FISICA:                         # livelli automatici di WRF (auto_levels_opt 2) piu' fitti in basso
+        t += " dzbot = 20.,\n dzstretch_s = 1.2,\n"
     t += riga("dx", D.DX) + riga("dy", D.DX)
     t += riga("grid_id", [1, 2, 3]) + riga("parent_id", [0, 1, 2])
     t += riga("i_parent_start", starts) + riga("j_parent_start", starts)
@@ -161,7 +170,7 @@ def namelist_input(inizio, fine, riprendi, nlev, nsoil, obs_minuti=None, obs_ven
 
     t += "&dynamics\n"
     t += " hybrid_opt = 2,\n use_theta_m = 0,\n w_damping = 1,\n"
-    t += riga("diff_opt", [1] * 3) + riga("km_opt", [4] * 3)
+    t += riga("diff_opt", [1, 1, 2 if "diff2" in FISICA else 1]) + riga("km_opt", [4] * 3)
     t += riga("diff_6th_opt", [0] * 3) + riga("diff_6th_factor", [0.12] * 3)
     t += " base_temp = 290.,\n damp_opt = 3,\n zdamp = 5000., 5000., 5000.,\n dampcoef = 0.2, 0.2, 0.2,\n"
     t += riga("khdif", [0] * 3) + riga("kvdif", [0] * 3)
@@ -178,8 +187,10 @@ def namelist_input(inizio, fine, riprendi, nlev, nsoil, obs_minuti=None, obs_ven
         t += riga("obs_nudge_wind", [1 if obs_vento else 0] * 3) + riga("obs_coef_wind", ["6.E-4"] * 3)
         t += riga("obs_nudge_temp", [1] * 3) + riga("obs_coef_temp", ["6.E-4"] * 3)
         t += riga("obs_nudge_mois", [1] * 3) + riga("obs_coef_mois", ["6.E-4"] * 3)
-        t += riga("obs_rinxy", ["100.", "50.", "25."])
+        t += riga("obs_rinxy", ["100.", "50.", "12." if "raggi" in FISICA else "25."])
         t += " obs_rinsig = 0.1,\n"
+        if "raggi" in FISICA:
+            t += " obs_dpsmx = 3.0,\n"           # cb: il peso si annulla con 30 hPa (~260 m) di dislivello (WRF: 7,5)
         t += riga("obs_twindo", ["0.6666667"] * 3) + " obs_npfi = 10,\n"
         t += riga("obs_ionf", [2] * 3) + " obs_idynin = 0,\n obs_dtramp = 40.,\n"
         t += " obs_prt_max = 10,\n obs_prt_freq = 100, 100, 100,\n"

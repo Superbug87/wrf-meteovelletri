@@ -48,7 +48,7 @@ on:
       prova:
         type: boolean
         default: false
-      # solo prove di fisica: sigle separate da "-" tra topo2, mynn, noahmp (vuoto = fisica in uso). Con una sigla la prova
+      # solo prove di fisica: sigle separate da "-" (vedi _NOTE_FISICA in wrf/config.py; vuoto = fisica in uso). Con una sigla la prova
       # non fa le mappe: lascia solo l'estratto per la verifica, nel ramo prove-fisica
       fisica:
         type: string
