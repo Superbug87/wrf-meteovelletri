@@ -317,6 +317,7 @@ prova lazio ecmwf wu urbano 2026102400
 prova lazio ecmwf wu urbano 2026102412
 prova lazio ecmwf wu urbano 2026102500
 prova lazio ecmwf wu urbano 2026102512
+prova lazio ecmwf wu urbano 2026102600
 prova lazio gfs wu 2026101912
 prova lazio gfs wu 2026102000
 prova lazio gfs wu 2026102012
