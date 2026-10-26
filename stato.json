@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-26T19:20:18Z",
+ "aggiornato": "2026-10-26T19:25:13Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -41,7 +41,7 @@
  "prove": [
   {
    "titolo": "PROVA lazio icon2i wu raggi 2026102612",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-26T18:05:41Z",
    "esito": ""
   },
