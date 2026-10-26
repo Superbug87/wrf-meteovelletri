@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-26T20:05:14Z",
+ "aggiornato": "2026-10-26T20:10:18Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -73,9 +73,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu livelli 2026102612",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-26T18:01:20Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio gfs wu 2026102612",
