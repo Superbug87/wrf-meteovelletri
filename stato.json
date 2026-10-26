@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-26T17:20:20Z",
+ "aggiornato": "2026-10-26T17:25:14Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -40,14 +40,20 @@
  ],
  "prove": [
   {
-   "titolo": "PROVA lazio iconeu wu 2026102612",
+   "titolo": "PROVA lazio gfs wu 2026102612",
    "stato": "in_progress",
+   "da": "2026-10-26T17:26:04Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA lazio iconeu wu 2026102612",
+   "stato": "queued",
    "da": "2026-10-26T17:21:09Z",
    "esito": ""
   },
   {
    "titolo": "PROVA castelli gfs wu 2026102612",
-   "stato": "in_progress",
+   "stato": "queued",
    "da": "2026-10-26T17:21:05Z",
    "esito": ""
   },
@@ -71,21 +77,21 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu radt15 2026102612",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-26T15:45:51Z",
    "esito": ""
   },
   {
    "titolo": "PROVA castelli icon2i wu radt6 2026102612",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-26T15:40:52Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio icon2i wu mynn-noahmp 2026102612",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-26T15:40:44Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio icon2i wu noahmp 2026102612",
@@ -101,9 +107,9 @@
   },
   {
    "titolo": "PROVA lazio icon2i wu topo2 2026102612",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-26T15:35:42Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu mynn-noahmp 2026102612",
@@ -113,9 +119,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu noahmp 2026102612",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-26T15:30:48Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu mynn 2026102612",
@@ -391,12 +397,6 @@
    "titolo": "PROVA lazio iconeu wu 2026102512",
    "stato": "completed",
    "da": "2026-10-25T17:16:00Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA castelli gfs wu 2026102512",
-   "stato": "completed",
-   "da": "2026-10-25T17:10:52Z",
    "esito": "success"
   }
  ]
