@@ -102,6 +102,7 @@ prova castelli ecmwf wu radt6 2026102412
 prova castelli ecmwf wu radt6 2026102500
 prova castelli ecmwf wu radt6 2026102512
 prova castelli ecmwf wu radt6 2026102600
+prova castelli ecmwf wu raggi 2026102612
 prova castelli ecmwf wu topo2 2026101900
 prova castelli ecmwf wu topo2 2026101912
 prova castelli ecmwf wu topo2 2026102000
@@ -263,6 +264,7 @@ prova castelli iconeu wu 2026102500
 prova castelli iconeu wu 2026102512
 prova castelli iconeu wu 2026102600
 prova castelli iconeu wu 2026102612
+prova lazio ecmwf wu livelli 2026102612
 prova lazio ecmwf wu mynn 2026101900
 prova lazio ecmwf wu mynn 2026101912
 prova lazio ecmwf wu mynn 2026102000
@@ -308,6 +310,7 @@ prova lazio ecmwf wu noahmp 2026102412
 prova lazio ecmwf wu noahmp 2026102500
 prova lazio ecmwf wu noahmp 2026102512
 prova lazio ecmwf wu noahmp 2026102600
+prova lazio ecmwf wu noahmp 2026102612
 prova lazio ecmwf wu topo2 2026101900
 prova lazio ecmwf wu topo2 2026101912
 prova lazio ecmwf wu topo2 2026102000
