@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-26T05:20:19Z",
+ "aggiornato": "2026-10-26T05:25:13Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -40,6 +40,12 @@
  ],
  "prove": [
   {
+   "titolo": "PROVA lazio gfs wu 2026102600",
+   "stato": "in_progress",
+   "da": "2026-10-26T05:25:58Z",
+   "esito": ""
+  },
+  {
    "titolo": "PROVA lazio iconeu wu 2026102600",
    "stato": "queued",
    "da": "2026-10-26T05:21:04Z",
@@ -59,9 +65,9 @@
   },
   {
    "titolo": "PROVA lazio icon2i wu urbano 2026102600",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-26T03:50:55Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu urbano 2026102600",
@@ -71,9 +77,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu radt15 2026102600",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-26T03:45:42Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu radt6 2026102600",
@@ -83,15 +89,15 @@
   },
   {
    "titolo": "PROVA lazio icon2i wu mynn-noahmp 2026102600",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-26T03:40:37Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio icon2i wu noahmp 2026102600",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-26T03:40:35Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio icon2i wu mynn 2026102600",
@@ -119,7 +125,7 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu mynn 2026102600",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-26T03:30:43Z",
    "esito": ""
   },
@@ -391,12 +397,6 @@
    "titolo": "PROVA castelli ecmwf ufficiali 2026102500",
    "stato": "completed",
    "da": "2026-10-25T08:20:24Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA lazio gfs wu 2026102500",
-   "stato": "completed",
-   "da": "2026-10-25T05:21:03Z",
    "esito": "success"
   }
  ]
