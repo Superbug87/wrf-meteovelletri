@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-26T22:15:20Z",
+ "aggiornato": "2026-10-26T22:20:17Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -95,7 +95,7 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu livelli 2026102612",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-26T20:20:33Z",
    "esito": ""
   },
