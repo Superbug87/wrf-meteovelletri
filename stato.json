@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-26T19:45:20Z",
+ "aggiornato": "2026-10-26T19:50:17Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -22,7 +22,11 @@
   {
    "workflow": "castelli-ecmwf.yml",
    "ultimo_pubblicato": "2026102600",
-   "in_corso": null,
+   "in_corso": {
+    "stato": "queued",
+    "da": "2026-10-26T19:50:20Z",
+    "id": 40390296263
+   },
    "ultimo_esito": {
     "esito": "success",
     "da": "2026-10-26T07:50:23Z"
@@ -31,7 +35,11 @@
   {
    "workflow": "lazio-ecmwf.yml",
    "ultimo_pubblicato": "2026102600",
-   "in_corso": null,
+   "in_corso": {
+    "stato": "in_progress",
+    "da": "2026-10-26T19:50:23Z",
+    "id": 40390303217
+   },
    "ultimo_esito": {
     "esito": "success",
     "da": "2026-10-26T07:50:26Z"
@@ -47,15 +55,15 @@
   },
   {
    "titolo": "PROVA lazio icon2i wu livelli 2026102612",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-26T18:05:39Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu raggi 2026102612",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-26T18:01:24Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu diff2 2026102612",
