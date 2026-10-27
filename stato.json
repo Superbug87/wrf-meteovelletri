@@ -1,17 +1,13 @@
 {
- "aggiornato": "2026-10-27T18:35:26Z",
+ "aggiornato": "2026-10-27T18:40:20Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
-   "ultimo_pubblicato": "2026102700",
-   "in_corso": {
-    "stato": "in_progress",
-    "da": "2026-10-27T16:11:27Z",
-    "id": 40538452385
-   },
+   "ultimo_pubblicato": "2026102712",
+   "in_corso": null,
    "ultimo_esito": {
-    "esito": "cancelled",
-    "da": "2026-10-27T16:01:24Z"
+    "esito": "success",
+    "da": "2026-10-27T16:11:27Z"
    }
   },
   {
@@ -63,7 +59,7 @@
   },
   {
    "titolo": "PROVA castelli iconeu wu 2026102712",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-27T17:01:44Z",
    "esito": ""
   },
