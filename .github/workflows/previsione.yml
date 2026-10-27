@@ -339,6 +339,11 @@ jobs:
         with:
           path: /home/runner/iconeu-dati
           key: iconeu-dati-v1-${{ env.CICLO }}-${{ env.ORE }}
+      - name: Aspetto lo scarico ICON-2I dei Castelli (un solo download per ciclo)
+        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'icon2i' && (inputs.zona != 'castelli' || inputs.prova)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash strumenti/aspetta_icon2i.sh "$CICLO" "$ORE"
       - name: Dati ICON-2I già scaricati per questo ciclo (cache condivisa tra le due zone)
         id: dati
         if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'icon2i'

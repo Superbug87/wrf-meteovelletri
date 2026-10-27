@@ -40,6 +40,7 @@ on:
 
 permissions:
   contents: write                 # le prove di fisica pubblicano l'estratto nel ramo prove-fisica
+  actions: read                   # aspetta_icon2i.sh: vede la cache ICON-2I e il run dei Castelli
 
 concurrency:
   group: sperimentale-${{ inputs.zona }}-${{ inputs.pilota }}-${{ inputs.nudging }}-${{ inputs.fisica }}-${{ inputs.runner }}
