@@ -362,16 +362,17 @@ def maschera_terra(hub, ciclo):
     """Land-sea mask (1 = terra): campo statico, si chiede senza tipo di tempo."""
     fs = hub.elenco(SUPERFICIE)
     prod = scegli(fs["product"], lambda p: p["desc"].startswith("Land cover"))
-    # e' la prima richiesta: aspetta il ciclo fino a un'ora (24 x 150 s). Il 27/10 il 12Z non c'era ancora alle 14:41 UTC: con
-    # 20 minuti di attesa ogni tentativo del regista cadeva a vuoto e i tre tentativi finivano prima che i dati arrivassero
-    campi, _, _, _ = leggi(estrai_con_attesa(hub, SUPERFICIE, ciclo, {"product": prod}, "icon2i_lsm", tentativi=24))
+    # anche la maschera aspetta il ciclo (27/10: alle 14:16 UTC il 12Z non c'era ancora e il run cadeva subito)
+    campi, _, _, _ = leggi(estrai_con_attesa(hub, SUPERFICIE, ciclo, {"product": prod}, "icon2i_lsm"))
     if not campi:
         sys.exit("Manca la maschera terra-mare di ICON-2I.")
     return campi[0][1]
 
 
-def estrai_con_attesa(hub, dataset, ciclo, filtri, nome, tentativi=8, pausa=150):
-    """Come estrai, ma se non c'e' ancora nulla (ciclo in arrivo su MeteoHub) aspetta e ritenta."""
+def estrai_con_attesa(hub, dataset, ciclo, filtri, nome, tentativi=24, pausa=150):
+    """Come estrai, ma se non c'e' ancora nulla (ciclo in arrivo su MeteoHub) aspetta e ritenta, fino a un'ora (24 x 150 s).
+    Il 27/10 il 12Z sui livelli del modello non c'era ancora alle 15:07 UTC, mentre la superficie era arrivata alle 14:44:
+    con 20 minuti di attesa i tentativi del regista finivano prima dei dati."""
     for i in range(tentativi):
         dati = hub.estrai(dataset, ciclo, filtri, nome)
         if dati:
