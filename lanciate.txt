@@ -147,7 +147,9 @@ prova castelli gfs wu 2026102512
 prova castelli gfs wu 2026102600
 prova castelli gfs wu 2026102612
 prova castelli icon2i wu diff2 2026102612
+prova castelli icon2i wu diff2 2026102700
 prova castelli icon2i wu livelli 2026102612
+prova castelli icon2i wu livelli 2026102700
 prova castelli icon2i wu mynn 2026101900
 prova castelli icon2i wu mynn 2026101912
 prova castelli icon2i wu mynn 2026102000
@@ -196,6 +198,7 @@ prova castelli icon2i wu noahmp 2026102500
 prova castelli icon2i wu noahmp 2026102512
 prova castelli icon2i wu noahmp 2026102600
 prova castelli icon2i wu noahmp 2026102612
+prova castelli icon2i wu noahmp 2026102700
 prova castelli icon2i wu radt15 2026102000
 prova castelli icon2i wu radt15 2026102012
 prova castelli icon2i wu radt15 2026102100
