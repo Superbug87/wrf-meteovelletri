@@ -489,6 +489,7 @@ radar lazio ecmwf rad0 2026102612 dati 2026102600
 radar lazio ecmwf rad0 2026102615 dati 2026102606
 radar lazio ecmwf rad0 2026102618 dati 2026102606
 radar lazio ecmwf rad0 2026102621 dati 2026102612
+radar lazio ecmwf rad0 2026102700 dati 2026102612
 radar lazio ecmwf radq-radnubi 2026102209 dati 2026102200
 radar lazio ecmwf radq-radnubi 2026102212 dati 2026102200
 radar lazio ecmwf radq-radnubi 2026102215 dati 2026102206
@@ -526,3 +527,4 @@ radar lazio ecmwf radq-radnubi 2026102612 dati 2026102600
 radar lazio ecmwf radq-radnubi 2026102615 dati 2026102606
 radar lazio ecmwf radq-radnubi 2026102618 dati 2026102606
 radar lazio ecmwf radq-radnubi 2026102621 dati 2026102612
+radar lazio ecmwf radq-radnubi 2026102700 dati 2026102612
