@@ -158,9 +158,19 @@ def pubblicato(ramo, ciclo):
     return r.returncode == 0
 
 
+def dati_icon2i_in_cache(c):
+    """True solo se i dati ICON-2I del ciclo sono in cache (scaricati dal run ufficiale dei Castelli, l'unico che parla con
+    MeteoHub). Se l'API non risponde si considera "no": nel dubbio non si lancia nulla."""
+    r = subprocess.run(["gh", "api", f"repos/{REPO}/actions/caches?key=icon2i-dati-v2-{c}-", "--jq", ".total_count"],
+                       capture_output=True, text=True)
+    return r.returncode == 0 and r.stdout.strip().isdigit() and int(r.stdout.strip()) > 0
+
+
 def ufficiale_pronto(zona, pilota, c, adesso):
     """None se il run ufficiale di quel ciclo ha gia' scaricato i dati (partito da abbastanza ed e' vivo o riuscito),
     altrimenti il motivo per aspettare."""
+    if pilota == "icon2i":
+        return None if dati_icon2i_in_cache(c) else f"i dati ICON-2I del ciclo {c} non sono ancora in cache (li scarica il Castelli ufficiale)"
     wf = {"castelli": "castelli", "lazio": "lazio"}[zona] + f"-{pilota}.yml"
     nome = f" {c}".lower()
     run = [r for r in gh("run", "list", "-R", REPO, "--workflow", wf, "-L", "10", "--json", "displayTitle,status,conclusion,createdAt")
@@ -214,6 +224,8 @@ def main():
                 print(f"  {wf}: ciclo {c} gia' pubblicato")
                 continue
             motivo = decidi(run_del_workflow(wf), partenza, adesso)
+            if not motivo and wf == "lazio-icon2i.yml" and not dati_icon2i_in_cache(c):
+                motivo = "i dati ICON-2I non sono ancora in cache: aspetto il Castelli (il Lazio non scarica da MeteoHub)"
             if motivo:
                 print(f"  {wf}: ciclo {c} non pubblicato, ma {motivo}")
                 continue

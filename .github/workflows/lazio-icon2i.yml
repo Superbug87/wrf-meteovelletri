@@ -35,7 +35,7 @@ on:
 
 permissions:
   contents: write                 # serve a pubblicare le immagini nel ramo risultati-lazio-icon2i
-  actions: read                   # aspetta_icon2i.sh: vede la cache ICON-2I e il run dei Castelli
+  actions: read                   # il regista e i run vedono se la cache ICON-2I c'è
 
 concurrency:
   group: lazio-icon2i             # un run alla volta per questa zona e questo modello; gli altri tre workflow vanno in parallelo

@@ -339,11 +339,6 @@ jobs:
         with:
           path: /home/runner/iconeu-dati
           key: iconeu-dati-v1-${{ env.CICLO }}-${{ env.ORE }}
-      - name: Aspetto lo scarico ICON-2I dei Castelli (un solo download per ciclo)
-        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'icon2i' && (inputs.zona != 'castelli' || inputs.prova)
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: bash strumenti/aspetta_icon2i.sh "$CICLO" "$ORE"
       - name: Dati ICON-2I già scaricati per questo ciclo (cache condivisa tra le due zone)
         id: dati
         if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'icon2i'
@@ -351,8 +346,15 @@ jobs:
         with:
           path: /home/runner/icon2i-dati
           key: icon2i-dati-v2-${{ env.CICLO }}-${{ env.ORE }}
-      - name: Scarico ICON-2I da MeteoHub (se non è già in cache)
-        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'icon2i' && steps.dati.outputs.cache-hit != 'true'
+      # Regola: da MeteoHub scarica SOLO il run ufficiale dei Castelli. Lazio e prove usano la cache; se non c'è si fermano
+      # senza chiedere nulla a MeteoHub (il 27/10/2026 troppi run insieme hanno riempito la quota e causato una mail al minuto).
+      - name: Senza dati in cache Lazio e prove non scaricano (lo fa solo il run ufficiale dei Castelli)
+        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'icon2i' && steps.dati.outputs.cache-hit != 'true' && (inputs.zona != 'castelli' || inputs.prova)
+        run: |
+          echo "::error::I dati ICON-2I di questo ciclo non sono in cache: li scarica solo il run ufficiale dei Castelli. Non chiedo nulla a MeteoHub."
+          exit 1
+      - name: Scarico ICON-2I da MeteoHub (solo run ufficiale dei Castelli, se non è già in cache)
+        if: steps.s.outputs.attivo == 'true' && matrix.seg == 0 && inputs.pilota == 'icon2i' && steps.dati.outputs.cache-hit != 'true' && inputs.zona == 'castelli' && !inputs.prova
         env:
           MH_EMAIL: ${{ secrets.MH_EMAIL }}
           MH_PASSWORD: ${{ secrets.MH_PASSWORD }}
