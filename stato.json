@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-27T21:40:18Z",
+ "aggiornato": "2026-10-27T21:45:21Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -65,7 +65,7 @@
   },
   {
    "titolo": "PROVA lazio ecmwf wu raggi 2026102712",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-27T20:30:58Z",
    "esito": ""
   },
