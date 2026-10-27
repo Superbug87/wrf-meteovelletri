@@ -8,6 +8,9 @@ Per ogni versione e scadenza (gruppi di 3 ore, da +1 a +48) si calcolano errore 
 La temperatura del modello e' riportata alla quota della stazione (0,65 K ogni 100 m), come nella pagella.
 L'umidita' relativa del modello si ricava da temperatura e punto di rugiada a 2 m (Magnus); nelle osservazioni viene dalla
 rete della Regione (34 stazioni) e, per i SYNOP, da temperatura e punto di rugiada.
+Il punto di rugiada (td2) si confronta su SYNOP e Regione (da temperatura e umidita'), riportato alla quota della stazione
+(vapore costante, 1,8 K/km). Il vento si confronta solo con i SYNOP: gli anemometri della Regione sono bassi o riparati
+(rapporto modello/osservato 1,6-1,7 in tutte le versioni contro ~1,0 dei SYNOP sui Castelli; vedi strumenti/verifica.py).
 La raffica non c'e': gli estratti non la contengono e la rete della Regione non la pubblica.
 """
 import argparse
@@ -29,7 +32,8 @@ sys.path.insert(0, QUI)
 import verifica as V  # noqa: E402
 
 BIN = 3
-VARS = {"t2": ("Temperatura a 2 m", "°C"), "ur": ("Umidità relativa a 2 m", "%"), "vento": ("Vento medio a 10 m", "m/s"),
+VARS = {"t2": ("Temperatura a 2 m", "°C"), "td2": ("Punto di rugiada a 2 m", "°C"), "ur": ("Umidità relativa a 2 m", "%"),
+        "vento": ("Vento medio a 10 m (solo SYNOP)", "m/s"),
         "pioggia": ("Pioggia in 3 ore ai pluviometri", "mm"), "csi": ("Pioggia ≥ 1 mm in 3 ore ai pluviometri: indice di successo CSI", "")}
 
 
@@ -58,6 +62,7 @@ def main():
         files[(m.group(1), m.group(2) or "", m.group(3))] = f
     st = json.load(open(os.path.join(QUI, "stazioni_verifica.json")))
     quote = {s["id"]: float(s["quota"]) for s in st["regione"] + st["aeronautica"] if s.get("quota") is not None}
+    synop = {s["id"] for s in st["aeronautica"]}
     dati = {k: np.load(f, allow_pickle=True) for k, f in files.items()}
     servono = {str(x) for d in dati.values() for x in d["stazioni"]}
     giorni = set()
@@ -107,7 +112,12 @@ def main():
                     coppie["t2"] = (tm + 0.0065 * dz, o["t2"][t])
                 if t in o.get("ur", {}) and 0 <= o["ur"][t] <= 100 and np.isfinite(tm) and np.isfinite(tdm):
                     coppie["ur"] = (float(min(100, ur_magnus(tm, tdm))), o["ur"][t])
-                if t in o.get("vento", {}) and 0 <= o["vento"][t] < 60 and np.isfinite(d["vento"][k, j]):
+                otd = o.get("td2", {}).get(t)
+                if otd is None:
+                    otd = V.rugiada(o.get("t2", {}).get(t), o.get("ur", {}).get(t))
+                if otd is not None and np.isfinite(tdm):
+                    coppie["td2"] = (tdm + V.GRAD_RUGIADA * dz, otd)
+                if sid in synop and t in o.get("vento", {}) and 0 <= o["vento"][t] < 60 and np.isfinite(d["vento"][k, j]):
                     coppie["vento"] = (float(d["vento"][k, j]), o["vento"][t])
                 for var_n, (p, ob) in coppie.items():
                     r = acc.setdefault((pil, var), {}).setdefault(var_n, {}).setdefault(b, [0, 0.0, 0.0])

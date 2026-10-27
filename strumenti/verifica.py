@@ -34,7 +34,7 @@ PILOTI = ["ecmwf", "icon2i"]
 PILOTI_PROVA = ["iconeu", "gfs"]          # piloti solo in prova: senza run normale ne' modello originale di riferimento
 # prove di fisica (run non pubblicati; gli estratti stanno nel ramo prove-fisica, vedi strumenti/pubblica_estratto.sh):
 # nei risultati compaiono come "<zona>-<pilota>-<variante>", per esempio "castelli-ecmwf-noahmp"
-VARIANTI = ["topo2", "mynn", "noahmp", "mynn-noahmp", "radt6", "radt15", "urbano"]
+VARIANTI = ["topo2", "mynn", "noahmp", "mynn-noahmp", "radt6", "radt15", "urbano", "livelli", "diff2", "raggi"]
 PORTALE = "https://temporeale.regione.lazio.it/datascapeA"
 SOGLIE_PIOGGIA = (0.2, 1.0, 5.0)         # mm in 6 ore, ai pluviometri
 SOGLIE_RADAR = (0.5, 2.0)                # mm in 6 ore, sul radar
@@ -45,6 +45,18 @@ NOTTE = set(range(18, 24)) | set(range(0, 6))   # ore UTC
 CLASSI_VENTO = (0.0, 1.0, 2.0, 3.0, 4.0, 6.0, 9.0, 1e9)
 MIN_CORREZIONE = 30
 GIORNI_CORREZIONE = 30
+# Versione delle somme di un giorno (campo "versione" di giorni/AAAA-MM-GG.json). Dalla 2 (26/10/2026):
+#  - il vento si confronta solo con i SYNOP (anemometro a 10 m in campo aperto, come il vento a 10 m del modello); le stazioni
+#    della Regione, con il 23% di calme e un rapporto modello/osservato di 1,6-1,7 in tutte le versioni (sensore basso o riparato),
+#    finiscono in "vento_reg", solo come informazione;
+#  - il punto di rugiada si confronta anche sulle stazioni della Regione (da temperatura e umidita') ed e' riportato alla quota
+#    della stazione come la temperatura (vapore costante: circa 1,8 K/km);
+#  - per ogni ciclo si tengono le somme di temperatura, rugiada e vento: la pagella confronta ogni prova di fisica con il WRF
+#    normale dello stesso pilota ciclo per ciclo (stessi cicli), con l'incertezza.
+# Nella pagella i giorni di versione 1 non contano per vento e rugiada (misurati in un altro modo).
+VERSIONE = 2
+SYNOP = set()                             # ID delle stazioni SYNOP (riempito in main)
+GRAD_RUGIADA = 0.0018                     # K/m: come scende la rugiada salendo, a vapore costante
 SESSIONE = requests.Session()
 SESSIONE.headers["User-Agent"] = "wrf-meteovelletri-verifica (GitHub Actions)"
 
@@ -344,13 +356,21 @@ def riferimento_openmeteo(punti, giorno):
 # ---------------------------------------------------------------------------------------------------------------
 # Indici
 # ---------------------------------------------------------------------------------------------------------------
+def rugiada(t, ur):
+    """Punto di rugiada (°C) da temperatura (°C) e umidita' relativa (%) con la formula di Magnus; None se manca qualcosa."""
+    if t is None or ur is None or not (-40 < t < 50) or not (1 <= ur <= 100):
+        return None
+    g = np.log(ur / 100.0) + 17.625 * t / (243.04 + t)
+    return float(243.04 * g / (17.625 - g))
+
+
 def vuoto():
     return {"t2": [0, 0.0, 0.0], "t2_giorno": [0, 0.0, 0.0], "t2_notte": [0, 0.0, 0.0], "td2": [0, 0.0, 0.0],
-            "vento": [0, 0.0, 0.0], "vento_corr": [0, 0.0, 0.0], "mslp": [0, 0.0, 0.0],
+            "vento": [0, 0.0, 0.0], "vento_corr": [0, 0.0, 0.0], "vento_reg": [0, 0.0, 0.0], "mslp": [0, 0.0, 0.0],
             "t2_wu": [0, 0.0, 0.0], "td2_wu": [0, 0.0, 0.0], "vento_wu": [0, 0.0, 0.0],
             "vento_classi": {str(i): [0, 0.0, 0.0] for i in range(len(CLASSI_VENTO) - 1)},
             "pioggia": {str(s): [0, 0, 0, 0] for s in SOGLIE_PIOGGIA},
-            "radar": {str(s): [0, 0, 0, 0] for s in SOGLIE_RADAR}, "cicli": []}
+            "radar": {str(s): [0, 0, 0, 0] for s in SOGLIE_RADAR}, "cicli": [], "per_ciclo": {}}
 
 
 def aggiungi(acc, chiave, err):
@@ -376,7 +396,10 @@ def correzioni_vento(archivio, giorno, fino_a_incluso=False):
         fine = giorno.isoformat()
         if not (inizio <= g < fine or (fino_a_incluso and g == fine)):
             continue
-        for chiave, per_scad in json.load(open(f))["modelli"].items():
+        gg = json.load(open(f))
+        if gg.get("versione", 1) < 2:                # vento misurato anche sulle stazioni della Regione: non confrontabile
+            continue
+        for chiave, per_scad in gg["modelli"].items():
             if "-rif-" in chiave:
                 continue
             for acc in per_scad.values():
@@ -416,6 +439,13 @@ def verifica_estratto(e, oss, quote, radar_ore, radar_mod, acc_per_scad, corr_ve
     for t_fine in finestre(GIORNO):
         giorno_ore.update(t_fine - timedelta(hours=h) for h in range(6))
     usati = set()
+    nome_ciclo = str(e["ciclo"])
+
+    def per_ciclo(acc, chiave, err):                 # somme per ciclo: servono al confronto appaiato della pagella
+        d = acc["per_ciclo"].setdefault(nome_ciclo, {})
+        x = d.setdefault(chiave, [0, 0.0, 0.0])
+        x[0] += 1; x[1] += float(err); x[2] += float(err) ** 2
+
     for j, sid in enumerate(ids):
         o = oss.get(sid)
         if not o:
@@ -445,17 +475,26 @@ def verifica_estratto(e, oss, quote, radar_ore, radar_mod, acc_per_scad, corr_ve
                 err = float(e["t2"][k, j]) + 0.0065 * dz - ot
                 aggiungi(acc, "t2", err)
                 aggiungi(acc, "t2_notte" if t.hour in NOTTE else "t2_giorno", err)
+                per_ciclo(acc, "t2", err)
             otd = o.get("td2", {}).get(t)
+            if otd is None:                          # stazioni della Regione: rugiada da temperatura e umidita'
+                otd = rugiada(o.get("t2", {}).get(t), o.get("ur", {}).get(t))
             if otd is not None and np.isfinite(e["td2"][k, j]):
-                aggiungi(acc, "td2", float(e["td2"][k, j]) - otd)
+                errd = float(e["td2"][k, j]) + GRAD_RUGIADA * dz - otd
+                aggiungi(acc, "td2", errd)
+                per_ciclo(acc, "td2", errd)
             ov = o.get("vento", {}).get(t)
             if ov is not None and 0 <= ov < 60 and np.isfinite(e["vento"][k, j]):
                 vm = float(e["vento"][k, j])
-                aggiungi(acc, "vento", vm - ov)
-                c = classe_vento(vm)
-                cl = acc["vento_classi"][c]
-                cl[0] += 1; cl[1] += vm; cl[2] += ov
-                aggiungi(acc, "vento_corr", vm * (corr_vento or {}).get(c, 1.0) - ov)
+                if sid not in SYNOP:                 # anemometri della Regione: solo informazione (vedi VERSIONE)
+                    aggiungi(acc, "vento_reg", vm - ov)
+                else:
+                    aggiungi(acc, "vento", vm - ov)
+                    per_ciclo(acc, "vento", vm - ov)
+                    c = classe_vento(vm)
+                    cl = acc["vento_classi"][c]
+                    cl[0] += 1; cl[1] += vm; cl[2] += ov
+                    aggiungi(acc, "vento_corr", vm * (corr_vento or {}).get(c, 1.0) - ov)
             op = o.get("mslp", {}).get(t)
             if op is not None and 950 < op < 1060 and np.isfinite(e["mslp"][k, j]):
                 aggiungi(acc, "mslp", float(e["mslp"][k, j]) - op)
@@ -513,7 +552,7 @@ def verifica_riferimento(rif, oss, ids, acc):
         for t, v in m["vento"].items():
             ov = o.get("vento", {}).get(t)
             if ov is not None and 0 <= ov < 60 and t.date() == GIORNO:
-                aggiungi(acc, "vento", v - ov)
+                aggiungi(acc, "vento" if sid in SYNOP else "vento_reg", v - ov)
         op = o.get("pioggia", {})
         for t_fine in finestre(GIORNO):
             ore6 = [t_fine - timedelta(hours=h) for h in range(6)]
@@ -524,7 +563,7 @@ def verifica_riferimento(rif, oss, ids, acc):
 def indici(acc):
     """Indici leggibili da un insieme di somme."""
     out = {}
-    for k in ("t2", "t2_giorno", "t2_notte", "td2", "vento", "vento_corr", "mslp", "t2_wu", "td2_wu", "vento_wu"):
+    for k in ("t2", "t2_giorno", "t2_notte", "td2", "vento", "vento_corr", "vento_reg", "mslp", "t2_wu", "td2_wu", "vento_wu"):
         n, s, s2 = acc.get(k, [0, 0.0, 0.0])
         out[k] = None if n == 0 else {"n": n, "medio": round(s / n, 2), "tipico": round((s2 / n) ** 0.5, 2)}
     out["pioggia"] = {}
@@ -544,6 +583,11 @@ def somma(a, b):
     for k, v in b.items():
         if k == "cicli":
             a[k] = a.get(k, []) + v
+        elif k == "per_ciclo":                       # {ciclo: {grandezza: [n, somma, somma dei quadrati]}}
+            for c, d in v.items():
+                dst = a.setdefault("per_ciclo", {}).setdefault(c, {})
+                for m, lst in d.items():
+                    dst[m] = [x + y for x, y in zip(dst.get(m, [0, 0.0, 0.0]), lst)]
         elif isinstance(v, dict):
             for s, lst in v.items():
                 a[k][s] = [x + y for x, y in zip(a[k][s], lst)]
@@ -555,7 +599,52 @@ def somma(a, b):
 NOMI = {"ecmwf": "WRF con ECMWF", "icon2i": "WRF con ICON-2I", "rif-ecmwf": "ECMWF originale", "rif-icon2i": "ICON-2I originale",
          "iconeu": "WRF con ICON-EU (prova)", "gfs": "WRF con GFS (prova)"}
 NOMI_VARIANTI = {"topo2": "vento sul terreno (topo_wind 2)", "mynn": "PBL MYNN", "noahmp": "suolo Noah-MP",
-                 "mynn-noahmp": "MYNN + Noah-MP", "radt6": "radiazione ogni 6 min (1 km)", "radt15": "radiazione ogni 15 min (1 km)", "urbano": "modello urbano (Roma)"}
+                 "mynn-noahmp": "MYNN + Noah-MP", "radt6": "radiazione ogni 6 min (1 km)", "radt15": "radiazione ogni 15 min (1 km)", "urbano": "modello urbano (Roma)",
+                 "livelli": "50 livelli, primo strato 20 m", "diff2": "diffusione sui pendii (1 km)", "raggi": "nudging piu' locale"}
+MIN_CICLO = 20                            # confronti minimi in un ciclo perche' entri nel confronto appaiato
+
+
+def senza_vecchie_misure(acc):
+    """Giorni di versione 1: vento (anche stazioni della Regione) e rugiada (solo SYNOP, senza quota) misurati diversamente."""
+    acc = dict(acc)
+    for k in ("vento", "vento_corr", "td2"):
+        acc[k] = [0, 0.0, 0.0]
+    acc["vento_classi"] = {c: [0, 0.0, 0.0] for c in acc.get("vento_classi", {})}
+    return acc
+
+
+def confronti_appaiati(tot):
+    """Ogni prova di fisica (<zona>-<pilota>-<variante>) contro il WRF normale dello stesso pilota, sui soli cicli che hanno
+    entrambi: per ciclo la differenza dell'errore tipico e di quello medio, poi la media sui cicli e l'incertezza (2 deviazioni
+    standard della media). I cicli si sovrappongono nel tempo e non sono del tutto indipendenti: l'incertezza e' un po' ottimista."""
+    out = {}
+    for chiave, per_scad in tot.items():
+        parti = chiave.split("-")
+        if len(parti) < 3 or parti[1] == "rif":
+            continue
+        base = tot.get(f"{parti[0]}-{parti[1]}")
+        if not base:
+            continue
+        for scad, acc in per_scad.items():
+            b = base.get(scad)
+            if not b:
+                continue
+            r = {}
+            for m in ("t2", "td2", "vento"):
+                dt, dm = [], []
+                for c, d in acc.get("per_ciclo", {}).items():
+                    x, y = d.get(m), b.get("per_ciclo", {}).get(c, {}).get(m)
+                    if x and y and x[0] >= MIN_CICLO and y[0] >= MIN_CICLO:
+                        dt.append((x[2] / x[0]) ** 0.5 - (y[2] / y[0]) ** 0.5)
+                        dm.append(x[1] / x[0] - y[1] / y[0])
+                if len(dt) >= 2:
+                    k = len(dt)
+                    r[m] = {"cicli": k, "tipico": round(float(np.mean(dt)), 3), "medio": round(float(np.mean(dm)), 3),
+                            "incertezza_tipico": round(float(2 * np.std(dt, ddof=1) / k ** 0.5), 3),
+                            "incertezza_medio": round(float(2 * np.std(dm, ddof=1) / k ** 0.5), 3)}
+            if r:
+                out.setdefault(chiave, {})[scad] = r
+    return out
 
 
 def pagella(archivio, oggi):
@@ -563,6 +652,8 @@ def pagella(archivio, oggi):
     out = {"aggiornata": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"), "ultimo_giorno": oggi.isoformat(),
            "periodi": {}, "nomi": NOMI, "varianti": NOMI_VARIANTI,
            "note": "Errori: medio = previsto meno osservato (positivo = modello troppo caldo/ventoso), tipico = scarto quadratico medio. "
+                   "Vento: solo stazioni SYNOP (anemometro a 10 m in campo aperto). Rugiada: SYNOP e Regione, alla quota della stazione. "
+                   "Prove di fisica: differenza con il WRF normale ciclo per ciclo, +- 2 deviazioni standard della media. "
                    "Pioggia ai pluviometri, in 6 ore: presa = piogge vere previste (%), falsi = previsioni senza pioggia vera (%). "
                    "Radar, in 6 ore, con 10 km di tolleranza: prevista giusta = pioggia prevista con pioggia vera vicina (%), "
                    "osservata presa = pioggia vera con pioggia prevista vicina (%). Riferimento: previsioni a breve dei modelli originali (Open-Meteo)."}
@@ -574,12 +665,14 @@ def pagella(archivio, oggi):
             if g["giorno"] < limite or g["giorno"] > oggi.isoformat():
                 continue
             nd += 1
+            vecchio = g.get("versione", 1) < 2
             for chiave, per_scad in g["modelli"].items():
                 for scad, acc in per_scad.items():
                     dst = tot.setdefault(chiave, {}).setdefault(scad, vuoto())
-                    somma(dst, acc)
+                    somma(dst, senza_vecchie_misure(acc) if vecchio else acc)
         out["periodi"][str(periodo)] = {"giorni": nd, "modelli": {k: {s: dict(indici(a), cicli=len(set(a["cicli"])))
-                                                                        for s, a in v.items()} for k, v in tot.items()}}
+                                                                        for s, a in v.items()} for k, v in tot.items()},
+                                        "confronti": confronti_appaiati(tot)}
     json.dump(out, open(os.path.join(archivio, "pagella.json"), "w"), ensure_ascii=False, indent=1)
     return out
 
@@ -608,6 +701,7 @@ def main():
     log(f"== Verifica del {GIORNO} (00-24 UTC)")
 
     st = json.load(open(os.path.join(QUI, "stazioni_verifica.json")))
+    SYNOP.update(s["id"] for s in st["aeronautica"])
     quote = {s["id"]: float(s["quota"]) for s in st["regione"] + st["aeronautica"] + st.get("wu", []) if s.get("quota") is not None}
     pos = {s["id"]: (s["lat"], s["lon"], float(s.get("quota") or 0)) for s in st["regione"] + st["aeronautica"] + st.get("wu", [])}
 
@@ -626,7 +720,7 @@ def main():
     rif = riferimento_openmeteo({k: pos[k] for k in servono if k in pos and not k.startswith("WU_")}, GIORNO)
 
     corr = correzioni_vento(a.archivio, GIORNO)
-    risultato = {"giorno": GIORNO.isoformat(), "modelli": {}, "correzioni_vento": corr}
+    risultato = {"giorno": GIORNO.isoformat(), "versione": VERSIONE, "modelli": {}, "correzioni_vento": corr}
     for (z, p), lista in estratti.items():
         acc = {"g1": vuoto(), "g2": vuoto()}
         for e in lista:

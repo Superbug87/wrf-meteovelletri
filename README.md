@@ -122,10 +122,15 @@ La verifica giornaliera parte dopo le 05:20 UTC.
   Se la chiave WU non vale, le stazioni WU saltano senza fermare la verifica.
 - Si contano solo le ore **dopo la fine del nudging**: prima il modello vedeva le stazioni (con le ufficiali, proprio quelle della verifica)
   e quelle ore erano già passate quando la previsione è uscita.
+- Dal 26/10/2026 (somme di **versione 2**): il **vento** si confronta solo con i SYNOP (anemometro a 10 m in campo aperto, come il vento del modello);
+  le stazioni della Regione, con sensori bassi o riparati (23% di calme sui Castelli, rapporto modello/osservato 1,6-1,7 in tutte le versioni contro ~1,0 dei SYNOP),
+  restano solo come informazione (`vento_reg`). Il **punto di rugiada** si confronta anche sulle stazioni della Regione (da temperatura e umidità), alla quota della stazione.
+  Per ogni ciclo si tengono le somme di temperatura, rugiada e vento: la pagella confronta ogni prova con il WRF normale **ciclo per ciclo** sugli stessi cicli
+  (`confronti` in `pagella.json`, con l'incertezza a 2 deviazioni standard; un po' ottimista perché i cicli si sovrappongono). I giorni di versione 1 non contano per vento e rugiada.
 - Risultati nel ramo `verifica`: `giorni/AAAA-MM-GG.json` (somme del giorno) e `pagella.json` (ultimi 7 e 30 giorni), letto da `sito/pagella-wrf.html`.
 - Elenco delle stazioni: `strumenti/stazioni_verifica.json` (da rifare se la rete regionale cambia).
 - **Confronti per scadenza**: `valuta_modelli_stazioni.py` e `valuta_modelli_radar.py` mettono a confronto tutte le versioni (ufficiali e prove) da +1 a +48 ore
-  su temperatura, umidità, vento, e sulla pioggia contro il radar.
+  su temperatura, rugiada, umidità, vento (solo SYNOP), e sulla pioggia contro il radar.
 - **Concordanza**: ogni 3 ore `concordanza.yml` confronta la pioggia delle versioni dello stesso ciclo e pubblica le mappe nel ramo `concordanza`.
 
 ## Segreti del repository (Settings → Secrets and variables → Actions)
@@ -186,10 +191,14 @@ suolo Noah, `topo_wind` 1, Thompson, RRTMG, convezione Grell-Freitas sui domini 
 | `mynn-noahmp` | le due cose insieme (con MYNN il `topo_wind` è spento, quindi non esiste un «tutte e tre») |
 | `radt6`, `radt15` | solo Castelli: la radiazione (RRTMG) si ricalcola ogni 6 o 15 minuti nel dominio da 1 km invece di 3 |
 | `urbano` | modello urbano a strato singolo (UCM) sulle celle urbane (Roma) |
+| `livelli` | 50 livelli invece di 40, primo strato di 20 m invece di 50 (`dzbot` 20, `dzstretch_s` 1,2): 8 livelli sotto i 300 m invece di 4, per lo strato freddo notturno e la nebbia |
+| `diff2` | solo Castelli: `diff_opt` 2 nel dominio da 1 km (diffusione orizzontale nello spazio fisico, ridotta sui pendii) |
+| `raggi` | nudging più locale: `obs_rinxy` del dominio fine dimezzato (Castelli 12 km, Lazio 25 km) e `obs_dpsmx` 3 cb (peso nullo oltre ~260 m di dislivello) |
 | `cu27`, `idroec` | prove singole sul Lazio: convezione esplicita sul 27 km, idrometeore dai dati ECMWF |
 
-Le lancia il regista (`PROVE` in `strumenti/regista.py`) per le quattro combinazioni zona/modello, con finestre di date diverse (ora fino al 31/10/2026):
-`topo2`, `mynn`, `noahmp` e `mynn-noahmp` dal 19/10, `radt6` e `radt15` dal 20/10, `urbano` dal 21/10. Partono dopo i run normali (ICON-2I 3:30, ECMWF 8:20 dopo il ciclo)
+Le lancia il regista (`PROVE` in `strumenti/regista.py`) per le quattro combinazioni zona/modello, con finestre di date diverse:
+`noahmp` dal 19/10 al 31/10 (poi si decide se diventa la fisica in uso), `radt6` e `radt15` dal 20/10 e `urbano` dal 21/10 fino al 31/10, `livelli` e `raggi` (e `diff2` sui Castelli)
+dal ciclo 26/10 12Z all'8/11. `topo2`, `mynn` e `mynn-noahmp` (dal 19/10) sono finite il 26/10: peggioravano il vento o rendevano le notti più calde. Partono dopo i run normali (ICON-2I 3:30, ECMWF 8:20 dopo il ciclo)
 perché i dati globali sono già in cache (i dati ECMWF si scaricano una volta per zona e ciclo: chiave `ecmwf-dati-v1-<zona>-<ciclo>-<ore>`).
 Non fanno le mappe: lasciano solo l'estratto, negli allegati restano 1 giorno. Quando una variante risulta migliore del run normale su almeno una settimana, si porta nella fisica in uso.
 
@@ -209,8 +218,10 @@ Non pubblica nulla: scrive nel ramo `prove-radar`.
   c'è la ricerca di una chiave di riserva, il segreto è stato rinnovato e i due cicli persi (Lazio e Castelli ECMWF 12Z) sono stati rifatti con le stazioni. Lo scarico MeteoHub ora ritenta e si libera lo spazio da solo
   (una richiesta dimenticata di 359 MB aveva fatto cadere il Castelli ICON-2I 12Z del 24/10).
 - Il nudging sulle stazioni resta attivo: confrontato con 27 stazioni della Regione Lazio migliora la temperatura a 2 m (errore tipico 1,27 °C contro 1,51 °C senza).
-- Risultati dei confronti (pochi cicli, in pratica un solo evento di pioggia, quindi da prendere con prudenza): i riferimenti (ECMWF e ICON-2I originali) battono WRF su temperatura, vento e pioggia;
-  WRF ha una deriva calda di +0,4/+0,6 °C e un vento troppo forte sul Lazio; l'umidità è troppo bassa di 6-8 punti; nessuna variante di fisica vince su tutto (MYNN peggiora il vento, Noah-MP è pari all'ufficiale con meno deriva).
+- Risultati dei confronti (6 cicli, 20-22/10, un solo evento di pioggia: da prendere con prudenza; analisi del 26/10, confronto ciclo per ciclo):
+  mattino troppo caldo (+1,8/+2,9 K alle 07 UTC) e notti calde (+0,7/+1,1 K), quasi niente nebbia (umidità ≥ 97% nel 2-6% dei casi contro il 18-24% osservato),
+  aria secca sul Lazio (rugiada -1,0 K, peggio il secondo giorno); vento giusto sui SYNOP dei Castelli e +40% su quelli del Lazio.
+  Noah-MP è l'unica variante che migliora davvero (errore di temperatura -0,12/-0,18 °C, rugiada +0,6/+0,8 K), ma scalda un po' le notti del Lazio.
 - Da verificare: WRF a volte produce piovaschi leggeri al mattino che i modelli globali non hanno (non dipende dal nudging né dalla temperatura del mare); il confronto con le stazioni WU «a norma» (aspetta gli ID);
   il pulsante «Fogli/Radar/Concordanza» nelle pagine WRF; il caricamento automatico sul sito (FTP) non è attivo, le pagine si caricano a mano.
 

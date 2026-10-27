@@ -63,19 +63,25 @@
   <div class="scheda" id="scheda"><div class="msg">Carico…</div></div>
   <dl>
     <dt>Le prove di fisica</dt>
-    <dd>Per ogni zona e modello di partenza girano, oltre al WRF normale, quattro varianti che <b>non vengono pubblicate</b>: servono solo a capire se la fisica del modello si può migliorare.
+    <dd>Per ogni zona e modello di partenza girano, oltre al WRF normale, alcune varianti che <b>non vengono pubblicate</b>: servono solo a capire se la fisica del modello si può migliorare.
       Tutte partono dagli stessi dati e con le stesse stazioni del WRF normale: cambia una sola cosa alla volta.</dd>
     <dt>Le varianti</dt>
-    <dd><b>Vento sul terreno 2</b>: stessa fisica del WRF normale con una correzione diversa del vento vicino al suolo (topo_wind 2 invece di 1).
-      <b>PBL MYNN</b>: altro schema per lo strato d'aria vicino al suolo (al posto di YSU); la correzione del vento sul terreno è del solo YSU, quindi qui è spenta.
-      <b>Suolo Noah-MP</b>: modello del suolo e della vegetazione più dettagliato (al posto di Noah).
-      <b>MYNN + Noah-MP</b>: le due cose insieme.</dd>
+    <dd><b>Noah-MP</b>: modello del suolo e della vegetazione più dettagliato (al posto di Noah).
+      <b>50 livelli</b>: più livelli vicino al suolo (il primo a 10 m invece di 25, otto sotto i 300 m invece di quattro), per l'aria fredda della notte e la nebbia.
+      <b>Diffusione pendii</b> (solo Castelli, dominio da 1 km): il rimescolamento orizzontale si calcola in piano e si riduce sui versanti, per non scaldare le conche di notte.
+      <b>Nudging locale</b>: le stazioni correggono il modello in un raggio più piccolo e non oltre circa 260 m di dislivello.
+      <b>Urbano</b>: modello della città su Roma. <b>Radiazione 6/15 min</b>: la radiazione calcolata meno spesso nel dominio da 1 km (risparmio di calcolo).
+      Fino al 26/10/2026 c'erano anche <b>Vento terreno 2</b>, <b>MYNN</b> e <b>MYNN + Noah-MP</b>, chiuse perché peggioravano vento o notti; restano visibili finché escono dal periodo.</dd>
     <dt>ICON-EU e GFS</dt>
     <dd>Altri due modelli di partenza in prova (non pubblicati): <b>ICON-EU</b> del servizio meteo tedesco e <b>GFS</b> americano. Danno a WRF anche acqua di nube e ghiaccio (GFS anche pioggia e neve) dai bordi e dall'inizio, cosi' nubi e piogge in arrivo da fuori zona non nascono da zero. Hanno una sola riga, senza modello originale di confronto.</dd>
     <dt>Come si legge</dt>
     <dd>Ogni mattina le previsioni del giorno prima vengono confrontate con quello che è successo davvero. In verde il migliore di ogni colonna, nello stesso gruppo.
-      Sotto ogni valore: per il WRF normale e gli originali, quanti confronti; per le varianti, quanto cambia rispetto al WRF normale (verde = meglio, rosso = peggio, grigio = quasi uguale).
+      Sotto ogni valore: per il WRF normale e gli originali, quanti confronti; per le varianti, quanto cambia rispetto al WRF normale.
+      Per temperatura, rugiada e vento la differenza è calcolata ciclo per ciclo sugli stessi cicli, con la sua incertezza: verde o rosso solo se la supera,
+      altrimenti grigia con il segno ≈ (non si distingue dal caso). L'incertezza si legge passando sopra il valore, e nel riquadro «In breve».
       <b>Tipico</b>: di quanto sbaglia di solito (più basso è meglio). <b>Medio</b>: se sta sistematicamente sopra (+) o sotto (−) il vero.
+      <b>Rugiada</b>: punto di rugiada medio, cioè se l'aria del modello è troppo secca (−) o troppo umida (+).
+      <b>Vento</b>: solo le stazioni SYNOP dell'Aeronautica, con l'anemometro a 10 m in campo aperto come il vento del modello; quelle della Regione (dal 26/10/2026 escluse) hanno sensori più bassi o riparati e facevano sembrare il modello molto più ventoso.
       <b>Corretto</b>: lo stesso vento di WRF ridotto o aumentato secondo l'errore dei 30 giorni prima, per ogni intensità: una prova per vedere se conviene correggere le mappe, che per ora restano senza correzione.
       <b>Presa</b>: delle piogge vere (≥ 1 mm in 6 ore), quante erano previste. <b>Falsi</b>: delle piogge previste, quante non ci sono state.
       <b>Radar</b>: pioggia (≥ 0,5 mm in 6 ore, 10 km di tolleranza) prevista nel posto giusto e pioggia vera vista.</dd>
@@ -96,22 +102,24 @@ const VISTE = { gruppi: "Per modello", tutti: "Tutti insieme" };
 const METRICHE = { temp: "Temperatura", vento: "Vento", pioggia: "Pioggia" };
 const PILOTI = { ecmwf: "Partenza ECMWF", icon2i: "Partenza ICON-2I" };
 const PILOTI_PROVA = { iconeu: "Partenza ICON-EU (prova, con nubi)", gfs: "Partenza GFS (prova, con nubi)" };   // solo in prova: una riga, senza originale
-const VARIANTI = ["topo2", "mynn", "noahmp", "mynn-noahmp", "radt6", "radt15"];
-const NOMI_VAR = { topo2: "Vento terreno 2", mynn: "MYNN", noahmp: "Noah-MP", "mynn-noahmp": "MYNN + Noah-MP", radt6: "Radiazione 6 min", radt15: "Radiazione 15 min" };
+const VARIANTI = ["noahmp", "livelli", "diff2", "raggi", "urbano", "radt6", "radt15", "topo2", "mynn", "mynn-noahmp"];
+const NOMI_VAR = { noahmp: "Noah-MP", livelli: "50 livelli", diff2: "Diffusione pendii", raggi: "Nudging locale", urbano: "Urbano",
+                   radt6: "Radiazione 6 min", radt15: "Radiazione 15 min", topo2: "Vento terreno 2", mynn: "MYNN", "mynn-noahmp": "MYNN + Noah-MP" };
 const N_MIN = 20;                 // sotto questo numero di confronti il valore e' poco affidabile
 const GIORNI_MIN = 5;             // sotto questo numero di giorni si avverte che e' presto per concludere
 
 // colonne di ogni gruppo di indici: val(indici) -> [valore, confronti]; m = cosa vuol dire "meglio"
 const COLONNE = {
   temp: [
-    { t: "Tipico", val: i => i.t2 && [i.t2.tipico, i.t2.n], m: "basso" },
-    { t: "Medio", val: i => i.t2 && [i.t2.medio, i.t2.n], m: "zero", segno: true },
+    { t: "Tipico", val: i => i.t2 && [i.t2.tipico, i.t2.n], m: "basso", conf: ["t2", "tipico"] },
+    { t: "Medio", val: i => i.t2 && [i.t2.medio, i.t2.n], m: "zero", segno: true, conf: ["t2", "medio"] },
     { t: "Notte", val: i => i.t2_notte && [i.t2_notte.tipico, i.t2_notte.n], m: "basso" },
     { t: "Giorno", val: i => i.t2_giorno && [i.t2_giorno.tipico, i.t2_giorno.n], m: "basso" },
+    { t: "Rugiada<br>medio", val: i => i.td2 && [i.td2.medio, i.td2.n], m: "zero", segno: true, soloWrf: true, conf: ["td2", "medio"] },
   ],
   vento: [
-    { t: "Tipico<br>km/h", val: i => i.vento && [i.vento.tipico * 3.6, i.vento.n], m: "basso" },
-    { t: "Medio<br>km/h", val: i => i.vento && [i.vento.medio * 3.6, i.vento.n], m: "zero", segno: true },
+    { t: "Tipico<br>km/h", val: i => i.vento && [i.vento.tipico * 3.6, i.vento.n], m: "basso", conf: ["vento", "tipico"], k: 3.6 },
+    { t: "Medio<br>km/h", val: i => i.vento && [i.vento.medio * 3.6, i.vento.n], m: "zero", segno: true, conf: ["vento", "medio"], k: 3.6 },
     { t: "Tipico<br>corretto", val: i => i.vento_corr && [i.vento_corr.tipico * 3.6, i.vento_corr.n], m: "basso", soloWrf: true },
   ],
   pioggia: [
@@ -146,8 +154,17 @@ function righeDi(modelli, pilota, soloProva = false) {
   const righe = [{ nome: "Originale", rif: true, indici: rif ? rif.breve : null },
                  { nome: soloProva ? "WRF" : "WRF normale", base: true, indici: (modelli[`${z}-${pilota}`] || {})[s] || null }];
   if (soloProva) return [righe[1]];                      // senza modello originale di confronto: una riga sola
-  for (const v of VARIANTI) righe.push({ nome: NOMI_VAR[v], indici: (modelli[`${z}-${pilota}-${v}`] || {})[s] || null });
+  for (const v of VARIANTI) righe.push({ nome: NOMI_VAR[v], chiave: `${z}-${pilota}-${v}`, indici: (modelli[`${z}-${pilota}-${v}`] || {})[s] || null });
   return righe;
+}
+
+// confronto appaiato (ciclo per ciclo, stessi cicli) di una variante con il WRF normale: {d, inc, cicli} oppure null
+function appaiato(per, riga, c) {
+  if (!c.conf || !riga.chiave || !per.confronti) return null;
+  const x = ((per.confronti[riga.chiave] || {})[scelta.scadenza] || {})[c.conf[0]];
+  if (!x || x[c.conf[1]] === undefined) return null;
+  const k = c.k || 1;
+  return { d: x[c.conf[1]] * k, inc: x["incertezza_" + c.conf[1]] * k, cicli: x.cicli };
 }
 
 // punteggio: piu' basso = meglio
@@ -187,7 +204,13 @@ function tabella(per) {
         const dec = c.dec ?? 1;
         const testo = (c.segno && x.v > 0 ? "+" : "") + num(x.v, dec);
         let delta = "";
-        if (!r.base && !r.rif && g.base[j]) {
+        const ap = (!r.base && !r.rif) ? appaiato(per, r, c) : null;
+        if (ap && g.base[j]) {                        // ciclo per ciclo: colore solo se la differenza supera l'incertezza
+          const bene = punteggio(c, g.base[j].v + ap.d) < punteggio(c, g.base[j].v);
+          const cls = Math.abs(ap.d) <= ap.inc ? "" : bene ? "d-bene" : "d-male";
+          const da = c.k ? dec : dec + 1;
+          delta = `<span class="${cls}" title="differenza con il WRF normale ciclo per ciclo: ${ap.d > 0 ? "+" : ""}${num(ap.d, da)} ± ${num(ap.inc, da)} (${ap.cicli} cicli)">${ap.d > 0 ? "+" : ""}${num(ap.d, da)}${cls ? "" : "<sup>≈</sup>"}</span>`;
+        } else if (!r.base && !r.rif && g.base[j]) {
           const d = x.v - g.base[j].v, soglia = dec === 0 ? 0.5 : 0.05;
           const bene = punteggio(c, x.v) < punteggio(c, g.base[j].v);
           const cls = Math.abs(d) < soglia ? "" : bene ? "d-bene" : "d-male";
@@ -217,6 +240,15 @@ function riepilogo(per) {
       const prove = rs.slice(2).map(r => ({ r, x: valoriDi(r, c) })).filter(o => o.x && o.x.n >= N_MIN);
       if (!prove.length) continue;                              // nessuna variante con abbastanza confronti: niente da dire
       conProve = true;
+      const conAp = prove.map(o => ({ ...o, ap: appaiato(per, o.r, c) })).filter(o => o.ap);
+      if (conAp.length) {                            // confronto ciclo per ciclo: conta solo una differenza oltre l'incertezza
+        const nette = conAp.filter(o => o.ap.d + o.ap.inc < 0);
+        if (!nette.length) { righe.push(`${titolo.replace("Partenza ", "")}, ${nome}: nessuna variante batte il WRF normale in modo netto.`); continue; }
+        const m = nette.reduce((a, b) => b.ap.d < a.ap.d ? b : a);
+        const u = nome === "vento" ? " km/h" : " °C";
+        righe.push(`${titolo.replace("Partenza ", "")}, ${nome}: meglio <b>${m.r.nome}</b> (errore tipico ${num(m.ap.d, nome === "vento" ? 1 : 2)}±${num(m.ap.inc, nome === "vento" ? 1 : 2)}${u} su ${m.ap.cicli} cicli).`);
+        continue;
+      }
       const migliori = prove.filter(o => o.x.v < base.v - 0.005);
       if (!migliori.length) { righe.push(`${titolo.replace("Partenza ", "")}, ${nome}: nessuna variante batte il WRF normale.`); continue; }
       const m = migliori.reduce((a, b) => b.x.v < a.x.v ? b : a);
