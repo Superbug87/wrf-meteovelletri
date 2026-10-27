@@ -356,7 +356,8 @@ def maschera_terra(hub, ciclo):
     """Land-sea mask (1 = terra): campo statico, si chiede senza tipo di tempo."""
     fs = hub.elenco(SUPERFICIE)
     prod = scegli(fs["product"], lambda p: p["desc"].startswith("Land cover"))
-    campi, _, _, _ = leggi(hub.estrai(SUPERFICIE, ciclo, {"product": prod}, "icon2i_lsm"))
+    # anche questa aspetta il ciclo: il 27/10 alle 14:16 UTC il 12Z non c'era ancora e il run cadeva subito
+    campi, _, _, _ = leggi(estrai_con_attesa(hub, SUPERFICIE, ciclo, {"product": prod}, "icon2i_lsm"))
     if not campi:
         sys.exit("Manca la maschera terra-mare di ICON-2I.")
     return campi[0][1]
