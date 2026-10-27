@@ -274,6 +274,7 @@ prova castelli iconeu wu 2026102500
 prova castelli iconeu wu 2026102512
 prova castelli iconeu wu 2026102600
 prova castelli iconeu wu 2026102612
+prova castelli iconeu wu 2026102700
 prova lazio ecmwf wu livelli 2026102612
 prova lazio ecmwf wu mynn 2026101900
 prova lazio ecmwf wu mynn 2026101912
