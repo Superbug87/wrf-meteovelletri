@@ -6,8 +6,13 @@ on:
         description: "cancella le richieste (altrimenti solo elenco)"
         type: boolean
         default: false
+      cache:
+        description: "cancella anche tutte le cache di GitHub Actions"
+        type: boolean
+        default: false
 permissions:
   contents: read
+  actions: write
 jobs:
   pulizia:
     runs-on: ubuntu-latest
@@ -20,3 +25,11 @@ jobs:
           MH_EMAIL: ${{ secrets.MH_EMAIL }}
           MH_PASSWORD: ${{ secrets.MH_PASSWORD }}
         run: python3 strumenti/pulisci_meteohub.py ${{ inputs.cancella && '--cancella' || '' }}
+      - name: Cancello le cache
+        if: ${{ inputs.cache }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh cache list --limit 200 --json id,key,sizeInBytes --jq '.[]|"\(.id) \(.key) \(.sizeInBytes)"'
+          gh cache delete --all
+          echo "Rimaste:"; gh cache list --limit 50
