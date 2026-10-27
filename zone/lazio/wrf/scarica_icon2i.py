@@ -45,6 +45,7 @@ LIVELLI_HPA = [1000, 975, 950, 925, 900, 875, 850, 825, 800, 775, 750, 725, 700,
 IDROMETEORE = [((1, 22), "Cloud mixing ratio (kg/kg)"), ((1, 24), "Rain mixing ratio (kg/kg)"),
                ((1, 25), "Snow mixing ratio (kg/kg)"), ((1, 32), "Graupel (snow pellets) (kg/kg)"),
                ((1, 82), "Cloud ice mixing-ratio (kg/kg)")]
+QUOTA_TENTATIVI = 10      # tentativi con la quota dell'account piena (un minuto l'uno)
 IDRO = os.environ.get("IDRO", "1") != "0"      # IDRO=0 = come prima (nubi e pioggia entrano a zero dai bordi)
 RD, G0, CP, GAMMA = 287.04, 9.80665, 1004.0, 0.0065
 STRATI_NOAH_CM = [(0, 7), (7, 28), (28, 100), (100, 289)]
@@ -124,17 +125,22 @@ class Hub:
     def estrai(self, dataset, ciclo, filtri, nome, attesa=1200, tentativi=3):
         """Una richiesta; ritorna i byte del GRIB (vuoti se non c'è nulla). Se MeteoHub non risponde in tempo (timeout, connessione
         interrotta) o la richiesta resta in elaborazione oltre 'attesa', la richiesta viene annullata e rifatta: fino a 'tentativi'
-        volte per i problemi di rete, una sola volta per la richiesta troppo lenta (ogni giro puo' costare 'attesa' secondi)."""
-        lente = 0
-        for i in range(tentativi):
+        volte per i problemi di rete, una sola volta per la richiesta troppo lenta (ogni giro puo' costare 'attesa' secondi).
+        Con la quota piena si aspetta di piu' (fino a QUOTA_TENTATIVI volte, un minuto l'una): di solito e' l'altra zona che sta
+        scaricando nello stesso momento (per esempio quando il ciclo arriva in ritardo e le due zone lo aspettavano insieme), e
+        ogni sua richiesta si cancella appena scaricata."""
+        lente = rete = quota = 0
+        while True:
             try:
                 return self._estrai_una(dataset, ciclo, filtri, nome, attesa)
             except (requests.RequestException, RichiestaLenta, QuotaPiena) as e:
                 lente += isinstance(e, RichiestaLenta)
-                if i == tentativi - 1 or lente > 1:
-                    sys.exit(f"[{nome}] MeteoHub non risponde ({type(e).__name__}) dopo {i + 1} tentativi")
-                pausa = 30 * (i + 1)
-                print(f"[{nome}] {type(e).__name__}: riprovo fra {pausa} s ({i + 1}/{tentativi})", file=sys.stderr, flush=True)
+                quota += isinstance(e, QuotaPiena)
+                rete += isinstance(e, requests.RequestException)
+                if rete >= tentativi or lente > 1 or quota >= QUOTA_TENTATIVI:
+                    sys.exit(f"[{nome}] MeteoHub non risponde ({type(e).__name__}) dopo {rete + lente + quota} tentativi")
+                pausa = 60 if isinstance(e, QuotaPiena) else 30 * (rete + lente)
+                print(f"[{nome}] {type(e).__name__}: riprovo fra {pausa} s", file=sys.stderr, flush=True)
                 time.sleep(pausa)
 
     def _estrai_una(self, dataset, ciclo, filtri, nome, attesa):
