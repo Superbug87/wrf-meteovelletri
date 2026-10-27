@@ -45,7 +45,7 @@ LIVELLI_HPA = [1000, 975, 950, 925, 900, 875, 850, 825, 800, 775, 750, 725, 700,
 IDROMETEORE = [((1, 22), "Cloud mixing ratio (kg/kg)"), ((1, 24), "Rain mixing ratio (kg/kg)"),
                ((1, 25), "Snow mixing ratio (kg/kg)"), ((1, 32), "Graupel (snow pellets) (kg/kg)"),
                ((1, 82), "Cloud ice mixing-ratio (kg/kg)")]
-QUOTA_TENTATIVI = 10      # tentativi con la quota dell'account piena (un minuto l'uno)
+QUOTA_TENTATIVI = 4       # tentativi con la quota piena (attese di 2, 4, 6 minuti): ogni rifiuto manda un'email di MeteoHub
 IDRO = os.environ.get("IDRO", "1") != "0"      # IDRO=0 = come prima (nubi e pioggia entrano a zero dai bordi)
 RD, G0, CP, GAMMA = 287.04, 9.80665, 1004.0, 0.0065
 STRATI_NOAH_CM = [(0, 7), (7, 28), (28, 100), (100, 289)]
