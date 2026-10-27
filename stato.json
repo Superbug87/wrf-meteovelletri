@@ -1,17 +1,17 @@
 {
- "aggiornato": "2026-10-27T15:55:16Z",
+ "aggiornato": "2026-10-27T16:00:48Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
    "ultimo_pubblicato": "2026102700",
    "in_corso": {
     "stato": "queued",
-    "da": "2026-10-27T15:09:31Z",
-    "id": 40528184386
+    "da": "2026-10-27T16:01:24Z",
+    "id": 40536792643
    },
    "ultimo_esito": {
     "esito": "failure",
-    "da": "2026-10-27T14:42:43Z"
+    "da": "2026-10-27T15:09:31Z"
    }
   },
   {
@@ -19,12 +19,12 @@
    "ultimo_pubblicato": "2026102700",
    "in_corso": {
     "stato": "queued",
-    "da": "2026-10-27T15:09:33Z",
-    "id": 40528188122
+    "da": "2026-10-27T16:00:53Z",
+    "id": 40536701532
    },
    "ultimo_esito": {
     "esito": "cancelled",
-    "da": "2026-10-27T14:50:26Z"
+    "da": "2026-10-27T15:09:33Z"
    }
   },
   {
@@ -97,9 +97,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu diff2 2026102712",
-   "stato": "queued",
+   "stato": "completed",
    "da": "2026-10-27T15:35:47Z",
-   "esito": ""
+   "esito": "failure"
   },
   {
    "titolo": "PROVA castelli icon2i wu livelli 2026102712",
