@@ -139,7 +139,7 @@ class Hub:
                 rete += isinstance(e, requests.RequestException)
                 if rete >= tentativi or lente > 1 or quota >= QUOTA_TENTATIVI:
                     sys.exit(f"[{nome}] MeteoHub non risponde ({type(e).__name__}) dopo {rete + lente + quota} tentativi")
-                pausa = 60 if isinstance(e, QuotaPiena) else 30 * (rete + lente)
+                pausa = 120 * quota if isinstance(e, QuotaPiena) else 30 * (rete + lente)
                 print(f"[{nome}] {type(e).__name__}: riprovo fra {pausa} s", file=sys.stderr, flush=True)
                 time.sleep(pausa)
 
