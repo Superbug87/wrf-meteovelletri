@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-28T17:00:48Z",
+ "aggiornato": "2026-10-28T17:05:15Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -41,7 +41,7 @@
  "prove": [
   {
    "titolo": "PROVA castelli iconeu wu 2026102812",
-   "stato": "in_progress",
+   "stato": "queued",
    "da": "2026-10-28T17:01:37Z",
    "esito": ""
   },
