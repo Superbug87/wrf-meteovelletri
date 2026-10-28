@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-28T09:30:34Z",
+ "aggiornato": "2026-10-28T09:35:15Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -21,15 +21,11 @@
   },
   {
    "workflow": "castelli-ecmwf.yml",
-   "ultimo_pubblicato": "2026102712",
-   "in_corso": {
-    "stato": "in_progress",
-    "da": "2026-10-28T07:50:24Z",
-    "id": 40652663995
-   },
+   "ultimo_pubblicato": "2026102800",
+   "in_corso": null,
    "ultimo_esito": {
     "esito": "success",
-    "da": "2026-10-27T19:50:25Z"
+    "da": "2026-10-28T07:50:24Z"
    }
   },
   {
@@ -117,9 +113,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu urbano 2026102712",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-28T07:37:12Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu radt15 2026102712",
