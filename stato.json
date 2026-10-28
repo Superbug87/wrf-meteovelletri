@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-28T09:55:14Z",
+ "aggiornato": "2026-10-28T10:00:45Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -65,9 +65,9 @@
   },
   {
    "titolo": "PROVA lazio ecmwf wu raggi 2026102800",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-28T08:30:57Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio ecmwf wu livelli 2026102800",
