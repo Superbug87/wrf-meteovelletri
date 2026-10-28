@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-28T09:15:23Z",
+ "aggiornato": "2026-10-28T09:20:19Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -115,7 +115,7 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu radt15 2026102712",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-28T07:37:10Z",
    "esito": ""
   },
