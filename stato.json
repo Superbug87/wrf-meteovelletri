@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-29T21:55:14Z",
+ "aggiornato": "2026-10-29T22:00:43Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -53,13 +53,13 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu radt15 2026102912",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-29T20:31:17Z",
    "esito": ""
   },
   {
    "titolo": "PROVA castelli ecmwf wu radt6 2026102912",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-29T20:31:15Z",
    "esito": ""
   },
@@ -71,7 +71,7 @@
   },
   {
    "titolo": "PROVA lazio ecmwf wu livelli 2026102912",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-29T20:25:40Z",
    "esito": ""
   },
@@ -83,15 +83,15 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu raggi 2026102912",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-29T20:25:25Z",
    "esito": ""
   },
   {
    "titolo": "PROVA castelli ecmwf wu diff2 2026102912",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-29T20:20:33Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu livelli 2026102912",
@@ -101,7 +101,7 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu noahmp 2026102912",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-29T20:20:27Z",
    "esito": ""
   },
