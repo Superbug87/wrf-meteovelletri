@@ -1,11 +1,11 @@
 {
- "aggiornato": "2026-10-29T17:35:15Z",
+ "aggiornato": "2026-10-29T17:40:21Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
    "ultimo_pubblicato": "2026102900",
    "in_corso": {
-    "stato": "queued",
+    "stato": "in_progress",
     "da": "2026-10-29T15:25:17Z",
     "id": 40901378657
    },
@@ -16,15 +16,11 @@
   },
   {
    "workflow": "lazio-icon2i.yml",
-   "ultimo_pubblicato": "2026102900",
-   "in_corso": {
-    "stato": "in_progress",
-    "da": "2026-10-29T16:05:21Z",
-    "id": 40908087081
-   },
+   "ultimo_pubblicato": "2026102912",
+   "in_corso": null,
    "ultimo_esito": {
     "esito": "success",
-    "da": "2026-10-29T04:40:24Z"
+    "da": "2026-10-29T16:05:21Z"
    }
   },
   {
@@ -79,7 +75,7 @@
   },
   {
    "titolo": "PROVA lazio icon2i wu raggi 2026102912",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-29T16:15:56Z",
    "esito": ""
   },
