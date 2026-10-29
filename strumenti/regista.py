@@ -32,8 +32,8 @@ REPO = os.environ.get("GITHUB_REPOSITORY", "Superbug87/wrf-meteovelletri")
 # stessi orari dei lanci programmati scritti nei workflow (i dati ECMWF escono circa 7 ore e mezza dopo il ciclo,
 # ICON-2I circa 2 ore dopo; il Lazio ICON-2I parte 35 minuti dopo i Castelli, che in circa 7 minuti mettono i dati in cache)
 PREVISIONI = {
-    "castelli-icon2i.yml": ("risultati-castelli-icon2i", {0: (2, 15), 12: (2, 15)}),   # dati ICON-2I su MeteoHub circa +2 h; lo scarico aspetta fino a ~20 min se mancano
-    "lazio-icon2i.yml": ("risultati-lazio-icon2i", {0: (2, 50), 12: (2, 50)}),   # i Castelli mettono ICON-2I in cache in ~7 min; 35 min di distanza evitano che i due scarichi riempiano insieme la quota MeteoHub
+    "castelli-icon2i.yml": ("risultati-castelli-icon2i", {0: (3, 15), 12: (3, 15)}),   # MeteoHub pubblica il ciclo ~3 h dopo (29/10: maschera terra-mare ancora assente dopo 1 h d attesa alle 2:15)
+    "lazio-icon2i.yml": ("risultati-lazio-icon2i", {0: (3, 50), 12: (3, 50)}),   # usa la cache dei Castelli: parte solo se c'è la cache; 35 min dopo
     "castelli-ecmwf.yml": ("risultati-castelli-ecmwf", {0: (7, 50), 12: (7, 50)}),   # ECMWF a 48 h esce verso +7:35
     "lazio-ecmwf.yml": ("risultati-lazio-ecmwf", {0: (7, 50), 12: (7, 50)}),
 }

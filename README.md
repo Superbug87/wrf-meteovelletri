@@ -71,8 +71,8 @@ Ora italiana = UTC + 2 fino al 25/10/2026 (ora legale), poi UTC + 1. Il regista 
 
 | workflow | partenza dopo il ciclo | cicli 00 / 12 UTC | in ora italiana (CEST) | pubblicazione tipica (CEST) |
 |---|---|---|---|---|
-| Castelli ICON-2I | +2:15 | 02:15 / 14:15 | 04:15 / 16:15 | circa 06:20-06:30 / 18:20-19:00 |
-| Lazio ICON-2I | +2:50 | 02:50 / 14:50 | 04:50 / 16:50 | circa 06:30-06:45 / 18:30-19:15 |
+| Castelli ICON-2I | +3:15 | 03:15 / 15:15 | 05:15 / 17:15 | circa 06:20-06:30 / 18:20-19:00 |
+| Lazio ICON-2I | +3:50 | 03:50 / 15:50 | 05:50 / 17:50 | circa 06:30-06:45 / 18:30-19:15 |
 | Castelli ECMWF | +7:50 | 07:50 / 19:50 | 09:50 / 21:50 | circa 11:10-11:30 / 23:20-23:30 |
 | Lazio ECMWF | +7:50 | 07:50 / 19:50 | 09:50 / 21:50 | circa 11:10-11:30 / 23:20-23:30 |
 
@@ -245,3 +245,4 @@ Librerie principali: ecCodes (Apache 2.0), JasPer, NumPy, SciPy, Matplotlib, net
 I nomi dei paesi e le posizioni sulle mappe sono scritti a mano nello script, non vengono da OpenStreetMap o altri archivi.
 Le condizioni dei fornitori possono cambiare: prima di usare il progetto in modo diverso da quello personale
 (per esempio per un servizio pubblico o commerciale) vanno ricontrollate.
+- 27-29/10/2026: da MeteoHub scarica solo il run ufficiale dei Castelli (una volta per ciclo, dati in cache); Lazio e prove partono solo con la cache presente e, senza, si fermano senza chiamare MeteoHub. Il 29/10 si è visto che MeteoHub pubblica ICON-2I circa 3 ore dopo il ciclo: Castelli ICON-2I +3:15, Lazio +3:50.
