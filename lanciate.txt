@@ -117,6 +117,7 @@ prova castelli ecmwf wu radt15 2026102800
 prova castelli ecmwf wu radt15 2026102812
 prova castelli ecmwf wu radt15 2026102900
 prova castelli ecmwf wu radt15 2026102912
+prova castelli ecmwf wu radt15 2026103000
 prova castelli ecmwf wu radt6 2026102000
 prova castelli ecmwf wu radt6 2026102012
 prova castelli ecmwf wu radt6 2026102100
@@ -137,6 +138,7 @@ prova castelli ecmwf wu radt6 2026102800
 prova castelli ecmwf wu radt6 2026102812
 prova castelli ecmwf wu radt6 2026102900
 prova castelli ecmwf wu radt6 2026102912
+prova castelli ecmwf wu radt6 2026103000
 prova castelli ecmwf wu raggi 2026102612
 prova castelli ecmwf wu raggi 2026102700
 prova castelli ecmwf wu raggi 2026102712
@@ -437,6 +439,7 @@ prova lazio ecmwf wu raggi 2026102800
 prova lazio ecmwf wu raggi 2026102812
 prova lazio ecmwf wu raggi 2026102900
 prova lazio ecmwf wu raggi 2026102912
+prova lazio ecmwf wu raggi 2026103000
 prova lazio ecmwf wu topo2 2026101900
 prova lazio ecmwf wu topo2 2026101912
 prova lazio ecmwf wu topo2 2026102000
