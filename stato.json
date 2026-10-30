@@ -1,17 +1,13 @@
 {
- "aggiornato": "2026-10-30T17:25:14Z",
+ "aggiornato": "2026-10-30T17:30:33Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
-   "ultimo_pubblicato": "2026103000",
-   "in_corso": {
-    "stato": "in_progress",
-    "da": "2026-10-30T15:15:25Z",
-    "id": 41079008776
-   },
+   "ultimo_pubblicato": "2026103012",
+   "in_corso": null,
    "ultimo_esito": {
     "esito": "success",
-    "da": "2026-10-30T03:15:24Z"
+    "da": "2026-10-30T15:15:25Z"
    }
   },
   {
@@ -44,8 +40,14 @@
  ],
  "prove": [
   {
-   "titolo": "PROVA lazio iconeu wu 2026103012",
+   "titolo": "PROVA lazio gfs wu 2026103012",
    "stato": "in_progress",
+   "da": "2026-10-30T17:31:29Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA lazio iconeu wu 2026103012",
+   "stato": "queued",
    "da": "2026-10-30T17:26:06Z",
    "esito": ""
   },
@@ -75,13 +77,13 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu radt15 2026103012",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-30T15:51:07Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu radt6 2026103012",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-10-30T15:51:06Z",
    "esito": ""
   },
@@ -111,9 +113,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu diff2 2026103012",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-30T15:40:38Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu livelli 2026103012",
@@ -123,9 +125,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu noahmp 2026103012",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-10-30T15:40:32Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio ecmwf wu urbano 2026103000",
@@ -395,12 +397,6 @@
    "titolo": "PROVA castelli icon2i wu radt6 2026102912",
    "stato": "completed",
    "da": "2026-10-29T16:16:04Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA lazio icon2i wu raggi 2026102912",
-   "stato": "completed",
-   "da": "2026-10-29T16:15:56Z",
    "esito": "success"
   }
  ]
