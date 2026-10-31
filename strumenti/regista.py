@@ -49,7 +49,7 @@ PROVE = [
 # modello, una prova per ciascuna di queste varianti, con il nudging in uso (wu). Partono dopo i run normali, cosi' i dati
 # globali sono gia' in cache: ICON-2I 3:30 dopo il ciclo (come il Lazio normale), ECMWF 8:20 (30 minuti dopo il normale).
 # Dal 26/10/2026 (analisi fisica su 6 cicli, confronto appaiato): topo2, mynn e mynn-noahmp sono finite (peggio sul vento o
-# notti piu' calde); noahmp continua fino al 31/10 (decisione sulla versione ufficiale). Al loro posto, fino all'8/11:
+# notti piu' calde); noahmp continua fino al 7/11 (prorogato il 31/10) (decisione sulla versione ufficiale). Al loro posto, fino all'8/11:
 # livelli (50 livelli, primo strato 20 m), raggi (nudging piu' locale) e, solo nel dominio a 1 km dei Castelli, diff2.
 # (kim_tofd per il vento non c'e' in WRF 4.7.0: arriva con la 4.8.0.)
 FISICHE = {"castelli": ("livelli", "diff2", "raggi"), "lazio": ("livelli", "raggi")}
@@ -57,24 +57,24 @@ RITARDI_PROVE = {"icon2i": {0: (3, 30), 12: (3, 30)}, "ecmwf": {0: (8, 20), 12: 
 for _wf, _z, _p in (("castelli-ecmwf.yml", "castelli", "ecmwf"), ("castelli-icon2i.yml", "castelli", "icon2i"),
                     ("lazio-ecmwf.yml", "lazio", "ecmwf"), ("lazio-icon2i.yml", "lazio", "icon2i")):
     PROVE.append({"workflow": _wf, "zona": _z, "pilota": _p, "varianti": ("wu",), "fisiche": ("noahmp",), "controllo": "false",
-                  "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026101900", "fino_a": "2026-10-31"})
+                  "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026101900", "fino_a": "2026-11-07"})
     PROVE.append({"workflow": _wf, "zona": _z, "pilota": _p, "varianti": ("wu",), "fisiche": FISICHE[_z], "controllo": "false",
                   "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026102612", "fino_a": "2026-11-08"})
 # prove della frequenza della radiazione (solo Castelli, dominio da 1 km: 6 e 15 minuti invece di 3): stessi ritardi delle altre prove di fisica
 for _wf, _p in (("castelli-ecmwf.yml", "ecmwf"), ("castelli-icon2i.yml", "icon2i")):
     PROVE.append({"workflow": _wf, "zona": "castelli", "pilota": _p, "varianti": ("wu",), "fisiche": ("radt6", "radt15"),
-                  "controllo": "false", "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026102000", "fino_a": "2026-10-31"})
+                  "controllo": "false", "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026102000", "fino_a": "2026-11-07"})
 # prova del modello urbano (UCM, Roma): come le altre prove di fisica, una per zona e modello, con il nudging wu; non pubblica
 for _wf, _z, _p in (("castelli-ecmwf.yml", "castelli", "ecmwf"), ("castelli-icon2i.yml", "castelli", "icon2i"),
                     ("lazio-ecmwf.yml", "lazio", "ecmwf"), ("lazio-icon2i.yml", "lazio", "icon2i")):
     PROVE.append({"workflow": _wf, "zona": _z, "pilota": _p, "varianti": ("wu",), "fisiche": ("urbano",), "controllo": "false",
-                  "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026102100", "fino_a": "2026-10-31"})
+                  "ritardi": RITARDI_PROVE[_p], "dal_ciclo": "2026102100", "fino_a": "2026-11-07"})
 # prove di piloti diversi (ICON-EU del DWD e GFS di NOAA, entrambi con acqua di nube ai bordi): stesse zone, nudging wu, mai pubblicate;
 # l'estratto va nel ramo prove-fisica e la pagella le mette a confronto. ICON-EU e GFS sono pronti circa 4 ore dopo il ciclo.
 for _z in ("castelli", "lazio"):
     for _p in ("iconeu", "gfs"):
         PROVE.append({"workflow": f"{_z}-icon2i.yml", "zona": _z, "pilota": _p, "varianti": ("wu",), "controllo": "false",
-                      "ritardi": {0: (5, 0), 12: (5, 0)}, "dal_ciclo": "2026101912", "fino_a": "2026-10-31"})
+                      "ritardi": {0: (5, 0), 12: (5, 0)}, "dal_ciclo": "2026101912", "fino_a": "2026-11-07"})
 # GitHub non ha priorita' tra i lavori: con 20 lavori contemporanei (limite dei runner gratuiti, per account) un segmento dei run
 # normali che finisce il suo turno si rimette in coda dietro agli altri. Per lasciare sempre posti liberi ai run normali (al
 # massimo 4 insieme) le prove ne usano al piu' MAX_PROVE alla volta; le altre aspettano la sveglia dopo.

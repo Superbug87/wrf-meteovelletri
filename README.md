@@ -197,7 +197,7 @@ suolo Noah, `topo_wind` 1, Thompson, RRTMG, convezione Grell-Freitas sui domini 
 | `cu27`, `idroec` | prove singole sul Lazio: convezione esplicita sul 27 km, idrometeore dai dati ECMWF |
 
 Le lancia il regista (`PROVE` in `strumenti/regista.py`) per le quattro combinazioni zona/modello, con finestre di date diverse:
-`noahmp` dal 19/10 al 31/10 (poi si decide se diventa la fisica in uso), `radt6` e `radt15` dal 20/10 e `urbano` dal 21/10 fino al 31/10, `livelli` e `raggi` (e `diff2` sui Castelli)
+`noahmp` dal 19/10 al 7/11 (prorogato il 31/10 di una settimana; poi si decide se diventa la fisica in uso), `radt6` e `radt15` dal 20/10 e `urbano` dal 21/10 fino al 7/11, `livelli` e `raggi` (e `diff2` sui Castelli)
 dal ciclo 26/10 12Z all'8/11. `topo2`, `mynn` e `mynn-noahmp` (dal 19/10) sono finite il 26/10: peggioravano il vento o rendevano le notti più calde. Partono dopo i run normali (ICON-2I 3:30, ECMWF 8:20 dopo il ciclo)
 perché i dati globali sono già in cache (i dati ECMWF si scaricano una volta per zona e ciclo: chiave `ecmwf-dati-v1-<zona>-<ciclo>-<ore>`).
 Non fanno le mappe: lasciano solo l'estratto, negli allegati restano 1 giorno. Quando una variante risulta migliore del run normale su almeno una settimana, si porta nella fisica in uso.
