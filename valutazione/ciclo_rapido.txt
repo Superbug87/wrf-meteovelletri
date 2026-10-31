@@ -1,0 +1,27 @@
+Ciclo rapido con il radar: 12 emissioni valutate (12 con pioggia nel riquadro)
+
+FSS a 20 km, soglia 0.5 mm/h (1 = perfetto)  [emissioni usate]
+                              +1h    +2h    +3h    +4h    +5h    +6h  
+radar fermo                  0.789   0.549   0.489   0.363   0.236   0.213    [12]
+nowcast radar (ANVIL)        0.891   0.714   0.680   0.568   0.423   0.206    [12]
+WRF corto senza radar        0.018   0.291   0.503   0.698   0.557   0.516    [12]
+WRF corto con radar          0.856   0.696   0.677   0.658   0.636   0.587    [12]
+WRF ECMWF ufficiale          0.541   0.543   0.575   0.443   0.336   0.379    [3]
+WRF ICON-2I ufficiale        0.408   0.470   0.568   0.498   0.423   0.534    [3]
+
+FSS a 20 km, soglia 2 mm/h (1 = perfetto)  [emissioni usate]
+                              +1h    +2h    +3h    +4h    +5h    +6h  
+radar fermo                  0.803   0.448   0.388   0.278   0.103   0.087    [12]
+nowcast radar (ANVIL)        0.875   0.650   0.685   0.565   0.415   0.181    [12]
+WRF corto senza radar        0.009   0.221   0.474   0.669   0.432   0.347    [12]
+WRF corto con radar          0.807   0.415   0.539   0.604   0.517   0.475    [12]
+WRF ECMWF ufficiale          0.375   0.409   0.435   0.328   0.133   0.109    [3]
+WRF ICON-2I ufficiale        0.192   0.341   0.412   0.367   0.136   0.174    [3]
+
+Pioggia prevista / osservata (1 = giusta)
+radar fermo                   0.95    0.76    0.75    0.84    0.86    0.86 
+nowcast radar (ANVIL)         0.93    0.83    0.73    0.68    0.53    0.31 
+WRF corto senza radar         0.04    0.27    0.51    0.93    0.94    0.89 
+WRF corto con radar           0.76    0.78    0.93    1.27    1.27    0.98 
+WRF ECMWF ufficiale           1.07    0.81    0.65    0.44    0.26    0.34 
+WRF ICON-2I ufficiale         1.11    0.69    0.43    0.30    0.13    0.36 
