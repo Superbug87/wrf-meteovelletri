@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-31T19:45:21Z",
+ "aggiornato": "2026-10-31T19:50:20Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -22,7 +22,11 @@
   {
    "workflow": "castelli-ecmwf.yml",
    "ultimo_pubblicato": "2026103100",
-   "in_corso": null,
+   "in_corso": {
+    "stato": "queued",
+    "da": "2026-10-31T19:50:24Z",
+    "id": 41236075367
+   },
    "ultimo_esito": {
     "esito": "success",
     "da": "2026-10-31T07:50:23Z"
@@ -31,7 +35,11 @@
   {
    "workflow": "lazio-ecmwf.yml",
    "ultimo_pubblicato": "2026103100",
-   "in_corso": null,
+   "in_corso": {
+    "stato": "queued",
+    "da": "2026-10-31T19:50:27Z",
+    "id": 41236079310
+   },
    "ultimo_esito": {
     "esito": "success",
     "da": "2026-10-31T07:50:26Z"
