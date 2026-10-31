@@ -1,0 +1,203 @@
+{
+ "ciclo": "2026103012",
+ "run": "2026-10-30T12:00:00Z",
+ "variabili": [
+  {
+   "id": "temperatura_2m",
+   "titolo": "Temperatura a 2 m",
+   "unita": "°C"
+  },
+  {
+   "id": "temperatura_925",
+   "titolo": "Temperatura a 925 hPa",
+   "unita": "°C"
+  },
+  {
+   "id": "temperatura_850",
+   "titolo": "Temperatura a 850 hPa",
+   "unita": "°C"
+  },
+  {
+   "id": "zero_termico",
+   "titolo": "Quota dello zero termico",
+   "unita": "m"
+  },
+  {
+   "id": "umidita",
+   "titolo": "Umidità relativa",
+   "unita": "%"
+  },
+  {
+   "id": "vento_medio",
+   "titolo": "Vento medio a 10 m",
+   "unita": "km/h"
+  },
+  {
+   "id": "raffiche",
+   "titolo": "Raffiche a 10 m",
+   "unita": "km/h"
+  },
+  {
+   "id": "pioggia_1h",
+   "titolo": "Pioggia nell'ultima ora",
+   "unita": "mm"
+  },
+  {
+   "id": "pioggia_3h",
+   "titolo": "Pioggia nelle ultime 3 ore",
+   "unita": "mm"
+  },
+  {
+   "id": "pioggia_6h",
+   "titolo": "Pioggia nelle ultime 6 ore",
+   "unita": "mm"
+  },
+  {
+   "id": "pioggia_12h",
+   "titolo": "Pioggia nelle ultime 12 ore",
+   "unita": "mm"
+  },
+  {
+   "id": "pioggia_24h",
+   "titolo": "Pioggia nelle ultime 24 ore",
+   "unita": "mm"
+  },
+  {
+   "id": "neve_6h",
+   "titolo": "Neve fresca nelle ultime 6 ore",
+   "unita": "cm"
+  },
+  {
+   "id": "neve_24h",
+   "titolo": "Neve fresca nelle ultime 24 ore",
+   "unita": "cm"
+  },
+  {
+   "id": "pressione",
+   "titolo": "Pressione al livello del mare",
+   "unita": "hPa"
+  },
+  {
+   "id": "nubi_totale",
+   "titolo": "Copertura nuvolosa totale",
+   "unita": "%"
+  },
+  {
+   "id": "nubi_basse",
+   "titolo": "Nubi basse",
+   "unita": "%"
+  },
+  {
+   "id": "nubi_medie",
+   "titolo": "Nubi medie",
+   "unita": "%"
+  },
+  {
+   "id": "nubi_alte",
+   "titolo": "Nubi alte",
+   "unita": "%"
+  },
+  {
+   "id": "cape_mu",
+   "titolo": "CAPE della parcella più instabile",
+   "unita": "J/kg"
+  },
+  {
+   "id": "cape_ml",
+   "titolo": "CAPE dello strato mescolato",
+   "unita": "J/kg"
+  },
+  {
+   "id": "cin",
+   "titolo": "Inibizione convettiva (CIN)",
+   "unita": "J/kg"
+  },
+  {
+   "id": "shear_01",
+   "titolo": "Shear del vento 0-1 km",
+   "unita": "m/s"
+  },
+  {
+   "id": "shear_03",
+   "titolo": "Shear del vento 0-3 km",
+   "unita": "m/s"
+  },
+  {
+   "id": "shear_06",
+   "titolo": "Shear del vento 0-6 km",
+   "unita": "m/s"
+  },
+  {
+   "id": "srh_01",
+   "titolo": "Elicità relativa alla tempesta 0-1 km",
+   "unita": "m²/s²"
+  },
+  {
+   "id": "srh_03",
+   "titolo": "Elicità relativa alla tempesta 0-3 km",
+   "unita": "m²/s²"
+  },
+  {
+   "id": "fulmini",
+   "titolo": "Rischio fulmini",
+   "unita": "indice"
+  },
+  {
+   "id": "supercelle",
+   "titolo": "Rischio supercelle",
+   "unita": "indice"
+  },
+  {
+   "id": "tornado",
+   "titolo": "Rischio tornado",
+   "unita": "indice"
+  }
+ ],
+ "ore": [
+  "2026-10-30T17:00:00Z",
+  "2026-10-30T18:00:00Z",
+  "2026-10-30T19:00:00Z",
+  "2026-10-30T20:00:00Z",
+  "2026-10-30T21:00:00Z",
+  "2026-10-30T22:00:00Z",
+  "2026-10-30T23:00:00Z",
+  "2026-10-31T00:00:00Z",
+  "2026-10-31T01:00:00Z",
+  "2026-10-31T02:00:00Z",
+  "2026-10-31T03:00:00Z",
+  "2026-10-31T04:00:00Z",
+  "2026-10-31T05:00:00Z",
+  "2026-10-31T06:00:00Z",
+  "2026-10-31T07:00:00Z",
+  "2026-10-31T08:00:00Z",
+  "2026-10-31T09:00:00Z",
+  "2026-10-31T10:00:00Z",
+  "2026-10-31T11:00:00Z",
+  "2026-10-31T12:00:00Z",
+  "2026-10-31T13:00:00Z",
+  "2026-10-31T14:00:00Z",
+  "2026-10-31T15:00:00Z",
+  "2026-10-31T16:00:00Z",
+  "2026-10-31T17:00:00Z",
+  "2026-10-31T18:00:00Z",
+  "2026-10-31T19:00:00Z",
+  "2026-10-31T20:00:00Z",
+  "2026-10-31T21:00:00Z",
+  "2026-10-31T22:00:00Z",
+  "2026-10-31T23:00:00Z",
+  "2026-11-01T00:00:00Z",
+  "2026-11-01T01:00:00Z",
+  "2026-11-01T02:00:00Z",
+  "2026-11-01T03:00:00Z",
+  "2026-11-01T04:00:00Z",
+  "2026-11-01T05:00:00Z",
+  "2026-11-01T06:00:00Z",
+  "2026-11-01T07:00:00Z",
+  "2026-11-01T08:00:00Z",
+  "2026-11-01T09:00:00Z",
+  "2026-11-01T10:00:00Z",
+  "2026-11-01T11:00:00Z",
+  "2026-11-01T12:00:00Z"
+ ],
+ "percorso": "{ciclo}/{variabile}/{ora}.png"
+}
