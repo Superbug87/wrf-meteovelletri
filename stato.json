@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-01T22:10:18Z",
+ "aggiornato": "2026-11-01T22:15:20Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -47,7 +47,7 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu urbano 2026110112",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-11-01T20:35:47Z",
    "esito": ""
   },
@@ -59,9 +59,9 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu radt6 2026110112",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-01T20:31:07Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio ecmwf wu raggi 2026110112",
@@ -101,9 +101,9 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu noahmp 2026110112",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-01T20:20:25Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio gfs wu 2026110112",
