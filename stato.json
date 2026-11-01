@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-01T17:20:18Z",
+ "aggiornato": "2026-11-01T17:25:14Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -40,6 +40,12 @@
  ],
  "prove": [
   {
+   "titolo": "PROVA lazio gfs wu 2026110112",
+   "stato": "in_progress",
+   "da": "2026-11-01T17:26:05Z",
+   "esito": ""
+  },
+  {
    "titolo": "PROVA lazio iconeu wu 2026110112",
    "stato": "queued",
    "da": "2026-11-01T17:16:11Z",
@@ -59,9 +65,9 @@
   },
   {
    "titolo": "PROVA lazio icon2i wu urbano 2026110112",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-01T15:46:08Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu urbano 2026110112",
@@ -71,9 +77,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu radt15 2026110112",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-01T15:40:54Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu radt6 2026110112",
@@ -89,7 +95,7 @@
   },
   {
    "titolo": "PROVA lazio icon2i wu livelli 2026110112",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-11-01T15:35:44Z",
    "esito": ""
   },
@@ -101,15 +107,15 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu raggi 2026110112",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-01T15:35:29Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu diff2 2026110112",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-01T15:30:51Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu livelli 2026110112",
@@ -119,9 +125,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu noahmp 2026110112",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-01T15:30:45Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio ecmwf wu urbano 2026110100",
@@ -391,12 +397,6 @@
    "titolo": "PROVA lazio icon2i wu raggi 2026103112",
    "stato": "completed",
    "da": "2026-10-31T15:45:48Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA lazio icon2i wu livelli 2026103112",
-   "stato": "completed",
-   "da": "2026-10-31T15:40:51Z",
    "esito": "success"
   }
  ]
