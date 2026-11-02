@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-02T06:35:15Z",
+ "aggiornato": "2026-11-02T06:40:21Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -41,7 +41,7 @@
  "prove": [
   {
    "titolo": "PROVA lazio gfs wu 2026110200",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-11-02T05:01:47Z",
    "esito": ""
   },
