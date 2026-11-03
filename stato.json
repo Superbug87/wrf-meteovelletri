@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-03T06:50:19Z",
+ "aggiornato": "2026-11-03T06:55:14Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -41,7 +41,7 @@
  "prove": [
   {
    "titolo": "PROVA lazio gfs wu 2026110300",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-11-03T05:21:15Z",
    "esito": ""
   },
@@ -59,7 +59,7 @@
   },
   {
    "titolo": "PROVA castelli iconeu wu 2026110300",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-11-03T05:01:27Z",
    "esito": ""
   },
