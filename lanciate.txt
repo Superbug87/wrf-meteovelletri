@@ -235,6 +235,7 @@ prova castelli ecmwf wu urbano 2026110100
 prova castelli ecmwf wu urbano 2026110112
 prova castelli ecmwf wu urbano 2026110200
 prova castelli ecmwf wu urbano 2026110212
+prova castelli ecmwf wu urbano 2026110300
 prova castelli gfs wu 2026101912
 prova castelli gfs wu 2026102000
 prova castelli gfs wu 2026102012
@@ -618,6 +619,7 @@ prova lazio ecmwf wu urbano 2026110100
 prova lazio ecmwf wu urbano 2026110112
 prova lazio ecmwf wu urbano 2026110200
 prova lazio ecmwf wu urbano 2026110212
+prova lazio ecmwf wu urbano 2026110300
 prova lazio gfs wu 2026101912
 prova lazio gfs wu 2026102000
 prova lazio gfs wu 2026102012
