@@ -1,17 +1,13 @@
 {
- "aggiornato": "2026-11-03T05:15:21Z",
+ "aggiornato": "2026-11-03T05:20:20Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
-   "ultimo_pubblicato": "2026110212",
-   "in_corso": {
-    "stato": "in_progress",
-    "da": "2026-11-03T03:15:24Z",
-    "id": 41571100694
-   },
+   "ultimo_pubblicato": "2026110300",
+   "in_corso": null,
    "ultimo_esito": {
     "esito": "success",
-    "da": "2026-11-02T15:15:28Z"
+    "da": "2026-11-03T03:15:24Z"
    }
   },
   {
@@ -48,8 +44,14 @@
  ],
  "prove": [
   {
-   "titolo": "PROVA lazio iconeu wu 2026110300",
+   "titolo": "PROVA lazio gfs wu 2026110300",
    "stato": "in_progress",
+   "da": "2026-11-03T05:21:15Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA lazio iconeu wu 2026110300",
+   "stato": "queued",
    "da": "2026-11-03T05:16:13Z",
    "esito": ""
   },
@@ -67,9 +69,9 @@
   },
   {
    "titolo": "PROVA lazio icon2i wu urbano 2026110300",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-03T03:46:08Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu urbano 2026110300",
@@ -79,9 +81,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu radt15 2026110300",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-03T03:40:52Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu radt6 2026110300",
@@ -109,15 +111,15 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu raggi 2026110300",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-11-03T03:35:31Z",
    "esito": ""
   },
   {
    "titolo": "PROVA castelli icon2i wu diff2 2026110300",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-03T03:30:57Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu livelli 2026110300",
@@ -399,12 +401,6 @@
    "titolo": "PROVA castelli ecmwf wu radt6 2026110112",
    "stato": "completed",
    "da": "2026-11-01T20:31:07Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA lazio ecmwf wu raggi 2026110112",
-   "stato": "completed",
-   "da": "2026-11-01T20:30:58Z",
    "esito": "success"
   }
  ]
