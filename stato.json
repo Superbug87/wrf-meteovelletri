@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-03T17:35:21Z",
+ "aggiornato": "2026-11-03T17:40:29Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -75,9 +75,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu urbano 2026110312",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-03T15:46:07Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu radt15 2026110312",
@@ -123,7 +123,7 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu livelli 2026110312",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-11-03T15:30:59Z",
    "esito": ""
   },
