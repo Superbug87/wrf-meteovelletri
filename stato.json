@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-04T03:45:23Z",
+ "aggiornato": "2026-11-04T03:50:19Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -17,7 +17,11 @@
   {
    "workflow": "lazio-icon2i.yml",
    "ultimo_pubblicato": "2026110312",
-   "in_corso": null,
+   "in_corso": {
+    "stato": "queued",
+    "da": "2026-11-04T03:50:24Z",
+    "id": 41769557202
+   },
    "ultimo_esito": {
     "esito": "success",
     "da": "2026-11-03T15:50:27Z"
@@ -45,13 +49,13 @@
  "prove": [
   {
    "titolo": "PROVA lazio icon2i wu urbano 2026110400",
-   "stato": "in_progress",
+   "stato": "queued",
    "da": "2026-11-04T03:46:08Z",
    "esito": ""
   },
   {
    "titolo": "PROVA castelli icon2i wu urbano 2026110400",
-   "stato": "in_progress",
+   "stato": "queued",
    "da": "2026-11-04T03:46:00Z",
    "esito": ""
   },
