@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-04T17:50:21Z",
+ "aggiornato": "2026-11-04T17:55:15Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -119,9 +119,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu livelli 2026110412",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-04T15:35:37Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu noahmp 2026110412",
