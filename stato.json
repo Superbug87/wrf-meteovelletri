@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-04T09:59:10Z",
+ "aggiornato": "2026-11-04T10:15:24Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -41,27 +41,27 @@
  "prove": [
   {
    "titolo": "PROVA lazio ecmwf wu urbano 2026110400",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-04T08:36:03Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu urbano 2026110400",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-11-04T08:35:55Z",
    "esito": ""
   },
   {
    "titolo": "PROVA castelli ecmwf wu radt15 2026110400",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-04T08:31:04Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu radt6 2026110400",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-04T08:31:03Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio ecmwf wu raggi 2026110400",
@@ -71,9 +71,9 @@
   },
   {
    "titolo": "PROVA lazio ecmwf wu livelli 2026110400",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-04T08:25:38Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio ecmwf wu noahmp 2026110400",
@@ -83,15 +83,15 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu raggi 2026110400",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-04T08:25:25Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu diff2 2026110400",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-04T08:20:35Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu livelli 2026110400",
@@ -101,9 +101,9 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu noahmp 2026110400",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-04T08:20:28Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA lazio gfs wu 2026110400",
