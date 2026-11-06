@@ -49,6 +49,7 @@ prova castelli ecmwf wu diff2 2026110400
 prova castelli ecmwf wu diff2 2026110412
 prova castelli ecmwf wu diff2 2026110500
 prova castelli ecmwf wu diff2 2026110512
+prova castelli ecmwf wu diff2 2026110600
 prova castelli ecmwf wu livelli 2026102612
 prova castelli ecmwf wu livelli 2026102700
 prova castelli ecmwf wu livelli 2026102712
@@ -70,6 +71,7 @@ prova castelli ecmwf wu livelli 2026110400
 prova castelli ecmwf wu livelli 2026110412
 prova castelli ecmwf wu livelli 2026110500
 prova castelli ecmwf wu livelli 2026110512
+prova castelli ecmwf wu livelli 2026110600
 prova castelli ecmwf wu mynn 2026101900
 prova castelli ecmwf wu mynn 2026101912
 prova castelli ecmwf wu mynn 2026102000
@@ -136,6 +138,7 @@ prova castelli ecmwf wu noahmp 2026110400
 prova castelli ecmwf wu noahmp 2026110412
 prova castelli ecmwf wu noahmp 2026110500
 prova castelli ecmwf wu noahmp 2026110512
+prova castelli ecmwf wu noahmp 2026110600
 prova castelli ecmwf wu radt15 2026102000
 prova castelli ecmwf wu radt15 2026102012
 prova castelli ecmwf wu radt15 2026102100
