@@ -306,6 +306,7 @@ prova castelli gfs wu 2026110400
 prova castelli gfs wu 2026110412
 prova castelli gfs wu 2026110500
 prova castelli gfs wu 2026110512
+prova castelli gfs wu 2026110600
 prova castelli icon2i wu diff2 2026102612
 prova castelli icon2i wu diff2 2026102700
 prova castelli icon2i wu diff2 2026102800
