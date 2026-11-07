@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-07T10:10:17Z",
+ "aggiornato": "2026-11-07T10:15:20Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -47,9 +47,9 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu urbano 2026110700",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-07T08:35:49Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli ecmwf wu radt15 2026110700",
@@ -95,7 +95,7 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu livelli 2026110700",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-11-07T08:20:30Z",
    "esito": ""
   },
