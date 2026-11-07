@@ -582,6 +582,7 @@ prova castelli icon2i wu urbano 2026110512
 prova castelli icon2i wu urbano 2026110600
 prova castelli icon2i wu urbano 2026110612
 prova castelli icon2i wu urbano 2026110700
+prova castelli icon2i wu urbano 2026110712
 prova castelli iconeu wu 2026101912
 prova castelli iconeu wu 2026102000
 prova castelli iconeu wu 2026102012
@@ -984,6 +985,7 @@ prova lazio icon2i wu urbano 2026110512
 prova lazio icon2i wu urbano 2026110600
 prova lazio icon2i wu urbano 2026110612
 prova lazio icon2i wu urbano 2026110700
+prova lazio icon2i wu urbano 2026110712
 prova lazio iconeu wu 2026101912
 prova lazio iconeu wu 2026102000
 prova lazio iconeu wu 2026102012
