@@ -668,6 +668,7 @@ prova lazio ecmwf wu livelli 2026110612
 prova lazio ecmwf wu livelli 2026110700
 prova lazio ecmwf wu livelli 2026110712
 prova lazio ecmwf wu livelli 2026110800
+prova lazio ecmwf wu livelli 2026110812
 prova lazio ecmwf wu mynn 2026101900
 prova lazio ecmwf wu mynn 2026101912
 prova lazio ecmwf wu mynn 2026102000
@@ -764,6 +765,7 @@ prova lazio ecmwf wu raggi 2026110612
 prova lazio ecmwf wu raggi 2026110700
 prova lazio ecmwf wu raggi 2026110712
 prova lazio ecmwf wu raggi 2026110800
+prova lazio ecmwf wu raggi 2026110812
 prova lazio ecmwf wu topo2 2026101900
 prova lazio ecmwf wu topo2 2026101912
 prova lazio ecmwf wu topo2 2026102000
