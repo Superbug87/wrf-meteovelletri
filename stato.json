@@ -1,11 +1,11 @@
 {
- "aggiornato": "2026-11-08T05:10:19Z",
+ "aggiornato": "2026-11-08T05:15:23Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
    "ultimo_pubblicato": "2026110712",
    "in_corso": {
-    "stato": "queued",
+    "stato": "in_progress",
     "da": "2026-11-08T03:15:25Z",
     "id": 42441940122
    },
@@ -18,7 +18,7 @@
    "workflow": "lazio-icon2i.yml",
    "ultimo_pubblicato": "2026110712",
    "in_corso": {
-    "stato": "queued",
+    "stato": "in_progress",
     "da": "2026-11-08T03:50:24Z",
     "id": 42444364114
    },
@@ -55,13 +55,13 @@
   },
   {
    "titolo": "PROVA lazio icon2i wu livelli 2026110800",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-11-08T03:35:31Z",
    "esito": ""
   },
   {
    "titolo": "PROVA castelli icon2i wu raggi 2026110800",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-11-08T03:30:46Z",
    "esito": ""
   },
