@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-08T20:15:22Z",
+ "aggiornato": "2026-11-08T20:20:19Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -47,6 +47,24 @@
   }
  ],
  "prove": [
+  {
+   "titolo": "PROVA castelli ecmwf wu raggi 2026110812",
+   "stato": "in_progress",
+   "da": "2026-11-08T20:20:28Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA castelli ecmwf wu diff2 2026110812",
+   "stato": "in_progress",
+   "da": "2026-11-08T20:20:27Z",
+   "esito": ""
+  },
+  {
+   "titolo": "PROVA castelli ecmwf wu livelli 2026110812",
+   "stato": "in_progress",
+   "da": "2026-11-08T20:20:26Z",
+   "esito": ""
+  },
   {
    "titolo": "PROVA lazio icon2i wu raggi 2026110812",
    "stato": "completed",
@@ -387,24 +405,6 @@
    "titolo": "PROVA lazio icon2i wu urbano 2026110700",
    "stato": "completed",
    "da": "2026-11-07T03:46:07Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA castelli icon2i wu urbano 2026110700",
-   "stato": "completed",
-   "da": "2026-11-07T03:45:59Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA castelli icon2i wu radt15 2026110700",
-   "stato": "completed",
-   "da": "2026-11-07T03:40:53Z",
-   "esito": "success"
-  },
-  {
-   "titolo": "PROVA castelli icon2i wu radt6 2026110700",
-   "stato": "completed",
-   "da": "2026-11-07T03:40:51Z",
    "esito": "success"
   }
  ]
