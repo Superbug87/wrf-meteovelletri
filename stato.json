@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-08T05:20:20Z",
+ "aggiornato": "2026-11-08T05:25:14Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -51,9 +51,9 @@
   },
   {
    "titolo": "PROVA lazio icon2i wu livelli 2026110800",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-08T03:35:31Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu raggi 2026110800",
@@ -63,9 +63,9 @@
   },
   {
    "titolo": "PROVA castelli icon2i wu diff2 2026110800",
-   "stato": "in_progress",
+   "stato": "completed",
    "da": "2026-11-08T03:30:44Z",
-   "esito": ""
+   "esito": "success"
   },
   {
    "titolo": "PROVA castelli icon2i wu livelli 2026110800",
