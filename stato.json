@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-08T21:50:19Z",
+ "aggiornato": "2026-11-08T21:55:13Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -53,13 +53,13 @@
   },
   {
    "titolo": "PROVA castelli ecmwf wu raggi 2026110812",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-11-08T20:20:28Z",
    "esito": ""
   },
   {
    "titolo": "PROVA castelli ecmwf wu diff2 2026110812",
-   "stato": "queued",
+   "stato": "in_progress",
    "da": "2026-11-08T20:20:27Z",
    "esito": ""
   },
