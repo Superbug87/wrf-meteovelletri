@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-10T21:30:33Z",
+ "aggiornato": "2026-11-10T21:35:14Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -21,15 +21,11 @@
   },
   {
    "workflow": "castelli-ecmwf.yml",
-   "ultimo_pubblicato": "2026111000",
-   "in_corso": {
-    "stato": "in_progress",
-    "da": "2026-11-10T19:50:23Z",
-    "id": 42889260146
-   },
+   "ultimo_pubblicato": "2026111012",
+   "in_corso": null,
    "ultimo_esito": {
     "esito": "success",
-    "da": "2026-11-10T07:50:23Z"
+    "da": "2026-11-10T19:50:23Z"
    }
   },
   {
