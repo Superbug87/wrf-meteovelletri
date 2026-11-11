@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-11T21:00:42Z",
+ "aggiornato": "2026-11-11T21:05:15Z",
  "ufficiali": [
   {
    "workflow": "castelli-icon2i.yml",
@@ -24,12 +24,12 @@
    "ultimo_pubblicato": "2026111100",
    "in_corso": {
     "stato": "queued",
-    "da": "2026-11-11T19:50:24Z",
-    "id": 43090908343
+    "da": "2026-11-11T21:05:18Z",
+    "id": 43100056418
    },
    "ultimo_esito": {
-    "esito": "success",
-    "da": "2026-11-11T07:50:22Z"
+    "esito": "failure",
+    "da": "2026-11-11T19:50:24Z"
    }
   },
   {
@@ -37,12 +37,12 @@
    "ultimo_pubblicato": "2026111100",
    "in_corso": {
     "stato": "queued",
-    "da": "2026-11-11T19:50:28Z",
-    "id": 43090917183
+    "da": "2026-11-11T21:05:22Z",
+    "id": 43100064336
    },
    "ultimo_esito": {
-    "esito": "success",
-    "da": "2026-11-11T07:50:26Z"
+    "esito": "failure",
+    "da": "2026-11-11T19:50:28Z"
    }
   }
  ],
