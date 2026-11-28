@@ -1,0 +1,8436 @@
+{
+ "aggiornata": "2026-11-28 05:27 UTC",
+ "ultimo_giorno": "2026-11-27",
+ "periodi": {
+  "7": {
+   "giorni": 7,
+   "modelli": {
+    "castelli-ecmwf": {
+     "g1": {
+      "t2": {
+       "n": 6158,
+       "medio": -0.05,
+       "tipico": 1.85
+      },
+      "t2_giorno": {
+       "n": 3092,
+       "medio": -0.14,
+       "tipico": 1.73
+      },
+      "t2_notte": {
+       "n": 3066,
+       "medio": 0.04,
+       "tipico": 1.96
+      },
+      "td2": {
+       "n": 1160,
+       "medio": -0.68,
+       "tipico": 2.15
+      },
+      "vento": {
+       "n": 446,
+       "medio": -0.2,
+       "tipico": 2.0
+      },
+      "vento_corr": {
+       "n": 446,
+       "medio": 0.06,
+       "tipico": 1.99
+      },
+      "vento_reg": {
+       "n": 476,
+       "medio": 0.89,
+       "tipico": 1.98
+      },
+      "mslp": {
+       "n": 446,
+       "medio": 0.06,
+       "tipico": 0.54
+      },
+      "t2_wu": {
+       "n": 4533,
+       "medio": 0.78,
+       "tipico": 2.06
+      },
+      "td2_wu": {
+       "n": 4533,
+       "medio": -0.85,
+       "tipico": 1.94
+      },
+      "vento_wu": {
+       "n": 4323,
+       "medio": 1.9,
+       "tipico": 2.93
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 1117,
+        "piovuto": 354,
+        "previsto": 244,
+        "presa": 40,
+        "falsi": 43,
+        "csi": 31
+       },
+       "1.0": {
+        "casi": 1117,
+        "piovuto": 205,
+        "previsto": 130,
+        "presa": 39,
+        "falsi": 38,
+        "csi": 31
+       },
+       "5.0": {
+        "casi": 1117,
+        "piovuto": 76,
+        "previsto": 51,
+        "presa": 37,
+        "falsi": 45,
+        "csi": 28
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 83,
+        "osservata_presa": 63,
+        "celle_previste": 4013,
+        "celle_osservate": 7517
+       },
+       "2.0": {
+        "prevista_giusta": 75,
+        "osservata_presa": 53,
+        "celle_previste": 2183,
+        "celle_osservate": 4843
+       }
+      },
+      "cicli": 15
+     },
+     "g2": {
+      "t2": {
+       "n": 8706,
+       "medio": 0.15,
+       "tipico": 1.92
+      },
+      "t2_giorno": {
+       "n": 4366,
+       "medio": 0.21,
+       "tipico": 1.73
+      },
+      "t2_notte": {
+       "n": 4340,
+       "medio": 0.1,
+       "tipico": 2.09
+      },
+      "td2": {
+       "n": 1650,
+       "medio": -1.06,
+       "tipico": 2.37
+      },
+      "vento": {
+       "n": 642,
+       "medio": -0.17,
+       "tipico": 1.98
+      },
+      "vento_corr": {
+       "n": 642,
+       "medio": 0.12,
+       "tipico": 1.95
+      },
+      "vento_reg": {
+       "n": 672,
+       "medio": 0.91,
+       "tipico": 1.96
+      },
+      "mslp": {
+       "n": 642,
+       "medio": 0.24,
+       "tipico": 0.64
+      },
+      "t2_wu": {
+       "n": 6646,
+       "medio": 1.21,
+       "tipico": 2.28
+      },
+      "td2_wu": {
+       "n": 6646,
+       "medio": -1.1,
+       "tipico": 2.25
+      },
+      "vento_wu": {
+       "n": 6338,
+       "medio": 2.03,
+       "tipico": 3.09
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 2234,
+        "piovuto": 708,
+        "previsto": 362,
+        "presa": 31,
+        "falsi": 40,
+        "csi": 26
+       },
+       "1.0": {
+        "casi": 2234,
+        "piovuto": 410,
+        "previsto": 205,
+        "presa": 32,
+        "falsi": 36,
+        "csi": 27
+       },
+       "5.0": {
+        "casi": 2234,
+        "piovuto": 152,
+        "previsto": 87,
+        "presa": 38,
+        "falsi": 33,
+        "csi": 32
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 88,
+        "osservata_presa": 56,
+        "celle_previste": 6410,
+        "celle_osservate": 15034
+       },
+       "2.0": {
+        "prevista_giusta": 86,
+        "osservata_presa": 42,
+        "celle_previste": 3184,
+        "celle_osservate": 9686
+       }
+      },
+      "cicli": 15
+     }
+    },
+    "castelli-icon2i": {
+     "g1": {
+      "t2": {
+       "n": 6966,
+       "medio": 0.05,
+       "tipico": 1.71
+      },
+      "t2_giorno": {
+       "n": 3404,
+       "medio": -0.07,
+       "tipico": 1.63
+      },
+      "t2_notte": {
+       "n": 3562,
+       "medio": 0.17,
+       "tipico": 1.78
+      },
+      "td2": {
+       "n": 1317,
+       "medio": -0.68,
+       "tipico": 2.0
+      },
+      "vento": {
+       "n": 510,
+       "medio": -0.4,
+       "tipico": 1.98
+      },
+      "vento_corr": {
+       "n": 510,
+       "medio": 0.03,
+       "tipico": 1.93
+      },
+      "vento_reg": {
+       "n": 538,
+       "medio": 0.76,
+       "tipico": 2.04
+      },
+      "mslp": {
+       "n": 510,
+       "medio": 0.34,
+       "tipico": 0.73
+      },
+      "t2_wu": {
+       "n": 5253,
+       "medio": 0.93,
+       "tipico": 2.0
+      },
+      "td2_wu": {
+       "n": 5253,
+       "medio": -0.93,
+       "tipico": 1.91
+      },
+      "vento_wu": {
+       "n": 5010,
+       "medio": 1.89,
+       "tipico": 2.98
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 1555,
+        "piovuto": 573,
+        "previsto": 409,
+        "presa": 46,
+        "falsi": 35,
+        "csi": 37
+       },
+       "1.0": {
+        "casi": 1555,
+        "piovuto": 338,
+        "previsto": 241,
+        "presa": 50,
+        "falsi": 29,
+        "csi": 42
+       },
+       "5.0": {
+        "casi": 1555,
+        "piovuto": 134,
+        "previsto": 128,
+        "presa": 70,
+        "falsi": 27,
+        "csi": 56
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 84,
+        "osservata_presa": 70,
+        "celle_previste": 6386,
+        "celle_osservate": 11632
+       },
+       "2.0": {
+        "prevista_giusta": 91,
+        "osservata_presa": 61,
+        "celle_previste": 3964,
+        "celle_osservate": 8233
+       }
+      },
+      "cicli": 14
+     },
+     "g2": {
+      "t2": {
+       "n": 8084,
+       "medio": 0.23,
+       "tipico": 1.77
+      },
+      "t2_giorno": {
+       "n": 4054,
+       "medio": 0.17,
+       "tipico": 1.57
+      },
+      "t2_notte": {
+       "n": 4030,
+       "medio": 0.29,
+       "tipico": 1.96
+      },
+      "td2": {
+       "n": 1532,
+       "medio": -0.85,
+       "tipico": 2.12
+      },
+      "vento": {
+       "n": 596,
+       "medio": -0.32,
+       "tipico": 1.93
+      },
+      "vento_corr": {
+       "n": 596,
+       "medio": 0.12,
+       "tipico": 1.93
+      },
+      "vento_reg": {
+       "n": 624,
+       "medio": 0.77,
+       "tipico": 1.96
+      },
+      "mslp": {
+       "n": 596,
+       "medio": 0.42,
+       "tipico": 0.91
+      },
+      "t2_wu": {
+       "n": 6172,
+       "medio": 1.27,
+       "tipico": 2.21
+      },
+      "td2_wu": {
+       "n": 6172,
+       "medio": -1.06,
+       "tipico": 2.08
+      },
+      "vento_wu": {
+       "n": 5886,
+       "medio": 2.01,
+       "tipico": 3.13
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 2074,
+        "piovuto": 699,
+        "previsto": 612,
+        "presa": 44,
+        "falsi": 49,
+        "csi": 31
+       },
+       "1.0": {
+        "casi": 2074,
+        "piovuto": 410,
+        "previsto": 350,
+        "presa": 37,
+        "falsi": 56,
+        "csi": 25
+       },
+       "5.0": {
+        "casi": 2074,
+        "piovuto": 152,
+        "previsto": 163,
+        "presa": 49,
+        "falsi": 54,
+        "csi": 31
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 77,
+        "osservata_presa": 70,
+        "celle_previste": 9714,
+        "celle_osservate": 15004
+       },
+       "2.0": {
+        "prevista_giusta": 73,
+        "osservata_presa": 61,
+        "celle_previste": 5426,
+        "celle_osservate": 9686
+       }
+      },
+      "cicli": 14
+     }
+    },
+    "lazio-ecmwf": {
+     "g1": {
+      "t2": {
+       "n": 40696,
+       "medio": -0.02,
+       "tipico": 1.93
+      },
+      "t2_giorno": {
+       "n": 20447,
+       "medio": -0.11,
+       "tipico": 1.85
+      },
+      "t2_notte": {
+       "n": 20249,
+       "medio": 0.07,
+       "tipico": 2.01
+      },
+      "td2": {
+       "n": 8790,
+       "medio": -0.71,
+       "tipico": 2.09
+      },
+      "vento": {
+       "n": 1669,
+       "medio": 0.36,
+       "tipico": 2.47
+      },
+      "vento_corr": {
+       "n": 1669,
+       "medio": -0.11,
+       "tipico": 2.18
+      },
+      "vento_reg": {
+       "n": 4234,
+       "medio": 1.39,
+       "tipico": 2.8
+      },
+      "mslp": {
+       "n": 1482,
+       "medio": 0.2,
+       "tipico": 0.68
+      },
+      "t2_wu": {
+       "n": 26218,
+       "medio": 0.35,
+       "tipico": 2.23
+      },
+      "td2_wu": {
+       "n": 26209,
+       "medio": -0.64,
+       "tipico": 4.46
+      },
+      "vento_wu": {
+       "n": 25937,
+       "medio": 2.23,
+       "tipico": 4.41
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 6088,
+        "piovuto": 2288,
+        "previsto": 1675,
+        "presa": 52,
+        "falsi": 29,
+        "csi": 43
+       },
+       "1.0": {
+        "casi": 6088,
+        "piovuto": 1350,
+        "previsto": 932,
+        "presa": 50,
+        "falsi": 28,
+        "csi": 42
+       },
+       "5.0": {
+        "casi": 6088,
+        "piovuto": 566,
+        "previsto": 353,
+        "presa": 42,
+        "falsi": 33,
+        "csi": 35
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 84,
+        "osservata_presa": 62,
+        "celle_previste": 11697,
+        "celle_osservate": 19475
+       },
+       "2.0": {
+        "prevista_giusta": 83,
+        "osservata_presa": 55,
+        "celle_previste": 6307,
+        "celle_osservate": 12730
+       }
+      },
+      "cicli": 15
+     },
+     "g2": {
+      "t2": {
+       "n": 57492,
+       "medio": 0.15,
+       "tipico": 2.01
+      },
+      "t2_giorno": {
+       "n": 28870,
+       "medio": 0.15,
+       "tipico": 1.89
+      },
+      "t2_notte": {
+       "n": 28622,
+       "medio": 0.16,
+       "tipico": 2.13
+      },
+      "td2": {
+       "n": 12450,
+       "medio": -0.92,
+       "tipico": 2.21
+      },
+      "vento": {
+       "n": 2402,
+       "medio": 0.54,
+       "tipico": 2.62
+      },
+      "vento_corr": {
+       "n": 2402,
+       "medio": 0.02,
+       "tipico": 2.22
+      },
+      "vento_reg": {
+       "n": 5978,
+       "medio": 1.56,
+       "tipico": 2.91
+      },
+      "mslp": {
+       "n": 2130,
+       "medio": 0.38,
+       "tipico": 0.84
+      },
+      "t2_wu": {
+       "n": 38438,
+       "medio": 0.62,
+       "tipico": 2.29
+      },
+      "td2_wu": {
+       "n": 38426,
+       "medio": -0.83,
+       "tipico": 4.56
+      },
+      "vento_wu": {
+       "n": 38030,
+       "medio": 2.38,
+       "tipico": 4.58
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 12176,
+        "piovuto": 4576,
+        "previsto": 3095,
+        "presa": 49,
+        "falsi": 28,
+        "csi": 41
+       },
+       "1.0": {
+        "casi": 12176,
+        "piovuto": 2700,
+        "previsto": 1895,
+        "presa": 50,
+        "falsi": 28,
+        "csi": 42
+       },
+       "5.0": {
+        "casi": 12176,
+        "piovuto": 1132,
+        "previsto": 757,
+        "presa": 45,
+        "falsi": 33,
+        "csi": 36
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 85,
+        "osservata_presa": 60,
+        "celle_previste": 22231,
+        "celle_osservate": 38950
+       },
+       "2.0": {
+        "prevista_giusta": 82,
+        "osservata_presa": 52,
+        "celle_previste": 11907,
+        "celle_osservate": 25460
+       }
+      },
+      "cicli": 15
+     }
+    },
+    "lazio-icon2i": {
+     "g1": {
+      "t2": {
+       "n": 46022,
+       "medio": 0.0,
+       "tipico": 1.82
+      },
+      "t2_giorno": {
+       "n": 22511,
+       "medio": -0.01,
+       "tipico": 1.76
+      },
+      "t2_notte": {
+       "n": 23511,
+       "medio": 0.01,
+       "tipico": 1.88
+      },
+      "td2": {
+       "n": 9961,
+       "medio": -0.82,
+       "tipico": 2.14
+      },
+      "vento": {
+       "n": 1907,
+       "medio": 0.18,
+       "tipico": 2.52
+      },
+      "vento_corr": {
+       "n": 1907,
+       "medio": -0.22,
+       "tipico": 2.23
+      },
+      "vento_reg": {
+       "n": 4792,
+       "medio": 1.26,
+       "tipico": 2.78
+      },
+      "mslp": {
+       "n": 1694,
+       "medio": 0.46,
+       "tipico": 0.89
+      },
+      "t2_wu": {
+       "n": 30322,
+       "medio": 0.43,
+       "tipico": 2.14
+      },
+      "td2_wu": {
+       "n": 30311,
+       "medio": -0.62,
+       "tipico": 4.5
+      },
+      "vento_wu": {
+       "n": 29991,
+       "medio": 2.09,
+       "tipico": 4.41
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 8479,
+        "piovuto": 3445,
+        "previsto": 3014,
+        "presa": 63,
+        "falsi": 28,
+        "csi": 50
+       },
+       "1.0": {
+        "casi": 8479,
+        "piovuto": 2129,
+        "previsto": 1871,
+        "presa": 60,
+        "falsi": 32,
+        "csi": 47
+       },
+       "5.0": {
+        "casi": 8479,
+        "piovuto": 946,
+        "previsto": 706,
+        "presa": 44,
+        "falsi": 41,
+        "csi": 33
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 83,
+        "osservata_presa": 76,
+        "celle_previste": 22216,
+        "celle_osservate": 28697
+       },
+       "2.0": {
+        "prevista_giusta": 79,
+        "osservata_presa": 64,
+        "celle_previste": 11904,
+        "celle_osservate": 19709
+       }
+      },
+      "cicli": 14
+     },
+     "g2": {
+      "t2": {
+       "n": 53391,
+       "medio": 0.17,
+       "tipico": 1.89
+      },
+      "t2_giorno": {
+       "n": 26811,
+       "medio": 0.11,
+       "tipico": 1.76
+      },
+      "t2_notte": {
+       "n": 26580,
+       "medio": 0.24,
+       "tipico": 2.02
+      },
+      "td2": {
+       "n": 11567,
+       "medio": -0.73,
+       "tipico": 2.13
+      },
+      "vento": {
+       "n": 2228,
+       "medio": 0.54,
+       "tipico": 2.65
+      },
+      "vento_corr": {
+       "n": 2228,
+       "medio": -0.03,
+       "tipico": 2.22
+      },
+      "vento_reg": {
+       "n": 5555,
+       "medio": 1.55,
+       "tipico": 2.94
+      },
+      "mslp": {
+       "n": 1979,
+       "medio": 0.55,
+       "tipico": 1.07
+      },
+      "t2_wu": {
+       "n": 35685,
+       "medio": 0.64,
+       "tipico": 2.22
+      },
+      "td2_wu": {
+       "n": 35675,
+       "medio": -0.55,
+       "tipico": 4.53
+      },
+      "vento_wu": {
+       "n": 35299,
+       "medio": 2.4,
+       "tipico": 4.66
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 11308,
+        "piovuto": 4488,
+        "previsto": 3878,
+        "presa": 59,
+        "falsi": 31,
+        "csi": 47
+       },
+       "1.0": {
+        "casi": 11308,
+        "piovuto": 2698,
+        "previsto": 2286,
+        "presa": 53,
+        "falsi": 37,
+        "csi": 40
+       },
+       "5.0": {
+        "casi": 11308,
+        "piovuto": 1132,
+        "previsto": 734,
+        "presa": 37,
+        "falsi": 43,
+        "csi": 29
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 82,
+        "osservata_presa": 68,
+        "celle_previste": 27185,
+        "celle_osservate": 38858
+       },
+       "2.0": {
+        "prevista_giusta": 75,
+        "osservata_presa": 57,
+        "celle_previste": 14261,
+        "celle_osservate": 25449
+       }
+      },
+      "cicli": 14
+     }
+    },
+    "castelli-rif-ecmwf": {
+     "breve": {
+      "t2": {
+       "n": 4367,
+       "medio": -0.6,
+       "tipico": 1.74
+      },
+      "t2_giorno": {
+       "n": 2183,
+       "medio": -0.78,
+       "tipico": 1.7
+      },
+      "t2_notte": {
+       "n": 2184,
+       "medio": -0.43,
+       "tipico": 1.77
+      },
+      "td2": null,
+      "vento": {
+       "n": 335,
+       "medio": -0.03,
+       "tipico": 1.35
+      },
+      "vento_corr": null,
+      "vento_reg": {
+       "n": 336,
+       "medio": 1.54,
+       "tipico": 2.26
+      },
+      "mslp": null,
+      "t2_wu": null,
+      "td2_wu": null,
+      "vento_wu": null,
+      "pioggia": {
+       "0.2": {
+        "casi": 838,
+        "piovuto": 252,
+        "previsto": 560,
+        "presa": 92,
+        "falsi": 58,
+        "csi": 40
+       },
+       "1.0": {
+        "casi": 838,
+        "piovuto": 129,
+        "previsto": 277,
+        "presa": 86,
+        "falsi": 60,
+        "csi": 38
+       },
+       "5.0": {
+        "casi": 838,
+        "piovuto": 39,
+        "previsto": 75,
+        "presa": 67,
+        "falsi": 65,
+        "csi": 30
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       },
+       "2.0": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       }
+      },
+      "cicli": 0
+     }
+    },
+    "castelli-rif-icon2i": {
+     "breve": {
+      "t2": {
+       "n": 4367,
+       "medio": 0.2,
+       "tipico": 1.41
+      },
+      "t2_giorno": {
+       "n": 2183,
+       "medio": -0.11,
+       "tipico": 1.31
+      },
+      "t2_notte": {
+       "n": 2184,
+       "medio": 0.52,
+       "tipico": 1.49
+      },
+      "td2": null,
+      "vento": {
+       "n": 335,
+       "medio": -0.51,
+       "tipico": 1.29
+      },
+      "vento_corr": null,
+      "vento_reg": {
+       "n": 336,
+       "medio": 0.85,
+       "tipico": 1.73
+      },
+      "mslp": null,
+      "t2_wu": null,
+      "td2_wu": null,
+      "vento_wu": null,
+      "pioggia": {
+       "0.2": {
+        "casi": 838,
+        "piovuto": 252,
+        "previsto": 189,
+        "presa": 57,
+        "falsi": 24,
+        "csi": 48
+       },
+       "1.0": {
+        "casi": 838,
+        "piovuto": 129,
+        "previsto": 83,
+        "presa": 47,
+        "falsi": 28,
+        "csi": 39
+       },
+       "5.0": {
+        "casi": 838,
+        "piovuto": 39,
+        "previsto": 27,
+        "presa": 26,
+        "falsi": 63,
+        "csi": 18
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       },
+       "2.0": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       }
+      },
+      "cicli": 0
+     }
+    },
+    "lazio-rif-ecmwf": {
+     "breve": {
+      "t2": {
+       "n": 28788,
+       "medio": -0.6,
+       "tipico": 1.76
+      },
+      "t2_giorno": {
+       "n": 14435,
+       "medio": -0.61,
+       "tipico": 1.69
+      },
+      "t2_notte": {
+       "n": 14353,
+       "medio": -0.59,
+       "tipico": 1.83
+      },
+      "td2": null,
+      "vento": {
+       "n": 1249,
+       "medio": 0.22,
+       "tipico": 1.65
+      },
+      "vento_corr": null,
+      "vento_reg": {
+       "n": 2989,
+       "medio": 0.5,
+       "tipico": 2.05
+      },
+      "mslp": null,
+      "t2_wu": null,
+      "td2_wu": null,
+      "vento_wu": null,
+      "pioggia": {
+       "0.2": {
+        "casi": 4567,
+        "piovuto": 1731,
+        "previsto": 3008,
+        "presa": 89,
+        "falsi": 49,
+        "csi": 48
+       },
+       "1.0": {
+        "casi": 4567,
+        "piovuto": 943,
+        "previsto": 1703,
+        "presa": 87,
+        "falsi": 52,
+        "csi": 45
+       },
+       "5.0": {
+        "casi": 4567,
+        "piovuto": 339,
+        "previsto": 594,
+        "presa": 71,
+        "falsi": 60,
+        "csi": 35
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       },
+       "2.0": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       }
+      },
+      "cicli": 0
+     }
+    },
+    "lazio-rif-icon2i": {
+     "breve": {
+      "t2": {
+       "n": 28788,
+       "medio": 0.3,
+       "tipico": 1.44
+      },
+      "t2_giorno": {
+       "n": 14435,
+       "medio": 0.09,
+       "tipico": 1.34
+      },
+      "t2_notte": {
+       "n": 14353,
+       "medio": 0.52,
+       "tipico": 1.53
+      },
+      "td2": null,
+      "vento": {
+       "n": 1249,
+       "medio": 0.08,
+       "tipico": 1.78
+      },
+      "vento_corr": null,
+      "vento_reg": {
+       "n": 2989,
+       "medio": 0.83,
+       "tipico": 2.01
+      },
+      "mslp": null,
+      "t2_wu": null,
+      "td2_wu": null,
+      "vento_wu": null,
+      "pioggia": {
+       "0.2": {
+        "casi": 4567,
+        "piovuto": 1731,
+        "previsto": 1118,
+        "presa": 54,
+        "falsi": 16,
+        "csi": 49
+       },
+       "1.0": {
+        "casi": 4567,
+        "piovuto": 943,
+        "previsto": 592,
+        "presa": 53,
+        "falsi": 16,
+        "csi": 48
+       },
+       "5.0": {
+        "casi": 4567,
+        "piovuto": 339,
+        "previsto": 225,
+        "presa": 39,
+        "falsi": 41,
+        "csi": 31
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       },
+       "2.0": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       }
+      },
+      "cicli": 0
+     }
+    }
+   },
+   "confronti": {}
+  },
+  "30": {
+   "giorni": 30,
+   "modelli": {
+    "castelli-ecmwf": {
+     "g1": {
+      "t2": {
+       "n": 26252,
+       "medio": 0.07,
+       "tipico": 1.9
+      },
+      "t2_giorno": {
+       "n": 13209,
+       "medio": 0.15,
+       "tipico": 1.78
+      },
+      "t2_notte": {
+       "n": 13043,
+       "medio": -0.0,
+       "tipico": 2.01
+      },
+      "td2": {
+       "n": 4954,
+       "medio": -0.7,
+       "tipico": 2.03
+      },
+      "vento": {
+       "n": 1900,
+       "medio": -0.41,
+       "tipico": 1.92
+      },
+      "vento_corr": {
+       "n": 1900,
+       "medio": -0.26,
+       "tipico": 1.8
+      },
+      "vento_reg": {
+       "n": 2036,
+       "medio": 0.63,
+       "tipico": 1.93
+      },
+      "mslp": {
+       "n": 1900,
+       "medio": -0.05,
+       "tipico": 0.61
+      },
+      "t2_wu": {
+       "n": 19183,
+       "medio": 0.85,
+       "tipico": 2.12
+      },
+      "td2_wu": {
+       "n": 19183,
+       "medio": -0.97,
+       "tipico": 2.0
+      },
+      "vento_wu": {
+       "n": 18269,
+       "medio": 1.73,
+       "tipico": 2.71
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 4787,
+        "piovuto": 1332,
+        "previsto": 752,
+        "presa": 34,
+        "falsi": 40,
+        "csi": 28
+       },
+       "1.0": {
+        "casi": 4787,
+        "piovuto": 820,
+        "previsto": 398,
+        "presa": 28,
+        "falsi": 43,
+        "csi": 23
+       },
+       "5.0": {
+        "casi": 4787,
+        "piovuto": 258,
+        "previsto": 115,
+        "presa": 24,
+        "falsi": 46,
+        "csi": 20
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 81,
+        "osservata_presa": 47,
+        "celle_previste": 11953,
+        "celle_osservate": 31392
+       },
+       "2.0": {
+        "prevista_giusta": 66,
+        "osservata_presa": 34,
+        "celle_previste": 6122,
+        "celle_osservate": 20005
+       }
+      },
+      "cicli": 61
+     },
+     "g2": {
+      "t2": {
+       "n": 37186,
+       "medio": 0.21,
+       "tipico": 1.97
+      },
+      "t2_giorno": {
+       "n": 18650,
+       "medio": 0.3,
+       "tipico": 1.8
+      },
+      "t2_notte": {
+       "n": 18536,
+       "medio": 0.13,
+       "tipico": 2.13
+      },
+      "td2": {
+       "n": 7058,
+       "medio": -1.04,
+       "tipico": 2.3
+      },
+      "vento": {
+       "n": 2738,
+       "medio": -0.43,
+       "tipico": 1.91
+      },
+      "vento_corr": {
+       "n": 2738,
+       "medio": -0.24,
+       "tipico": 1.79
+      },
+      "vento_reg": {
+       "n": 2880,
+       "medio": 0.67,
+       "tipico": 1.85
+      },
+      "mslp": {
+       "n": 2738,
+       "medio": 0.19,
+       "tipico": 0.73
+      },
+      "t2_wu": {
+       "n": 28190,
+       "medio": 1.15,
+       "tipico": 2.28
+      },
+      "td2_wu": {
+       "n": 28190,
+       "medio": -1.23,
+       "tipico": 2.27
+      },
+      "vento_wu": {
+       "n": 26846,
+       "medio": 1.8,
+       "tipico": 2.77
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 9574,
+        "piovuto": 2664,
+        "previsto": 1468,
+        "presa": 34,
+        "falsi": 39,
+        "csi": 28
+       },
+       "1.0": {
+        "casi": 9574,
+        "piovuto": 1640,
+        "previsto": 741,
+        "presa": 25,
+        "falsi": 44,
+        "csi": 21
+       },
+       "5.0": {
+        "casi": 9574,
+        "piovuto": 516,
+        "previsto": 291,
+        "presa": 25,
+        "falsi": 56,
+        "csi": 19
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 82,
+        "osservata_presa": 48,
+        "celle_previste": 23169,
+        "celle_osservate": 62784
+       },
+       "2.0": {
+        "prevista_giusta": 73,
+        "osservata_presa": 31,
+        "celle_previste": 10757,
+        "celle_osservate": 40010
+       }
+      },
+      "cicli": 61
+     }
+    },
+    "castelli-icon2i": {
+     "g1": {
+      "t2": {
+       "n": 29934,
+       "medio": 0.11,
+       "tipico": 1.82
+      },
+      "t2_giorno": {
+       "n": 14759,
+       "medio": 0.05,
+       "tipico": 1.69
+      },
+      "t2_notte": {
+       "n": 15175,
+       "medio": 0.17,
+       "tipico": 1.94
+      },
+      "td2": {
+       "n": 5672,
+       "medio": -0.59,
+       "tipico": 2.01
+      },
+      "vento": {
+       "n": 2192,
+       "medio": -0.62,
+       "tipico": 1.85
+      },
+      "vento_corr": {
+       "n": 2192,
+       "medio": -0.31,
+       "tipico": 1.73
+      },
+      "vento_reg": {
+       "n": 2320,
+       "medio": 0.56,
+       "tipico": 1.8
+      },
+      "mslp": {
+       "n": 2192,
+       "medio": 0.22,
+       "tipico": 0.73
+      },
+      "t2_wu": {
+       "n": 22388,
+       "medio": 0.91,
+       "tipico": 2.06
+      },
+      "td2_wu": {
+       "n": 22388,
+       "medio": -0.9,
+       "tipico": 1.99
+      },
+      "vento_wu": {
+       "n": 21321,
+       "medio": 1.58,
+       "tipico": 2.55
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 6700,
+        "piovuto": 1901,
+        "previsto": 1391,
+        "presa": 47,
+        "falsi": 36,
+        "csi": 37
+       },
+       "1.0": {
+        "casi": 6700,
+        "piovuto": 1139,
+        "previsto": 810,
+        "presa": 42,
+        "falsi": 41,
+        "csi": 32
+       },
+       "5.0": {
+        "casi": 6700,
+        "piovuto": 363,
+        "previsto": 312,
+        "presa": 48,
+        "falsi": 44,
+        "csi": 35
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 83,
+        "osservata_presa": 64,
+        "celle_previste": 23056,
+        "celle_osservate": 43123
+       },
+       "2.0": {
+        "prevista_giusta": 74,
+        "osservata_presa": 51,
+        "celle_previste": 12813,
+        "celle_osservate": 27639
+       }
+      },
+      "cicli": 57
+     },
+     "g2": {
+      "t2": {
+       "n": 34700,
+       "medio": 0.26,
+       "tipico": 1.91
+      },
+      "t2_giorno": {
+       "n": 17404,
+       "medio": 0.21,
+       "tipico": 1.73
+      },
+      "t2_notte": {
+       "n": 17296,
+       "medio": 0.3,
+       "tipico": 2.06
+      },
+      "td2": {
+       "n": 6588,
+       "medio": -0.86,
+       "tipico": 2.28
+      },
+      "vento": {
+       "n": 2556,
+       "medio": -0.59,
+       "tipico": 1.89
+      },
+      "vento_corr": {
+       "n": 2556,
+       "medio": -0.29,
+       "tipico": 1.79
+      },
+      "vento_reg": {
+       "n": 2688,
+       "medio": 0.6,
+       "tipico": 1.77
+      },
+      "mslp": {
+       "n": 2556,
+       "medio": 0.43,
+       "tipico": 0.94
+      },
+      "t2_wu": {
+       "n": 26297,
+       "medio": 1.17,
+       "tipico": 2.24
+      },
+      "td2_wu": {
+       "n": 26297,
+       "medio": -1.19,
+       "tipico": 2.3
+      },
+      "vento_wu": {
+       "n": 25041,
+       "medio": 1.69,
+       "tipico": 2.67
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 8934,
+        "piovuto": 2567,
+        "previsto": 1886,
+        "presa": 44,
+        "falsi": 40,
+        "csi": 34
+       },
+       "1.0": {
+        "casi": 8934,
+        "piovuto": 1600,
+        "previsto": 1113,
+        "presa": 37,
+        "falsi": 47,
+        "csi": 28
+       },
+       "5.0": {
+        "casi": 8934,
+        "piovuto": 512,
+        "previsto": 448,
+        "presa": 37,
+        "falsi": 58,
+        "csi": 24
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 80,
+        "osservata_presa": 58,
+        "celle_previste": 31473,
+        "celle_osservate": 59424
+       },
+       "2.0": {
+        "prevista_giusta": 72,
+        "osservata_presa": 45,
+        "celle_previste": 17234,
+        "celle_osservate": 37770
+       }
+      },
+      "cicli": 57
+     }
+    },
+    "lazio-ecmwf": {
+     "g1": {
+      "t2": {
+       "n": 173547,
+       "medio": 0.03,
+       "tipico": 1.93
+      },
+      "t2_giorno": {
+       "n": 87382,
+       "medio": 0.11,
+       "tipico": 1.8
+      },
+      "t2_notte": {
+       "n": 86165,
+       "medio": -0.05,
+       "tipico": 2.06
+      },
+      "td2": {
+       "n": 37608,
+       "medio": -0.72,
+       "tipico": 2.07
+      },
+      "vento": {
+       "n": 7208,
+       "medio": 0.39,
+       "tipico": 2.52
+      },
+      "vento_corr": {
+       "n": 7208,
+       "medio": -0.38,
+       "tipico": 2.18
+      },
+      "vento_reg": {
+       "n": 18180,
+       "medio": 1.52,
+       "tipico": 3.07
+      },
+      "mslp": {
+       "n": 6289,
+       "medio": 0.06,
+       "tipico": 0.72
+      },
+      "t2_wu": {
+       "n": 113799,
+       "medio": 0.43,
+       "tipico": 2.25
+      },
+      "td2_wu": {
+       "n": 113775,
+       "medio": -0.67,
+       "tipico": 4.48
+      },
+      "vento_wu": {
+       "n": 112899,
+       "medio": 2.32,
+       "tipico": 4.25
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 26055,
+        "piovuto": 8002,
+        "previsto": 6330,
+        "presa": 55,
+        "falsi": 31,
+        "csi": 44
+       },
+       "1.0": {
+        "casi": 26055,
+        "piovuto": 5202,
+        "previsto": 3727,
+        "presa": 48,
+        "falsi": 32,
+        "csi": 39
+       },
+       "5.0": {
+        "casi": 26055,
+        "piovuto": 2075,
+        "previsto": 1429,
+        "presa": 40,
+        "falsi": 43,
+        "csi": 31
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 81,
+        "osservata_presa": 58,
+        "celle_previste": 47388,
+        "celle_osservate": 81442
+       },
+       "2.0": {
+        "prevista_giusta": 79,
+        "osservata_presa": 51,
+        "celle_previste": 27670,
+        "celle_osservate": 56757
+       }
+      },
+      "cicli": 61
+     },
+     "g2": {
+      "t2": {
+       "n": 245660,
+       "medio": 0.0,
+       "tipico": 2.05
+      },
+      "t2_giorno": {
+       "n": 123364,
+       "medio": 0.1,
+       "tipico": 1.87
+      },
+      "t2_notte": {
+       "n": 122296,
+       "medio": -0.1,
+       "tipico": 2.21
+      },
+      "td2": {
+       "n": 53368,
+       "medio": -0.96,
+       "tipico": 2.3
+      },
+      "vento": {
+       "n": 10386,
+       "medio": 0.46,
+       "tipico": 2.6
+      },
+      "vento_corr": {
+       "n": 10386,
+       "medio": -0.31,
+       "tipico": 2.21
+      },
+      "vento_reg": {
+       "n": 25722,
+       "medio": 1.59,
+       "tipico": 3.15
+      },
+      "mslp": {
+       "n": 9060,
+       "medio": 0.27,
+       "tipico": 0.89
+      },
+      "t2_wu": {
+       "n": 167178,
+       "medio": 0.51,
+       "tipico": 2.31
+      },
+      "td2_wu": {
+       "n": 167144,
+       "medio": -0.85,
+       "tipico": 4.6
+      },
+      "vento_wu": {
+       "n": 165854,
+       "medio": 2.36,
+       "tipico": 4.29
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 52110,
+        "piovuto": 16004,
+        "previsto": 11800,
+        "presa": 50,
+        "falsi": 32,
+        "csi": 41
+       },
+       "1.0": {
+        "casi": 52110,
+        "piovuto": 10404,
+        "previsto": 6739,
+        "presa": 42,
+        "falsi": 35,
+        "csi": 34
+       },
+       "5.0": {
+        "casi": 52110,
+        "piovuto": 4150,
+        "previsto": 2813,
+        "presa": 37,
+        "falsi": 46,
+        "csi": 28
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 81,
+        "osservata_presa": 57,
+        "celle_previste": 90703,
+        "celle_osservate": 162884
+       },
+       "2.0": {
+        "prevista_giusta": 79,
+        "osservata_presa": 48,
+        "celle_previste": 52113,
+        "celle_osservate": 113514
+       }
+      },
+      "cicli": 61
+     }
+    },
+    "lazio-icon2i": {
+     "g1": {
+      "t2": {
+       "n": 197500,
+       "medio": 0.02,
+       "tipico": 1.88
+      },
+      "t2_giorno": {
+       "n": 97484,
+       "medio": 0.06,
+       "tipico": 1.76
+      },
+      "t2_notte": {
+       "n": 100016,
+       "medio": -0.02,
+       "tipico": 1.99
+      },
+      "td2": {
+       "n": 42905,
+       "medio": -0.73,
+       "tipico": 2.08
+      },
+      "vento": {
+       "n": 8298,
+       "medio": 0.29,
+       "tipico": 2.46
+      },
+      "vento_corr": {
+       "n": 8298,
+       "medio": -0.37,
+       "tipico": 2.14
+      },
+      "vento_reg": {
+       "n": 20695,
+       "medio": 1.43,
+       "tipico": 2.99
+      },
+      "mslp": {
+       "n": 7241,
+       "medio": 0.22,
+       "tipico": 0.87
+      },
+      "t2_wu": {
+       "n": 132433,
+       "medio": 0.46,
+       "tipico": 2.19
+      },
+      "td2_wu": {
+       "n": 132406,
+       "medio": -0.6,
+       "tipico": 4.52
+      },
+      "vento_wu": {
+       "n": 131378,
+       "medio": 2.18,
+       "tipico": 4.15
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 36479,
+        "piovuto": 11252,
+        "previsto": 10730,
+        "presa": 65,
+        "falsi": 32,
+        "csi": 50
+       },
+       "1.0": {
+        "casi": 36479,
+        "piovuto": 7285,
+        "previsto": 6541,
+        "presa": 56,
+        "falsi": 38,
+        "csi": 42
+       },
+       "5.0": {
+        "casi": 36479,
+        "piovuto": 2848,
+        "previsto": 2331,
+        "presa": 42,
+        "falsi": 49,
+        "csi": 30
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 79,
+        "osservata_presa": 70,
+        "celle_previste": 84544,
+        "celle_osservate": 109085
+       },
+       "2.0": {
+        "prevista_giusta": 76,
+        "osservata_presa": 59,
+        "celle_previste": 47383,
+        "celle_osservate": 76319
+       }
+      },
+      "cicli": 57
+     },
+     "g2": {
+      "t2": {
+       "n": 229295,
+       "medio": 0.05,
+       "tipico": 1.99
+      },
+      "t2_giorno": {
+       "n": 115150,
+       "medio": 0.05,
+       "tipico": 1.81
+      },
+      "t2_notte": {
+       "n": 114145,
+       "medio": 0.04,
+       "tipico": 2.15
+      },
+      "td2": {
+       "n": 49835,
+       "medio": -0.76,
+       "tipico": 2.2
+      },
+      "vento": {
+       "n": 9692,
+       "medio": 0.39,
+       "tipico": 2.58
+      },
+      "vento_corr": {
+       "n": 9692,
+       "medio": -0.35,
+       "tipico": 2.21
+      },
+      "vento_reg": {
+       "n": 24030,
+       "medio": 1.53,
+       "tipico": 3.11
+      },
+      "mslp": {
+       "n": 8458,
+       "medio": 0.4,
+       "tipico": 1.07
+      },
+      "t2_wu": {
+       "n": 155938,
+       "medio": 0.53,
+       "tipico": 2.28
+      },
+      "td2_wu": {
+       "n": 155906,
+       "medio": -0.66,
+       "tipico": 4.56
+      },
+      "vento_wu": {
+       "n": 154679,
+       "medio": 2.28,
+       "tipico": 4.24
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 48642,
+        "piovuto": 15289,
+        "previsto": 13583,
+        "presa": 58,
+        "falsi": 34,
+        "csi": 45
+       },
+       "1.0": {
+        "casi": 48642,
+        "piovuto": 9969,
+        "previsto": 8118,
+        "presa": 49,
+        "falsi": 40,
+        "csi": 37
+       },
+       "5.0": {
+        "casi": 48642,
+        "piovuto": 3973,
+        "previsto": 2829,
+        "presa": 34,
+        "falsi": 52,
+        "csi": 25
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 80,
+        "osservata_presa": 63,
+        "celle_previste": 102296,
+        "celle_osservate": 152696
+       },
+       "2.0": {
+        "prevista_giusta": 76,
+        "osservata_presa": 53,
+        "celle_previste": 58570,
+        "celle_osservate": 105728
+       }
+      },
+      "cicli": 57
+     }
+    },
+    "castelli-ecmwf-noahmp": {
+     "g1": {
+      "t2": {
+       "n": 8553,
+       "medio": 0.87,
+       "tipico": 2.14
+      },
+      "t2_giorno": {
+       "n": 4320,
+       "medio": 0.82,
+       "tipico": 2.06
+      },
+      "t2_notte": {
+       "n": 4233,
+       "medio": 0.93,
+       "tipico": 2.22
+      },
+      "td2": {
+       "n": 1616,
+       "medio": -0.27,
+       "tipico": 2.06
+      },
+      "vento": {
+       "n": 620,
+       "medio": -0.54,
+       "tipico": 1.69
+      },
+      "vento_corr": {
+       "n": 620,
+       "medio": -0.26,
+       "tipico": 1.47
+      },
+      "vento_reg": {
+       "n": 664,
+       "medio": -0.18,
+       "tipico": 1.33
+      },
+      "mslp": {
+       "n": 620,
+       "medio": 0.05,
+       "tipico": 0.54
+      },
+      "t2_wu": {
+       "n": 6160,
+       "medio": 1.51,
+       "tipico": 2.56
+      },
+      "td2_wu": {
+       "n": 6160,
+       "medio": -1.03,
+       "tipico": 2.42
+      },
+      "vento_wu": {
+       "n": 5866,
+       "medio": 1.12,
+       "tipico": 1.99
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 1675,
+        "piovuto": 310,
+        "previsto": 227,
+        "presa": 49,
+        "falsi": 33,
+        "csi": 39
+       },
+       "1.0": {
+        "casi": 1675,
+        "piovuto": 215,
+        "previsto": 141,
+        "presa": 33,
+        "falsi": 49,
+        "csi": 25
+       },
+       "5.0": {
+        "casi": 1675,
+        "piovuto": 24,
+        "previsto": 13,
+        "presa": 4,
+        "falsi": 92,
+        "csi": 3
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 82,
+        "osservata_presa": 51,
+        "celle_previste": 3880,
+        "celle_osservate": 9653
+       },
+       "2.0": {
+        "prevista_giusta": 61,
+        "osservata_presa": 34,
+        "celle_previste": 1725,
+        "celle_osservate": 5804
+       }
+      },
+      "cicli": 21
+     },
+     "g2": {
+      "t2": {
+       "n": 13898,
+       "medio": 0.94,
+       "tipico": 2.2
+      },
+      "t2_giorno": {
+       "n": 6993,
+       "medio": 0.75,
+       "tipico": 2.02
+      },
+      "t2_notte": {
+       "n": 6905,
+       "medio": 1.14,
+       "tipico": 2.37
+      },
+      "td2": {
+       "n": 2650,
+       "medio": -0.46,
+       "tipico": 2.13
+      },
+      "vento": {
+       "n": 1030,
+       "medio": -0.56,
+       "tipico": 1.56
+      },
+      "vento_corr": {
+       "n": 1030,
+       "medio": -0.24,
+       "tipico": 1.41
+      },
+      "vento_reg": {
+       "n": 1080,
+       "medio": -0.07,
+       "tipico": 1.35
+      },
+      "mslp": {
+       "n": 1030,
+       "medio": 0.25,
+       "tipico": 0.74
+      },
+      "t2_wu": {
+       "n": 10457,
+       "medio": 1.66,
+       "tipico": 2.63
+      },
+      "td2_wu": {
+       "n": 10457,
+       "medio": -1.23,
+       "tipico": 2.46
+      },
+      "vento_wu": {
+       "n": 9957,
+       "medio": 1.13,
+       "tipico": 1.93
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3584,
+        "piovuto": 621,
+        "previsto": 624,
+        "presa": 57,
+        "falsi": 43,
+        "csi": 40
+       },
+       "1.0": {
+        "casi": 3584,
+        "piovuto": 430,
+        "previsto": 302,
+        "presa": 36,
+        "falsi": 49,
+        "csi": 26
+       },
+       "5.0": {
+        "casi": 3584,
+        "piovuto": 48,
+        "previsto": 82,
+        "presa": 17,
+        "falsi": 90,
+        "csi": 7
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 78,
+        "osservata_presa": 58,
+        "celle_previste": 9612,
+        "celle_osservate": 19306
+       },
+       "2.0": {
+        "prevista_giusta": 61,
+        "osservata_presa": 36,
+        "celle_previste": 3979,
+        "celle_osservate": 11608
+       }
+      },
+      "cicli": 23
+     }
+    },
+    "castelli-ecmwf-radt6": {
+     "g1": {
+      "t2": {
+       "n": 8553,
+       "medio": 0.49,
+       "tipico": 2.18
+      },
+      "t2_giorno": {
+       "n": 4320,
+       "medio": 0.46,
+       "tipico": 2.11
+      },
+      "t2_notte": {
+       "n": 4233,
+       "medio": 0.53,
+       "tipico": 2.26
+      },
+      "td2": {
+       "n": 1616,
+       "medio": -1.15,
+       "tipico": 2.28
+      },
+      "vento": {
+       "n": 620,
+       "medio": -0.48,
+       "tipico": 1.59
+      },
+      "vento_corr": {
+       "n": 620,
+       "medio": -0.31,
+       "tipico": 1.42
+      },
+      "vento_reg": {
+       "n": 664,
+       "medio": 0.06,
+       "tipico": 1.35
+      },
+      "mslp": {
+       "n": 620,
+       "medio": 0.12,
+       "tipico": 0.54
+      },
+      "t2_wu": {
+       "n": 6160,
+       "medio": 1.36,
+       "tipico": 2.53
+      },
+      "td2_wu": {
+       "n": 6160,
+       "medio": -1.49,
+       "tipico": 2.53
+      },
+      "vento_wu": {
+       "n": 5866,
+       "medio": 1.31,
+       "tipico": 2.17
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 1675,
+        "piovuto": 310,
+        "previsto": 227,
+        "presa": 47,
+        "falsi": 36,
+        "csi": 37
+       },
+       "1.0": {
+        "casi": 1675,
+        "piovuto": 215,
+        "previsto": 117,
+        "presa": 25,
+        "falsi": 55,
+        "csi": 19
+       },
+       "5.0": {
+        "casi": 1675,
+        "piovuto": 24,
+        "previsto": 20,
+        "presa": 0,
+        "falsi": 100,
+        "csi": 0
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 81,
+        "osservata_presa": 52,
+        "celle_previste": 3817,
+        "celle_osservate": 9653
+       },
+       "2.0": {
+        "prevista_giusta": 45,
+        "osservata_presa": 28,
+        "celle_previste": 1601,
+        "celle_osservate": 5804
+       }
+      },
+      "cicli": 21
+     },
+     "g2": {
+      "t2": {
+       "n": 13898,
+       "medio": 0.54,
+       "tipico": 2.25
+      },
+      "t2_giorno": {
+       "n": 6993,
+       "medio": 0.4,
+       "tipico": 2.07
+      },
+      "t2_notte": {
+       "n": 6905,
+       "medio": 0.69,
+       "tipico": 2.42
+      },
+      "td2": {
+       "n": 2650,
+       "medio": -1.6,
+       "tipico": 2.59
+      },
+      "vento": {
+       "n": 1030,
+       "medio": -0.51,
+       "tipico": 1.55
+      },
+      "vento_corr": {
+       "n": 1030,
+       "medio": -0.29,
+       "tipico": 1.44
+      },
+      "vento_reg": {
+       "n": 1080,
+       "medio": 0.13,
+       "tipico": 1.34
+      },
+      "mslp": {
+       "n": 1030,
+       "medio": 0.34,
+       "tipico": 0.75
+      },
+      "t2_wu": {
+       "n": 10457,
+       "medio": 1.55,
+       "tipico": 2.62
+      },
+      "td2_wu": {
+       "n": 10457,
+       "medio": -1.95,
+       "tipico": 2.83
+      },
+      "vento_wu": {
+       "n": 9957,
+       "medio": 1.3,
+       "tipico": 2.09
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3584,
+        "piovuto": 621,
+        "previsto": 557,
+        "presa": 55,
+        "falsi": 39,
+        "csi": 41
+       },
+       "1.0": {
+        "casi": 3584,
+        "piovuto": 430,
+        "previsto": 282,
+        "presa": 37,
+        "falsi": 44,
+        "csi": 28
+       },
+       "5.0": {
+        "casi": 3584,
+        "piovuto": 48,
+        "previsto": 78,
+        "presa": 12,
+        "falsi": 92,
+        "csi": 5
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 80,
+        "osservata_presa": 54,
+        "celle_previste": 8685,
+        "celle_osservate": 19306
+       },
+       "2.0": {
+        "prevista_giusta": 64,
+        "osservata_presa": 33,
+        "celle_previste": 3635,
+        "celle_osservate": 11608
+       }
+      },
+      "cicli": 23
+     }
+    },
+    "castelli-ecmwf-radt15": {
+     "g1": {
+      "t2": {
+       "n": 8553,
+       "medio": 0.49,
+       "tipico": 2.17
+      },
+      "t2_giorno": {
+       "n": 4320,
+       "medio": 0.45,
+       "tipico": 2.08
+      },
+      "t2_notte": {
+       "n": 4233,
+       "medio": 0.53,
+       "tipico": 2.25
+      },
+      "td2": {
+       "n": 1616,
+       "medio": -1.15,
+       "tipico": 2.29
+      },
+      "vento": {
+       "n": 620,
+       "medio": -0.52,
+       "tipico": 1.66
+      },
+      "vento_corr": {
+       "n": 620,
+       "medio": -0.31,
+       "tipico": 1.47
+      },
+      "vento_reg": {
+       "n": 664,
+       "medio": 0.04,
+       "tipico": 1.37
+      },
+      "mslp": {
+       "n": 620,
+       "medio": 0.12,
+       "tipico": 0.54
+      },
+      "t2_wu": {
+       "n": 6160,
+       "medio": 1.34,
+       "tipico": 2.51
+      },
+      "td2_wu": {
+       "n": 6160,
+       "medio": -1.49,
+       "tipico": 2.52
+      },
+      "vento_wu": {
+       "n": 5866,
+       "medio": 1.29,
+       "tipico": 2.15
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 1675,
+        "piovuto": 310,
+        "previsto": 195,
+        "presa": 45,
+        "falsi": 29,
+        "csi": 38
+       },
+       "1.0": {
+        "casi": 1675,
+        "piovuto": 215,
+        "previsto": 114,
+        "presa": 28,
+        "falsi": 47,
+        "csi": 22
+       },
+       "5.0": {
+        "casi": 1675,
+        "piovuto": 24,
+        "previsto": 21,
+        "presa": 12,
+        "falsi": 86,
+        "csi": 7
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 91,
+        "osservata_presa": 52,
+        "celle_previste": 3511,
+        "celle_osservate": 9653
+       },
+       "2.0": {
+        "prevista_giusta": 65,
+        "osservata_presa": 32,
+        "celle_previste": 1737,
+        "celle_osservate": 5804
+       }
+      },
+      "cicli": 21
+     },
+     "g2": {
+      "t2": {
+       "n": 13898,
+       "medio": 0.53,
+       "tipico": 2.24
+      },
+      "t2_giorno": {
+       "n": 6993,
+       "medio": 0.37,
+       "tipico": 2.06
+      },
+      "t2_notte": {
+       "n": 6905,
+       "medio": 0.68,
+       "tipico": 2.41
+      },
+      "td2": {
+       "n": 2650,
+       "medio": -1.61,
+       "tipico": 2.61
+      },
+      "vento": {
+       "n": 1030,
+       "medio": -0.51,
+       "tipico": 1.5
+      },
+      "vento_corr": {
+       "n": 1030,
+       "medio": -0.27,
+       "tipico": 1.4
+      },
+      "vento_reg": {
+       "n": 1080,
+       "medio": 0.13,
+       "tipico": 1.37
+      },
+      "mslp": {
+       "n": 1030,
+       "medio": 0.35,
+       "tipico": 0.75
+      },
+      "t2_wu": {
+       "n": 10457,
+       "medio": 1.53,
+       "tipico": 2.62
+      },
+      "td2_wu": {
+       "n": 10457,
+       "medio": -1.97,
+       "tipico": 2.84
+      },
+      "vento_wu": {
+       "n": 9957,
+       "medio": 1.29,
+       "tipico": 2.08
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3584,
+        "piovuto": 621,
+        "previsto": 551,
+        "presa": 57,
+        "falsi": 36,
+        "csi": 43
+       },
+       "1.0": {
+        "casi": 3584,
+        "piovuto": 430,
+        "previsto": 295,
+        "presa": 36,
+        "falsi": 48,
+        "csi": 27
+       },
+       "5.0": {
+        "casi": 3584,
+        "piovuto": 48,
+        "previsto": 79,
+        "presa": 19,
+        "falsi": 89,
+        "csi": 8
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 83,
+        "osservata_presa": 53,
+        "celle_previste": 8832,
+        "celle_osservate": 19306
+       },
+       "2.0": {
+        "prevista_giusta": 67,
+        "osservata_presa": 34,
+        "celle_previste": 3986,
+        "celle_osservate": 11608
+       }
+      },
+      "cicli": 23
+     }
+    },
+    "castelli-ecmwf-urbano": {
+     "g1": {
+      "t2": {
+       "n": 8553,
+       "medio": 0.26,
+       "tipico": 2.14
+      },
+      "t2_giorno": {
+       "n": 4320,
+       "medio": 0.31,
+       "tipico": 2.04
+      },
+      "t2_notte": {
+       "n": 4233,
+       "medio": 0.22,
+       "tipico": 2.23
+      },
+      "td2": {
+       "n": 1616,
+       "medio": -1.1,
+       "tipico": 2.25
+      },
+      "vento": {
+       "n": 620,
+       "medio": -0.36,
+       "tipico": 1.65
+      },
+      "vento_corr": {
+       "n": 620,
+       "medio": -0.23,
+       "tipico": 1.52
+      },
+      "vento_reg": {
+       "n": 664,
+       "medio": 0.09,
+       "tipico": 1.39
+      },
+      "mslp": {
+       "n": 620,
+       "medio": 0.12,
+       "tipico": 0.56
+      },
+      "t2_wu": {
+       "n": 6160,
+       "medio": 1.02,
+       "tipico": 2.35
+      },
+      "td2_wu": {
+       "n": 6160,
+       "medio": -1.42,
+       "tipico": 2.43
+      },
+      "vento_wu": {
+       "n": 5866,
+       "medio": 1.5,
+       "tipico": 2.36
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 1675,
+        "piovuto": 310,
+        "previsto": 216,
+        "presa": 47,
+        "falsi": 33,
+        "csi": 38
+       },
+       "1.0": {
+        "casi": 1675,
+        "piovuto": 215,
+        "previsto": 121,
+        "presa": 32,
+        "falsi": 44,
+        "csi": 25
+       },
+       "5.0": {
+        "casi": 1675,
+        "piovuto": 24,
+        "previsto": 27,
+        "presa": 4,
+        "falsi": 96,
+        "csi": 2
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 84,
+        "osservata_presa": 52,
+        "celle_previste": 3765,
+        "celle_osservate": 9653
+       },
+       "2.0": {
+        "prevista_giusta": 63,
+        "osservata_presa": 33,
+        "celle_previste": 1844,
+        "celle_osservate": 5804
+       }
+      },
+      "cicli": 21
+     },
+     "g2": {
+      "t2": {
+       "n": 13898,
+       "medio": 0.22,
+       "tipico": 2.16
+      },
+      "t2_giorno": {
+       "n": 6993,
+       "medio": 0.15,
+       "tipico": 2.01
+      },
+      "t2_notte": {
+       "n": 6905,
+       "medio": 0.3,
+       "tipico": 2.3
+      },
+      "td2": {
+       "n": 2650,
+       "medio": -1.5,
+       "tipico": 2.53
+      },
+      "vento": {
+       "n": 1030,
+       "medio": -0.41,
+       "tipico": 1.5
+      },
+      "vento_corr": {
+       "n": 1030,
+       "medio": -0.24,
+       "tipico": 1.45
+      },
+      "vento_reg": {
+       "n": 1080,
+       "medio": 0.14,
+       "tipico": 1.38
+      },
+      "mslp": {
+       "n": 1030,
+       "medio": 0.35,
+       "tipico": 0.76
+      },
+      "t2_wu": {
+       "n": 10457,
+       "medio": 1.1,
+       "tipico": 2.39
+      },
+      "td2_wu": {
+       "n": 10457,
+       "medio": -1.85,
+       "tipico": 2.71
+      },
+      "vento_wu": {
+       "n": 9957,
+       "medio": 1.45,
+       "tipico": 2.25
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3584,
+        "piovuto": 621,
+        "previsto": 579,
+        "presa": 55,
+        "falsi": 41,
+        "csi": 40
+       },
+       "1.0": {
+        "casi": 3584,
+        "piovuto": 430,
+        "previsto": 245,
+        "presa": 30,
+        "falsi": 47,
+        "csi": 24
+       },
+       "5.0": {
+        "casi": 3584,
+        "piovuto": 48,
+        "previsto": 49,
+        "presa": 6,
+        "falsi": 94,
+        "csi": 3
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 78,
+        "osservata_presa": 58,
+        "celle_previste": 9107,
+        "celle_osservate": 19306
+       },
+       "2.0": {
+        "prevista_giusta": 61,
+        "osservata_presa": 31,
+        "celle_previste": 3394,
+        "celle_osservate": 11608
+       }
+      },
+      "cicli": 23
+     }
+    },
+    "castelli-ecmwf-livelli": {
+     "g1": {
+      "t2": {
+       "n": 9349,
+       "medio": 0.63,
+       "tipico": 2.13
+      },
+      "t2_giorno": {
+       "n": 4720,
+       "medio": 0.45,
+       "tipico": 2.06
+      },
+      "t2_notte": {
+       "n": 4629,
+       "medio": 0.82,
+       "tipico": 2.2
+      },
+      "td2": {
+       "n": 1772,
+       "medio": -0.84,
+       "tipico": 2.1
+      },
+      "vento": {
+       "n": 680,
+       "medio": -0.48,
+       "tipico": 1.57
+      },
+      "vento_corr": {
+       "n": 680,
+       "medio": -0.05,
+       "tipico": 1.44
+      },
+      "vento_reg": {
+       "n": 728,
+       "medio": 0.16,
+       "tipico": 1.38
+      },
+      "mslp": {
+       "n": 680,
+       "medio": 0.09,
+       "tipico": 0.51
+      },
+      "t2_wu": {
+       "n": 6747,
+       "medio": 1.37,
+       "tipico": 2.54
+      },
+      "td2_wu": {
+       "n": 6747,
+       "medio": -1.25,
+       "tipico": 2.38
+      },
+      "vento_wu": {
+       "n": 6424,
+       "medio": 1.25,
+       "tipico": 2.1
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 1831,
+        "piovuto": 311,
+        "previsto": 259,
+        "presa": 45,
+        "falsi": 46,
+        "csi": 33
+       },
+       "1.0": {
+        "casi": 1831,
+        "piovuto": 215,
+        "previsto": 128,
+        "presa": 29,
+        "falsi": 52,
+        "csi": 22
+       },
+       "5.0": {
+        "casi": 1831,
+        "piovuto": 24,
+        "previsto": 13,
+        "presa": 4,
+        "falsi": 92,
+        "csi": 3
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 81,
+        "osservata_presa": 55,
+        "celle_previste": 4051,
+        "celle_osservate": 9653
+       },
+       "2.0": {
+        "prevista_giusta": 56,
+        "osservata_presa": 36,
+        "celle_previste": 1806,
+        "celle_osservate": 5804
+       }
+      },
+      "cicli": 23
+     },
+     "g2": {
+      "t2": {
+       "n": 15122,
+       "medio": 0.62,
+       "tipico": 2.16
+      },
+      "t2_giorno": {
+       "n": 7602,
+       "medio": 0.46,
+       "tipico": 2.0
+      },
+      "t2_notte": {
+       "n": 7520,
+       "medio": 0.77,
+       "tipico": 2.31
+      },
+      "td2": {
+       "n": 2886,
+       "medio": -1.33,
+       "tipico": 2.39
+      },
+      "vento": {
+       "n": 1122,
+       "medio": -0.56,
+       "tipico": 1.6
+      },
+      "vento_corr": {
+       "n": 1122,
+       "medio": -0.15,
+       "tipico": 1.5
+      },
+      "vento_reg": {
+       "n": 1176,
+       "medio": 0.24,
+       "tipico": 1.45
+      },
+      "mslp": {
+       "n": 1122,
+       "medio": 0.3,
+       "tipico": 0.73
+      },
+      "t2_wu": {
+       "n": 11380,
+       "medio": 1.49,
+       "tipico": 2.57
+      },
+      "td2_wu": {
+       "n": 11380,
+       "medio": -1.73,
+       "tipico": 2.63
+      },
+      "vento_wu": {
+       "n": 10836,
+       "medio": 1.26,
+       "tipico": 2.1
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3900,
+        "piovuto": 692,
+        "previsto": 615,
+        "presa": 56,
+        "falsi": 37,
+        "csi": 42
+       },
+       "1.0": {
+        "casi": 3900,
+        "piovuto": 444,
+        "previsto": 301,
+        "presa": 36,
+        "falsi": 47,
+        "csi": 27
+       },
+       "5.0": {
+        "casi": 3900,
+        "piovuto": 48,
+        "previsto": 52,
+        "presa": 8,
+        "falsi": 92,
+        "csi": 4
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 83,
+        "osservata_presa": 57,
+        "celle_previste": 9423,
+        "celle_osservate": 21040
+       },
+       "2.0": {
+        "prevista_giusta": 68,
+        "osservata_presa": 33,
+        "celle_previste": 3649,
+        "celle_osservate": 12639
+       }
+      },
+      "cicli": 25
+     }
+    },
+    "castelli-ecmwf-diff2": {
+     "g1": {
+      "t2": {
+       "n": 8935,
+       "medio": 0.48,
+       "tipico": 2.19
+      },
+      "t2_giorno": {
+       "n": 4538,
+       "medio": 0.38,
+       "tipico": 2.08
+      },
+      "t2_notte": {
+       "n": 4397,
+       "medio": 0.58,
+       "tipico": 2.29
+      },
+      "td2": {
+       "n": 1694,
+       "medio": -0.97,
+       "tipico": 2.18
+      },
+      "vento": {
+       "n": 650,
+       "medio": -0.47,
+       "tipico": 1.55
+      },
+      "vento_corr": {
+       "n": 650,
+       "medio": -0.03,
+       "tipico": 1.4
+      },
+      "vento_reg": {
+       "n": 696,
+       "medio": 0.09,
+       "tipico": 1.33
+      },
+      "mslp": {
+       "n": 650,
+       "medio": 0.13,
+       "tipico": 0.51
+      },
+      "t2_wu": {
+       "n": 6453,
+       "medio": 1.32,
+       "tipico": 2.51
+      },
+      "td2_wu": {
+       "n": 6453,
+       "medio": -1.27,
+       "tipico": 2.41
+      },
+      "vento_wu": {
+       "n": 6144,
+       "medio": 1.27,
+       "tipico": 2.09
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 1751,
+        "piovuto": 250,
+        "previsto": 248,
+        "presa": 54,
+        "falsi": 46,
+        "csi": 37
+       },
+       "1.0": {
+        "casi": 1751,
+        "piovuto": 173,
+        "previsto": 130,
+        "presa": 39,
+        "falsi": 48,
+        "csi": 28
+       },
+       "5.0": {
+        "casi": 1751,
+        "piovuto": 24,
+        "previsto": 10,
+        "presa": 0,
+        "falsi": 100,
+        "csi": 0
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 77,
+        "osservata_presa": 54,
+        "celle_previste": 3842,
+        "celle_osservate": 7877
+       },
+       "2.0": {
+        "prevista_giusta": 50,
+        "osservata_presa": 35,
+        "celle_previste": 1675,
+        "celle_osservate": 4706
+       }
+      },
+      "cicli": 22
+     },
+     "g2": {
+      "t2": {
+       "n": 14506,
+       "medio": 0.52,
+       "tipico": 2.26
+      },
+      "t2_giorno": {
+       "n": 7295,
+       "medio": 0.42,
+       "tipico": 2.06
+      },
+      "t2_notte": {
+       "n": 7211,
+       "medio": 0.63,
+       "tipico": 2.45
+      },
+      "td2": {
+       "n": 2769,
+       "medio": -1.54,
+       "tipico": 2.52
+      },
+      "vento": {
+       "n": 1077,
+       "medio": -0.55,
+       "tipico": 1.58
+      },
+      "vento_corr": {
+       "n": 1077,
+       "medio": -0.11,
+       "tipico": 1.47
+      },
+      "vento_reg": {
+       "n": 1128,
+       "medio": 0.21,
+       "tipico": 1.36
+      },
+      "mslp": {
+       "n": 1077,
+       "medio": 0.34,
+       "tipico": 0.73
+      },
+      "t2_wu": {
+       "n": 10939,
+       "medio": 1.52,
+       "tipico": 2.62
+      },
+      "td2_wu": {
+       "n": 10939,
+       "medio": -1.86,
+       "tipico": 2.77
+      },
+      "vento_wu": {
+       "n": 10418,
+       "medio": 1.35,
+       "tipico": 2.13
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3741,
+        "piovuto": 574,
+        "previsto": 568,
+        "presa": 46,
+        "falsi": 54,
+        "csi": 30
+       },
+       "1.0": {
+        "casi": 3741,
+        "piovuto": 352,
+        "previsto": 215,
+        "presa": 28,
+        "falsi": 55,
+        "csi": 21
+       },
+       "5.0": {
+        "casi": 3741,
+        "piovuto": 39,
+        "previsto": 66,
+        "presa": 13,
+        "falsi": 92,
+        "csi": 5
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 74,
+        "osservata_presa": 53,
+        "celle_previste": 7942,
+        "celle_osservate": 19673
+       },
+       "2.0": {
+        "prevista_giusta": 63,
+        "osservata_presa": 29,
+        "celle_previste": 2855,
+        "celle_osservate": 12409
+       }
+      },
+      "cicli": 24
+     }
+    },
+    "castelli-ecmwf-raggi": {
+     "g1": {
+      "t2": {
+       "n": 9349,
+       "medio": 0.49,
+       "tipico": 2.18
+      },
+      "t2_giorno": {
+       "n": 4720,
+       "medio": 0.4,
+       "tipico": 2.07
+      },
+      "t2_notte": {
+       "n": 4629,
+       "medio": 0.58,
+       "tipico": 2.29
+      },
+      "td2": {
+       "n": 1772,
+       "medio": -1.04,
+       "tipico": 2.22
+      },
+      "vento": {
+       "n": 680,
+       "medio": -0.47,
+       "tipico": 1.59
+      },
+      "vento_corr": {
+       "n": 680,
+       "medio": -0.05,
+       "tipico": 1.45
+      },
+      "vento_reg": {
+       "n": 728,
+       "medio": 0.08,
+       "tipico": 1.35
+      },
+      "mslp": {
+       "n": 680,
+       "medio": 0.12,
+       "tipico": 0.53
+      },
+      "t2_wu": {
+       "n": 6747,
+       "medio": 1.33,
+       "tipico": 2.5
+      },
+      "td2_wu": {
+       "n": 6747,
+       "medio": -1.35,
+       "tipico": 2.45
+      },
+      "vento_wu": {
+       "n": 6424,
+       "medio": 1.3,
+       "tipico": 2.14
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 1831,
+        "piovuto": 311,
+        "previsto": 262,
+        "presa": 47,
+        "falsi": 44,
+        "csi": 34
+       },
+       "1.0": {
+        "casi": 1831,
+        "piovuto": 215,
+        "previsto": 133,
+        "presa": 38,
+        "falsi": 38,
+        "csi": 31
+       },
+       "5.0": {
+        "casi": 1831,
+        "piovuto": 24,
+        "previsto": 20,
+        "presa": 4,
+        "falsi": 95,
+        "csi": 2
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 80,
+        "osservata_presa": 51,
+        "celle_previste": 4046,
+        "celle_osservate": 9653
+       },
+       "2.0": {
+        "prevista_giusta": 66,
+        "osservata_presa": 37,
+        "celle_previste": 1990,
+        "celle_osservate": 5804
+       }
+      },
+      "cicli": 23
+     },
+     "g2": {
+      "t2": {
+       "n": 15122,
+       "medio": 0.5,
+       "tipico": 2.24
+      },
+      "t2_giorno": {
+       "n": 7602,
+       "medio": 0.42,
+       "tipico": 2.04
+      },
+      "t2_notte": {
+       "n": 7520,
+       "medio": 0.58,
+       "tipico": 2.41
+      },
+      "td2": {
+       "n": 2886,
+       "medio": -1.5,
+       "tipico": 2.53
+      },
+      "vento": {
+       "n": 1122,
+       "medio": -0.54,
+       "tipico": 1.56
+      },
+      "vento_corr": {
+       "n": 1122,
+       "medio": -0.11,
+       "tipico": 1.47
+      },
+      "vento_reg": {
+       "n": 1176,
+       "medio": 0.17,
+       "tipico": 1.36
+      },
+      "mslp": {
+       "n": 1122,
+       "medio": 0.32,
+       "tipico": 0.72
+      },
+      "t2_wu": {
+       "n": 11380,
+       "medio": 1.51,
+       "tipico": 2.59
+      },
+      "td2_wu": {
+       "n": 11380,
+       "medio": -1.85,
+       "tipico": 2.75
+      },
+      "vento_wu": {
+       "n": 10836,
+       "medio": 1.34,
+       "tipico": 2.11
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3900,
+        "piovuto": 692,
+        "previsto": 599,
+        "presa": 52,
+        "falsi": 40,
+        "csi": 39
+       },
+       "1.0": {
+        "casi": 3900,
+        "piovuto": 444,
+        "previsto": 299,
+        "presa": 37,
+        "falsi": 45,
+        "csi": 29
+       },
+       "5.0": {
+        "casi": 3900,
+        "piovuto": 48,
+        "previsto": 70,
+        "presa": 19,
+        "falsi": 87,
+        "csi": 8
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 80,
+        "osservata_presa": 55,
+        "celle_previste": 9434,
+        "celle_osservate": 21040
+       },
+       "2.0": {
+        "prevista_giusta": 66,
+        "osservata_presa": 35,
+        "celle_previste": 4167,
+        "celle_osservate": 12639
+       }
+      },
+      "cicli": 25
+     }
+    },
+    "castelli-icon2i-noahmp": {
+     "g1": {
+      "t2": {
+       "n": 10005,
+       "medio": 0.63,
+       "tipico": 2.03
+      },
+      "t2_giorno": {
+       "n": 4966,
+       "medio": 0.42,
+       "tipico": 1.88
+      },
+      "t2_notte": {
+       "n": 5039,
+       "medio": 0.83,
+       "tipico": 2.17
+      },
+      "td2": {
+       "n": 1899,
+       "medio": -0.16,
+       "tipico": 2.16
+      },
+      "vento": {
+       "n": 735,
+       "medio": -0.72,
+       "tipico": 1.62
+      },
+      "vento_corr": {
+       "n": 735,
+       "medio": -0.33,
+       "tipico": 1.41
+      },
+      "vento_reg": {
+       "n": 776,
+       "medio": -0.19,
+       "tipico": 1.27
+      },
+      "mslp": {
+       "n": 735,
+       "medio": 0.28,
+       "tipico": 0.79
+      },
+      "t2_wu": {
+       "n": 7415,
+       "medio": 1.33,
+       "tipico": 2.41
+      },
+      "td2_wu": {
+       "n": 7415,
+       "medio": -0.93,
+       "tipico": 2.42
+      },
+      "vento_wu": {
+       "n": 7061,
+       "medio": 1.05,
+       "tipico": 1.86
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 2233,
+        "piovuto": 408,
+        "previsto": 482,
+        "presa": 70,
+        "falsi": 41,
+        "csi": 47
+       },
+       "1.0": {
+        "casi": 2233,
+        "piovuto": 271,
+        "previsto": 322,
+        "presa": 58,
+        "falsi": 52,
+        "csi": 36
+       },
+       "5.0": {
+        "casi": 2233,
+        "piovuto": 32,
+        "previsto": 76,
+        "presa": 9,
+        "falsi": 96,
+        "csi": 3
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 78,
+        "osservata_presa": 70,
+        "celle_previste": 8633,
+        "celle_osservate": 12637
+       },
+       "2.0": {
+        "prevista_giusta": 53,
+        "osservata_presa": 45,
+        "celle_previste": 4638,
+        "celle_osservate": 7440
+       }
+      },
+      "cicli": 19
+     },
+     "g2": {
+      "t2": {
+       "n": 12656,
+       "medio": 0.79,
+       "tipico": 2.2
+      },
+      "t2_giorno": {
+       "n": 6371,
+       "medio": 0.47,
+       "tipico": 1.94
+      },
+      "t2_notte": {
+       "n": 6285,
+       "medio": 1.13,
+       "tipico": 2.44
+      },
+      "td2": {
+       "n": 2416,
+       "medio": -0.61,
+       "tipico": 2.3
+      },
+      "vento": {
+       "n": 940,
+       "medio": -0.61,
+       "tipico": 1.59
+      },
+      "vento_corr": {
+       "n": 940,
+       "medio": -0.22,
+       "tipico": 1.42
+      },
+      "vento_reg": {
+       "n": 984,
+       "medio": -0.06,
+       "tipico": 1.31
+      },
+      "mslp": {
+       "n": 940,
+       "medio": 0.33,
+       "tipico": 0.88
+      },
+      "t2_wu": {
+       "n": 9500,
+       "medio": 1.57,
+       "tipico": 2.59
+      },
+      "td2_wu": {
+       "n": 9500,
+       "medio": -1.52,
+       "tipico": 2.7
+      },
+      "vento_wu": {
+       "n": 9044,
+       "medio": 1.1,
+       "tipico": 1.88
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3264,
+        "piovuto": 583,
+        "previsto": 540,
+        "presa": 61,
+        "falsi": 34,
+        "csi": 46
+       },
+       "1.0": {
+        "casi": 3264,
+        "piovuto": 410,
+        "previsto": 359,
+        "presa": 51,
+        "falsi": 42,
+        "csi": 37
+       },
+       "5.0": {
+        "casi": 3264,
+        "piovuto": 44,
+        "previsto": 85,
+        "presa": 7,
+        "falsi": 96,
+        "csi": 2
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 86,
+        "osservata_presa": 62,
+        "celle_previste": 9587,
+        "celle_osservate": 16933
+       },
+       "2.0": {
+        "prevista_giusta": 69,
+        "osservata_presa": 41,
+        "celle_previste": 5252,
+        "celle_osservate": 9920
+       }
+      },
+      "cicli": 21
+     }
+    },
+    "castelli-icon2i-radt6": {
+     "g1": {
+      "t2": {
+       "n": 9461,
+       "medio": 0.37,
+       "tipico": 2.12
+      },
+      "t2_giorno": {
+       "n": 4732,
+       "medio": 0.14,
+       "tipico": 1.98
+      },
+      "t2_notte": {
+       "n": 4729,
+       "medio": 0.6,
+       "tipico": 2.25
+      },
+      "td2": {
+       "n": 1796,
+       "medio": -0.95,
+       "tipico": 2.26
+      },
+      "vento": {
+       "n": 695,
+       "medio": -0.73,
+       "tipico": 1.54
+      },
+      "vento_corr": {
+       "n": 695,
+       "medio": -0.4,
+       "tipico": 1.38
+      },
+      "vento_reg": {
+       "n": 734,
+       "medio": 0.03,
+       "tipico": 1.32
+      },
+      "mslp": {
+       "n": 695,
+       "medio": 0.31,
+       "tipico": 0.8
+      },
+      "t2_wu": {
+       "n": 7016,
+       "medio": 1.22,
+       "tipico": 2.41
+      },
+      "td2_wu": {
+       "n": 7016,
+       "medio": -1.33,
+       "tipico": 2.47
+      },
+      "vento_wu": {
+       "n": 6681,
+       "medio": 1.2,
+       "tipico": 1.98
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 2113,
+        "piovuto": 347,
+        "previsto": 421,
+        "presa": 67,
+        "falsi": 44,
+        "csi": 44
+       },
+       "1.0": {
+        "casi": 2113,
+        "piovuto": 229,
+        "previsto": 306,
+        "presa": 60,
+        "falsi": 55,
+        "csi": 34
+       },
+       "5.0": {
+        "casi": 2113,
+        "piovuto": 32,
+        "previsto": 71,
+        "presa": 22,
+        "falsi": 90,
+        "csi": 7
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 74,
+        "osservata_presa": 67,
+        "celle_previste": 8088,
+        "celle_osservate": 10442
+       },
+       "2.0": {
+        "prevista_giusta": 53,
+        "osservata_presa": 47,
+        "celle_previste": 4605,
+        "celle_osservate": 6205
+       }
+      },
+      "cicli": 18
+     },
+     "g2": {
+      "t2": {
+       "n": 12040,
+       "medio": 0.59,
+       "tipico": 2.29
+      },
+      "t2_giorno": {
+       "n": 6064,
+       "medio": 0.28,
+       "tipico": 2.03
+      },
+      "t2_notte": {
+       "n": 5976,
+       "medio": 0.9,
+       "tipico": 2.54
+      },
+      "td2": {
+       "n": 2299,
+       "medio": -1.56,
+       "tipico": 2.75
+      },
+      "vento": {
+       "n": 895,
+       "medio": -0.59,
+       "tipico": 1.53
+      },
+      "vento_corr": {
+       "n": 895,
+       "medio": -0.29,
+       "tipico": 1.39
+      },
+      "vento_reg": {
+       "n": 936,
+       "medio": 0.19,
+       "tipico": 1.31
+      },
+      "mslp": {
+       "n": 895,
+       "medio": 0.37,
+       "tipico": 0.89
+      },
+      "t2_wu": {
+       "n": 9059,
+       "medio": 1.59,
+       "tipico": 2.68
+      },
+      "td2_wu": {
+       "n": 9059,
+       "medio": -2.14,
+       "tipico": 3.05
+      },
+      "vento_wu": {
+       "n": 8626,
+       "medio": 1.28,
+       "tipico": 2.04
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3105,
+        "piovuto": 465,
+        "previsto": 473,
+        "presa": 59,
+        "falsi": 42,
+        "csi": 41
+       },
+       "1.0": {
+        "casi": 3105,
+        "piovuto": 318,
+        "previsto": 292,
+        "presa": 49,
+        "falsi": 46,
+        "csi": 35
+       },
+       "5.0": {
+        "casi": 3105,
+        "piovuto": 35,
+        "previsto": 77,
+        "presa": 17,
+        "falsi": 92,
+        "csi": 6
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 81,
+        "osservata_presa": 57,
+        "celle_previste": 7812,
+        "celle_osservate": 15566
+       },
+       "2.0": {
+        "prevista_giusta": 74,
+        "osservata_presa": 37,
+        "celle_previste": 3957,
+        "celle_osservate": 9690
+       }
+      },
+      "cicli": 20
+     }
+    },
+    "castelli-icon2i-radt15": {
+     "g1": {
+      "t2": {
+       "n": 9953,
+       "medio": 0.44,
+       "tipico": 2.1
+      },
+      "t2_giorno": {
+       "n": 4914,
+       "medio": 0.23,
+       "tipico": 1.95
+      },
+      "t2_notte": {
+       "n": 5039,
+       "medio": 0.65,
+       "tipico": 2.23
+      },
+      "td2": {
+       "n": 1889,
+       "medio": -0.97,
+       "tipico": 2.27
+      },
+      "vento": {
+       "n": 731,
+       "medio": -0.65,
+       "tipico": 1.53
+      },
+      "vento_corr": {
+       "n": 731,
+       "medio": -0.33,
+       "tipico": 1.36
+      },
+      "vento_reg": {
+       "n": 772,
+       "medio": 0.04,
+       "tipico": 1.3
+      },
+      "mslp": {
+       "n": 731,
+       "medio": 0.31,
+       "tipico": 0.78
+      },
+      "t2_wu": {
+       "n": 7372,
+       "medio": 1.27,
+       "tipico": 2.42
+      },
+      "td2_wu": {
+       "n": 7372,
+       "medio": -1.36,
+       "tipico": 2.49
+      },
+      "vento_wu": {
+       "n": 7020,
+       "medio": 1.25,
+       "tipico": 2.04
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 2233,
+        "piovuto": 408,
+        "previsto": 462,
+        "presa": 66,
+        "falsi": 42,
+        "csi": 45
+       },
+       "1.0": {
+        "casi": 2233,
+        "piovuto": 271,
+        "previsto": 291,
+        "presa": 45,
+        "falsi": 58,
+        "csi": 28
+       },
+       "5.0": {
+        "casi": 2233,
+        "piovuto": 32,
+        "previsto": 80,
+        "presa": 19,
+        "falsi": 92,
+        "csi": 6
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 77,
+        "osservata_presa": 68,
+        "celle_previste": 8270,
+        "celle_osservate": 12637
+       },
+       "2.0": {
+        "prevista_giusta": 51,
+        "osservata_presa": 42,
+        "celle_previste": 4469,
+        "celle_osservate": 7440
+       }
+      },
+      "cicli": 19
+     },
+     "g2": {
+      "t2": {
+       "n": 12656,
+       "medio": 0.57,
+       "tipico": 2.25
+      },
+      "t2_giorno": {
+       "n": 6371,
+       "medio": 0.29,
+       "tipico": 1.99
+      },
+      "t2_notte": {
+       "n": 6285,
+       "medio": 0.85,
+       "tipico": 2.49
+      },
+      "td2": {
+       "n": 2416,
+       "medio": -1.51,
+       "tipico": 2.72
+      },
+      "vento": {
+       "n": 940,
+       "medio": -0.59,
+       "tipico": 1.54
+      },
+      "vento_corr": {
+       "n": 940,
+       "medio": -0.3,
+       "tipico": 1.4
+      },
+      "vento_reg": {
+       "n": 984,
+       "medio": 0.12,
+       "tipico": 1.34
+      },
+      "mslp": {
+       "n": 940,
+       "medio": 0.38,
+       "tipico": 0.89
+      },
+      "t2_wu": {
+       "n": 9500,
+       "medio": 1.56,
+       "tipico": 2.64
+      },
+      "td2_wu": {
+       "n": 9500,
+       "medio": -2.06,
+       "tipico": 2.99
+      },
+      "vento_wu": {
+       "n": 9044,
+       "medio": 1.27,
+       "tipico": 2.05
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3264,
+        "piovuto": 583,
+        "previsto": 533,
+        "presa": 63,
+        "falsi": 32,
+        "csi": 49
+       },
+       "1.0": {
+        "casi": 3264,
+        "piovuto": 410,
+        "previsto": 359,
+        "presa": 51,
+        "falsi": 42,
+        "csi": 38
+       },
+       "5.0": {
+        "casi": 3264,
+        "piovuto": 44,
+        "previsto": 90,
+        "presa": 14,
+        "falsi": 93,
+        "csi": 5
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 86,
+        "osservata_presa": 64,
+        "celle_previste": 9268,
+        "celle_osservate": 16933
+       },
+       "2.0": {
+        "prevista_giusta": 69,
+        "osservata_presa": 41,
+        "celle_previste": 4918,
+        "celle_osservate": 9920
+       }
+      },
+      "cicli": 21
+     }
+    },
+    "castelli-icon2i-urbano": {
+     "g1": {
+      "t2": {
+       "n": 9435,
+       "medio": 0.19,
+       "tipico": 2.11
+      },
+      "t2_giorno": {
+       "n": 4706,
+       "medio": 0.02,
+       "tipico": 1.97
+      },
+      "t2_notte": {
+       "n": 4729,
+       "medio": 0.36,
+       "tipico": 2.25
+      },
+      "td2": {
+       "n": 1791,
+       "medio": -0.88,
+       "tipico": 2.25
+      },
+      "vento": {
+       "n": 693,
+       "medio": -0.66,
+       "tipico": 1.5
+      },
+      "vento_corr": {
+       "n": 693,
+       "medio": -0.4,
+       "tipico": 1.39
+      },
+      "vento_reg": {
+       "n": 732,
+       "medio": 0.02,
+       "tipico": 1.33
+      },
+      "mslp": {
+       "n": 693,
+       "medio": 0.32,
+       "tipico": 0.8
+      },
+      "t2_wu": {
+       "n": 6995,
+       "medio": 0.91,
+       "tipico": 2.3
+      },
+      "td2_wu": {
+       "n": 6995,
+       "medio": -1.27,
+       "tipico": 2.4
+      },
+      "vento_wu": {
+       "n": 6661,
+       "medio": 1.35,
+       "tipico": 2.11
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 2113,
+        "piovuto": 347,
+        "previsto": 418,
+        "presa": 68,
+        "falsi": 44,
+        "csi": 45
+       },
+       "1.0": {
+        "casi": 2113,
+        "piovuto": 229,
+        "previsto": 286,
+        "presa": 53,
+        "falsi": 57,
+        "csi": 31
+       },
+       "5.0": {
+        "casi": 2113,
+        "piovuto": 32,
+        "previsto": 71,
+        "presa": 12,
+        "falsi": 94,
+        "csi": 4
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 76,
+        "osservata_presa": 64,
+        "celle_previste": 7698,
+        "celle_osservate": 10442
+       },
+       "2.0": {
+        "prevista_giusta": 52,
+        "osservata_presa": 47,
+        "celle_previste": 4478,
+        "celle_osservate": 6205
+       }
+      },
+      "cicli": 18
+     },
+     "g2": {
+      "t2": {
+       "n": 12040,
+       "medio": 0.31,
+       "tipico": 2.23
+      },
+      "t2_giorno": {
+       "n": 6064,
+       "medio": 0.08,
+       "tipico": 2.0
+      },
+      "t2_notte": {
+       "n": 5976,
+       "medio": 0.55,
+       "tipico": 2.44
+      },
+      "td2": {
+       "n": 2299,
+       "medio": -1.54,
+       "tipico": 2.73
+      },
+      "vento": {
+       "n": 895,
+       "medio": -0.47,
+       "tipico": 1.46
+      },
+      "vento_corr": {
+       "n": 895,
+       "medio": -0.23,
+       "tipico": 1.42
+      },
+      "vento_reg": {
+       "n": 936,
+       "medio": 0.17,
+       "tipico": 1.33
+      },
+      "mslp": {
+       "n": 895,
+       "medio": 0.38,
+       "tipico": 0.89
+      },
+      "t2_wu": {
+       "n": 9059,
+       "medio": 1.17,
+       "tipico": 2.47
+      },
+      "td2_wu": {
+       "n": 9059,
+       "medio": -2.08,
+       "tipico": 2.97
+      },
+      "vento_wu": {
+       "n": 8626,
+       "medio": 1.45,
+       "tipico": 2.2
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3105,
+        "piovuto": 465,
+        "previsto": 451,
+        "presa": 56,
+        "falsi": 42,
+        "csi": 40
+       },
+       "1.0": {
+        "casi": 3105,
+        "piovuto": 318,
+        "previsto": 303,
+        "presa": 48,
+        "falsi": 50,
+        "csi": 33
+       },
+       "5.0": {
+        "casi": 3105,
+        "piovuto": 35,
+        "previsto": 76,
+        "presa": 14,
+        "falsi": 93,
+        "csi": 5
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 78,
+        "osservata_presa": 58,
+        "celle_previste": 8040,
+        "celle_osservate": 15566
+       },
+       "2.0": {
+        "prevista_giusta": 69,
+        "osservata_presa": 39,
+        "celle_previste": 4149,
+        "celle_osservate": 9690
+       }
+      },
+      "cicli": 20
+     }
+    },
+    "castelli-icon2i-livelli": {
+     "g1": {
+      "t2": {
+       "n": 11051,
+       "medio": 0.63,
+       "tipico": 2.09
+      },
+      "t2_giorno": {
+       "n": 5491,
+       "medio": 0.3,
+       "tipico": 1.92
+      },
+      "t2_notte": {
+       "n": 5560,
+       "medio": 0.95,
+       "tipico": 2.24
+      },
+      "td2": {
+       "n": 2105,
+       "medio": -0.63,
+       "tipico": 2.13
+      },
+      "vento": {
+       "n": 815,
+       "medio": -0.67,
+       "tipico": 1.54
+      },
+      "vento_corr": {
+       "n": 815,
+       "medio": -0.12,
+       "tipico": 1.39
+      },
+      "vento_reg": {
+       "n": 860,
+       "medio": 0.13,
+       "tipico": 1.33
+      },
+      "mslp": {
+       "n": 815,
+       "medio": 0.21,
+       "tipico": 0.74
+      },
+      "t2_wu": {
+       "n": 8208,
+       "medio": 1.38,
+       "tipico": 2.48
+      },
+      "td2_wu": {
+       "n": 8208,
+       "medio": -1.19,
+       "tipico": 2.38
+      },
+      "vento_wu": {
+       "n": 7815,
+       "medio": 1.17,
+       "tipico": 1.99
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 2467,
+        "piovuto": 409,
+        "previsto": 499,
+        "presa": 68,
+        "falsi": 44,
+        "csi": 44
+       },
+       "1.0": {
+        "casi": 2467,
+        "piovuto": 271,
+        "previsto": 298,
+        "presa": 45,
+        "falsi": 59,
+        "csi": 27
+       },
+       "5.0": {
+        "casi": 2467,
+        "piovuto": 32,
+        "previsto": 59,
+        "presa": 9,
+        "falsi": 95,
+        "csi": 3
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 75,
+        "osservata_presa": 68,
+        "celle_previste": 8493,
+        "celle_osservate": 12637
+       },
+       "2.0": {
+        "prevista_giusta": 51,
+        "osservata_presa": 47,
+        "celle_previste": 4338,
+        "celle_osservate": 7440
+       }
+      },
+      "cicli": 21
+     },
+     "g2": {
+      "t2": {
+       "n": 13880,
+       "medio": 0.59,
+       "tipico": 2.15
+      },
+      "t2_giorno": {
+       "n": 6980,
+       "medio": 0.27,
+       "tipico": 1.94
+      },
+      "t2_notte": {
+       "n": 6900,
+       "medio": 0.92,
+       "tipico": 2.34
+      },
+      "td2": {
+       "n": 2652,
+       "medio": -1.23,
+       "tipico": 2.51
+      },
+      "vento": {
+       "n": 1032,
+       "medio": -0.73,
+       "tipico": 1.66
+      },
+      "vento_corr": {
+       "n": 1032,
+       "medio": -0.22,
+       "tipico": 1.5
+      },
+      "vento_reg": {
+       "n": 1080,
+       "medio": 0.17,
+       "tipico": 1.41
+      },
+      "mslp": {
+       "n": 1032,
+       "medio": 0.33,
+       "tipico": 0.86
+      },
+      "t2_wu": {
+       "n": 10423,
+       "medio": 1.45,
+       "tipico": 2.57
+      },
+      "td2_wu": {
+       "n": 10423,
+       "medio": -1.86,
+       "tipico": 2.8
+      },
+      "vento_wu": {
+       "n": 9923,
+       "medio": 1.17,
+       "tipico": 2.0
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3580,
+        "piovuto": 654,
+        "previsto": 667,
+        "presa": 58,
+        "falsi": 43,
+        "csi": 41
+       },
+       "1.0": {
+        "casi": 3580,
+        "piovuto": 424,
+        "previsto": 397,
+        "presa": 46,
+        "falsi": 50,
+        "csi": 32
+       },
+       "5.0": {
+        "casi": 3580,
+        "piovuto": 44,
+        "previsto": 102,
+        "presa": 9,
+        "falsi": 96,
+        "csi": 3
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 78,
+        "osservata_presa": 63,
+        "celle_previste": 10595,
+        "celle_osservate": 18667
+       },
+       "2.0": {
+        "prevista_giusta": 66,
+        "osservata_presa": 40,
+        "celle_previste": 5334,
+        "celle_osservate": 10951
+       }
+      },
+      "cicli": 23
+     }
+    },
+    "castelli-icon2i-diff2": {
+     "g1": {
+      "t2": {
+       "n": 11051,
+       "medio": 0.53,
+       "tipico": 2.16
+      },
+      "t2_giorno": {
+       "n": 5491,
+       "medio": 0.24,
+       "tipico": 1.97
+      },
+      "t2_notte": {
+       "n": 5560,
+       "medio": 0.81,
+       "tipico": 2.33
+      },
+      "td2": {
+       "n": 2105,
+       "medio": -0.81,
+       "tipico": 2.23
+      },
+      "vento": {
+       "n": 815,
+       "medio": -0.62,
+       "tipico": 1.5
+      },
+      "vento_corr": {
+       "n": 815,
+       "medio": -0.08,
+       "tipico": 1.36
+      },
+      "vento_reg": {
+       "n": 860,
+       "medio": 0.05,
+       "tipico": 1.32
+      },
+      "mslp": {
+       "n": 815,
+       "medio": 0.25,
+       "tipico": 0.77
+      },
+      "t2_wu": {
+       "n": 8208,
+       "medio": 1.34,
+       "tipico": 2.48
+      },
+      "td2_wu": {
+       "n": 8208,
+       "medio": -1.25,
+       "tipico": 2.42
+      },
+      "vento_wu": {
+       "n": 7815,
+       "medio": 1.22,
+       "tipico": 1.99
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 2467,
+        "piovuto": 409,
+        "previsto": 506,
+        "presa": 67,
+        "falsi": 46,
+        "csi": 43
+       },
+       "1.0": {
+        "casi": 2467,
+        "piovuto": 271,
+        "previsto": 305,
+        "presa": 51,
+        "falsi": 54,
+        "csi": 32
+       },
+       "5.0": {
+        "casi": 2467,
+        "piovuto": 32,
+        "previsto": 60,
+        "presa": 9,
+        "falsi": 95,
+        "csi": 3
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 76,
+        "osservata_presa": 65,
+        "celle_previste": 8511,
+        "celle_osservate": 12637
+       },
+       "2.0": {
+        "prevista_giusta": 56,
+        "osservata_presa": 42,
+        "celle_previste": 4312,
+        "celle_osservate": 7440
+       }
+      },
+      "cicli": 21
+     },
+     "g2": {
+      "t2": {
+       "n": 13880,
+       "medio": 0.53,
+       "tipico": 2.22
+      },
+      "t2_giorno": {
+       "n": 6980,
+       "medio": 0.24,
+       "tipico": 1.96
+      },
+      "t2_notte": {
+       "n": 6900,
+       "medio": 0.82,
+       "tipico": 2.46
+      },
+      "td2": {
+       "n": 2652,
+       "medio": -1.38,
+       "tipico": 2.63
+      },
+      "vento": {
+       "n": 1032,
+       "medio": -0.74,
+       "tipico": 1.64
+      },
+      "vento_corr": {
+       "n": 1032,
+       "medio": -0.21,
+       "tipico": 1.48
+      },
+      "vento_reg": {
+       "n": 1080,
+       "medio": 0.1,
+       "tipico": 1.34
+      },
+      "mslp": {
+       "n": 1032,
+       "medio": 0.36,
+       "tipico": 0.88
+      },
+      "t2_wu": {
+       "n": 10423,
+       "medio": 1.47,
+       "tipico": 2.58
+      },
+      "td2_wu": {
+       "n": 10423,
+       "medio": -1.92,
+       "tipico": 2.87
+      },
+      "vento_wu": {
+       "n": 9923,
+       "medio": 1.24,
+       "tipico": 2.03
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3580,
+        "piovuto": 654,
+        "previsto": 718,
+        "presa": 62,
+        "falsi": 44,
+        "csi": 42
+       },
+       "1.0": {
+        "casi": 3580,
+        "piovuto": 424,
+        "previsto": 396,
+        "presa": 51,
+        "falsi": 45,
+        "csi": 36
+       },
+       "5.0": {
+        "casi": 3580,
+        "piovuto": 44,
+        "previsto": 91,
+        "presa": 9,
+        "falsi": 96,
+        "csi": 3
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 78,
+        "osservata_presa": 60,
+        "celle_previste": 10625,
+        "celle_osservate": 18667
+       },
+       "2.0": {
+        "prevista_giusta": 67,
+        "osservata_presa": 38,
+        "celle_previste": 5207,
+        "celle_osservate": 10951
+       }
+      },
+      "cicli": 23
+     }
+    },
+    "castelli-icon2i-raggi": {
+     "g1": {
+      "t2": {
+       "n": 11051,
+       "medio": 0.51,
+       "tipico": 2.17
+      },
+      "t2_giorno": {
+       "n": 5491,
+       "medio": 0.24,
+       "tipico": 1.97
+      },
+      "t2_notte": {
+       "n": 5560,
+       "medio": 0.79,
+       "tipico": 2.34
+      },
+      "td2": {
+       "n": 2105,
+       "medio": -0.88,
+       "tipico": 2.26
+      },
+      "vento": {
+       "n": 815,
+       "medio": -0.63,
+       "tipico": 1.5
+      },
+      "vento_corr": {
+       "n": 815,
+       "medio": -0.09,
+       "tipico": 1.35
+      },
+      "vento_reg": {
+       "n": 860,
+       "medio": 0.06,
+       "tipico": 1.32
+      },
+      "mslp": {
+       "n": 815,
+       "medio": 0.25,
+       "tipico": 0.77
+      },
+      "t2_wu": {
+       "n": 8208,
+       "medio": 1.33,
+       "tipico": 2.47
+      },
+      "td2_wu": {
+       "n": 8208,
+       "medio": -1.3,
+       "tipico": 2.45
+      },
+      "vento_wu": {
+       "n": 7815,
+       "medio": 1.22,
+       "tipico": 1.98
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 2467,
+        "piovuto": 409,
+        "previsto": 474,
+        "presa": 65,
+        "falsi": 44,
+        "csi": 43
+       },
+       "1.0": {
+        "casi": 2467,
+        "piovuto": 271,
+        "previsto": 294,
+        "presa": 45,
+        "falsi": 59,
+        "csi": 28
+       },
+       "5.0": {
+        "casi": 2467,
+        "piovuto": 32,
+        "previsto": 73,
+        "presa": 12,
+        "falsi": 95,
+        "csi": 4
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 74,
+        "osservata_presa": 69,
+        "celle_previste": 8633,
+        "celle_osservate": 12637
+       },
+       "2.0": {
+        "prevista_giusta": 54,
+        "osservata_presa": 44,
+        "celle_previste": 4698,
+        "celle_osservate": 7440
+       }
+      },
+      "cicli": 21
+     },
+     "g2": {
+      "t2": {
+       "n": 13880,
+       "medio": 0.49,
+       "tipico": 2.22
+      },
+      "t2_giorno": {
+       "n": 6980,
+       "medio": 0.23,
+       "tipico": 1.98
+      },
+      "t2_notte": {
+       "n": 6900,
+       "medio": 0.76,
+       "tipico": 2.43
+      },
+      "td2": {
+       "n": 2652,
+       "medio": -1.4,
+       "tipico": 2.64
+      },
+      "vento": {
+       "n": 1032,
+       "medio": -0.73,
+       "tipico": 1.65
+      },
+      "vento_corr": {
+       "n": 1032,
+       "medio": -0.21,
+       "tipico": 1.47
+      },
+      "vento_reg": {
+       "n": 1080,
+       "medio": 0.13,
+       "tipico": 1.34
+      },
+      "mslp": {
+       "n": 1032,
+       "medio": 0.37,
+       "tipico": 0.88
+      },
+      "t2_wu": {
+       "n": 10423,
+       "medio": 1.46,
+       "tipico": 2.58
+      },
+      "td2_wu": {
+       "n": 10423,
+       "medio": -1.95,
+       "tipico": 2.9
+      },
+      "vento_wu": {
+       "n": 9923,
+       "medio": 1.23,
+       "tipico": 2.02
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3580,
+        "piovuto": 654,
+        "previsto": 662,
+        "presa": 59,
+        "falsi": 42,
+        "csi": 41
+       },
+       "1.0": {
+        "casi": 3580,
+        "piovuto": 424,
+        "previsto": 390,
+        "presa": 49,
+        "falsi": 47,
+        "csi": 34
+       },
+       "5.0": {
+        "casi": 3580,
+        "piovuto": 44,
+        "previsto": 98,
+        "presa": 16,
+        "falsi": 93,
+        "csi": 5
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 80,
+        "osservata_presa": 61,
+        "celle_previste": 10874,
+        "celle_osservate": 18667
+       },
+       "2.0": {
+        "prevista_giusta": 65,
+        "osservata_presa": 39,
+        "celle_previste": 5520,
+        "celle_osservate": 10951
+       }
+      },
+      "cicli": 23
+     }
+    },
+    "castelli-iconeu": {
+     "g1": {
+      "t2": {
+       "n": 10107,
+       "medio": 0.19,
+       "tipico": 2.2
+      },
+      "t2_giorno": {
+       "n": 5098,
+       "medio": -0.07,
+       "tipico": 2.05
+      },
+      "t2_notte": {
+       "n": 5009,
+       "medio": 0.46,
+       "tipico": 2.34
+      },
+      "td2": {
+       "n": 1915,
+       "medio": -1.88,
+       "tipico": 2.97
+      },
+      "vento": {
+       "n": 739,
+       "medio": -0.89,
+       "tipico": 1.65
+      },
+      "vento_corr": {
+       "n": 739,
+       "medio": -0.39,
+       "tipico": 1.44
+      },
+      "vento_reg": {
+       "n": 784,
+       "medio": -0.19,
+       "tipico": 1.43
+      },
+      "mslp": {
+       "n": 739,
+       "medio": 0.12,
+       "tipico": 0.76
+      },
+      "t2_wu": {
+       "n": 7428,
+       "medio": 1.04,
+       "tipico": 2.46
+      },
+      "td2_wu": {
+       "n": 7428,
+       "medio": -2.64,
+       "tipico": 3.66
+      },
+      "vento_wu": {
+       "n": 7074,
+       "medio": 0.94,
+       "tipico": 1.8
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 2473,
+        "piovuto": 425,
+        "previsto": 275,
+        "presa": 21,
+        "falsi": 67,
+        "csi": 15
+       },
+       "1.0": {
+        "casi": 2473,
+        "piovuto": 278,
+        "previsto": 82,
+        "presa": 11,
+        "falsi": 62,
+        "csi": 9
+       },
+       "5.0": {
+        "casi": 2473,
+        "piovuto": 32,
+        "previsto": 15,
+        "presa": 12,
+        "falsi": 73,
+        "csi": 9
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 85,
+        "osservata_presa": 39,
+        "celle_previste": 4389,
+        "celle_osservate": 14612
+       },
+       "2.0": {
+        "prevista_giusta": 81,
+        "osservata_presa": 30,
+        "celle_previste": 1395,
+        "celle_osservate": 8659
+       }
+      },
+      "cicli": 21
+     },
+     "g2": {
+      "t2": {
+       "n": 13898,
+       "medio": 0.37,
+       "tipico": 2.28
+      },
+      "t2_giorno": {
+       "n": 6993,
+       "medio": 0.17,
+       "tipico": 2.1
+      },
+      "t2_notte": {
+       "n": 6905,
+       "medio": 0.57,
+       "tipico": 2.46
+      },
+      "td2": {
+       "n": 2650,
+       "medio": -2.62,
+       "tipico": 3.65
+      },
+      "vento": {
+       "n": 1030,
+       "medio": -0.76,
+       "tipico": 1.62
+      },
+      "vento_corr": {
+       "n": 1030,
+       "medio": -0.28,
+       "tipico": 1.44
+      },
+      "vento_reg": {
+       "n": 1080,
+       "medio": 0.02,
+       "tipico": 1.37
+      },
+      "mslp": {
+       "n": 1030,
+       "medio": 0.28,
+       "tipico": 0.92
+      },
+      "t2_wu": {
+       "n": 10457,
+       "medio": 1.42,
+       "tipico": 2.6
+      },
+      "td2_wu": {
+       "n": 10457,
+       "medio": -3.14,
+       "tipico": 4.02
+      },
+      "vento_wu": {
+       "n": 9957,
+       "medio": 1.04,
+       "tipico": 1.83
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3584,
+        "piovuto": 621,
+        "previsto": 329,
+        "presa": 24,
+        "falsi": 55,
+        "csi": 18
+       },
+       "1.0": {
+        "casi": 3584,
+        "piovuto": 430,
+        "previsto": 112,
+        "presa": 14,
+        "falsi": 47,
+        "csi": 12
+       },
+       "5.0": {
+        "casi": 3584,
+        "piovuto": 48,
+        "previsto": 16,
+        "presa": 2,
+        "falsi": 94,
+        "csi": 2
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 78,
+        "osservata_presa": 36,
+        "celle_previste": 5298,
+        "celle_osservate": 19306
+       },
+       "2.0": {
+        "prevista_giusta": 73,
+        "osservata_presa": 25,
+        "celle_previste": 1571,
+        "celle_osservate": 11608
+       }
+      },
+      "cicli": 23
+     }
+    },
+    "castelli-gfs": {
+     "g1": {
+      "t2": {
+       "n": 10055,
+       "medio": 0.41,
+       "tipico": 2.15
+      },
+      "t2_giorno": {
+       "n": 5072,
+       "medio": 0.11,
+       "tipico": 1.98
+      },
+      "t2_notte": {
+       "n": 4983,
+       "medio": 0.71,
+       "tipico": 2.3
+      },
+      "td2": {
+       "n": 1905,
+       "medio": -0.53,
+       "tipico": 2.06
+      },
+      "vento": {
+       "n": 735,
+       "medio": -0.69,
+       "tipico": 1.61
+      },
+      "vento_corr": {
+       "n": 735,
+       "medio": -0.37,
+       "tipico": 1.42
+      },
+      "vento_reg": {
+       "n": 780,
+       "medio": 0.06,
+       "tipico": 1.41
+      },
+      "mslp": {
+       "n": 735,
+       "medio": -0.0,
+       "tipico": 0.64
+      },
+      "t2_wu": {
+       "n": 7387,
+       "medio": 1.19,
+       "tipico": 2.44
+      },
+      "td2_wu": {
+       "n": 7387,
+       "medio": -1.04,
+       "tipico": 2.26
+      },
+      "vento_wu": {
+       "n": 7035,
+       "medio": 1.3,
+       "tipico": 2.21
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 2393,
+        "piovuto": 424,
+        "previsto": 671,
+        "presa": 79,
+        "falsi": 50,
+        "csi": 44
+       },
+       "1.0": {
+        "casi": 2393,
+        "piovuto": 278,
+        "previsto": 403,
+        "presa": 55,
+        "falsi": 62,
+        "csi": 29
+       },
+       "5.0": {
+        "casi": 2393,
+        "piovuto": 32,
+        "previsto": 87,
+        "presa": 16,
+        "falsi": 94,
+        "csi": 4
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 79,
+        "osservata_presa": 80,
+        "celle_previste": 11869,
+        "celle_osservate": 14612
+       },
+       "2.0": {
+        "prevista_giusta": 66,
+        "osservata_presa": 75,
+        "celle_previste": 6645,
+        "celle_osservate": 8659
+       }
+      },
+      "cicli": 21
+     },
+     "g2": {
+      "t2": {
+       "n": 13898,
+       "medio": 0.36,
+       "tipico": 2.22
+      },
+      "t2_giorno": {
+       "n": 6993,
+       "medio": -0.04,
+       "tipico": 2.0
+      },
+      "t2_notte": {
+       "n": 6905,
+       "medio": 0.76,
+       "tipico": 2.41
+      },
+      "td2": {
+       "n": 2650,
+       "medio": -0.71,
+       "tipico": 2.12
+      },
+      "vento": {
+       "n": 1030,
+       "medio": -0.72,
+       "tipico": 1.6
+      },
+      "vento_corr": {
+       "n": 1030,
+       "medio": -0.38,
+       "tipico": 1.43
+      },
+      "vento_reg": {
+       "n": 1080,
+       "medio": 0.14,
+       "tipico": 1.35
+      },
+      "mslp": {
+       "n": 1030,
+       "medio": 0.18,
+       "tipico": 0.81
+      },
+      "t2_wu": {
+       "n": 10457,
+       "medio": 1.34,
+       "tipico": 2.54
+      },
+      "td2_wu": {
+       "n": 10457,
+       "medio": -1.2,
+       "tipico": 2.34
+      },
+      "vento_wu": {
+       "n": 9957,
+       "medio": 1.28,
+       "tipico": 2.09
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 3584,
+        "piovuto": 621,
+        "previsto": 951,
+        "presa": 56,
+        "falsi": 63,
+        "csi": 29
+       },
+       "1.0": {
+        "casi": 3584,
+        "piovuto": 430,
+        "previsto": 674,
+        "presa": 50,
+        "falsi": 68,
+        "csi": 24
+       },
+       "5.0": {
+        "casi": 3584,
+        "piovuto": 48,
+        "previsto": 260,
+        "presa": 40,
+        "falsi": 93,
+        "csi": 7
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 73,
+        "osservata_presa": 73,
+        "celle_previste": 16378,
+        "celle_osservate": 19306
+       },
+       "2.0": {
+        "prevista_giusta": 66,
+        "osservata_presa": 63,
+        "celle_previste": 10908,
+        "celle_osservate": 11608
+       }
+      },
+      "cicli": 23
+     }
+    },
+    "lazio-ecmwf-noahmp": {
+     "g1": {
+      "t2": {
+       "n": 56568,
+       "medio": 0.54,
+       "tipico": 2.0
+      },
+      "t2_giorno": {
+       "n": 28591,
+       "medio": 0.57,
+       "tipico": 1.86
+      },
+      "t2_notte": {
+       "n": 27977,
+       "medio": 0.51,
+       "tipico": 2.14
+      },
+      "td2": {
+       "n": 12250,
+       "medio": -0.54,
+       "tipico": 2.03
+      },
+      "vento": {
+       "n": 2359,
+       "medio": 0.07,
+       "tipico": 2.13
+      },
+      "vento_corr": {
+       "n": 2359,
+       "medio": -0.39,
+       "tipico": 1.83
+      },
+      "vento_reg": {
+       "n": 5937,
+       "medio": 1.05,
+       "tipico": 3.07
+      },
+      "mslp": {
+       "n": 2047,
+       "medio": -0.07,
+       "tipico": 0.7
+      },
+      "t2_wu": {
+       "n": 37511,
+       "medio": 0.9,
+       "tipico": 2.41
+      },
+      "td2_wu": {
+       "n": 37511,
+       "medio": -0.63,
+       "tipico": 4.53
+      },
+      "vento_wu": {
+       "n": 37220,
+       "medio": 1.83,
+       "tipico": 3.28
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 9148,
+        "piovuto": 1598,
+        "previsto": 1622,
+        "presa": 63,
+        "falsi": 38,
+        "csi": 45
+       },
+       "1.0": {
+        "casi": 9148,
+        "piovuto": 1050,
+        "previsto": 1024,
+        "presa": 52,
+        "falsi": 47,
+        "csi": 35
+       },
+       "5.0": {
+        "casi": 9148,
+        "piovuto": 243,
+        "previsto": 375,
+        "presa": 38,
+        "falsi": 75,
+        "csi": 17
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 79,
+        "osservata_presa": 66,
+        "celle_previste": 18875,
+        "celle_osservate": 25767
+       },
+       "2.0": {
+        "prevista_giusta": 76,
+        "osservata_presa": 57,
+        "celle_previste": 11904,
+        "celle_osservate": 18806
+       }
+      },
+      "cicli": 21
+     },
+     "g2": {
+      "t2": {
+       "n": 92033,
+       "medio": 0.46,
+       "tipico": 2.14
+      },
+      "t2_giorno": {
+       "n": 46374,
+       "medio": 0.39,
+       "tipico": 1.95
+      },
+      "t2_notte": {
+       "n": 45659,
+       "medio": 0.53,
+       "tipico": 2.32
+      },
+      "td2": {
+       "n": 20005,
+       "medio": -0.75,
+       "tipico": 2.26
+      },
+      "vento": {
+       "n": 3917,
+       "medio": 0.12,
+       "tipico": 2.15
+      },
+      "vento_corr": {
+       "n": 3917,
+       "medio": -0.27,
+       "tipico": 1.84
+      },
+      "vento_reg": {
+       "n": 9662,
+       "medio": 1.03,
+       "tipico": 3.06
+      },
+      "mslp": {
+       "n": 3399,
+       "medio": 0.1,
+       "tipico": 0.84
+      },
+      "t2_wu": {
+       "n": 63638,
+       "medio": 0.92,
+       "tipico": 2.51
+      },
+      "td2_wu": {
+       "n": 63638,
+       "medio": -0.74,
+       "tipico": 4.66
+      },
+      "vento_wu": {
+       "n": 63142,
+       "medio": 1.8,
+       "tipico": 3.21
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 19598,
+        "piovuto": 3225,
+        "previsto": 3042,
+        "presa": 55,
+        "falsi": 42,
+        "csi": 39
+       },
+       "1.0": {
+        "casi": 19598,
+        "piovuto": 2101,
+        "previsto": 1797,
+        "presa": 41,
+        "falsi": 52,
+        "csi": 28
+       },
+       "5.0": {
+        "casi": 19598,
+        "piovuto": 487,
+        "previsto": 648,
+        "presa": 21,
+        "falsi": 85,
+        "csi": 10
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 78,
+        "osservata_presa": 65,
+        "celle_previste": 37085,
+        "celle_osservate": 51835
+       },
+       "2.0": {
+        "prevista_giusta": 75,
+        "osservata_presa": 54,
+        "celle_previste": 22320,
+        "celle_osservate": 37655
+       }
+      },
+      "cicli": 23
+     }
+    },
+    "lazio-ecmwf-urbano": {
+     "g1": {
+      "t2": {
+       "n": 56568,
+       "medio": -0.01,
+       "tipico": 2.07
+      },
+      "t2_giorno": {
+       "n": 28591,
+       "medio": 0.18,
+       "tipico": 1.9
+      },
+      "t2_notte": {
+       "n": 27977,
+       "medio": -0.2,
+       "tipico": 2.24
+      },
+      "td2": {
+       "n": 12250,
+       "medio": -1.03,
+       "tipico": 2.23
+      },
+      "vento": {
+       "n": 2359,
+       "medio": 0.58,
+       "tipico": 2.35
+      },
+      "vento_corr": {
+       "n": 2359,
+       "medio": -0.32,
+       "tipico": 1.82
+      },
+      "vento_reg": {
+       "n": 5937,
+       "medio": 1.58,
+       "tipico": 3.34
+      },
+      "mslp": {
+       "n": 2047,
+       "medio": -0.03,
+       "tipico": 0.69
+      },
+      "t2_wu": {
+       "n": 37511,
+       "medio": 0.5,
+       "tipico": 2.34
+      },
+      "td2_wu": {
+       "n": 37511,
+       "medio": -0.93,
+       "tipico": 4.51
+      },
+      "vento_wu": {
+       "n": 37220,
+       "medio": 2.31,
+       "tipico": 3.69
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 9148,
+        "piovuto": 1598,
+        "previsto": 1438,
+        "presa": 59,
+        "falsi": 35,
+        "csi": 45
+       },
+       "1.0": {
+        "casi": 9148,
+        "piovuto": 1050,
+        "previsto": 901,
+        "presa": 48,
+        "falsi": 45,
+        "csi": 34
+       },
+       "5.0": {
+        "casi": 9148,
+        "piovuto": 243,
+        "previsto": 354,
+        "presa": 35,
+        "falsi": 76,
+        "csi": 16
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 79,
+        "osservata_presa": 65,
+        "celle_previste": 18101,
+        "celle_osservate": 25767
+       },
+       "2.0": {
+        "prevista_giusta": 76,
+        "osservata_presa": 55,
+        "celle_previste": 11342,
+        "celle_osservate": 18806
+       }
+      },
+      "cicli": 21
+     },
+     "g2": {
+      "t2": {
+       "n": 92033,
+       "medio": -0.24,
+       "tipico": 2.23
+      },
+      "t2_giorno": {
+       "n": 46374,
+       "medio": -0.09,
+       "tipico": 2.01
+      },
+      "t2_notte": {
+       "n": 45659,
+       "medio": -0.4,
+       "tipico": 2.44
+      },
+      "td2": {
+       "n": 20005,
+       "medio": -1.49,
+       "tipico": 2.69
+      },
+      "vento": {
+       "n": 3917,
+       "medio": 0.56,
+       "tipico": 2.32
+      },
+      "vento_corr": {
+       "n": 3917,
+       "medio": -0.26,
+       "tipico": 1.82
+      },
+      "vento_reg": {
+       "n": 9662,
+       "medio": 1.51,
+       "tipico": 3.27
+      },
+      "mslp": {
+       "n": 3399,
+       "medio": 0.18,
+       "tipico": 0.82
+      },
+      "t2_wu": {
+       "n": 63638,
+       "medio": 0.41,
+       "tipico": 2.42
+      },
+      "td2_wu": {
+       "n": 63638,
+       "medio": -1.25,
+       "tipico": 4.72
+      },
+      "vento_wu": {
+       "n": 63142,
+       "medio": 2.21,
+       "tipico": 3.55
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 19598,
+        "piovuto": 3225,
+        "previsto": 2839,
+        "presa": 49,
+        "falsi": 44,
+        "csi": 35
+       },
+       "1.0": {
+        "casi": 19598,
+        "piovuto": 2101,
+        "previsto": 1665,
+        "presa": 37,
+        "falsi": 53,
+        "csi": 26
+       },
+       "5.0": {
+        "casi": 19598,
+        "piovuto": 487,
+        "previsto": 659,
+        "presa": 21,
+        "falsi": 85,
+        "csi": 10
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 77,
+        "osservata_presa": 63,
+        "celle_previste": 35645,
+        "celle_osservate": 51835
+       },
+       "2.0": {
+        "prevista_giusta": 76,
+        "osservata_presa": 52,
+        "celle_previste": 21981,
+        "celle_osservate": 37655
+       }
+      },
+      "cicli": 23
+     }
+    },
+    "lazio-ecmwf-livelli": {
+     "g1": {
+      "t2": {
+       "n": 61979,
+       "medio": 0.24,
+       "tipico": 2.06
+      },
+      "t2_giorno": {
+       "n": 31311,
+       "medio": 0.24,
+       "tipico": 1.88
+      },
+      "t2_notte": {
+       "n": 30668,
+       "medio": 0.23,
+       "tipico": 2.22
+      },
+      "td2": {
+       "n": 13437,
+       "medio": -0.92,
+       "tipico": 2.11
+      },
+      "vento": {
+       "n": 2586,
+       "medio": 0.39,
+       "tipico": 2.28
+      },
+      "vento_corr": {
+       "n": 2586,
+       "medio": -0.14,
+       "tipico": 1.91
+      },
+      "vento_reg": {
+       "n": 6513,
+       "medio": 1.25,
+       "tipico": 2.88
+      },
+      "mslp": {
+       "n": 2244,
+       "medio": -0.03,
+       "tipico": 0.68
+      },
+      "t2_wu": {
+       "n": 41067,
+       "medio": 0.73,
+       "tipico": 2.39
+      },
+      "td2_wu": {
+       "n": 41067,
+       "medio": -0.9,
+       "tipico": 4.45
+      },
+      "vento_wu": {
+       "n": 40747,
+       "medio": 2.11,
+       "tipico": 3.45
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 10016,
+        "piovuto": 1626,
+        "previsto": 1577,
+        "presa": 58,
+        "falsi": 41,
+        "csi": 41
+       },
+       "1.0": {
+        "casi": 10016,
+        "piovuto": 1051,
+        "previsto": 961,
+        "presa": 48,
+        "falsi": 48,
+        "csi": 33
+       },
+       "5.0": {
+        "casi": 10016,
+        "piovuto": 244,
+        "previsto": 359,
+        "presa": 35,
+        "falsi": 76,
+        "csi": 17
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 77,
+        "osservata_presa": 64,
+        "celle_previste": 18656,
+        "celle_osservate": 26036
+       },
+       "2.0": {
+        "prevista_giusta": 76,
+        "osservata_presa": 56,
+        "celle_previste": 11742,
+        "celle_osservate": 18846
+       }
+      },
+      "cicli": 23
+     },
+     "g2": {
+      "t2": {
+       "n": 100188,
+       "medio": 0.07,
+       "tipico": 2.15
+      },
+      "t2_giorno": {
+       "n": 50464,
+       "medio": 0.11,
+       "tipico": 1.96
+      },
+      "t2_notte": {
+       "n": 49724,
+       "medio": 0.03,
+       "tipico": 2.33
+      },
+      "td2": {
+       "n": 21795,
+       "medio": -1.29,
+       "tipico": 2.46
+      },
+      "vento": {
+       "n": 4263,
+       "medio": 0.36,
+       "tipico": 2.34
+      },
+      "vento_corr": {
+       "n": 4263,
+       "medio": -0.16,
+       "tipico": 1.96
+      },
+      "vento_reg": {
+       "n": 10526,
+       "medio": 1.2,
+       "tipico": 2.9
+      },
+      "mslp": {
+       "n": 3701,
+       "medio": 0.18,
+       "tipico": 0.83
+      },
+      "t2_wu": {
+       "n": 69201,
+       "medio": 0.69,
+       "tipico": 2.44
+      },
+      "td2_wu": {
+       "n": 69201,
+       "medio": -1.15,
+       "tipico": 4.68
+      },
+      "vento_wu": {
+       "n": 68662,
+       "medio": 2.07,
+       "tipico": 3.41
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 21338,
+        "piovuto": 3698,
+        "previsto": 3186,
+        "presa": 49,
+        "falsi": 43,
+        "csi": 36
+       },
+       "1.0": {
+        "casi": 21338,
+        "piovuto": 2300,
+        "previsto": 1821,
+        "presa": 37,
+        "falsi": 53,
+        "csi": 26
+       },
+       "5.0": {
+        "casi": 21338,
+        "piovuto": 496,
+        "previsto": 656,
+        "presa": 18,
+        "falsi": 87,
+        "csi": 8
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 77,
+        "osservata_presa": 59,
+        "celle_previste": 36155,
+        "celle_osservate": 57253
+       },
+       "2.0": {
+        "prevista_giusta": 75,
+        "osservata_presa": 49,
+        "celle_previste": 21717,
+        "celle_osservate": 40179
+       }
+      },
+      "cicli": 25
+     }
+    },
+    "lazio-ecmwf-raggi": {
+     "g1": {
+      "t2": {
+       "n": 61979,
+       "medio": 0.13,
+       "tipico": 2.15
+      },
+      "t2_giorno": {
+       "n": 31311,
+       "medio": 0.24,
+       "tipico": 1.93
+      },
+      "t2_notte": {
+       "n": 30668,
+       "medio": 0.02,
+       "tipico": 2.35
+      },
+      "td2": {
+       "n": 13437,
+       "medio": -1.1,
+       "tipico": 2.27
+      },
+      "vento": {
+       "n": 2586,
+       "medio": 0.45,
+       "tipico": 2.21
+      },
+      "vento_corr": {
+       "n": 2586,
+       "medio": -0.13,
+       "tipico": 1.84
+      },
+      "vento_reg": {
+       "n": 6513,
+       "medio": 1.39,
+       "tipico": 3.12
+      },
+      "mslp": {
+       "n": 2244,
+       "medio": -0.01,
+       "tipico": 0.67
+      },
+      "t2_wu": {
+       "n": 41067,
+       "medio": 0.67,
+       "tipico": 2.41
+      },
+      "td2_wu": {
+       "n": 41067,
+       "medio": -1.01,
+       "tipico": 4.47
+      },
+      "vento_wu": {
+       "n": 40747,
+       "medio": 2.11,
+       "tipico": 3.46
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 10016,
+        "piovuto": 1626,
+        "previsto": 1515,
+        "presa": 59,
+        "falsi": 37,
+        "csi": 44
+       },
+       "1.0": {
+        "casi": 10016,
+        "piovuto": 1051,
+        "previsto": 952,
+        "presa": 50,
+        "falsi": 45,
+        "csi": 36
+       },
+       "5.0": {
+        "casi": 10016,
+        "piovuto": 244,
+        "previsto": 300,
+        "presa": 27,
+        "falsi": 78,
+        "csi": 14
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 77,
+        "osservata_presa": 64,
+        "celle_previste": 18572,
+        "celle_osservate": 26036
+       },
+       "2.0": {
+        "prevista_giusta": 75,
+        "osservata_presa": 55,
+        "celle_previste": 11535,
+        "celle_osservate": 18846
+       }
+      },
+      "cicli": 23
+     },
+     "g2": {
+      "t2": {
+       "n": 100188,
+       "medio": -0.04,
+       "tipico": 2.28
+      },
+      "t2_giorno": {
+       "n": 50464,
+       "medio": 0.1,
+       "tipico": 2.05
+      },
+      "t2_notte": {
+       "n": 49724,
+       "medio": -0.19,
+       "tipico": 2.49
+      },
+      "td2": {
+       "n": 21795,
+       "medio": -1.48,
+       "tipico": 2.7
+      },
+      "vento": {
+       "n": 4263,
+       "medio": 0.4,
+       "tipico": 2.27
+      },
+      "vento_corr": {
+       "n": 4263,
+       "medio": -0.17,
+       "tipico": 1.93
+      },
+      "vento_reg": {
+       "n": 10526,
+       "medio": 1.33,
+       "tipico": 3.11
+      },
+      "mslp": {
+       "n": 3701,
+       "medio": 0.2,
+       "tipico": 0.82
+      },
+      "t2_wu": {
+       "n": 69201,
+       "medio": 0.62,
+       "tipico": 2.48
+      },
+      "td2_wu": {
+       "n": 69201,
+       "medio": -1.25,
+       "tipico": 4.73
+      },
+      "vento_wu": {
+       "n": 68662,
+       "medio": 2.05,
+       "tipico": 3.4
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 21338,
+        "piovuto": 3698,
+        "previsto": 3220,
+        "presa": 45,
+        "falsi": 48,
+        "csi": 32
+       },
+       "1.0": {
+        "casi": 21338,
+        "piovuto": 2300,
+        "previsto": 1686,
+        "presa": 32,
+        "falsi": 56,
+        "csi": 23
+       },
+       "5.0": {
+        "casi": 21338,
+        "piovuto": 496,
+        "previsto": 589,
+        "presa": 15,
+        "falsi": 87,
+        "csi": 8
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 76,
+        "osservata_presa": 57,
+        "celle_previste": 36236,
+        "celle_osservate": 57253
+       },
+       "2.0": {
+        "prevista_giusta": 74,
+        "osservata_presa": 47,
+        "celle_previste": 21314,
+        "celle_osservate": 40179
+       }
+      },
+      "cicli": 25
+     }
+    },
+    "lazio-icon2i-noahmp": {
+     "g1": {
+      "t2": {
+       "n": 65786,
+       "medio": 0.37,
+       "tipico": 1.95
+      },
+      "t2_giorno": {
+       "n": 32514,
+       "medio": 0.33,
+       "tipico": 1.8
+      },
+      "t2_notte": {
+       "n": 33272,
+       "medio": 0.41,
+       "tipico": 2.1
+      },
+      "td2": {
+       "n": 14294,
+       "medio": -0.54,
+       "tipico": 2.09
+      },
+      "vento": {
+       "n": 2783,
+       "medio": 0.01,
+       "tipico": 2.07
+      },
+      "vento_corr": {
+       "n": 2783,
+       "medio": -0.35,
+       "tipico": 1.77
+      },
+      "vento_reg": {
+       "n": 6902,
+       "medio": 1.04,
+       "tipico": 3.03
+      },
+      "mslp": {
+       "n": 2415,
+       "medio": -0.03,
+       "tipico": 0.8
+      },
+      "t2_wu": {
+       "n": 44913,
+       "medio": 0.73,
+       "tipico": 2.33
+      },
+      "td2_wu": {
+       "n": 44913,
+       "medio": -0.53,
+       "tipico": 4.64
+      },
+      "vento_wu": {
+       "n": 44566,
+       "medio": 1.75,
+       "tipico": 3.19
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 12196,
+        "piovuto": 2194,
+        "previsto": 2492,
+        "presa": 68,
+        "falsi": 40,
+        "csi": 46
+       },
+       "1.0": {
+        "casi": 12196,
+        "piovuto": 1429,
+        "previsto": 1563,
+        "presa": 50,
+        "falsi": 54,
+        "csi": 32
+       },
+       "5.0": {
+        "casi": 12196,
+        "piovuto": 313,
+        "previsto": 538,
+        "presa": 20,
+        "falsi": 88,
+        "csi": 8
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 74,
+        "osservata_presa": 71,
+        "celle_previste": 28829,
+        "celle_osservate": 32679
+       },
+       "2.0": {
+        "prevista_giusta": 72,
+        "osservata_presa": 60,
+        "celle_previste": 17499,
+        "celle_osservate": 23937
+       }
+      },
+      "cicli": 19
+     },
+     "g2": {
+      "t2": {
+       "n": 83857,
+       "medio": 0.42,
+       "tipico": 2.15
+      },
+      "t2_giorno": {
+       "n": 42272,
+       "medio": 0.27,
+       "tipico": 1.92
+      },
+      "t2_notte": {
+       "n": 41585,
+       "medio": 0.57,
+       "tipico": 2.37
+      },
+      "td2": {
+       "n": 18242,
+       "medio": -0.63,
+       "tipico": 2.2
+      },
+      "vento": {
+       "n": 3571,
+       "medio": 0.07,
+       "tipico": 2.14
+      },
+      "vento_corr": {
+       "n": 3571,
+       "medio": -0.3,
+       "tipico": 1.85
+      },
+      "vento_reg": {
+       "n": 8818,
+       "medio": 1.08,
+       "tipico": 3.13
+      },
+      "mslp": {
+       "n": 3099,
+       "medio": 0.01,
+       "tipico": 0.92
+      },
+      "t2_wu": {
+       "n": 57920,
+       "medio": 0.84,
+       "tipico": 2.51
+      },
+      "td2_wu": {
+       "n": 57920,
+       "medio": -0.65,
+       "tipico": 4.63
+      },
+      "vento_wu": {
+       "n": 57468,
+       "medio": 1.76,
+       "tipico": 3.14
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 17857,
+        "piovuto": 2997,
+        "previsto": 3109,
+        "presa": 56,
+        "falsi": 46,
+        "csi": 38
+       },
+       "1.0": {
+        "casi": 17857,
+        "piovuto": 1945,
+        "previsto": 1891,
+        "presa": 43,
+        "falsi": 56,
+        "csi": 28
+       },
+       "5.0": {
+        "casi": 17857,
+        "piovuto": 449,
+        "previsto": 690,
+        "presa": 28,
+        "falsi": 82,
+        "csi": 12
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 76,
+        "osservata_presa": 69,
+        "celle_previste": 37326,
+        "celle_osservate": 45221
+       },
+       "2.0": {
+        "prevista_giusta": 74,
+        "osservata_presa": 60,
+        "celle_previste": 23581,
+        "celle_osservate": 32445
+       }
+      },
+      "cicli": 21
+     }
+    },
+    "lazio-icon2i-urbano": {
+     "g1": {
+      "t2": {
+       "n": 65614,
+       "medio": -0.09,
+       "tipico": 2.09
+      },
+      "t2_giorno": {
+       "n": 32342,
+       "medio": 0.01,
+       "tipico": 1.91
+      },
+      "t2_notte": {
+       "n": 33272,
+       "medio": -0.18,
+       "tipico": 2.24
+      },
+      "td2": {
+       "n": 14256,
+       "medio": -1.06,
+       "tipico": 2.27
+      },
+      "vento": {
+       "n": 2775,
+       "medio": 0.45,
+       "tipico": 2.21
+      },
+      "vento_corr": {
+       "n": 2775,
+       "medio": -0.32,
+       "tipico": 1.75
+      },
+      "vento_reg": {
+       "n": 6884,
+       "medio": 1.51,
+       "tipico": 3.21
+      },
+      "mslp": {
+       "n": 2408,
+       "medio": -0.0,
+       "tipico": 0.79
+      },
+      "t2_wu": {
+       "n": 44783,
+       "medio": 0.42,
+       "tipico": 2.3
+      },
+      "td2_wu": {
+       "n": 44783,
+       "medio": -0.87,
+       "tipico": 4.61
+      },
+      "vento_wu": {
+       "n": 44437,
+       "medio": 2.17,
+       "tipico": 3.51
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 12196,
+        "piovuto": 2194,
+        "previsto": 2384,
+        "presa": 64,
+        "falsi": 41,
+        "csi": 45
+       },
+       "1.0": {
+        "casi": 12196,
+        "piovuto": 1429,
+        "previsto": 1531,
+        "presa": 48,
+        "falsi": 55,
+        "csi": 30
+       },
+       "5.0": {
+        "casi": 12196,
+        "piovuto": 313,
+        "previsto": 521,
+        "presa": 23,
+        "falsi": 86,
+        "csi": 9
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 75,
+        "osservata_presa": 71,
+        "celle_previste": 28624,
+        "celle_osservate": 32679
+       },
+       "2.0": {
+        "prevista_giusta": 72,
+        "osservata_presa": 61,
+        "celle_previste": 17742,
+        "celle_osservate": 23937
+       }
+      },
+      "cicli": 19
+     },
+     "g2": {
+      "t2": {
+       "n": 83857,
+       "medio": -0.14,
+       "tipico": 2.24
+      },
+      "t2_giorno": {
+       "n": 42272,
+       "medio": -0.1,
+       "tipico": 2.01
+      },
+      "t2_notte": {
+       "n": 41585,
+       "medio": -0.18,
+       "tipico": 2.46
+      },
+      "td2": {
+       "n": 18242,
+       "medio": -1.25,
+       "tipico": 2.54
+      },
+      "vento": {
+       "n": 3571,
+       "medio": 0.48,
+       "tipico": 2.31
+      },
+      "vento_corr": {
+       "n": 3571,
+       "medio": -0.3,
+       "tipico": 1.86
+      },
+      "vento_reg": {
+       "n": 8818,
+       "medio": 1.48,
+       "tipico": 3.27
+      },
+      "mslp": {
+       "n": 3099,
+       "medio": 0.05,
+       "tipico": 0.91
+      },
+      "t2_wu": {
+       "n": 57920,
+       "medio": 0.46,
+       "tipico": 2.44
+      },
+      "td2_wu": {
+       "n": 57920,
+       "medio": -1.08,
+       "tipico": 4.67
+      },
+      "vento_wu": {
+       "n": 57468,
+       "medio": 2.13,
+       "tipico": 3.43
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 17857,
+        "piovuto": 2997,
+        "previsto": 2900,
+        "presa": 52,
+        "falsi": 46,
+        "csi": 36
+       },
+       "1.0": {
+        "casi": 17857,
+        "piovuto": 1945,
+        "previsto": 1697,
+        "presa": 38,
+        "falsi": 57,
+        "csi": 25
+       },
+       "5.0": {
+        "casi": 17857,
+        "piovuto": 449,
+        "previsto": 617,
+        "presa": 24,
+        "falsi": 82,
+        "csi": 12
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 75,
+        "osservata_presa": 67,
+        "celle_previste": 35845,
+        "celle_osservate": 45221
+       },
+       "2.0": {
+        "prevista_giusta": 72,
+        "osservata_presa": 56,
+        "celle_previste": 22136,
+        "celle_osservate": 32445
+       }
+      },
+      "cicli": 21
+     }
+    },
+    "lazio-icon2i-livelli": {
+     "g1": {
+      "t2": {
+       "n": 73063,
+       "medio": 0.25,
+       "tipico": 2.07
+      },
+      "t2_giorno": {
+       "n": 36254,
+       "medio": 0.21,
+       "tipico": 1.91
+      },
+      "t2_notte": {
+       "n": 36809,
+       "medio": 0.29,
+       "tipico": 2.22
+      },
+      "td2": {
+       "n": 15894,
+       "medio": -0.88,
+       "tipico": 2.11
+      },
+      "vento": {
+       "n": 3094,
+       "medio": 0.31,
+       "tipico": 2.19
+      },
+      "vento_corr": {
+       "n": 3094,
+       "medio": -0.11,
+       "tipico": 1.86
+      },
+      "vento_reg": {
+       "n": 7676,
+       "medio": 1.22,
+       "tipico": 2.86
+      },
+      "mslp": {
+       "n": 2685,
+       "medio": -0.04,
+       "tipico": 0.79
+      },
+      "t2_wu": {
+       "n": 49854,
+       "medio": 0.75,
+       "tipico": 2.39
+      },
+      "td2_wu": {
+       "n": 49854,
+       "medio": -0.77,
+       "tipico": 4.54
+      },
+      "vento_wu": {
+       "n": 49467,
+       "medio": 2.01,
+       "tipico": 3.31
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 13498,
+        "piovuto": 2236,
+        "previsto": 2495,
+        "presa": 63,
+        "falsi": 44,
+        "csi": 42
+       },
+       "1.0": {
+        "casi": 13498,
+        "piovuto": 1430,
+        "previsto": 1499,
+        "presa": 47,
+        "falsi": 55,
+        "csi": 30
+       },
+       "5.0": {
+        "casi": 13498,
+        "piovuto": 314,
+        "previsto": 497,
+        "presa": 21,
+        "falsi": 87,
+        "csi": 9
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 72,
+        "osservata_presa": 70,
+        "celle_previste": 29383,
+        "celle_osservate": 32990
+       },
+       "2.0": {
+        "prevista_giusta": 69,
+        "osservata_presa": 59,
+        "celle_previste": 17781,
+        "celle_osservate": 23980
+       }
+      },
+      "cicli": 21
+     },
+     "g2": {
+      "t2": {
+       "n": 92012,
+       "medio": 0.17,
+       "tipico": 2.15
+      },
+      "t2_giorno": {
+       "n": 46362,
+       "medio": 0.1,
+       "tipico": 1.94
+      },
+      "t2_notte": {
+       "n": 45650,
+       "medio": 0.24,
+       "tipico": 2.34
+      },
+      "td2": {
+       "n": 20032,
+       "medio": -0.99,
+       "tipico": 2.33
+      },
+      "vento": {
+       "n": 3917,
+       "medio": 0.29,
+       "tipico": 2.33
+      },
+      "vento_corr": {
+       "n": 3917,
+       "medio": -0.23,
+       "tipico": 2.0
+      },
+      "vento_reg": {
+       "n": 9682,
+       "medio": 1.23,
+       "tipico": 2.99
+      },
+      "mslp": {
+       "n": 3401,
+       "medio": 0.04,
+       "tipico": 0.87
+      },
+      "t2_wu": {
+       "n": 63483,
+       "medio": 0.74,
+       "tipico": 2.45
+      },
+      "td2_wu": {
+       "n": 63483,
+       "medio": -0.94,
+       "tipico": 4.65
+      },
+      "vento_wu": {
+       "n": 62988,
+       "medio": 2.02,
+       "tipico": 3.34
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 19597,
+        "piovuto": 3470,
+        "previsto": 3381,
+        "presa": 51,
+        "falsi": 48,
+        "csi": 35
+       },
+       "1.0": {
+        "casi": 19597,
+        "piovuto": 2144,
+        "previsto": 1976,
+        "presa": 40,
+        "falsi": 56,
+        "csi": 27
+       },
+       "5.0": {
+        "casi": 19597,
+        "piovuto": 458,
+        "previsto": 709,
+        "presa": 26,
+        "falsi": 83,
+        "csi": 11
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 74,
+        "osservata_presa": 66,
+        "celle_previste": 39209,
+        "celle_osservate": 50639
+       },
+       "2.0": {
+        "prevista_giusta": 72,
+        "osservata_presa": 56,
+        "celle_previste": 24425,
+        "celle_osservate": 34969
+       }
+      },
+      "cicli": 23
+     }
+    },
+    "lazio-icon2i-raggi": {
+     "g1": {
+      "t2": {
+       "n": 69490,
+       "medio": 0.07,
+       "tipico": 2.15
+      },
+      "t2_giorno": {
+       "n": 34716,
+       "medio": 0.11,
+       "tipico": 1.95
+      },
+      "t2_notte": {
+       "n": 34774,
+       "medio": 0.04,
+       "tipico": 2.34
+      },
+      "td2": {
+       "n": 15113,
+       "medio": -1.09,
+       "tipico": 2.28
+      },
+      "vento": {
+       "n": 2944,
+       "medio": 0.35,
+       "tipico": 2.09
+      },
+      "vento_corr": {
+       "n": 2944,
+       "medio": -0.09,
+       "tipico": 1.81
+      },
+      "vento_reg": {
+       "n": 7298,
+       "medio": 1.33,
+       "tipico": 3.02
+      },
+      "mslp": {
+       "n": 2555,
+       "medio": -0.03,
+       "tipico": 0.78
+      },
+      "t2_wu": {
+       "n": 47461,
+       "medio": 0.61,
+       "tipico": 2.37
+      },
+      "td2_wu": {
+       "n": 47461,
+       "medio": -0.93,
+       "tipico": 4.55
+      },
+      "vento_wu": {
+       "n": 47093,
+       "medio": 1.98,
+       "tipico": 3.3
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 12844,
+        "piovuto": 1842,
+        "previsto": 2076,
+        "presa": 60,
+        "falsi": 47,
+        "csi": 39
+       },
+       "1.0": {
+        "casi": 12844,
+        "piovuto": 1173,
+        "previsto": 1225,
+        "presa": 45,
+        "falsi": 57,
+        "csi": 28
+       },
+       "5.0": {
+        "casi": 12844,
+        "piovuto": 253,
+        "previsto": 351,
+        "presa": 19,
+        "falsi": 86,
+        "csi": 9
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 70,
+        "osservata_presa": 68,
+        "celle_previste": 25022,
+        "celle_osservate": 28337
+       },
+       "2.0": {
+        "prevista_giusta": 67,
+        "osservata_presa": 56,
+        "celle_previste": 14547,
+        "celle_osservate": 20231
+       }
+      },
+      "cicli": 20
+     },
+     "g2": {
+      "t2": {
+       "n": 87932,
+       "medio": 0.04,
+       "tipico": 2.26
+      },
+      "t2_giorno": {
+       "n": 44316,
+       "medio": 0.04,
+       "tipico": 2.02
+      },
+      "t2_notte": {
+       "n": 43616,
+       "medio": 0.05,
+       "tipico": 2.48
+      },
+      "td2": {
+       "n": 19138,
+       "medio": -1.16,
+       "tipico": 2.47
+      },
+      "vento": {
+       "n": 3744,
+       "medio": 0.34,
+       "tipico": 2.29
+      },
+      "vento_corr": {
+       "n": 3744,
+       "medio": -0.24,
+       "tipico": 1.99
+      },
+      "vento_reg": {
+       "n": 9250,
+       "medio": 1.38,
+       "tipico": 3.21
+      },
+      "mslp": {
+       "n": 3251,
+       "medio": 0.05,
+       "tipico": 0.88
+      },
+      "t2_wu": {
+       "n": 60713,
+       "medio": 0.65,
+       "tipico": 2.49
+      },
+      "td2_wu": {
+       "n": 60713,
+       "medio": -1.05,
+       "tipico": 4.64
+      },
+      "vento_wu": {
+       "n": 60243,
+       "medio": 2.02,
+       "tipico": 3.27
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 18726,
+        "piovuto": 2875,
+        "previsto": 3062,
+        "presa": 54,
+        "falsi": 49,
+        "csi": 36
+       },
+       "1.0": {
+        "casi": 18726,
+        "piovuto": 1716,
+        "previsto": 1713,
+        "presa": 46,
+        "falsi": 54,
+        "csi": 30
+       },
+       "5.0": {
+        "casi": 18726,
+        "piovuto": 372,
+        "previsto": 653,
+        "presa": 35,
+        "falsi": 80,
+        "csi": 14
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 75,
+        "osservata_presa": 65,
+        "celle_previste": 35851,
+        "celle_osservate": 47875
+       },
+       "2.0": {
+        "prevista_giusta": 74,
+        "osservata_presa": 55,
+        "celle_previste": 22036,
+        "celle_osservate": 33403
+       }
+      },
+      "cicli": 22
+     }
+    },
+    "lazio-iconeu": {
+     "g1": {
+      "t2": {
+       "n": 58180,
+       "medio": -0.19,
+       "tipico": 2.14
+      },
+      "t2_giorno": {
+       "n": 29136,
+       "medio": -0.18,
+       "tipico": 2.05
+      },
+      "t2_notte": {
+       "n": 29044,
+       "medio": -0.21,
+       "tipico": 2.23
+      },
+      "td2": {
+       "n": 12593,
+       "medio": -1.48,
+       "tipico": 2.77
+      },
+      "vento": {
+       "n": 2448,
+       "medio": 0.11,
+       "tipico": 2.43
+      },
+      "vento_corr": {
+       "n": 2448,
+       "medio": -0.61,
+       "tipico": 2.04
+      },
+      "vento_reg": {
+       "n": 6090,
+       "medio": 1.19,
+       "tipico": 3.3
+      },
+      "mslp": {
+       "n": 2125,
+       "medio": -0.13,
+       "tipico": 0.87
+      },
+      "t2_wu": {
+       "n": 39289,
+       "medio": 0.37,
+       "tipico": 2.4
+      },
+      "td2_wu": {
+       "n": 39289,
+       "medio": -1.58,
+       "tipico": 4.88
+      },
+      "vento_wu": {
+       "n": 38989,
+       "medio": 2.01,
+       "tipico": 3.43
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 11549,
+        "piovuto": 1993,
+        "previsto": 1548,
+        "presa": 41,
+        "falsi": 48,
+        "csi": 30
+       },
+       "1.0": {
+        "casi": 11549,
+        "piovuto": 1346,
+        "previsto": 919,
+        "presa": 30,
+        "falsi": 56,
+        "csi": 22
+       },
+       "5.0": {
+        "casi": 11549,
+        "piovuto": 307,
+        "previsto": 211,
+        "presa": 12,
+        "falsi": 82,
+        "csi": 8
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 86,
+        "osservata_presa": 46,
+        "celle_previste": 15881,
+        "celle_osservate": 38011
+       },
+       "2.0": {
+        "prevista_giusta": 83,
+        "osservata_presa": 36,
+        "celle_previste": 9284,
+        "celle_osservate": 27935
+       }
+      },
+      "cicli": 19
+     },
+     "g2": {
+      "t2": {
+       "n": 73738,
+       "medio": -0.1,
+       "tipico": 2.39
+      },
+      "t2_giorno": {
+       "n": 37022,
+       "medio": -0.02,
+       "tipico": 2.28
+      },
+      "t2_notte": {
+       "n": 36716,
+       "medio": -0.17,
+       "tipico": 2.5
+      },
+      "td2": {
+       "n": 15980,
+       "medio": -1.74,
+       "tipico": 3.12
+      },
+      "vento": {
+       "n": 3130,
+       "medio": 0.43,
+       "tipico": 2.62
+      },
+      "vento_corr": {
+       "n": 3130,
+       "medio": -0.47,
+       "tipico": 2.05
+      },
+      "vento_reg": {
+       "n": 7718,
+       "medio": 1.43,
+       "tipico": 3.48
+      },
+      "mslp": {
+       "n": 2716,
+       "medio": -0.07,
+       "tipico": 1.03
+      },
+      "t2_wu": {
+       "n": 50986,
+       "medio": 0.62,
+       "tipico": 2.6
+      },
+      "td2_wu": {
+       "n": 50986,
+       "medio": -1.61,
+       "tipico": 4.97
+      },
+      "vento_wu": {
+       "n": 50596,
+       "medio": 2.1,
+       "tipico": 3.51
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 15690,
+        "piovuto": 2694,
+        "previsto": 1735,
+        "presa": 30,
+        "falsi": 53,
+        "csi": 23
+       },
+       "1.0": {
+        "casi": 15690,
+        "piovuto": 1868,
+        "previsto": 1094,
+        "presa": 25,
+        "falsi": 58,
+        "csi": 18
+       },
+       "5.0": {
+        "casi": 15690,
+        "piovuto": 456,
+        "previsto": 378,
+        "presa": 12,
+        "falsi": 86,
+        "csi": 7
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 78,
+        "osservata_presa": 49,
+        "celle_previste": 24901,
+        "celle_osservate": 50370
+       },
+       "2.0": {
+        "prevista_giusta": 73,
+        "osservata_presa": 38,
+        "celle_previste": 14977,
+        "celle_osservate": 37228
+       }
+      },
+      "cicli": 19
+     }
+    },
+    "lazio-gfs": {
+     "g1": {
+      "t2": {
+       "n": 66138,
+       "medio": -0.02,
+       "tipico": 2.17
+      },
+      "t2_giorno": {
+       "n": 33558,
+       "medio": 0.06,
+       "tipico": 1.96
+      },
+      "t2_notte": {
+       "n": 32580,
+       "medio": -0.11,
+       "tipico": 2.36
+      },
+      "td2": {
+       "n": 14343,
+       "medio": -1.03,
+       "tipico": 2.21
+      },
+      "vento": {
+       "n": 2788,
+       "medio": 0.24,
+       "tipico": 2.18
+      },
+      "vento_corr": {
+       "n": 2788,
+       "medio": -0.47,
+       "tipico": 1.86
+      },
+      "vento_reg": {
+       "n": 6936,
+       "medio": 1.4,
+       "tipico": 3.31
+      },
+      "mslp": {
+       "n": 2420,
+       "medio": -0.12,
+       "tipico": 0.75
+      },
+      "t2_wu": {
+       "n": 44716,
+       "medio": 0.45,
+       "tipico": 2.36
+      },
+      "td2_wu": {
+       "n": 44716,
+       "medio": -0.91,
+       "tipico": 4.58
+      },
+      "vento_wu": {
+       "n": 44370,
+       "medio": 2.07,
+       "tipico": 3.5
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 12632,
+        "piovuto": 2288,
+        "previsto": 2753,
+        "presa": 71,
+        "falsi": 41,
+        "csi": 48
+       },
+       "1.0": {
+        "casi": 12632,
+        "piovuto": 1480,
+        "previsto": 1724,
+        "presa": 61,
+        "falsi": 48,
+        "csi": 39
+       },
+       "5.0": {
+        "casi": 12632,
+        "piovuto": 324,
+        "previsto": 674,
+        "presa": 40,
+        "falsi": 81,
+        "csi": 15
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 76,
+        "osservata_presa": 71,
+        "celle_previste": 32406,
+        "celle_osservate": 37606
+       },
+       "2.0": {
+        "prevista_giusta": 73,
+        "osservata_presa": 62,
+        "celle_previste": 20522,
+        "celle_osservate": 27641
+       }
+      },
+      "cicli": 21
+     },
+     "g2": {
+      "t2": {
+       "n": 92033,
+       "medio": -0.03,
+       "tipico": 2.33
+      },
+      "t2_giorno": {
+       "n": 46374,
+       "medio": 0.04,
+       "tipico": 2.13
+      },
+      "t2_notte": {
+       "n": 45659,
+       "medio": -0.1,
+       "tipico": 2.52
+      },
+      "td2": {
+       "n": 20005,
+       "medio": -1.24,
+       "tipico": 2.5
+      },
+      "vento": {
+       "n": 3917,
+       "medio": 0.29,
+       "tipico": 2.16
+      },
+      "vento_corr": {
+       "n": 3917,
+       "medio": -0.37,
+       "tipico": 1.82
+      },
+      "vento_reg": {
+       "n": 9662,
+       "medio": 1.38,
+       "tipico": 3.21
+      },
+      "mslp": {
+       "n": 3399,
+       "medio": -0.03,
+       "tipico": 1.0
+      },
+      "t2_wu": {
+       "n": 63638,
+       "medio": 0.61,
+       "tipico": 2.5
+      },
+      "td2_wu": {
+       "n": 63638,
+       "medio": -1.04,
+       "tipico": 4.63
+      },
+      "vento_wu": {
+       "n": 63142,
+       "medio": 2.04,
+       "tipico": 3.46
+      },
+      "pioggia": {
+       "0.2": {
+        "casi": 19598,
+        "piovuto": 3225,
+        "previsto": 3427,
+        "presa": 47,
+        "falsi": 56,
+        "csi": 29
+       },
+       "1.0": {
+        "casi": 19598,
+        "piovuto": 2101,
+        "previsto": 2130,
+        "presa": 39,
+        "falsi": 61,
+        "csi": 24
+       },
+       "5.0": {
+        "casi": 19598,
+        "piovuto": 487,
+        "previsto": 746,
+        "presa": 25,
+        "falsi": 83,
+        "csi": 11
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": 74,
+        "osservata_presa": 66,
+        "celle_previste": 41410,
+        "celle_osservate": 51835
+       },
+       "2.0": {
+        "prevista_giusta": 70,
+        "osservata_presa": 57,
+        "celle_previste": 26093,
+        "celle_osservate": 37655
+       }
+      },
+      "cicli": 23
+     }
+    },
+    "castelli-rif-ecmwf": {
+     "breve": {
+      "t2": {
+       "n": 18652,
+       "medio": -0.46,
+       "tipico": 1.79
+      },
+      "t2_giorno": {
+       "n": 9325,
+       "medio": -0.53,
+       "tipico": 1.69
+      },
+      "t2_notte": {
+       "n": 9327,
+       "medio": -0.39,
+       "tipico": 1.89
+      },
+      "td2": null,
+      "vento": {
+       "n": 1428,
+       "medio": -0.11,
+       "tipico": 1.41
+      },
+      "vento_corr": null,
+      "vento_reg": {
+       "n": 1440,
+       "medio": 1.1,
+       "tipico": 2.05
+      },
+      "mslp": null,
+      "t2_wu": null,
+      "td2_wu": null,
+      "vento_wu": null,
+      "pioggia": {
+       "0.2": {
+        "casi": 3590,
+        "piovuto": 1086,
+        "previsto": 2009,
+        "presa": 93,
+        "falsi": 50,
+        "csi": 48
+       },
+       "1.0": {
+        "casi": 3590,
+        "piovuto": 639,
+        "previsto": 1195,
+        "presa": 84,
+        "falsi": 55,
+        "csi": 42
+       },
+       "5.0": {
+        "casi": 3590,
+        "piovuto": 191,
+        "previsto": 389,
+        "presa": 73,
+        "falsi": 64,
+        "csi": 32
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       },
+       "2.0": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       }
+      },
+      "cicli": 0
+     }
+    },
+    "castelli-rif-icon2i": {
+     "breve": {
+      "t2": {
+       "n": 18652,
+       "medio": 0.18,
+       "tipico": 1.42
+      },
+      "t2_giorno": {
+       "n": 9325,
+       "medio": -0.08,
+       "tipico": 1.33
+      },
+      "t2_notte": {
+       "n": 9327,
+       "medio": 0.45,
+       "tipico": 1.51
+      },
+      "td2": null,
+      "vento": {
+       "n": 1428,
+       "medio": -0.64,
+       "tipico": 1.37
+      },
+      "vento_corr": null,
+      "vento_reg": {
+       "n": 1440,
+       "medio": 0.66,
+       "tipico": 1.63
+      },
+      "mslp": null,
+      "t2_wu": null,
+      "td2_wu": null,
+      "vento_wu": null,
+      "pioggia": {
+       "0.2": {
+        "casi": 3590,
+        "piovuto": 1086,
+        "previsto": 904,
+        "presa": 66,
+        "falsi": 20,
+        "csi": 57
+       },
+       "1.0": {
+        "casi": 3590,
+        "piovuto": 639,
+        "previsto": 524,
+        "presa": 59,
+        "falsi": 29,
+        "csi": 47
+       },
+       "5.0": {
+        "casi": 3590,
+        "piovuto": 191,
+        "previsto": 224,
+        "presa": 54,
+        "falsi": 54,
+        "csi": 33
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       },
+       "2.0": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       }
+      },
+      "cicli": 0
+     }
+    },
+    "lazio-rif-ecmwf": {
+     "breve": {
+      "t2": {
+       "n": 123011,
+       "medio": -0.5,
+       "tipico": 1.75
+      },
+      "t2_giorno": {
+       "n": 61682,
+       "medio": -0.42,
+       "tipico": 1.62
+      },
+      "t2_notte": {
+       "n": 61329,
+       "medio": -0.59,
+       "tipico": 1.87
+      },
+      "td2": null,
+      "vento": {
+       "n": 5401,
+       "medio": 0.16,
+       "tipico": 1.7
+      },
+      "vento_corr": null,
+      "vento_reg": {
+       "n": 12862,
+       "medio": 0.51,
+       "tipico": 2.21
+      },
+      "mslp": null,
+      "t2_wu": null,
+      "td2_wu": null,
+      "vento_wu": null,
+      "pioggia": {
+       "0.2": {
+        "casi": 19545,
+        "piovuto": 6490,
+        "previsto": 11027,
+        "presa": 92,
+        "falsi": 46,
+        "csi": 52
+       },
+       "1.0": {
+        "casi": 19545,
+        "piovuto": 4081,
+        "previsto": 7077,
+        "presa": 90,
+        "falsi": 48,
+        "csi": 49
+       },
+       "5.0": {
+        "casi": 19545,
+        "piovuto": 1609,
+        "previsto": 2602,
+        "presa": 78,
+        "falsi": 52,
+        "csi": 43
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       },
+       "2.0": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       }
+      },
+      "cicli": 0
+     }
+    },
+    "lazio-rif-icon2i": {
+     "breve": {
+      "t2": {
+       "n": 123011,
+       "medio": 0.18,
+       "tipico": 1.4
+      },
+      "t2_giorno": {
+       "n": 61682,
+       "medio": 0.03,
+       "tipico": 1.31
+      },
+      "t2_notte": {
+       "n": 61329,
+       "medio": 0.34,
+       "tipico": 1.49
+      },
+      "td2": null,
+      "vento": {
+       "n": 5401,
+       "medio": 0.01,
+       "tipico": 1.76
+      },
+      "vento_corr": null,
+      "vento_reg": {
+       "n": 12862,
+       "medio": 0.83,
+       "tipico": 2.05
+      },
+      "mslp": null,
+      "t2_wu": null,
+      "td2_wu": null,
+      "vento_wu": null,
+      "pioggia": {
+       "0.2": {
+        "casi": 19545,
+        "piovuto": 6490,
+        "previsto": 5111,
+        "presa": 65,
+        "falsi": 18,
+        "csi": 57
+       },
+       "1.0": {
+        "casi": 19545,
+        "piovuto": 4081,
+        "previsto": 3357,
+        "presa": 63,
+        "falsi": 23,
+        "csi": 53
+       },
+       "5.0": {
+        "casi": 19545,
+        "piovuto": 1609,
+        "previsto": 1592,
+        "presa": 61,
+        "falsi": 39,
+        "csi": 44
+       }
+      },
+      "radar": {
+       "0.5": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       },
+       "2.0": {
+        "prevista_giusta": null,
+        "osservata_presa": null,
+        "celle_previste": 0,
+        "celle_osservate": 0
+       }
+      },
+      "cicli": 0
+     }
+    }
+   },
+   "confronti": {
+    "castelli-ecmwf-noahmp": {
+     "g1": {
+      "t2": {
+       "cicli": 21,
+       "tipico": -0.046,
+       "medio": 0.383,
+       "incertezza_tipico": 0.07,
+       "incertezza_medio": 0.105
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": -0.181,
+       "medio": 0.849,
+       "incertezza_tipico": 0.125,
+       "incertezza_medio": 0.181
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": 0.045,
+       "medio": -0.009,
+       "incertezza_tipico": 0.071,
+       "incertezza_medio": 0.075
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 23,
+       "tipico": -0.076,
+       "medio": 0.377,
+       "incertezza_tipico": 0.05,
+       "incertezza_medio": 0.076
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": -0.476,
+       "medio": 1.17,
+       "incertezza_tipico": 0.221,
+       "incertezza_medio": 0.219
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": 0.045,
+       "medio": -0.035,
+       "incertezza_tipico": 0.057,
+       "incertezza_medio": 0.061
+      }
+     }
+    },
+    "castelli-ecmwf-radt6": {
+     "g1": {
+      "t2": {
+       "cicli": 21,
+       "tipico": 0.004,
+       "medio": 0.0,
+       "incertezza_tipico": 0.026,
+       "incertezza_medio": 0.047
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": 0.032,
+       "medio": -0.038,
+       "incertezza_tipico": 0.043,
+       "incertezza_medio": 0.05
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": -0.05,
+       "medio": 0.054,
+       "incertezza_tipico": 0.047,
+       "incertezza_medio": 0.057
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 23,
+       "tipico": -0.014,
+       "medio": -0.028,
+       "incertezza_tipico": 0.017,
+       "incertezza_medio": 0.05
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": -0.018,
+       "medio": 0.003,
+       "incertezza_tipico": 0.057,
+       "incertezza_medio": 0.088
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": 0.024,
+       "medio": 0.012,
+       "incertezza_tipico": 0.025,
+       "incertezza_medio": 0.033
+      }
+     }
+    },
+    "castelli-ecmwf-radt15": {
+     "g1": {
+      "t2": {
+       "cicli": 21,
+       "tipico": -0.01,
+       "medio": -0.007,
+       "incertezza_tipico": 0.024,
+       "incertezza_medio": 0.045
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": 0.046,
+       "medio": -0.036,
+       "incertezza_tipico": 0.046,
+       "incertezza_medio": 0.066
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": 0.01,
+       "medio": 0.015,
+       "incertezza_tipico": 0.04,
+       "incertezza_medio": 0.058
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 23,
+       "tipico": -0.026,
+       "medio": -0.048,
+       "incertezza_tipico": 0.02,
+       "incertezza_medio": 0.054
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": -0.004,
+       "medio": -0.007,
+       "incertezza_tipico": 0.058,
+       "incertezza_medio": 0.079
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": -0.011,
+       "medio": 0.02,
+       "incertezza_tipico": 0.034,
+       "incertezza_medio": 0.043
+      }
+     }
+    },
+    "castelli-ecmwf-urbano": {
+     "g1": {
+      "t2": {
+       "cicli": 21,
+       "tipico": -0.043,
+       "medio": -0.23,
+       "incertezza_tipico": 0.033,
+       "incertezza_medio": 0.058
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": 0.001,
+       "medio": 0.012,
+       "incertezza_tipico": 0.037,
+       "incertezza_medio": 0.059
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": -0.028,
+       "medio": 0.169,
+       "incertezza_tipico": 0.082,
+       "incertezza_medio": 0.066
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 23,
+       "tipico": -0.105,
+       "medio": -0.351,
+       "incertezza_tipico": 0.048,
+       "incertezza_medio": 0.051
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": -0.072,
+       "medio": 0.108,
+       "incertezza_tipico": 0.059,
+       "incertezza_medio": 0.084
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": -0.029,
+       "medio": 0.113,
+       "incertezza_tipico": 0.06,
+       "incertezza_medio": 0.067
+      }
+     }
+    },
+    "castelli-ecmwf-livelli": {
+     "g1": {
+      "t2": {
+       "cicli": 23,
+       "tipico": -0.052,
+       "medio": 0.152,
+       "incertezza_tipico": 0.039,
+       "incertezza_medio": 0.045
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": -0.107,
+       "medio": 0.163,
+       "incertezza_tipico": 0.055,
+       "incertezza_medio": 0.082
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": -0.022,
+       "medio": 0.01,
+       "incertezza_tipico": 0.087,
+       "incertezza_medio": 0.109
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 25,
+       "tipico": -0.08,
+       "medio": 0.129,
+       "incertezza_tipico": 0.03,
+       "incertezza_medio": 0.048
+      },
+      "td2": {
+       "cicli": 25,
+       "tipico": -0.168,
+       "medio": 0.206,
+       "incertezza_tipico": 0.048,
+       "incertezza_medio": 0.064
+      },
+      "vento": {
+       "cicli": 25,
+       "tipico": 0.023,
+       "medio": 0.019,
+       "incertezza_tipico": 0.074,
+       "incertezza_medio": 0.057
+      }
+     }
+    },
+    "castelli-ecmwf-diff2": {
+     "g1": {
+      "t2": {
+       "cicli": 22,
+       "tipico": -0.004,
+       "medio": 0.039,
+       "incertezza_tipico": 0.029,
+       "incertezza_medio": 0.045
+      },
+      "td2": {
+       "cicli": 22,
+       "tipico": 0.015,
+       "medio": -0.025,
+       "incertezza_tipico": 0.032,
+       "incertezza_medio": 0.047
+      },
+      "vento": {
+       "cicli": 22,
+       "tipico": -0.027,
+       "medio": 0.044,
+       "incertezza_tipico": 0.05,
+       "incertezza_medio": 0.075
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 24,
+       "tipico": 0.004,
+       "medio": 0.038,
+       "incertezza_tipico": 0.013,
+       "incertezza_medio": 0.043
+      },
+      "td2": {
+       "cicli": 24,
+       "tipico": -0.063,
+       "medio": 0.064,
+       "incertezza_tipico": 0.047,
+       "incertezza_medio": 0.061
+      },
+      "vento": {
+       "cicli": 24,
+       "tipico": 0.001,
+       "medio": 0.005,
+       "incertezza_tipico": 0.034,
+       "incertezza_medio": 0.038
+      }
+     }
+    },
+    "castelli-ecmwf-raggi": {
+     "g1": {
+      "t2": {
+       "cicli": 23,
+       "tipico": 0.001,
+       "medio": 0.011,
+       "incertezza_tipico": 0.021,
+       "incertezza_medio": 0.035
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": 0.017,
+       "medio": -0.041,
+       "incertezza_tipico": 0.035,
+       "incertezza_medio": 0.05
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": -0.021,
+       "medio": 0.02,
+       "incertezza_tipico": 0.056,
+       "incertezza_medio": 0.052
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 25,
+       "tipico": -0.0,
+       "medio": 0.01,
+       "incertezza_tipico": 0.015,
+       "incertezza_medio": 0.036
+      },
+      "td2": {
+       "cicli": 25,
+       "tipico": -0.02,
+       "medio": 0.037,
+       "incertezza_tipico": 0.036,
+       "incertezza_medio": 0.054
+      },
+      "vento": {
+       "cicli": 25,
+       "tipico": -0.04,
+       "medio": 0.047,
+       "incertezza_tipico": 0.034,
+       "incertezza_medio": 0.035
+      }
+     }
+    },
+    "castelli-icon2i-noahmp": {
+     "g1": {
+      "t2": {
+       "cicli": 19,
+       "tipico": -0.081,
+       "medio": 0.204,
+       "incertezza_tipico": 0.059,
+       "incertezza_medio": 0.11
+      },
+      "td2": {
+       "cicli": 19,
+       "tipico": -0.141,
+       "medio": 0.829,
+       "incertezza_tipico": 0.211,
+       "incertezza_medio": 0.15
+      },
+      "vento": {
+       "cicli": 19,
+       "tipico": 0.061,
+       "medio": -0.06,
+       "incertezza_tipico": 0.053,
+       "incertezza_medio": 0.059
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 21,
+       "tipico": -0.074,
+       "medio": 0.257,
+       "incertezza_tipico": 0.059,
+       "incertezza_medio": 0.086
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": -0.39,
+       "medio": 0.92,
+       "incertezza_tipico": 0.231,
+       "incertezza_medio": 0.167
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": 0.058,
+       "medio": -0.019,
+       "incertezza_tipico": 0.052,
+       "incertezza_medio": 0.056
+      }
+     }
+    },
+    "castelli-icon2i-radt6": {
+     "g1": {
+      "t2": {
+       "cicli": 18,
+       "tipico": 0.001,
+       "medio": -0.013,
+       "incertezza_tipico": 0.012,
+       "incertezza_medio": 0.026
+      },
+      "td2": {
+       "cicli": 18,
+       "tipico": -0.033,
+       "medio": 0.022,
+       "incertezza_tipico": 0.04,
+       "incertezza_medio": 0.061
+      },
+      "vento": {
+       "cicli": 18,
+       "tipico": 0.006,
+       "medio": -0.017,
+       "incertezza_tipico": 0.042,
+       "incertezza_medio": 0.047
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 20,
+       "tipico": -0.005,
+       "medio": 0.03,
+       "incertezza_tipico": 0.019,
+       "incertezza_medio": 0.036
+      },
+      "td2": {
+       "cicli": 20,
+       "tipico": -0.022,
+       "medio": 0.031,
+       "incertezza_tipico": 0.055,
+       "incertezza_medio": 0.078
+      },
+      "vento": {
+       "cicli": 20,
+       "tipico": 0.016,
+       "medio": -0.025,
+       "incertezza_tipico": 0.035,
+       "incertezza_medio": 0.023
+      }
+     }
+    },
+    "castelli-icon2i-radt15": {
+     "g1": {
+      "t2": {
+       "cicli": 19,
+       "tipico": -0.009,
+       "medio": 0.004,
+       "incertezza_tipico": 0.01,
+       "incertezza_medio": 0.019
+      },
+      "td2": {
+       "cicli": 19,
+       "tipico": -0.026,
+       "medio": 0.023,
+       "incertezza_tipico": 0.048,
+       "incertezza_medio": 0.072
+      },
+      "vento": {
+       "cicli": 19,
+       "tipico": -0.02,
+       "medio": 0.014,
+       "incertezza_tipico": 0.034,
+       "incertezza_medio": 0.017
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 21,
+       "tipico": -0.017,
+       "medio": 0.021,
+       "incertezza_tipico": 0.011,
+       "incertezza_medio": 0.038
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": -0.022,
+       "medio": 0.014,
+       "incertezza_tipico": 0.036,
+       "incertezza_medio": 0.05
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": 0.014,
+       "medio": 0.002,
+       "incertezza_tipico": 0.032,
+       "incertezza_medio": 0.02
+      }
+     }
+    },
+    "castelli-icon2i-urbano": {
+     "g1": {
+      "t2": {
+       "cicli": 18,
+       "tipico": -0.001,
+       "medio": -0.194,
+       "incertezza_tipico": 0.045,
+       "incertezza_medio": 0.037
+      },
+      "td2": {
+       "cicli": 18,
+       "tipico": -0.054,
+       "medio": 0.093,
+       "incertezza_tipico": 0.066,
+       "incertezza_medio": 0.097
+      },
+      "vento": {
+       "cicli": 18,
+       "tipico": -0.039,
+       "medio": 0.044,
+       "incertezza_tipico": 0.047,
+       "incertezza_medio": 0.062
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 20,
+       "tipico": -0.066,
+       "medio": -0.249,
+       "incertezza_tipico": 0.045,
+       "incertezza_medio": 0.048
+      },
+      "td2": {
+       "cicli": 20,
+       "tipico": -0.052,
+       "medio": 0.051,
+       "incertezza_tipico": 0.033,
+       "incertezza_medio": 0.057
+      },
+      "vento": {
+       "cicli": 20,
+       "tipico": -0.06,
+       "medio": 0.087,
+       "incertezza_tipico": 0.059,
+       "incertezza_medio": 0.061
+      }
+     }
+    },
+    "castelli-icon2i-livelli": {
+     "g1": {
+      "t2": {
+       "cicli": 21,
+       "tipico": -0.075,
+       "medio": 0.114,
+       "incertezza_tipico": 0.032,
+       "incertezza_medio": 0.04
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": -0.121,
+       "medio": 0.219,
+       "incertezza_tipico": 0.072,
+       "incertezza_medio": 0.078
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": 0.037,
+       "medio": -0.054,
+       "incertezza_tipico": 0.06,
+       "incertezza_medio": 0.079
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 23,
+       "tipico": -0.075,
+       "medio": 0.106,
+       "incertezza_tipico": 0.036,
+       "incertezza_medio": 0.049
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": -0.142,
+       "medio": 0.212,
+       "incertezza_tipico": 0.059,
+       "incertezza_medio": 0.094
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": 0.027,
+       "medio": -0.016,
+       "incertezza_tipico": 0.056,
+       "incertezza_medio": 0.051
+      }
+     }
+    },
+    "castelli-icon2i-diff2": {
+     "g1": {
+      "t2": {
+       "cicli": 21,
+       "tipico": 0.0,
+       "medio": 0.018,
+       "incertezza_tipico": 0.011,
+       "incertezza_medio": 0.02
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": -0.026,
+       "medio": 0.038,
+       "incertezza_tipico": 0.043,
+       "incertezza_medio": 0.068
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": -0.014,
+       "medio": -0.003,
+       "incertezza_tipico": 0.024,
+       "incertezza_medio": 0.023
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 23,
+       "tipico": -0.001,
+       "medio": 0.04,
+       "incertezza_tipico": 0.018,
+       "incertezza_medio": 0.043
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": -0.028,
+       "medio": 0.065,
+       "incertezza_tipico": 0.048,
+       "incertezza_medio": 0.065
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": -0.009,
+       "medio": -0.021,
+       "incertezza_tipico": 0.034,
+       "incertezza_medio": 0.04
+      }
+     }
+    },
+    "castelli-icon2i-raggi": {
+     "g1": {
+      "t2": {
+       "cicli": 21,
+       "tipico": 0.007,
+       "medio": 0.004,
+       "incertezza_tipico": 0.012,
+       "incertezza_medio": 0.017
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": 0.005,
+       "medio": -0.032,
+       "incertezza_tipico": 0.033,
+       "incertezza_medio": 0.043
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": -0.022,
+       "medio": -0.02,
+       "incertezza_tipico": 0.032,
+       "incertezza_medio": 0.047
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 23,
+       "tipico": -0.005,
+       "medio": 0.006,
+       "incertezza_tipico": 0.014,
+       "incertezza_medio": 0.024
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": -0.013,
+       "medio": 0.042,
+       "incertezza_tipico": 0.036,
+       "incertezza_medio": 0.054
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": -0.003,
+       "medio": -0.011,
+       "incertezza_tipico": 0.041,
+       "incertezza_medio": 0.035
+      }
+     }
+    },
+    "lazio-ecmwf-noahmp": {
+     "g1": {
+      "t2": {
+       "cicli": 21,
+       "tipico": -0.138,
+       "medio": 0.424,
+       "incertezza_tipico": 0.08,
+       "incertezza_medio": 0.131
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": -0.236,
+       "medio": 0.522,
+       "incertezza_tipico": 0.067,
+       "incertezza_medio": 0.125
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": -0.128,
+       "medio": -0.322,
+       "incertezza_tipico": 0.087,
+       "incertezza_medio": 0.09
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 23,
+       "tipico": -0.164,
+       "medio": 0.539,
+       "incertezza_tipico": 0.069,
+       "incertezza_medio": 0.118
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": -0.429,
+       "medio": 0.747,
+       "incertezza_tipico": 0.051,
+       "incertezza_medio": 0.113
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": -0.122,
+       "medio": -0.343,
+       "incertezza_tipico": 0.061,
+       "incertezza_medio": 0.078
+      }
+     }
+    },
+    "lazio-ecmwf-urbano": {
+     "g1": {
+      "t2": {
+       "cicli": 21,
+       "tipico": -0.066,
+       "medio": -0.128,
+       "incertezza_tipico": 0.022,
+       "incertezza_medio": 0.034
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": -0.037,
+       "medio": 0.03,
+       "incertezza_tipico": 0.031,
+       "incertezza_medio": 0.044
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": 0.067,
+       "medio": 0.183,
+       "incertezza_tipico": 0.048,
+       "incertezza_medio": 0.054
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 23,
+       "tipico": -0.076,
+       "medio": -0.164,
+       "incertezza_tipico": 0.034,
+       "incertezza_medio": 0.049
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": -0.006,
+       "medio": 0.008,
+       "incertezza_tipico": 0.054,
+       "incertezza_medio": 0.06
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": 0.041,
+       "medio": 0.103,
+       "incertezza_tipico": 0.041,
+       "incertezza_medio": 0.044
+      }
+     }
+    },
+    "lazio-ecmwf-livelli": {
+     "g1": {
+      "t2": {
+       "cicli": 23,
+       "tipico": -0.093,
+       "medio": 0.108,
+       "incertezza_tipico": 0.025,
+       "incertezza_medio": 0.041
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": -0.173,
+       "medio": 0.174,
+       "incertezza_tipico": 0.029,
+       "incertezza_medio": 0.051
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": 0.076,
+       "medio": 0.015,
+       "incertezza_tipico": 0.036,
+       "incertezza_medio": 0.042
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 25,
+       "tipico": -0.123,
+       "medio": 0.115,
+       "incertezza_tipico": 0.029,
+       "incertezza_medio": 0.057
+      },
+      "td2": {
+       "cicli": 25,
+       "tipico": -0.185,
+       "medio": 0.154,
+       "incertezza_tipico": 0.051,
+       "incertezza_medio": 0.059
+      },
+      "vento": {
+       "cicli": 25,
+       "tipico": 0.067,
+       "medio": -0.042,
+       "incertezza_tipico": 0.039,
+       "incertezza_medio": 0.047
+      }
+     }
+    },
+    "lazio-ecmwf-raggi": {
+     "g1": {
+      "t2": {
+       "cicli": 23,
+       "tipico": -0.001,
+       "medio": 0.005,
+       "incertezza_tipico": 0.016,
+       "incertezza_medio": 0.032
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": -0.02,
+       "medio": -0.007,
+       "incertezza_tipico": 0.032,
+       "incertezza_medio": 0.044
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": 0.004,
+       "medio": 0.083,
+       "incertezza_tipico": 0.034,
+       "incertezza_medio": 0.049
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 25,
+       "tipico": -0.001,
+       "medio": -0.001,
+       "incertezza_tipico": 0.03,
+       "incertezza_medio": 0.063
+      },
+      "td2": {
+       "cicli": 25,
+       "tipico": 0.046,
+       "medio": -0.04,
+       "incertezza_tipico": 0.064,
+       "incertezza_medio": 0.084
+      },
+      "vento": {
+       "cicli": 25,
+       "tipico": 0.003,
+       "medio": 0.003,
+       "incertezza_tipico": 0.045,
+       "incertezza_medio": 0.045
+      }
+     }
+    },
+    "lazio-icon2i-noahmp": {
+     "g1": {
+      "t2": {
+       "cicli": 19,
+       "tipico": -0.161,
+       "medio": 0.354,
+       "incertezza_tipico": 0.079,
+       "incertezza_medio": 0.107
+      },
+      "td2": {
+       "cicli": 19,
+       "tipico": -0.229,
+       "medio": 0.543,
+       "incertezza_tipico": 0.073,
+       "incertezza_medio": 0.105
+      },
+      "vento": {
+       "cicli": 19,
+       "tipico": -0.138,
+       "medio": -0.367,
+       "incertezza_tipico": 0.06,
+       "incertezza_medio": 0.06
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 21,
+       "tipico": -0.139,
+       "medio": 0.419,
+       "incertezza_tipico": 0.073,
+       "incertezza_medio": 0.116
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": -0.355,
+       "medio": 0.601,
+       "incertezza_tipico": 0.087,
+       "incertezza_medio": 0.107
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": -0.12,
+       "medio": -0.337,
+       "incertezza_tipico": 0.078,
+       "incertezza_medio": 0.063
+      }
+     }
+    },
+    "lazio-icon2i-urbano": {
+     "g1": {
+      "t2": {
+       "cicli": 19,
+       "tipico": -0.025,
+       "medio": -0.107,
+       "incertezza_tipico": 0.018,
+       "incertezza_medio": 0.028
+      },
+      "td2": {
+       "cicli": 19,
+       "tipico": -0.039,
+       "medio": 0.022,
+       "incertezza_tipico": 0.017,
+       "incertezza_medio": 0.032
+      },
+      "vento": {
+       "cicli": 19,
+       "tipico": 0.006,
+       "medio": 0.075,
+       "incertezza_tipico": 0.031,
+       "incertezza_medio": 0.03
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 21,
+       "tipico": -0.044,
+       "medio": -0.146,
+       "incertezza_tipico": 0.032,
+       "incertezza_medio": 0.054
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": -0.012,
+       "medio": -0.015,
+       "incertezza_tipico": 0.046,
+       "incertezza_medio": 0.063
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": 0.053,
+       "medio": 0.074,
+       "incertezza_tipico": 0.045,
+       "incertezza_medio": 0.058
+      }
+     }
+    },
+    "lazio-icon2i-livelli": {
+     "g1": {
+      "t2": {
+       "cicli": 21,
+       "tipico": -0.073,
+       "medio": 0.132,
+       "incertezza_tipico": 0.026,
+       "incertezza_medio": 0.024
+      },
+      "td2": {
+       "cicli": 21,
+       "tipico": -0.164,
+       "medio": 0.169,
+       "incertezza_tipico": 0.037,
+       "incertezza_medio": 0.047
+      },
+      "vento": {
+       "cicli": 21,
+       "tipico": 0.067,
+       "medio": -0.048,
+       "incertezza_tipico": 0.049,
+       "incertezza_medio": 0.034
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 23,
+       "tipico": -0.099,
+       "medio": 0.104,
+       "incertezza_tipico": 0.031,
+       "incertezza_medio": 0.053
+      },
+      "td2": {
+       "cicli": 23,
+       "tipico": -0.165,
+       "medio": 0.16,
+       "incertezza_tipico": 0.072,
+       "incertezza_medio": 0.079
+      },
+      "vento": {
+       "cicli": 23,
+       "tipico": 0.07,
+       "medio": -0.036,
+       "incertezza_tipico": 0.054,
+       "incertezza_medio": 0.049
+      }
+     }
+    },
+    "lazio-icon2i-raggi": {
+     "g1": {
+      "t2": {
+       "cicli": 20,
+       "tipico": -0.004,
+       "medio": -0.004,
+       "incertezza_tipico": 0.012,
+       "incertezza_medio": 0.02
+      },
+      "td2": {
+       "cicli": 20,
+       "tipico": -0.016,
+       "medio": -0.024,
+       "incertezza_tipico": 0.023,
+       "incertezza_medio": 0.033
+      },
+      "vento": {
+       "cicli": 20,
+       "tipico": -0.017,
+       "medio": -0.011,
+       "incertezza_tipico": 0.03,
+       "incertezza_medio": 0.026
+      }
+     },
+     "g2": {
+      "t2": {
+       "cicli": 22,
+       "tipico": -0.001,
+       "medio": -0.007,
+       "incertezza_tipico": 0.026,
+       "incertezza_medio": 0.05
+      },
+      "td2": {
+       "cicli": 22,
+       "tipico": -0.032,
+       "medio": 0.004,
+       "incertezza_tipico": 0.048,
+       "incertezza_medio": 0.082
+      },
+      "vento": {
+       "cicli": 22,
+       "tipico": 0.018,
+       "medio": -0.001,
+       "incertezza_tipico": 0.041,
+       "incertezza_medio": 0.038
+      }
+     }
+    }
+   }
+  }
+ },
+ "nomi": {
+  "ecmwf": "WRF con ECMWF",
+  "icon2i": "WRF con ICON-2I",
+  "rif-ecmwf": "ECMWF originale",
+  "rif-icon2i": "ICON-2I originale",
+  "iconeu": "WRF con ICON-EU (prova)",
+  "gfs": "WRF con GFS (prova)"
+ },
+ "varianti": {
+  "topo2": "vento sul terreno (topo_wind 2)",
+  "mynn": "PBL MYNN",
+  "noahmp": "suolo Noah-MP",
+  "mynn-noahmp": "MYNN + Noah-MP",
+  "radt6": "radiazione ogni 6 min (1 km)",
+  "radt15": "radiazione ogni 15 min (1 km)",
+  "urbano": "modello urbano (Roma)",
+  "livelli": "50 livelli, primo strato 20 m",
+  "diff2": "diffusione sui pendii (1 km)",
+  "raggi": "nudging piu' locale"
+ },
+ "note": "Errori: medio = previsto meno osservato (positivo = modello troppo caldo/ventoso), tipico = scarto quadratico medio. Vento: solo stazioni SYNOP (anemometro a 10 m in campo aperto). Rugiada: SYNOP e Regione, alla quota della stazione. Prove di fisica: differenza con il WRF normale ciclo per ciclo, +- 2 deviazioni standard della media. Pioggia ai pluviometri, in 6 ore: presa = piogge vere previste (%), falsi = previsioni senza pioggia vera (%). Radar, in 6 ore, con 10 km di tolleranza: prevista giusta = pioggia prevista con pioggia vera vicina (%), osservata presa = pioggia vera con pioggia prevista vicina (%). Riferimento: previsioni a breve dei modelli originali (Open-Meteo)."
+}
